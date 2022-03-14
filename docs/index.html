@@ -278,7 +278,15 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#schedule-and-assignments">Schedule and assignments</a></li>
+<li><a href="#schedule">Schedule</a></li>
+<li><a href="#important-links">Important Links</a></li>
+<li><a href="#course-description">Course Description</a></li>
+<li><a href="#weekly-programming-assignments-wpas">Weekly Programming Assignments (WPAs)</a></li>
+<li><a href="#grading">Grading</a></li>
+<li><a href="#tips">Tips</a>
+<ul>
+<li><a href="#r-and-wpa-guidelines">R and WPA guidelines</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -287,8 +295,210 @@ $(document).ready(function () {
 <li><strong>Course meeting time</strong>: Tuesdays, 10.15-11.45, Missionsstrasse 64a, Computerraum 00.010</li>
 <li><strong>Instructor</strong>: Dr. Laura Fontanesi, <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a></li>
 </ul>
-<div id="schedule-and-assignments" class="section level3">
-<h3>Schedule and assignments</h3>
+<div id="schedule" class="section level1">
+<h1>Schedule</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Date</th>
+<th>Topic</th>
+<th>Texbook readings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>15 March</td>
+<td>Introduction</td>
+<td>No readings</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>22 March</td>
+<td>Basic R</td>
+<td><a href="https://moderndive.com/1-getting-started.html">Chapter 1</a></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>29 March</td>
+<td>Data visualization</td>
+<td><a href="https://moderndive.com/2-viz.html">Chapter 2</a></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>5 April</td>
+<td>Data wrangling</td>
+<td><a href="https://moderndive.com/3-wrangling.html">Chapter 3</a></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>12 April</td>
+<td>Importing data</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>19 April</td>
+<td>Tidying data</td>
+<td><a href="https://moderndive.com/4-tidy.html">Chapter 4</a></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>26 April</td>
+<td>Writing Functions and Loops</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>3 May</td>
+<td>Linear and logistic regression</td>
+<td><a href="https://moderndive.com/5-regression.html">Chapter 5</a></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>10 May</td>
+<td>Multiple regression and ANOVA</td>
+<td><a href="https://moderndive.com/6-multiple-regression.html">Chapter 6</a></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>17 May</td>
+<td>Multilevel regression</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>24 May</td>
+<td>Final project</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>31 May</td>
+<td>Final project</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>New WPAs will be uploaded weekly (in the menu), so check back regularly.</p>
+</div>
+<div id="important-links" class="section level1">
+<h1>Important Links</h1>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Link</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://rstudio.com/products/rstudio/download/">RStudio</a></td>
+<td>Download link for RStudio. Only necessary if you are using it on your own computer and not in class.</td>
+</tr>
+<tr class="even">
+<td><a href="https://moderndive.com/">Textbook (Statistical Inference via Data Science, by Chester Ismay and Albert Y. Kim)</a></td>
+<td>For weekly readings.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf">Base R cheat sheet</a></td>
+<td>A handy R guide.</td>
+</tr>
+<tr class="even">
+<td><a href="https://medium.com/@brianward1428/introduction-to-tidyverse-7b3dbf2337d5">Tidyverse cheat sheets</a></td>
+<td>Quick reference guide for tidyverse, with different cheat sheets separated by topic.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://ggplot2.tidyverse.org/reference/index.html">ggplot2 reference guide</a></td>
+<td>Your main reference guide for plotting.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: If you are still experiencing issues with ggplot or tidyverse, do the following (in this order): 1) re-install R: <a href="https://stat.ethz.ch/CRAN/" class="uri">https://stat.ethz.ch/CRAN/</a> 2) re-install RStudio: <a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a> 3) in RStudio, type <code>install.packages("tidyverse")</code></p>
+</div>
+<div id="course-description" class="section level1">
+<h1>Course Description</h1>
+<p>R is one of the most popular statistical languages for both academic researchers and data analysts working in the industry. The reason why is simple: R is free, easy to use and incredibly powerful. With R you can generate and manipulate data, conduct analyses, create plots and even write documents. The goal of this course is to introduce you to R so you can apply it to your current and future research. In this course, you will learn how to use R to conduct all steps of your data analysis, from loading data to performing analyses, to producing figures.</p>
+</div>
+<div id="weekly-programming-assignments-wpas" class="section level1">
+<h1>Weekly Programming Assignments (WPAs)</h1>
+<p>During each class, you will work on a series of programming tasks called <strong>Weekly Programming Assignments (WPA)</strong>. You can do this alone, but I encourage you to discuss and/or work with your peers. It is however very important that each student’s work is his/her own. Do not turn in any assignments that you did not contribute to or do not fully understand.</p>
+<p>By the end of the lesson, you should email your WPA to me to receive credit. While I will keep track of how often you submit your WPAs, I will <em>not</em> grade them. You should however try to reply to each of the questions in the assignment. When you are not able to, I will be there to answer any doubt or question about the code. These assignments are meant as a practice to learn-by-doing the class’ material.</p>
+<p>As a final assignment, you will have to run a data analysis flow from the beginning to the end.</p>
+</div>
+<div id="grading" class="section level1">
+<h1>Grading</h1>
+<p>This is a pass / fail course. To pass the course, you should turn in your WPAs, miss not more than 2 classes, and finalise the final assignment.</p>
+</div>
+<div id="tips" class="section level1">
+<h1>Tips</h1>
+<p>Learning R will be challenging, but ultimately rewarding. However, it will be a lot easier if you ask questions. Here are the best ways to ask.</p>
+<p><strong>Use the help function</strong> If you are unsure how a function works or what its doing, type ?functionname into the console (functionname should be the name of the function e.g. ?mean). Every function has documentation, and this command will bring it up. If you don’t know the exact function name, you can also type ??thingIamlooking (.e.g. ??mean) to perform a search for related documentation. See <a href="https://www.r-project.org/help.html">this page</a> for how to get help in R.</p>
+<p>In RStudio, I suggest to activate the help pane (View&gt;Panes&gt;Show All Panes), and always search for functions, especially when you are using them for the first time. This will also help you to understand how functions are organized in packages, and develop a better understanding of your R environment.</p>
+<p><strong>Google Everything</strong> If you have a problem (particularly outside class) Google it. Almost every question you have, someone else has asked at some point. This applies particularly to R. There are a lot of good forums you might end up on, like <a href="http://stackoverflow.com/tags/r/">stackoverflow.com</a>, or <a href="http://stats.stackexchange.com/questions/tagged/r">stats.stackexchange.com</a>, where people provide detailed answers. You also might find documentation and functions you couldn’t find using the internal help or materials from other courses. I Google R and stats related questions daily and am constantly finding innovative answers and new functions. Just keep in mind that there is no point copying someone else’s code if you don’t understand how it works and how to adapt it to your circumstances.</p>
+<p><a href="http://letmegooglethat.com/?q=load+csv+in+R">For example</a></p>
+<p><strong>Ask, ask, ask!</strong> Thats why I’m here. If you don’t know what you are doing or why something doesn’t work (or does work), or maybe you do know what you are doing but you want to make it more efficient, please do not hesitate to ask questions. As this is meant to be a more practical seminar and we are somewhat limited by the online format, it is very important that we all make an effort to communicate with each other.</p>
+<p><strong>Take notes</strong> Even during the graded assignments, you can consult all the material you want. However, sometimes having too many resources to look at is not optimal, since you might end up wasting a lot of time searching for what you need all the time. What I suggest you to do, is to keep notes on the commands you find most difficult to remember or on examples that you find particularly useful. This will also help you organize the material in a way that might be better for you, compared to how I will present topics during the course or how it is presented in the text book.</p>
+<div id="r-and-wpa-guidelines" class="section level2">
+<h2>R and WPA guidelines</h2>
+<ol style="list-style-type: decimal">
+<li><p>Be sure you save your script often.</p></li>
+<li><p>Keep your script clean. Comment out all the text that it’s not R-interpretable by putting an <code>#</code> in front. One should be always able to run your script from beginning to end without getting errors. If you have code that didn’t work (that did give you an error), comment it out. You can then explain in the comment what you think went wrong. Never paste the output in your script, unless it’s required in a specific question. In that case, be sure to comment it out.</p></li>
+<li><p>Print the output of all new lines of code, to check if they do what you are actually meaning them to. Re-run your script from the start every time you make significant progress, or to test a new chunk of code before starting with the next exercise. Many bugs can be detected by “starting fresh”.</p></li>
+<li><p>Always clean your workspace at the beginning of your script (e.g., using the command <code>rm(list = ls())</code>). This avoids forgetting old variable names that could mess up with your code.</p></li>
+<li><p>Avoid using the console window and RStudio “buttons” (such as the ones to import data or to clean your workspace). It’s always better to have all the commands that you used written down in your script so that you can easily retrace what you have done up to that point. Plus, that makes your script entirely reproducible by another user (e.g., me). That’s also why we use R instead of for example SPSS.</p></li>
+<li><p>Keep all your scripts in one folder, of which you always know the location and the path in your operating system. You can name the folder as you please (e.g., “r-course”) as long as you remember it. Inside this folder, create a sub-folder called “data”, where you will download/save all the datasets that we will use throughout the course. Be sure that you never change the location of this folder and sub-folders/files. This will ensure that you will always be able to re-run your scripts at any point in time. Even better, have a look at <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">Projects</a>, which help to keep separate R projects organized.</p></li>
+<li><p>Use code completion (Tab key) as much as possible. This not only speeds you up, but it’s incredibly helpful to avoid typos. Also, it allows you to explore possible arguments within a function you didn’t know about, and also know whether a specific function you are planning to use is even loaded in your current environment. Code completion is also your best friend when specifying the path of a file you want to load:</p></li>
+</ol>
+<ul>
+<li>On Mac, you can start from <code>read.csv('~/')</code> (or similar functions for loading data) and press Tab, to start navigating from your home folder</li>
+<li>On Windows, you can do the same, but starting from <code>read.csv('C:\Users\')</code></li>
+</ul>
+<ol start="8" style="list-style-type: decimal">
+<li><p>Use the help window in RStudio as much as possible. Search for new functions when you use them for the first time. This will massively improve your knowledge of R, by giving you more ideas of what is even possible to do.</p></li>
+<li><p>Even though it is possible to specify functions’ arguments without naming them, try to avoid that as much as possible. It’s very easy to confuse the order of arguments and get unexpected results. For example, type <code>seq(from=0, to=10, by=1)</code> instead of <code>seq(0, 10, 1)</code>. It also makes it more readable for the “future you” and a different user (e.g., me).</p></li>
+<li><p>Either use <code>=</code> or <code>&lt;-</code> for assignments, but do it consistently (e.g., either <code>a = 4</code> or <code>a &lt;- 4</code>), and use <code>_</code> instead of <code>.</code> in identifiers (e.g., <code>my_variable = 5</code> instead of <code>my.variable = 5</code>).</p></li>
+</ol>
+<p><em>Here is an example of how your <code>wpa_1_LastFirst.R</code> file could look like:</em></p>
+<pre class="r"><code># Assignment: WPA 1
+# Name: LAST, FIRST
+# Date: DAY MONTH YEAR
+
+rm(list = ls()) # clean workspace
+
+# TASK A1
+# Add 1 to 1
+1 + 1</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># TASK A2
+# Draw 100 samples from a standard normal
+x = rnorm(100)
+
+# TASK A3
+# Conduct a t-test. Write down the p-value.
+t.test(x)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = -0.74348, df = 99, p-value = 0.459
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.2757097  0.1254111
+## sample estimates:
+##  mean of x 
+## -0.0751493</code></pre>
+<pre class="r"><code># p = .04
+
+# TASK A4
+# What is the height of dogs that weigh more than 5 kg?
+# I tried dogs[dogs[&#39;weight&#39;] &gt; 5, height] but didn&#39;t work. I suspect that there is a problem with height.</code></pre>
+</div>
 </div>
 
 
