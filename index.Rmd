@@ -11,8 +11,8 @@ Syllabus and materials for the UniBas Spring 2022 semester on programming and st
 
 | Week | Date | Topic | Texbook readings |
 | ---- | ---- | ----- | ---------------- |
-| 1 | 15 March | Introduction | No readings |
-| 2 | 22 March | Basic R | [Chapter 1](https://moderndive.com/1-getting-started.html) |
+| 1 | 15 March | Introduction | [Chapter 1](https://moderndive.com/1-getting-started.html) |
+| 2 | 22 March | Basic R | [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html) |
 | 3 | 29 March | Data visualization | [Chapter 2](https://moderndive.com/2-viz.html) |
 | 4 | 5 April | Data wrangling | [Chapter 3](https://moderndive.com/3-wrangling.html) |
 | 5 | 12 April | Importing data | - |

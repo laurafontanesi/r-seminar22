@@ -1,0 +1,223 @@
+---
+title: "wpa1"
+---
+
+# Introduction to Rstudio, and seeing what R can do
+
+## 1. RStudio
+
+Open RStudio.
+
+#### RStudio panes
+
+The RStudio interface consists of four main panes, or windows.
+
+- **Bottom left**: console or command window. Here you can type any valid R command after the > prompt followed by Enter and R will execute that command.
+- **Top left**: text editor or script window. This is where you can save and edit collections of commands.
+- **Top right**: environment & history window. The environment window contains objects (data, values, functions) R has currently stored in its memory. The history window shows all commands that were executed in the console.
+- **Bottom right**: files, plots, packages, help, & viewer pane. Here you can open files, view plots, install and load packages, read man pages, and view markdown and other documents in the viewer tab.
+
+The location of these windows can be changed by clicking Tools > Global Options > Pane Layout.
+
+You may have noticed that, by default, there is no text editor window open. In order to open one, click File > New File > R Script. Alternatively, click the 'Add new document' symbol and select R Script.
+
+Open a new R script in R and **save it as** `wpa_1_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about capitalizing, and using `_` and **not**, e.g., `WPA-1-LastFirst.R`
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 1
+# Name: Laura Fontanesi
+# Date: 15 March 2022
+```
+
+#### Code completion
+RStudio supports automatic completion of code using the **Tab key**. 
+
+For example, let's create a new object, named `my_block_rewards`:
+
+
+```{r}
+my_block_rewards = c(34, 36, 90)
+```
+
+Now, you can type `my` and then press Tab and RStudio will automatically complete the full name of the object if `my` is unique; otherwise, RStudio will list all of the objects (or functions) starting with `my` in your current environment.
+
+Try now to define another object starting with `my` and see what happens.
+
+```{r}
+my_score = .4
+```
+
+Code completion also works for function arguments.
+
+`data()` is a function to load one of R preset dataframes.
+
+Type `data(m` in the console, then hit Tab to bring up a list of options. RStudio will automatically add a closing parenthesis for you, but your cursor needs to be between the two parentheses for tab completion to work. 
+
+Choose `mtcars` from the list and press Enter. What happens?
+
+#### Environment browser
+
+The `mtcars` object should have appeared in your environment tab.
+
+The environment tab is in the top right window, which displays the R objects that exist in the global environment. These are the objects that were created by you in your current session.
+
+If you click the load symbol next to the `mtcars` object, you can see the structure of the object. You can also click the view icon load to have a table view of the dataset. This might come useful at times.
+
+#### Run some code in your script file
+
+What we want to do most of time is to run our code from the script and not from the console. This will help us writing more complicated functions and keep track of exactly what we have been doing up to that point.
+
+You always have the choice to run part of it or the whole code. I suggest (particularly at the begginning) to always run from the start to the end of your code, and to make sure that your workspace is clean at the beginning.
+
+It's very useful to use shortcuts for this, for example:
+
+Description | Windows & Linux | Mac
+--- | --- | ---
+Run current line/selection | Ctrl+Enter | Command+Enter
+Run current line/selection (retain cursor position) | Alt+Enter | Option+Enter
+Run current document | Ctrl+Alt+R | Command+Option+R
+Run from document beginning to current line | Ctrl+Alt+B | Command+Option+B
+Run from current line to document end | Ctrl+Alt+E | Command+Option+E
+
+See [here](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts) for more.
+
+Practice with the following chunk of code:
+
+```{r echo=TRUE}
+data(mtcars)
+
+head(mtcars)
+
+colnames(mtcars)
+
+colnames(mtcars)[1] = 'MPG'
+
+head(mtcars)
+```
+
+#### Retrieving previous commands
+
+It's often the case that you want to re-execute commands that you previously entered. The RStudio console supports the ability to recall previous commands using the arrow keys:
+
+- Up — Recall previous command(s)
+- Down — Reverse of Up
+
+You can even view a list of your recent commands by pressing Ctrl+Up on Windows or Command+Up on a Mac.
+
+See [here](https://twitter.com/rstudiotips) for more RStudio tips.
+
+## 2. Install and load packages
+
+```{r}
+install.packages('tidyverse')
+```
+```{r}
+install.packages('tidyverse')
+```
+
+## 3. Load and inspect some data
+
+```{r}
+# load data without downloading
+
+con = url('https://www.dropbox.com/s/f8umnzf6vl2d26d/movies.RData?dl=0')
+load(con)
+close(con)
+```
+
+```R
+# command to list all the variables in your workspace
+ls()
+```
+
+```R
+# inspect the first 5 lines of a dataset
+
+movies %>%
+  slice(1:5)
+```
+
+```R
+summary(movies)
+```
+
+#### Continuous  variables
+
+```R
+# plot relationship between two variables, critics_score and audience_score
+
+ggplot(data = movies, aes(x = critics_score, y = audience_score, color=imdb_rating)) +
+  geom_jitter() +
+  scale_colour_gradient(low = "blue", high = "gold", limits=range(movies[,'imdb_rating'])) +
+  labs(x = "Critics Score", y = "Audience Score", color='IMDb rating') +
+  ggtitle("Relationship Between Critics Score And Audience Score On Rotten Tomatoes")
+```
+
+```R
+# Run a correlation test
+cor.test(~ audience_score + critics_score, data = movies)
+```
+
+```R
+# Run a regression
+regression_fit = lm(formula = audience_score ~ critics_score + imdb_rating, 
+                    data = movies)
+
+# Print summary results
+summary(regression_fit)
+```
+
+```R
+cormat = cor(movies[, c('audience_score', 'critics_score', 'imdb_rating', 'imdb_num_votes')])
+cormat
+```
+
+#### Discrete variables
+
+```R
+ggplot(data = movies, aes(x = best_pic_nom, y = audience_score, fill = best_dir_win)) +
+  geom_boxplot() +
+  labs(x = "Movie Was Nominated For A Best Picture Oscar", y = "Audience Score", fill = "Director won oscar") +
+  ggtitle("Relationship Between Audience Score, Movie Picture Oscar and Director Achievement")
+```
+
+```R
+# Run an ANOVA
+anova_fit = aov(formula = audience_score ~ best_pic_nom * best_dir_win, 
+                data = movies)
+
+# Print summary results
+summary(anova_fit)
+```
+
+```R
+ggplot(data = movies, aes(x = thtr_rel_year)) +
+  geom_bar() +
+  ggtitle("Number of movies in the database per release year") +
+  labs(x = "Theatrical release year", y = "Count")
+```
+
+## 4. Now it's your turn
+
+**Task A** 
+
+1. Plot the relationship between: `imdb_rating`, `imdb_num_votes` and `audience_score`. 
+2. Change the coloring of the scatterplot. You can either have a look [here](https://ggplot2.tidyverse.org/reference/scale_gradient.html) or simply change the two colors in the gradients, and have a look for example [here](http://sape.inf.usi.ch/quick-reference/ggplot2/colour).
+3. Compute the regression for such relationship.
+
+**Task B**
+
+1. Plot the relationship between `best_actor_win`, `best_actress_win` and `audience_score`.
+2. Compute the ANOVA for such relationship.
+
+**Task C**
+
+1. Plot the number of movies in each `mpaa_rating` category.
+
+## Submit your assignment
+
+Save and email your `wpa_1_LastFirst.R` script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of the day.
