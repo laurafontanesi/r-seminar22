@@ -116,7 +116,7 @@ See [here](https://twitter.com/rstudiotips) for more RStudio tips.
 install.packages('tidyverse')
 ```
 ```{r}
-install.packages('tidyverse')
+library(tidyverse)
 ```
 
 ## 3. Load and inspect some data
@@ -124,30 +124,30 @@ install.packages('tidyverse')
 ```{r}
 # load data without downloading
 
-con = url('https://www.dropbox.com/s/f8umnzf6vl2d26d/movies.RData?dl=0')
+con = url('https://github.com/laurafontanesi/r-seminar22/blob/main/data/movies.RData?raw=true')
 load(con)
 close(con)
 ```
 
-```R
+```{r}
 # command to list all the variables in your workspace
 ls()
 ```
 
-```R
+```{r}
 # inspect the first 5 lines of a dataset
 
 movies %>%
   slice(1:5)
 ```
 
-```R
+```{r}
 summary(movies)
 ```
 
 #### Continuous  variables
 
-```R
+```{r}
 # plot relationship between two variables, critics_score and audience_score
 
 ggplot(data = movies, aes(x = critics_score, y = audience_score, color=imdb_rating)) +
@@ -157,12 +157,12 @@ ggplot(data = movies, aes(x = critics_score, y = audience_score, color=imdb_rati
   ggtitle("Relationship Between Critics Score And Audience Score On Rotten Tomatoes")
 ```
 
-```R
+```{r}
 # Run a correlation test
 cor.test(~ audience_score + critics_score, data = movies)
 ```
 
-```R
+```{r}
 # Run a regression
 regression_fit = lm(formula = audience_score ~ critics_score + imdb_rating, 
                     data = movies)
@@ -171,21 +171,21 @@ regression_fit = lm(formula = audience_score ~ critics_score + imdb_rating,
 summary(regression_fit)
 ```
 
-```R
+```{r}
 cormat = cor(movies[, c('audience_score', 'critics_score', 'imdb_rating', 'imdb_num_votes')])
 cormat
 ```
 
 #### Discrete variables
 
-```R
+```{r}
 ggplot(data = movies, aes(x = best_pic_nom, y = audience_score, fill = best_dir_win)) +
   geom_boxplot() +
   labs(x = "Movie Was Nominated For A Best Picture Oscar", y = "Audience Score", fill = "Director won oscar") +
   ggtitle("Relationship Between Audience Score, Movie Picture Oscar and Director Achievement")
 ```
 
-```R
+```{r}
 # Run an ANOVA
 anova_fit = aov(formula = audience_score ~ best_pic_nom * best_dir_win, 
                 data = movies)
@@ -194,7 +194,7 @@ anova_fit = aov(formula = audience_score ~ best_pic_nom * best_dir_win,
 summary(anova_fit)
 ```
 
-```R
+```{r}
 ggplot(data = movies, aes(x = thtr_rel_year)) +
   geom_bar() +
   ggtitle("Number of movies in the database per release year") +
