@@ -110,9 +110,10 @@ See [here](https://twitter.com/rstudiotips) for more RStudio tips.
 
 # 2. Install and load packages
 
-```{r}
+```
 install.packages('tidyverse')
 ```
+
 ```{r}
 library(tidyverse)
 ```

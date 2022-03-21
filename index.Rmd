@@ -77,7 +77,7 @@ Thats why I'm here. If you don't know what you are doing or why something doesn'
 **Take notes**
 Even during the graded assignments, you can consult all the material you want. However, sometimes having too many resources to look at is not optimal, since you might end up wasting a lot of time searching for what you need all the time. What I suggest you to do, is to keep notes on the commands you find most difficult to remember or on examples that you find particularly useful. This will also help you organize the material in a way that might be better for you, compared to how I will present topics during the course or how it is presented in the text book.
 
-## R and WPA guidelines
+# R and WPA guidelines
 1. Be sure you save your script often.
 
 2. Keep your script clean. Comment out all the text that it's not R-interpretable by putting an `#` in front. One should be always able to run your script from beginning to end without getting errors. If you have code that didn't work (that did give you an error), comment it out. You can then explain in the comment what you think went wrong. Never paste the output in your script, unless it's required in a specific question. In that case, be sure to comment it out.

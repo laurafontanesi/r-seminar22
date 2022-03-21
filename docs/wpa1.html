@@ -433,8 +433,7 @@ head(mtcars)</code></pre>
 </div>
 <div id="install-and-load-packages" class="section level1">
 <h1>2. Install and load packages</h1>
-<pre class="r"><code>install.packages(&#39;tidyverse&#39;)</code></pre>
-<pre><code>## Error in install.packages : Updating loaded packages</code></pre>
+<pre><code>install.packages(&#39;tidyverse&#39;)</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
 </div>
 <div id="load-and-inspect-some-data" class="section level1">
@@ -522,7 +521,7 @@ ggplot(data = movies, aes(x = critics_score, y = audience_score, color=imdb_rati
   scale_colour_gradient(low = &quot;blue&quot;, high = &quot;gold&quot;, limits=range(movies[,&#39;imdb_rating&#39;])) +
   labs(x = &quot;Critics Score&quot;, y = &quot;Audience Score&quot;, color=&#39;IMDb rating&#39;) +
   ggtitle(&quot;Relationship Between Critics Score And Audience Score On Rotten Tomatoes&quot;)</code></pre>
-<p><img src="wpa1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="wpa1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code># Run a correlation test
 cor.test(~ audience_score + critics_score, data = movies)</code></pre>
 <pre><code>## 
@@ -575,7 +574,7 @@ cormat</code></pre>
   geom_boxplot() +
   labs(x = &quot;Movie Was Nominated For A Best Picture Oscar&quot;, y = &quot;Audience Score&quot;, fill = &quot;Director won oscar&quot;) +
   ggtitle(&quot;Relationship Between Audience Score, Movie Picture Oscar and Director Achievement&quot;)</code></pre>
-<p><img src="wpa1_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="wpa1_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <pre class="r"><code># Run an ANOVA
 anova_fit = aov(formula = audience_score ~ best_pic_nom * best_dir_win, 
                 data = movies)
@@ -593,7 +592,7 @@ summary(anova_fit)</code></pre>
   geom_bar() +
   ggtitle(&quot;Number of movies in the database per release year&quot;) +
   labs(x = &quot;Theatrical release year&quot;, y = &quot;Count&quot;)</code></pre>
-<p><img src="wpa1_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="wpa1_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 </div>
 <div id="now-its-your-turn" class="section level1">

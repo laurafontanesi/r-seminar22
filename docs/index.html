@@ -300,10 +300,8 @@ $(document).ready(function () {
 <li><a href="#course-description">Course Description</a></li>
 <li><a href="#weekly-programming-assignments-wpas">Weekly Programming Assignments (WPAs)</a></li>
 <li><a href="#grading">Grading</a></li>
-<li><a href="#tips">Tips</a>
-<ul>
+<li><a href="#tips">Tips</a></li>
 <li><a href="#r-and-wpa-guidelines">R and WPA guidelines</a></li>
-</ul></li>
 </ul>
 </div>
 
@@ -461,8 +459,9 @@ $(document).ready(function () {
 <p><a href="http://letmegooglethat.com/?q=load+csv+in+R">For example</a></p>
 <p><strong>Ask, ask, ask!</strong> Thats why I’m here. If you don’t know what you are doing or why something doesn’t work (or does work), or maybe you do know what you are doing but you want to make it more efficient, please do not hesitate to ask questions. As this is meant to be a more practical seminar and we are somewhat limited by the online format, it is very important that we all make an effort to communicate with each other.</p>
 <p><strong>Take notes</strong> Even during the graded assignments, you can consult all the material you want. However, sometimes having too many resources to look at is not optimal, since you might end up wasting a lot of time searching for what you need all the time. What I suggest you to do, is to keep notes on the commands you find most difficult to remember or on examples that you find particularly useful. This will also help you organize the material in a way that might be better for you, compared to how I will present topics during the course or how it is presented in the text book.</p>
-<div id="r-and-wpa-guidelines" class="section level2">
-<h2>R and WPA guidelines</h2>
+</div>
+<div id="r-and-wpa-guidelines" class="section level1">
+<h1>R and WPA guidelines</h1>
 <ol style="list-style-type: decimal">
 <li><p>Be sure you save your script often.</p></li>
 <li><p>Keep your script clean. Comment out all the text that it’s not R-interpretable by putting an <code>#</code> in front. One should be always able to run your script from beginning to end without getting errors. If you have code that didn’t work (that did give you an error), comment it out. You can then explain in the comment what you think went wrong. Never paste the output in your script, unless it’s required in a specific question. In that case, be sure to comment it out.</p></li>
@@ -503,19 +502,18 @@ t.test(x)</code></pre>
 ##  One Sample t-test
 ## 
 ## data:  x
-## t = 0.23439, df = 99, p-value = 0.8152
+## t = -0.98004, df = 99, p-value = 0.3295
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.1861404  0.2360086
+##  -0.3159480  0.1070313
 ## sample estimates:
-## mean of x 
-## 0.0249341</code></pre>
+##  mean of x 
+## -0.1044584</code></pre>
 <pre class="r"><code># p = .04
 
 # TASK A4
 # What is the height of dogs that weigh more than 5 kg?
 # I tried dogs[dogs[&#39;weight&#39;] &gt; 5, height] but didn&#39;t work. I suspect that there is a problem with height.</code></pre>
-</div>
 </div>
 
 
