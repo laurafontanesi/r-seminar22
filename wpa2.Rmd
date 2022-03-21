@@ -1,0 +1,728 @@
+---
+title: "Basic R"
+---
+
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_2_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about capitalizing, and using `_`: **DO NOT write** `WPA-2-LastFirst.R` or `WPA_2_LastFirst.R` or `wpa_2_FirstLast.R`
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 2
+# Name: Laura Fontanesi
+# Date: 22 March 2022
+```
+
+# 1. R commands, case sensitivity, etc.
+
+Technically R is an expression language with a very simple syntax. It is case sensitive as are most UNIX based packages, so `A` and `a` are different symbols and would refer to different variables.
+
+In this course, we will try to avoid numbers in R names, as well as capital letters and `.`. We will thus use names such as: `my_data`, `anova_results`, `square_root`, etc.
+
+Elementary commands consist of either **expressions** or **assignments**. 
+
+If an **expression** is given as a command, it is evaluated, printed, and the value is lost:
+
+
+```{r}
+57*2 + 100
+```
+
+An **assignment** also evaluates an expression and passes the value to a variable but the result is not automatically printed:
+
+```{r}
+some_variable = 57*2 + 100
+
+print(some_variable)
+```
+
+Commands are separated by a newline. 
+
+Comments can be put almost anywhere, starting with a hashmark (`#`), everything to the end of the line is a comment.
+
+In the console, if a command is not complete at the end of a line, R will give a different prompt (by default `+`) on second and subsequent lines and continue to read input until the command is syntactically complete.
+
+# 2. Vectors and assignment
+
+R operates on named data structures. The simplest such structure is the **numeric vector**, which is a single entity consisting of an ordered collection of numbers. To set up a vector named x, say, consisting of five numbers, namely 10.4, 5.6, 3.1, 6.4 and 21.7, use the R command:
+
+
+```{r}
+x = c(10.4, 5.6, 3.1, 6.4, 21.7)
+
+print(x)
+```
+
+This is an assignment statement using the function `c()` which in this context can take an arbitrary number of vector arguments and whose value is a vector got by concatenating its arguments end to end.
+
+If an expression is used as a complete command, the value is printed and lost. So now if we were to use the command:
+
+```{r}
+1/x + 5
+```
+the reciprocals of the five values would be printed at the terminal (and the value of x, of course, unchanged).
+
+The further assignment:
+```{r}
+y = c(x, 0, x)
+```
+would create a vector y with 11 entries consisting of two copies of x with a zero in the middle place:
+
+```{r}
+print(y)
+```
+
+# 3. Vector arithmetic
+
+Vectors can be used in arithmetic expressions, in which case the operations are performed element by element. Vectors occurring in the same expression need not all be of the same length. If they are not, the value of the expression is a vector with the same length as the longest vector which occurs in the expression. Shorter vectors in the expression are recycled as often as need be (perhaps fractionally) until they match the length of the longest vector. In particular, a constant is simply repeated. So with the above assignments the commands:
+
+```{r}
+x
+```
+```{r}
+z = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+print(z)
+```
+
+```{r}
+v = 2*x + z + 1
+
+print(v)
+```
+
+generates a new vector `v` of length 10 constructed by adding together, element by element, `2*x` repeated 2 times, `z` repeated just once, and `1` repeated 10 times.
+
+However, when trying:
+```{r}
+print(y)
+```
+```{r}
+w = 2*x + y + 1
+
+print(w)
+```
+
+It gives us the Warning that `y` (the longest object, of lenght 11) is not a multiple of `x` (the shortest, with length 5).
+
+- The elementary arithmetic operators are the usual `+`, `-`, `*`, `/` and `^` for raising to a power. 
+
+- In addition all of the common arithmetic functions are available. `log`, `exp`, `sin`, `cos`, `tan`, `sqrt`, and so on, all have their usual meaning. 
+
+- `max` and `min` select the largest and smallest elements of a vector respectively. 
+
+- `range` is a function whose value is a vector of length two, namely `c(min(x), max(x))`. 
+
+- `length(x)` is the number of elements in `x`.
+
+- `sum(x)` gives the total of the elements in `x`, and `prod(x)` their product.
+
+- Two statistical functions are `mean(x)` which calculates the sample mean, which is the same as `sum(x)/length(x)`, and `var(x)` which gives `sum((x-mean(x))^2)/(length(x)-1)` or sample variance. 
+
+- `sort(x)` returns a vector of the same size as x with the elements arranged in increasing order.
+
+```{r}
+min(y)
+max(y)
+range(y)
+```
+
+```{r}
+log(y)
+```
+
+```{r}
+length(y)
+```
+
+```{r}
+sort(y)
+```
+
+```{r}
+mean(x)
+sd(x)
+var(x)
+```
+
+# 4. Generating regular sequences
+
+R has a number of facilities for generating commonly used sequences of numbers. 
+
+For example:
+```{r}
+4:12
+```
+
+The **colon operator** has high priority within an expression, so, for example `2*1:15` is the vector `c(2, 4, ..., 28, 30)`. 
+
+Put n = 10 and compare the sequences `1:n-1` and `1:(n-1)`.
+
+The construction `5:1` may be used to generate a sequence backwards:
+
+```{r}
+n = 10
+1:n-1
+```
+
+```{r}
+1:(n-1)
+```
+
+The function **`seq()`** is a more general facility for generating sequences. It has five arguments, only some of which may be specified in any one call. The first two arguments, if given, specify the beginning and end of the sequence, and if these are the only two arguments given the result is the same as the colon operator. That is `seq(2,10)` is the same vector as `2:10`.
+
+Arguments to seq(), and to many other R functions, can also be given in named form, in which case the order in which they appear is irrelevant. The first two arguments may be named `from=value` and `to=value`; thus `seq(1,30)`, `seq(from=1, to=30)` and `seq(to=30, from=1)` are all the same as `1:30`. 
+
+The next two arguments to seq() may be named `by=value` and `length=value`, which specify a step size and a length for the sequence respectively. If neither of these is given, the default `by=1` is assumed.
+
+For example:
+```{r}
+seq(from=-1, to=10, by=3)
+```
+
+```{r}
+seq(length=5, from=-1, by=.5)
+```
+
+A related function is **`rep()`** which can be used for replicating an object.
+
+It has two main arguments, `times` and `each`. The first tells how many copies do we want of the same object, and the second tells how many copies of each element of the object we want to repeat.
+
+```{r}
+a = 1:4
+
+print(a)
+```
+
+```{r}
+rep(a, times=3)
+```
+
+```{r}
+rep(a, each=3)
+```
+
+```{r}
+rep(a, times=3, each=2)
+```
+
+# 5. Logical vectors
+
+As well as numerical vectors, R allows manipulation of logical quantities. The elements of a logical vector can have the values `TRUE`, `FALSE`, and `NA` (for “not available”). The first two are often abbreviated as `T` and `F`, respectively. Note however that `T` and `F` are just variables which are set to `TRUE` and `FALSE` by default, but are not reserved words and hence can be overwritten by the user. Hence, you should always use `TRUE` and `FALSE`.
+
+Logical vectors are generated by conditions. For example:
+```{r}
+x
+```
+
+```{r}
+x > 10
+```
+
+```{r}
+x <= 10
+```
+
+```{r}
+x == 10.4
+```
+
+```{r}
+x != 10.4
+```
+
+```{r}
+temp = (x > 10)
+temp
+```
+sets `temp` as a vector of the same length as `x` with values `FALSE` corresponding to elements of `x` where the condition is not met and `TRUE` where it is.
+
+The logical operators are `<`, `<=`, `>`, `>=`, `==` for exact equality and `!=` for inequality. 
+
+In addition, if `c1` and `c2` are logical expressions, then `c1 & c2` is their intersection (“and”), `c1 | c2` is their union (“or”), and `!c1` is the negation of c1.
+
+```{r}
+temp_opposite = (x <= 10)
+temp_opposite
+```
+
+```{r}
+!temp
+```
+
+```{r}
+temp & temp_opposite
+```
+
+```{r}
+temp | temp_opposite
+```
+
+Logical vectors may be used in **ordinary arithmetic**, in which case they are coerced into numeric vectors, `FALSE` becoming 0 and `TRUE` becoming 1. However, there are situations where logical vectors and their coerced numeric counterparts are not equivalent, for example see the next subsection.
+
+```{r}
+sum(temp)
+```
+
+```{r}
+mean(temp)*100
+```
+
+# 6. Missing values
+
+In some cases the components of a vector may not be completely known. When an element or value is “not available” or a “missing value” in the statistical sense, a place within a vector may be reserved for it by assigning it the special value `NA`. In general, any operation on an `NA` becomes an `NA`. The motivation for this rule is simply that if the specification of an operation is incomplete, the result cannot be known and hence is not available.
+
+The function `is.na(x)` gives a logical vector of the same size as `x` with value `TRUE` if and only if the corresponding element in `x` is `NA`.
+
+```{r}
+z = c(1:3, NA)
+z
+```
+
+```{r}
+ind = is.na(z)
+ind
+```
+
+Note that there is a second kind of "missing" values which are produced by numerical computation, the so-called Not a Number, `NaN`, values. Examples are:
+
+```{r}
+0/0
+```
+
+```{r}
+30/0
+```
+
+```{r}
+30/0 - 30/0
+```
+which give `NaN` since the result cannot be defined sensibly.
+
+In summary, `is.na(xx)` is `TRUE` both for `NA` and `NaN` values. To differentiate these, `is.nan(xx)` is only `TRUE` for `NaNs`.
+
+```{r}
+is.na(NA)
+```
+
+```{r}
+is.nan(NA)
+```
+
+# 7. Character vectors
+
+Character quantities and character vectors are used frequently in R, for example as plot labels. Where needed they are denoted by a sequence of characters delimited by the double quote character, e.g., "x-values", "New iteration results".
+
+Character strings are entered using either matching double (") or single (') quotes, but are printed using double quotes (or sometimes without quotes). Useful escape sequences are `\n`, newline and `\t`, tab.
+
+Character vectors may be concatenated into a vector by the `c()` function.
+
+```{r}
+char_first = c('a', 'b', 'c')
+char_second = c('E', 'F', 'G')
+
+char_third = c(char_first, char_second)
+print(char_third)
+```
+
+```{r}
+print("This is the assginmenet of Laura Fontanesi.\nIt was done on the 9th of March.")
+```
+
+```{r}
+cat("This is the assginmenet of Laura Fontanesi.\nIt was done on the 9th of March.")
+```
+
+```{r}
+cat("This is the assginmenet of Laura Fontanesi.\n\tIt was done on the 9th of March.")
+```
+
+The **`paste()`** function takes an arbitrary number of arguments and concatenates them one by one into character strings. Any numbers given among the arguments are coerced into character strings in the evident way, that is, in the same way they would be if they were printed. The arguments are by default separated in the result by a single blank character, but this can be changed by the named argument, `sep=string`, which changes it to string, possibly empty.
+
+For example:
+
+```{r}
+labs = paste(c("X", "Y"), 1:10, sep="-")
+labs
+```
+
+Note particularly that recycling of short lists takes place here too; thus `c("X", "Y")` is repeated 5 times to match the sequence `1:10`.
+
+# 8. Index vectors
+
+Subsets of the elements of a vector may be selected by appending to the name of the vector an index vector in square brackets. More generally, any expression that evaluates to a vector may have subsets of its elements similarly selected by appending an index vector in square brackets immediately after the expression.
+
+Such index vectors can be any of 3 main types:
+
+## 8.1 A logical vector
+In this case the index vector is recycled to the same length as the vector from which elements are to be selected. Values corresponding to `TRUE` in the index vector are selected and those corresponding to `FALSE` are omitted. For example:
+
+```{r}
+z
+```
+
+```{r}
+!is.na(z)
+```
+
+```{r}
+y = z[!is.na(z)]
+
+print(y)
+```
+
+creates (or re-creates) an object `y` which will contain the non-missing values of `z`, in the same order. Note that if `z` has missing values, `y` will be shorter than `z`. 
+
+Also:
+
+```{r}
+y = (z+1)[(!is.na(z)) & (z+1)>1]
+
+print(y)
+```
+
+creates an object `y` and places in it the values of the vector `z+1` for which the corresponding value in `z` was both non-missing and positive.
+
+You can also create a new variable `new_z` as a step before creating `y`:
+
+```{r}
+new_z = z + 1
+
+y = new_z[(!is.na(new_z)) & new_z>1]
+
+print(y)
+```
+
+## 8.2 A vector of positive integral quantities
+In this case, the values in the index vector must lie in the set {1, 2, . . ., `length(x)`}. The corresponding elements of the vector are selected and concatenated, in that order, in the result. 
+
+The index vector can be of any length and the result is of the same length as the index vector. 
+
+For example `x[6]` is the sixth component of `x` and `x[1:10]` selects the first 10 elements of `x` (assuming `length(x)` is not less than 10). 
+
+Also:
+```{r}
+c(12, 4, 67)[2]
+```
+
+```{r}
+weird_indices = rep(c(1,2,2,1), times=3)
+
+print(weird_indices)
+```
+
+```{r}
+c("x","y")[weird_indices]
+```
+
+(an admittedly unlikely thing to do) produces a character vector of length 12 consisting of "x", "y", "y", "x" repeated 3 times.
+
+Or, more likely:
+```{r}
+x = seq(from=-3, to=3, by=1)
+
+print(x)
+```
+
+```{r}
+length(x)
+```
+
+```{r}
+x[c(1, length(x))]
+```
+to get the first and last elements of `x`.
+
+## 8.3 A vector of negative integral quantities
+Such an index vector specifies the values to be excluded rather than included. Thus:
+
+```{r}
+print(x)
+
+x[-1]
+```
+
+```{r}
+x[-(1:3)]
+```
+
+gives all but the first 3 elements of `x`.
+
+# 9. Factors
+
+A factor is a vector object used to specify a discrete classification (grouping) of the components of other vectors of the same length. R provides both ordered and unordered factors. While the "real" application of factors is with model formulae (we will see this when fitting regressions, ANOVAs, etc.), we here look at a specific example.
+
+Suppose, for example, we have a sample of 30 tax accountants from all the states and territories of Australia and their individual state of origin is specified by a character vector of state mnemonics as:
+
+```{r}
+state = c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", 
+          "wa", "qld", "vic", "nsw", "vic", "qld", "qld", 
+          "sa", "tas", "sa", "nt", "wa", "vic", "qld", "nsw", 
+          "nsw", "wa", "sa", "act", "nsw", "vic", "vic", "act")
+
+sort(state)
+```
+
+Notice that in the case of a character vector, "sorted" means sorted in alphabetical order. 
+
+A factor is similarly created using the `factor()` function:
+```{r}
+state_factor = factor(state)
+
+print(state_factor)
+```
+
+To find out the levels of a factor the function `levels()` can be used.
+
+```{r}
+levels(state_factor)
+```
+
+The levels of factors are stored in alphabetical order, or in the order they were specified to factor if they were specified explicitly.
+
+Sometimes the levels will have a natural ordering that we want to record and want our statistical analysis to make use of. The `ordered()` function creates such ordered factors but is otherwise identical to `factor`. For most purposes the only difference between ordered and unordered factors is that the former are printed showing the ordering of the levels, but the contrasts generated for them in fitting linear models are different.
+
+```{r}
+x = factor(c("Man", "Male", "Man", "Lady", "Female"))
+
+print(x)
+```
+
+```{r}
+x = factor(c("Man", "Male", "Man", "Lady", "Female"), levels = c("Man", "Female", "Lady"))
+
+print(x)
+```
+
+```{r}
+sort(x)
+```
+
+# 10. Data frames
+
+A data frame is a list where its components are vectors (numeric, character, or logical) or factors of equal length.
+
+```{r}
+n = c(2, 3, 5) 
+s = c("aa", "bb", "cc") 
+b = c(TRUE, FALSE, TRUE) 
+df = data.frame(n, s, b)
+
+print(df)
+```
+
+## 10.1 Index data frames
+
+Select one column by name using the `$` operator:
+```{r}
+df$n
+```
+
+Select one or more columns by name using the brackets:
+```{r}
+df[,"n"]
+```
+
+```{r}
+df[,c("n", "s")]
+```
+
+Select one or more columns by index using the brackets:
+```{r}
+df[,1]
+```
+
+```{r}
+df[,c(1, 3)]
+```
+
+Select one or more **rows** by index using the brackets:
+
+```{r}
+df[1,]
+```
+
+```{r}
+df[c(1,3),]
+```
+
+Finally, you can select **both rows and columns**:
+```{r}
+df[2, c("n", "s")]
+```
+
+Note that you can use all the ways to index vectors, both for rows and columns:
+
+```{r}
+design = data.frame(
+  stimulus = rep(c('a', 'b', 'c'), each=4),
+  item = seq(from=1, by=1, length.out=12),
+  correct_response = rep(c(0, 1), times=6)
+)
+
+print(design)
+```
+
+```{r}
+design[design$stimulus == 'c',]
+```
+
+```{r}
+design[design$stimulus == 'c' & design$correct_response == 0,]
+```
+
+```{r}
+design[design$correct_response == 1, "item"]
+```
+
+```{r}
+design[seq(from=1, to=5),]
+```
+
+```{r}
+design[-seq(from=1, to=5),]
+```
+
+## 10.2 Add columns
+
+To add a column after creating the dataframe, you have 3 options.
+
+1. Using the `$` operator: 
+```{r}
+df$first = seq(from=7, by=10, length.out=3)
+
+print(df)
+```
+
+2. Using brackets: 
+```{r}
+df['second'] = seq(from=70, by=2, length.out=3)
+
+print(df)
+```
+
+3. Using the function `cbind`: 
+```{r}
+df= cbind(df, seq(from=700, by=5, length.out=3))
+
+print(df)
+```
+
+## 10.3 Get and change column names
+
+```{r}
+colnames(df)
+```
+
+```{r}
+colnames(df) = c("n", "s", "b", "first", "second", "third")
+
+print(df)
+```
+
+## 10.4 Concatenate two dataframes
+
+```{r}
+design_second = data.frame(
+    stimulus = rep(c('d', 'e', 'f'), each=2),
+    item = seq(from=13, by=1, length.out=6),
+    correct_response = rep(c(0, 1), times=3)
+)
+
+print(design_second)
+```
+
+```{r}
+design_new = rbind(design, design_second)
+
+print(design_new)
+```
+
+```{r}
+design_new[13, "correct_response"] = NaN
+
+print(design_new)
+```
+
+```{r}
+design_third = data.frame(
+    missing_value = is.nan(design_new$correct_response)
+)
+
+print(design_third)
+```
+
+```{r}
+design_final = cbind(design_new, design_third)
+
+print(design_final)
+```
+
+Select and change values:
+
+```{r}
+design_final[3, "stimulus"] = "f"
+design_final
+```
+
+```{r}
+design_final[design_final$stimulus == "a", "stimulus"] = "f"
+design_final
+```
+
+# 11. Probability distributions
+
+R provides convenient functions to simulate observations from different distributions.
+
+For example:
+
+Distribution | R Name | Arguments
+------------ | ------ | --------------------
+uniform | runif | n, min, max
+normal | rnorm | n, mean, sd
+binomial | rbinom | n, size, prob
+
+
+```{r}
+runif(n=10, min=1, max=10)
+```
+
+```{r}
+x = rnorm(n=20, mean=20, sd=5)
+
+mean(x)
+range(x)
+```
+
+```{r}
+rbinom(n=6, size=1, prob=.6)
+```
+
+# 12. Now it's your turn
+
+**Task A** 
+
+1. Create a numeric vector called `participants`, containing integer numbers from 1 to 20, using `c()` and `seq()`.
+2. Create a character vector called `conditions`, of length 20, containing alternating values of "a" and "b" ("a", "b", "a", "b", "a", ...), using `rep()`.
+3. Create a vector called `first_half`, containing only the first half of the `participants` vector's values.
+4. Check that both `participants` and `conditions` have length 20, and that `first_half` has length 10, using `length()`.
+5. Instead of the fifth element in `conditions`, insert a missing value. Print the `conditions` after the change.
+6. Create a vector called `participants_cond`, by pasting together (using `paste()`) `participants` and `conditions`, separated by `_`. So, the first element should be "1_a". 
+7. Check that the 5th element of participants_cond is still a missing value.
+
+**Task B**
+
+1. Create a data frame called `my_data`, with as columns the vectors`participants`, `conditions` and `participants_cond` that you created before. Print the data frame to have a look if it worked.
+2. Add a column called `response_times` made of 20 samples from the normal distribution, with mean .8 and standard deviation 1. Print the data frame to have a look if it worked.
+3. Select the values of the `response_times` column that are negative and set them to 0. Print the data frame to have a look if it worked.
+4. Create a new column, called `log_response_times`, made of the logarithm of `response_times`.
+5. Add a column called `correct_response` made of 20 samples from the binomial distribution, with size 1 and probability of success .65. Print the data frame to have a look if it worked.
+6. Calculate the mean proportion of correct responses and the mean response time.
+7. Create two data frames, `data_correct` and `data_incorrect` made of, respectively, the subset of `my_data` where `correct_response` is 1, and the subset of `my_data` where `correct_response` is 0. Print the data frame to have a look if it worked. Print the result to check.
+
+# Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of Friday. 

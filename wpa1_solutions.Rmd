@@ -1,0 +1,66 @@
+---
+title: "Solutions for WPA1"
+---
+
+```{r}
+library('tidyverse')
+
+con = url('https://github.com/laurafontanesi/r-seminar22/blob/main/data/movies.RData?raw=true')
+load(con)
+close(con)
+```
+
+**Task A** 
+
+1. Plot the relationship between: `imdb_rating`, `imdb_num_votes` and `audience_score`. 
+2. Change the coloring of the scatterplot. You can either have a look [here](https://ggplot2.tidyverse.org/reference/scale_gradient.html) or simply change the two colors in the gradients, and have a look for example [here](http://sape.inf.usi.ch/quick-reference/ggplot2/colour).
+3. Compute the regression for such relationship.
+
+```{r}
+ggplot(data = movies, aes(x = imdb_rating, y = audience_score, color=imdb_num_votes)) +
+  geom_jitter() +
+  scale_colour_gradient(low = "blue", high = "gold", limits=range(movies[,'imdb_num_votes']), trans='log') +
+  labs(x = 'IMDb rating', y = "Audience Score", color="log(Number Votes)") +
+  ggtitle("Relationship Between Ratings, Audience Score and Number of Votes On Rotten Tomatoes")
+```
+
+```{r}
+# Run a regression
+regression_fit = lm(formula = audience_score ~ imdb_num_votes + imdb_rating, 
+                    data = movies)
+
+# Print summary results
+summary(regression_fit)
+```
+
+**Task B**
+
+1. Plot the relationship between `best_actor_win`, `best_actress_win` and `audience_score`.
+2. Compute the ANOVA for such relationship.
+
+```{r}
+ggplot(data = movies, aes(x = best_actor_win, y = audience_score, fill = best_actress_win)) +
+  geom_boxplot() +
+  labs(x = "Best Actor Won Oscar", y = "Audience Score", fill = "Best Actress Won Oscar") +
+  ggtitle("Relationship Between Audience Score and Actors achievements")
+```
+
+```{r}
+# Run an ANOVA
+anova_fit = aov(formula = audience_score ~ best_actor_win * best_actress_win, 
+                data = movies)
+
+# Print summary results
+summary(anova_fit)
+```
+
+**Task C**
+
+1. Plot the number of movies in each `mpaa_rating` category.
+
+```{r}
+ggplot(data = movies, aes(x = mpaa_rating)) +
+  geom_bar() +
+  ggtitle("Number of movies in the database per mpaa_rating") +
+  labs(x = "mpaa_rating", y = "Count")
+```

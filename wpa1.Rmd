@@ -1,14 +1,12 @@
 ---
-title: "wpa1"
+title: "Introduction to Rstudio, and seeing what R can do"
 ---
 
-# Introduction to Rstudio, and seeing what R can do
-
-## 1. RStudio
+# 1. RStudio
 
 Open RStudio.
 
-#### RStudio panes
+## RStudio panes
 
 The RStudio interface consists of four main panes, or windows.
 
@@ -33,7 +31,7 @@ At the top of your script, write the following (**with appropriate changes**):
 # Date: 15 March 2022
 ```
 
-#### Code completion
+## Code completion
 RStudio supports automatic completion of code using the **Tab key**. 
 
 For example, let's create a new object, named `my_block_rewards`:
@@ -59,7 +57,7 @@ Type `data(m` in the console, then hit Tab to bring up a list of options. RStudi
 
 Choose `mtcars` from the list and press Enter. What happens?
 
-#### Environment browser
+## Environment browser
 
 The `mtcars` object should have appeared in your environment tab.
 
@@ -67,7 +65,7 @@ The environment tab is in the top right window, which displays the R objects tha
 
 If you click the load symbol next to the `mtcars` object, you can see the structure of the object. You can also click the view icon load to have a table view of the dataset. This might come useful at times.
 
-#### Run some code in your script file
+## Run some code in your script file
 
 What we want to do most of time is to run our code from the script and not from the console. This will help us writing more complicated functions and keep track of exactly what we have been doing up to that point.
 
@@ -99,7 +97,7 @@ colnames(mtcars)[1] = 'MPG'
 head(mtcars)
 ```
 
-#### Retrieving previous commands
+## Retrieving previous commands
 
 It's often the case that you want to re-execute commands that you previously entered. The RStudio console supports the ability to recall previous commands using the arrow keys:
 
@@ -110,7 +108,7 @@ You can even view a list of your recent commands by pressing Ctrl+Up on Windows 
 
 See [here](https://twitter.com/rstudiotips) for more RStudio tips.
 
-## 2. Install and load packages
+# 2. Install and load packages
 
 ```{r}
 install.packages('tidyverse')
@@ -119,7 +117,7 @@ install.packages('tidyverse')
 library(tidyverse)
 ```
 
-## 3. Load and inspect some data
+# 3. Load and inspect some data
 
 ```{r}
 # load data without downloading
@@ -145,7 +143,7 @@ movies %>%
 summary(movies)
 ```
 
-#### Continuous  variables
+## Continuous  variables
 
 ```{r}
 # plot relationship between two variables, critics_score and audience_score
@@ -176,7 +174,7 @@ cormat = cor(movies[, c('audience_score', 'critics_score', 'imdb_rating', 'imdb_
 cormat
 ```
 
-#### Discrete variables
+## Discrete variables
 
 ```{r}
 ggplot(data = movies, aes(x = best_pic_nom, y = audience_score, fill = best_dir_win)) +
@@ -201,7 +199,7 @@ ggplot(data = movies, aes(x = thtr_rel_year)) +
   labs(x = "Theatrical release year", y = "Count")
 ```
 
-## 4. Now it's your turn
+# 4. Now it's your turn
 
 **Task A** 
 
@@ -218,6 +216,6 @@ ggplot(data = movies, aes(x = thtr_rel_year)) +
 
 1. Plot the number of movies in each `mpaa_rating` category.
 
-## Submit your assignment
+# Submit your assignment
 
 Save and email your `wpa_1_LastFirst.R` script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of the day.

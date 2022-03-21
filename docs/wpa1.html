@@ -11,7 +11,7 @@
 
 
 
-<title>wpa1</title>
+<title>Introduction to Rstudio, and seeing what R can do</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -248,7 +248,7 @@ $(document).ready(function () {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-desktop"></span>
+    <span class="fas fa-display"></span>
      
     WPAs
      
@@ -257,6 +257,23 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1 solutions</a>
     </li>
   </ul>
 </li>
@@ -272,30 +289,36 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">wpa1</h1>
+<h1 class="title toc-ignore">Introduction to Rstudio, and seeing what R can do</h1>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction-to-rstudio-and-seeing-what-r-can-do">Introduction to Rstudio, and seeing what R can do</a>
+<li><a href="#rstudio">1. RStudio</a>
 <ul>
-<li><a href="#rstudio">1. RStudio</a></li>
+<li><a href="#rstudio-panes">RStudio panes</a></li>
+<li><a href="#code-completion">Code completion</a></li>
+<li><a href="#environment-browser">Environment browser</a></li>
+<li><a href="#run-some-code-in-your-script-file">Run some code in your script file</a></li>
+<li><a href="#retrieving-previous-commands">Retrieving previous commands</a></li>
+</ul></li>
 <li><a href="#install-and-load-packages">2. Install and load packages</a></li>
-<li><a href="#load-and-inspect-some-data">3. Load and inspect some data</a></li>
+<li><a href="#load-and-inspect-some-data">3. Load and inspect some data</a>
+<ul>
+<li><a href="#continuous-variables">Continuous variables</a></li>
+<li><a href="#discrete-variables">Discrete variables</a></li>
+</ul></li>
 <li><a href="#now-its-your-turn">4. Now it’s your turn</a></li>
 <li><a href="#submit-your-assignment">Submit your assignment</a></li>
-</ul></li>
 </ul>
 </div>
 
-<div id="introduction-to-rstudio-and-seeing-what-r-can-do" class="section level1">
-<h1>Introduction to Rstudio, and seeing what R can do</h1>
-<div id="rstudio" class="section level2">
-<h2>1. RStudio</h2>
+<div id="rstudio" class="section level1">
+<h1>1. RStudio</h1>
 <p>Open RStudio.</p>
-<div id="rstudio-panes" class="section level4">
-<h4>RStudio panes</h4>
+<div id="rstudio-panes" class="section level2">
+<h2>RStudio panes</h2>
 <p>The RStudio interface consists of four main panes, or windows.</p>
 <ul>
 <li><strong>Bottom left</strong>: console or command window. Here you can type any valid R command after the &gt; prompt followed by Enter and R will execute that command.</li>
@@ -312,8 +335,8 @@ $(document).ready(function () {
 # Name: Laura Fontanesi
 # Date: 15 March 2022</code></pre>
 </div>
-<div id="code-completion" class="section level4">
-<h4>Code completion</h4>
+<div id="code-completion" class="section level2">
+<h2>Code completion</h2>
 <p>RStudio supports automatic completion of code using the <strong>Tab key</strong>.</p>
 <p>For example, let’s create a new object, named <code>my_block_rewards</code>:</p>
 <pre class="r"><code>my_block_rewards = c(34, 36, 90)</code></pre>
@@ -325,14 +348,14 @@ $(document).ready(function () {
 <p>Type <code>data(m</code> in the console, then hit Tab to bring up a list of options. RStudio will automatically add a closing parenthesis for you, but your cursor needs to be between the two parentheses for tab completion to work.</p>
 <p>Choose <code>mtcars</code> from the list and press Enter. What happens?</p>
 </div>
-<div id="environment-browser" class="section level4">
-<h4>Environment browser</h4>
+<div id="environment-browser" class="section level2">
+<h2>Environment browser</h2>
 <p>The <code>mtcars</code> object should have appeared in your environment tab.</p>
 <p>The environment tab is in the top right window, which displays the R objects that exist in the global environment. These are the objects that were created by you in your current session.</p>
 <p>If you click the load symbol next to the <code>mtcars</code> object, you can see the structure of the object. You can also click the view icon load to have a table view of the dataset. This might come useful at times.</p>
 </div>
-<div id="run-some-code-in-your-script-file" class="section level4">
-<h4>Run some code in your script file</h4>
+<div id="run-some-code-in-your-script-file" class="section level2">
+<h2>Run some code in your script file</h2>
 <p>What we want to do most of time is to run our code from the script and not from the console. This will help us writing more complicated functions and keep track of exactly what we have been doing up to that point.</p>
 <p>You always have the choice to run part of it or the whole code. I suggest (particularly at the begginning) to always run from the start to the end of your code, and to make sure that your workspace is clean at the beginning.</p>
 <p>It’s very useful to use shortcuts for this, for example:</p>
@@ -397,8 +420,8 @@ head(mtcars)</code></pre>
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
-<div id="retrieving-previous-commands" class="section level4">
-<h4>Retrieving previous commands</h4>
+<div id="retrieving-previous-commands" class="section level2">
+<h2>Retrieving previous commands</h2>
 <p>It’s often the case that you want to re-execute commands that you previously entered. The RStudio console supports the ability to recall previous commands using the arrow keys:</p>
 <ul>
 <li>Up — Recall previous command(s)</li>
@@ -408,14 +431,14 @@ head(mtcars)</code></pre>
 <p>See <a href="https://twitter.com/rstudiotips">here</a> for more RStudio tips.</p>
 </div>
 </div>
-<div id="install-and-load-packages" class="section level2">
-<h2>2. Install and load packages</h2>
+<div id="install-and-load-packages" class="section level1">
+<h1>2. Install and load packages</h1>
 <pre class="r"><code>install.packages(&#39;tidyverse&#39;)</code></pre>
 <pre><code>## Error in install.packages : Updating loaded packages</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
 </div>
-<div id="load-and-inspect-some-data" class="section level2">
-<h2>3. Load and inspect some data</h2>
+<div id="load-and-inspect-some-data" class="section level1">
+<h1>3. Load and inspect some data</h1>
 <pre class="r"><code># load data without downloading
 
 con = url(&#39;https://github.com/laurafontanesi/r-seminar22/blob/main/data/movies.RData?raw=true&#39;)
@@ -423,7 +446,8 @@ load(con)
 close(con)</code></pre>
 <pre class="r"><code># command to list all the variables in your workspace
 ls()</code></pre>
-<pre><code>## [1] &quot;con&quot;              &quot;movies&quot;           &quot;mtcars&quot;           &quot;my_block_rewards&quot; &quot;my_score&quot;         &quot;x&quot;</code></pre>
+<pre><code>## [1] &quot;anova_fit&quot;        &quot;con&quot;              &quot;movies&quot;           &quot;mtcars&quot;           &quot;my_block_rewards&quot; &quot;my_score&quot;        
+## [7] &quot;regression_fit&quot;   &quot;x&quot;</code></pre>
 <pre class="r"><code># inspect the first 5 lines of a dataset
 
 movies %&gt;%
@@ -489,8 +513,8 @@ movies %&gt;%
 ##                    
 ##                    
 ## </code></pre>
-<div id="continuous-variables" class="section level4">
-<h4>Continuous variables</h4>
+<div id="continuous-variables" class="section level2">
+<h2>Continuous variables</h2>
 <pre class="r"><code># plot relationship between two variables, critics_score and audience_score
 
 ggplot(data = movies, aes(x = critics_score, y = audience_score, color=imdb_rating)) +
@@ -545,8 +569,8 @@ cormat</code></pre>
 ## imdb_rating         0.8648652     0.7650355   1.0000000      0.3311525
 ## imdb_num_votes      0.2898128     0.2092508   0.3311525      1.0000000</code></pre>
 </div>
-<div id="discrete-variables" class="section level4">
-<h4>Discrete variables</h4>
+<div id="discrete-variables" class="section level2">
+<h2>Discrete variables</h2>
 <pre class="r"><code>ggplot(data = movies, aes(x = best_pic_nom, y = audience_score, fill = best_dir_win)) +
   geom_boxplot() +
   labs(x = &quot;Movie Was Nominated For A Best Picture Oscar&quot;, y = &quot;Audience Score&quot;, fill = &quot;Director won oscar&quot;) +
@@ -572,8 +596,8 @@ summary(anova_fit)</code></pre>
 <p><img src="wpa1_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 </div>
-<div id="now-its-your-turn" class="section level2">
-<h2>4. Now it’s your turn</h2>
+<div id="now-its-your-turn" class="section level1">
+<h1>4. Now it’s your turn</h1>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
 <li>Plot the relationship between: <code>imdb_rating</code>, <code>imdb_num_votes</code> and <code>audience_score</code>.</li>
@@ -590,10 +614,9 @@ summary(anova_fit)</code></pre>
 <li>Plot the number of movies in each <code>mpaa_rating</code> category.</li>
 </ol>
 </div>
-<div id="submit-your-assignment" class="section level2">
-<h2>Submit your assignment</h2>
+<div id="submit-your-assignment" class="section level1">
+<h1>Submit your assignment</h1>
 <p>Save and email your <code>wpa_1_LastFirst.R</code> script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of the day.</p>
-</div>
 </div>
 
 

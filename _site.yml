@@ -7,10 +7,17 @@ navbar:
     - text: "Syllabus"
       href: index.html
     - text: "WPAs"
-      icon: fa-desktop
+      icon: fa-display
       menu:
       - text: "WPA 1"
         href: wpa1.html
+      - text: "WPA 2"
+        href: wpa2.html
+    - text: "Solutions"
+      icon: fa-display-arrow-down
+      menu:
+      - text: "WPA 1 solutions"
+        href: wpa1_solutions.html
 output:
   html_document:
     theme: yeti
