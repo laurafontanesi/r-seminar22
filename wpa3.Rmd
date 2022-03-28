@@ -13,7 +13,7 @@ At the top of your script, write the following (**with appropriate changes**):
 ```
 # Assignment: WPA 3
 # Name: Laura Fontanesi
-# Date: 29 March 2021
+# Date: 29 March 2022
 ```
 
 # 1. Importing data
