@@ -1,0 +1,102 @@
+---
+title: "Solutions for WPA2"
+---
+
+# Basic R
+
+## 12. Now it's your turn
+
+**Task A** 
+
+1. Create a numeric vector called `participants`, containing integer numbers from 1 to 20, using `c()` and `seq()`.
+2. Create a character vector called `conditions`, of length 20, containing alternating values of "a" and "b" ("a", "b", "a", "b", "a", ...), using `rep()`.
+3. Create a vector called `first_half`, containing only the first half of the `participants` vector's values.
+4. Check that both `participants` and `conditions` have length 20, and that `first_half` has length 10, using `length()`.
+5. Instead of the fifth element in `conditions`, insert a missing value. Print the `conditions` after the change.
+6. Create a vector called `participants_cond`, by pasting together (using `paste()`) `participants` and `conditions`, separated by `_`. So, the first element should be "1_a". 
+7. Check that the 5th element of participants_cond is still a missing value.
+
+```{r}
+# task A1
+participants = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+participants = seq(from=1, to=20)
+
+# task A2
+x = c("a", "b")
+conditions = rep(x, times=10, each=1)
+
+# task A3
+first_half = participants[1:(length(participants)/2)]
+print(first_half)
+
+# task A4
+length(participants) == 20 & length(conditions) == 20
+length(first_half) == 10
+
+# task A5
+conditions[5] = NA
+print(conditions)
+
+# task A6
+participants_cond = paste(participants, conditions, sep="_")
+print(participants_cond)
+
+# task A7
+is.na(participants_cond[5])
+participants_cond[5] = NA
+print(participants_cond)
+```
+
+**Task B**
+
+1. Create a data frame called `my_data`, with as columns the vectors`participants`, `conditions` and `participants_cond` that you created before. Print the data frame to have a look if it worked.
+2. Add a column called `response_times` made of 20 samples from the normal distribution, with mean .8 and standard deviation 1. Print the data frame to have a look if it worked.
+3. Select the values of the `response_times` column that are negative and set them to 0. Print the data frame to have a look if it worked.
+4. Create a new column, called `log_response_times`, made of the logarithm of `response_times`.
+5. Add a column called `correct_response` made of 20 samples from the binomial distribution, with size 1 and probability of success .65. Print the data frame to have a look if it worked.
+6. Calculate the mean proportion of correct responses and the mean response time.
+7. Create two data frames, `data_correct` and `data_incorrect` made of, respectively, the subset of `my_data` where `correct_response` is 1, and the subset of `my_data` where `correct_response` is 0. Print the data frame to have a look if it worked. Print the result to check.
+
+```{r}
+# task B1
+my_data = data.frame(participants, conditions, participants_cond)
+print(my_data)
+```
+
+```{r}
+# task B2
+my_data$response_times = rnorm(n=20, mean=.8, sd=1)
+print(my_data)
+```
+
+```{r}
+# task B3
+my_data[my_data$response_times < 0, "response_times"] = 0
+print(my_data)
+```
+
+```{r}
+# task B4
+my_data$log_response_times = log(my_data$response_times)
+print(my_data)
+```
+
+```{r}
+# task B5
+my_data$correct_response = rbinom(n=20, size=1, prob=.65)
+print(my_data)
+```
+
+```{r}
+# task B6
+mean(my_data$response_times)
+mean(my_data$correct_response)
+```
+
+```{r}
+# task B7
+data_correct = my_data[my_data$correct_response == 1,]
+data_incorrect = my_data[my_data$correct_response == 0,]
+print(data_correct)
+print(data_incorrect)
+```

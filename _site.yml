@@ -18,6 +18,8 @@ navbar:
       menu:
       - text: "WPA 1 solutions"
         href: wpa1_solutions.html
+      - text: "WPA 2 solutions"
+        href: wpa2_solutions.html
 output:
   html_document:
     theme: yeti
