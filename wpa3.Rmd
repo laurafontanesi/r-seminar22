@@ -1,0 +1,169 @@
+---
+title: "Importing data"
+---
+
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_3_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 3
+# Name: Laura Fontanesi
+# Date: 29 March 2021
+```
+
+# 1. Importing data
+
+Up to this point, I gave you the code to load datasets in R. 
+
+Say instead you have your own data saved on your computer or somewhere online. How can you analyze this data in R? 
+
+You have two main ways to do it: 
+- using the "Import Dataset" button in the "Environment" tab in R Studio
+- using code
+
+Today, we will learn how to import data using code within the the tidyverse package. This allow us to import data directly into tidyverse objects (i.e., tibbles, as we will see in the next 2 lessons).
+
+The specific sub-package for importing data is called [readr](https://readr.tidyverse.org/reference/index.html).
+
+Data can come from different sources, e.g.:
+- text files stored locally
+- text files from a website
+
+The functions you will use, depend on the specific format the data were written in:
+
+## Different functions to read tabular data from file:
+- `read_delim()` is the principal and more general means of reading tabular data into R
+
+- `read_csv()` sets the default separator to a comma
+
+- `read_csv2()` is its European cousin, using a comma for decimal places and a semicolon as a separator
+
+- `read_tsv()` import tab-delimited files
+
+## Different functions to read other data formats:
+- Excel files: https://readxl.tidyverse.org/reference/read_excel.html
+
+- STATA, SPSS, SAS files: https://haven.tidyverse.org/
+
+# 2. File paths for local files
+
+At this point, you should have a folder on your laptop for our R course, where you stored all your scripts. Create a subfolder called `data`.
+
+When you are done, download the content of this folder 'https://www.dropbox.com/sh/kw6o7ztouwpiawk/AACG5YtjeF58YaKjkK9h428Ka?dl=0' in your `data` folder, so that the 5 data files are in your `data` folder.
+
+To load these files in R, we need to write the path to your data folder. We can do this using code completion (Tab key): 
+- On Mac, you can start from `read_delim('~/')` (or similar functions for loading data) and press Tab, to start navigating from your home folder
+- On Windows, you can do the same, but starting from `read_delim('C:\Users\')`
+
+In my case, this folder was on Dropbox:
+
+```{r}
+library(tidyverse)
+
+data_a = read_delim('~/Dropbox/teaching/r-course22/data/data_to_import_a.txt', delim='\t')
+
+head(data_a)
+```
+
+```{r}
+data_b = read_csv('~/Dropbox/teaching/r-course22/data/data_to_import_b.csv')
+
+# same as: data_b = read_delim('~/Dropbox/teaching/r-course22/data/data_to_import_b.csv', delim = ",")
+
+head(data_b)
+```
+
+```{r}
+data_c = read_csv2('~/Dropbox/teaching/r-course22/data/data_to_import_c.csv')
+
+head(data_c)
+```
+
+```{r}
+library(readxl)
+
+# maybe try first: install.packages("readxl")
+
+data_d = read_excel('~/Dropbox/teaching/r-course22/data/data_to_import_d.xls')
+
+head(data_d)
+```
+
+```{r}
+library(haven)
+# maybe first: install.packages("haven")
+
+data_e = read_sav('~/Dropbox/teaching/r-course22/data/data_to_import_e.sav')
+
+head(data_e)
+```
+
+# 3. File on a website: load and save
+
+Let's say we want to load in R some data, directly from a website (without saving it to a file). In this case, we get some data from the website "https://support.spatialkey.com/spatialkey-sample-csv-data/". Instead of writing a local address, we can simply use the same functions with the web address.
+
+```{r}
+data_transactions = read_csv("https://support.spatialkey.com/wp-content/uploads/2021/02/Sacramentorealestatetransactions.csv")
+
+head(data_transactions)
+```
+
+If we want, we can then save it to file from R, using similar set of functions that start with `write_` instead of `read_`. You can use such functions also to save your data in a different format from the original for later use.
+
+```{r}
+# save it to file
+write_csv(data_transactions, file = "~/Dropbox/teaching/r-course22/data/Sacramentorealestatetransactions.csv")
+```
+
+```{r}
+# load it again
+data_transactions = read_csv("~/Dropbox/teaching/r-course22/data/Sacramentorealestatetransactions.csv")
+
+head(data_transactions)
+```
+
+# 4. Get raw files from GitHub
+
+Go on the `data` folder where I load the datasets for the seminar: 'https://github.com/laurafontanesi/r-seminar22/tree/main/data'.
+
+Click on `tdcs.csv`.
+
+To be able to load these data in R, we first need to get to the raw data.
+
+You can get them by clickin on `View raw`. **Note** that for some files, instead of getting to the raw data page, you can directly dowload them to a local directory. From there, you can simply load them in R using the appropriate `read_` function.
+
+Copy the adress of the page containing the raw data. It should be https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv
+
+You can use now this url with one of our `read_` functions:
+
+```{r}
+data_tdcs = read_csv("https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/tdcs.csv")
+
+head(data_tdcs)
+```
+
+# 5. Now it's your turn
+
+**Task A**
+
+From the [data folder on Github](https://github.com/laurafontanesi/r-seminar22/tree/main/data), get the data sets in the list below. Load them in R giving the respective names: `qualtrics_data`, `data_f`, `data_g`, `data_h`. Inspect them using `head()` or `glimpse()`. Finally, save them to your local `data` directory (that you should have as a sub-directory in your R course directory) as `csv` files.
+
+1. 20180321_qualtrics_managers_historical_social_comparisons.dta
+2. data_to_import_f.csv
+3. data_to_import_g.csv
+4. data_to_import_h.csv
+
+**Task B**
+
+Go to this website: https://www.britishelectionstudy.com/data-objects/cross-sectional-data/ (you can register for free).
+
+Download the 2017 Face-to-face Post-election Survey Version 1.5 **SPSS file** in your local `data` directory (see above). Then, load it in R assigning it to the name `british_cross_sectional_data` using the appropriate function for SPSS files and inspect it using `head()` or `glimpse()`.
+
+# Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of **Friday**.
