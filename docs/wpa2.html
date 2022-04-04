@@ -264,6 +264,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa3.html">WPA 3</a>
     </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -280,6 +283,9 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="wpa2_solutions.html">WPA 2 solutions</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3 solutions</a>
     </li>
   </ul>
 </li>
@@ -619,15 +625,14 @@ print(x)</code></pre>
           &quot;nsw&quot;, &quot;wa&quot;, &quot;sa&quot;, &quot;act&quot;, &quot;nsw&quot;, &quot;vic&quot;, &quot;vic&quot;, &quot;act&quot;)
 
 sort(state)</code></pre>
-<pre><code>##  [1] &quot;act&quot; &quot;act&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nt&quot;  &quot;nt&quot;  &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot; 
-## [20] &quot;tas&quot; &quot;tas&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;</code></pre>
+<pre><code>##  [1] &quot;act&quot; &quot;act&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nt&quot;  &quot;nt&quot;  &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot;  &quot;tas&quot; &quot;tas&quot;
+## [22] &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;</code></pre>
 <p>Notice that in the case of a character vector, “sorted” means sorted in alphabetical order.</p>
 <p>A factor is similarly created using the <code>factor()</code> function:</p>
 <pre class="r"><code>state_factor = factor(state)
 
 print(state_factor)</code></pre>
-<pre><code>##  [1] tas sa  qld nsw nsw nt  wa  wa  qld vic nsw vic qld qld sa  tas sa  nt  wa  vic qld nsw nsw wa  sa  act nsw vic vic
-## [30] act
+<pre><code>##  [1] tas sa  qld nsw nsw nt  wa  wa  qld vic nsw vic qld qld sa  tas sa  nt  wa  vic qld nsw nsw wa  sa  act nsw vic vic act
 ## Levels: act nsw nt qld sa tas vic wa</code></pre>
 <p>To find out the levels of a factor the function <code>levels()</code> can be used.</p>
 <pre class="r"><code>levels(state_factor)</code></pre>
@@ -781,9 +786,8 @@ print(df)</code></pre>
 <div id="get-and-change-column-names" class="section level2">
 <h2>10.3 Get and change column names</h2>
 <pre class="r"><code>colnames(df)</code></pre>
-<pre><code>## [1] &quot;n&quot;                                       &quot;s&quot;                                      
-## [3] &quot;b&quot;                                       &quot;first&quot;                                  
-## [5] &quot;second&quot;                                  &quot;seq(from = 700, by = 5, length.out = 3)&quot;</code></pre>
+<pre><code>## [1] &quot;n&quot;                                       &quot;s&quot;                                       &quot;b&quot;                                      
+## [4] &quot;first&quot;                                   &quot;second&quot;                                  &quot;seq(from = 700, by = 5, length.out = 3)&quot;</code></pre>
 <pre class="r"><code>colnames(df) = c(&quot;n&quot;, &quot;s&quot;, &quot;b&quot;, &quot;first&quot;, &quot;second&quot;, &quot;third&quot;)
 
 print(df)</code></pre>
@@ -974,15 +978,15 @@ design_final</code></pre>
 </tbody>
 </table>
 <pre class="r"><code>runif(n=10, min=1, max=10)</code></pre>
-<pre><code>##  [1] 4.761806 2.248305 4.427102 4.088711 9.248326 3.486417 9.654511 3.823987 6.791235 8.963100</code></pre>
+<pre><code>##  [1] 2.766495 1.591819 7.272679 4.978388 9.672847 5.822302 3.576192 3.157143 7.764534 3.114546</code></pre>
 <pre class="r"><code>x = rnorm(n=20, mean=20, sd=5)
 
 mean(x)</code></pre>
-<pre><code>## [1] 19.2621</code></pre>
+<pre><code>## [1] 19.94977</code></pre>
 <pre class="r"><code>range(x)</code></pre>
-<pre><code>## [1] 11.74210 25.14524</code></pre>
+<pre><code>## [1] 13.16194 29.59638</code></pre>
 <pre class="r"><code>rbinom(n=6, size=1, prob=.6)</code></pre>
-<pre><code>## [1] 1 1 1 0 1 1</code></pre>
+<pre><code>## [1] 0 1 1 0 1 0</code></pre>
 </div>
 <div id="now-its-your-turn" class="section level1">
 <h1>12. Now it’s your turn</h1>

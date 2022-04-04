@@ -1,0 +1,53 @@
+---
+title: "Solutions to WPA3"
+---
+
+**Task A**
+
+From the [data folder on Github](https://github.com/laurafontanesi/r-seminar22/tree/main/data), get the data sets in the list below. Load them in R giving the respective names: `qualtrics_data`, `data_f`, `data_g`, `data_h`. Inspect them using `head()` or `glimpse()`. Finally, save them to your local `data` directory (that you should have as a sub-directory in your R course directory) as `csv` files.
+
+1. 20180321_qualtrics_managers_historical_social_comparisons.dta
+2. data_to_import_f.csv
+3. data_to_import_g.csv
+4. data_to_import_h.csv
+
+**Task B**
+
+Go to this website: https://www.britishelectionstudy.com/data-objects/cross-sectional-data/ (you can register for free).
+
+Download the 2017 Face-to-face Post-election Survey Version 1.5 **SPSS file** in your local `data` directory (see above). Then, load it in R assigning it to the name `british_cross_sectional_data` using the appropriate function for SPSS files and inspect it using `head()` or `glimpse()`.
+
+```{r}
+library('tidyverse')
+library('haven')
+```
+
+```{r}
+qualtrics_data = read_dta("https://github.com/laurafontanesi/r-seminar22/blob/main/data/20180321_qualtrics_managers_historical_social_comparisons.dta?raw=true")
+
+head(qualtrics_data, 2)
+```
+
+```{r}
+data_f = read_csv2('https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_f.csv')
+
+head(data_f)
+```
+
+```{r}
+data_g = read_delim('https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_g.txt', delim='\t')
+
+head(data_g)
+```
+
+```{r}
+data_h = read_csv('https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_h.csv')
+
+head(data_h)
+```
+
+```{r}
+british_cross_sectional_data = read_sav('~/Dropbox/teaching/r-course22/data/bes_f2f_2017_v1.5.sav')
+
+head(british_cross_sectional_data)
+```

@@ -15,6 +15,8 @@ navbar:
         href: wpa2.html
       - text: "WPA 3"
         href: wpa3.html
+      - text: "WPA 4"
+        href: wpa4.html
     - text: "Solutions"
       icon: fa-display-arrow-down
       menu:
@@ -22,6 +24,8 @@ navbar:
         href: wpa1_solutions.html
       - text: "WPA 2 solutions"
         href: wpa2_solutions.html
+      - text: "WPA 3 solutions"
+        href: wpa3_solutions.html
 output:
   html_document:
     theme: yeti

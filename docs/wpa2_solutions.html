@@ -11,7 +11,7 @@
 
 
 
-<title>Solutions for WPA2</title>
+<title>Solutions to WPA2</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -264,6 +264,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa3.html">WPA 3</a>
     </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -281,6 +284,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa2_solutions.html">WPA 2 solutions</a>
     </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3 solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -295,7 +301,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Solutions for WPA2</h1>
+<h1 class="title toc-ignore">Solutions to WPA2</h1>
 
 </div>
 
@@ -346,15 +352,15 @@ print(conditions)</code></pre>
 <pre class="r"><code># task A6
 participants_cond = paste(participants, conditions, sep=&quot;_&quot;)
 print(participants_cond)</code></pre>
-<pre><code>##  [1] &quot;1_a&quot;  &quot;2_b&quot;  &quot;3_a&quot;  &quot;4_b&quot;  &quot;5_NA&quot; &quot;6_b&quot;  &quot;7_a&quot;  &quot;8_b&quot;  &quot;9_a&quot;  &quot;10_b&quot; &quot;11_a&quot; &quot;12_b&quot; &quot;13_a&quot; &quot;14_b&quot; &quot;15_a&quot; &quot;16_b&quot;
-## [17] &quot;17_a&quot; &quot;18_b&quot; &quot;19_a&quot; &quot;20_b&quot;</code></pre>
+<pre><code>##  [1] &quot;1_a&quot;  &quot;2_b&quot;  &quot;3_a&quot;  &quot;4_b&quot;  &quot;5_NA&quot; &quot;6_b&quot;  &quot;7_a&quot;  &quot;8_b&quot;  &quot;9_a&quot;  &quot;10_b&quot; &quot;11_a&quot; &quot;12_b&quot; &quot;13_a&quot; &quot;14_b&quot; &quot;15_a&quot; &quot;16_b&quot; &quot;17_a&quot; &quot;18_b&quot;
+## [19] &quot;19_a&quot; &quot;20_b&quot;</code></pre>
 <pre class="r"><code># task A7
 is.na(participants_cond[5])</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>participants_cond[5] = NA
 print(participants_cond)</code></pre>
-<pre><code>##  [1] &quot;1_a&quot;  &quot;2_b&quot;  &quot;3_a&quot;  &quot;4_b&quot;  NA     &quot;6_b&quot;  &quot;7_a&quot;  &quot;8_b&quot;  &quot;9_a&quot;  &quot;10_b&quot; &quot;11_a&quot; &quot;12_b&quot; &quot;13_a&quot; &quot;14_b&quot; &quot;15_a&quot; &quot;16_b&quot;
-## [17] &quot;17_a&quot; &quot;18_b&quot; &quot;19_a&quot; &quot;20_b&quot;</code></pre>
+<pre><code>##  [1] &quot;1_a&quot;  &quot;2_b&quot;  &quot;3_a&quot;  &quot;4_b&quot;  NA     &quot;6_b&quot;  &quot;7_a&quot;  &quot;8_b&quot;  &quot;9_a&quot;  &quot;10_b&quot; &quot;11_a&quot; &quot;12_b&quot; &quot;13_a&quot; &quot;14_b&quot; &quot;15_a&quot; &quot;16_b&quot; &quot;17_a&quot; &quot;18_b&quot;
+## [19] &quot;19_a&quot; &quot;20_b&quot;</code></pre>
 <p><strong>Task B</strong></p>
 <ol style="list-style-type: decimal">
 <li>Create a data frame called <code>my_data</code>, with as columns the vectors<code>participants</code>, <code>conditions</code> and <code>participants_cond</code> that you created before. Print the data frame to have a look if it worked.</li>
@@ -393,130 +399,130 @@ print(my_data)</code></pre>
 my_data$response_times = rnorm(n=20, mean=.8, sd=1)
 print(my_data)</code></pre>
 <pre><code>##    participants conditions participants_cond response_times
-## 1             1          a               1_a     1.00960977
-## 2             2          b               2_b     0.75613933
-## 3             3          a               3_a     1.14810621
-## 4             4          b               4_b     1.59558656
-## 5             5       &lt;NA&gt;              &lt;NA&gt;     0.13667084
-## 6             6          b               6_b     2.28221779
-## 7             7          a               7_a     0.79982007
-## 8             8          b               8_b     0.01932546
-## 9             9          a               9_a    -1.67876256
-## 10           10          b              10_b     0.09379216
-## 11           11          a              11_a    -1.27401687
-## 12           12          b              12_b     1.63441626
-## 13           13          a              13_a     0.73045978
-## 14           14          b              14_b     0.42951956
-## 15           15          a              15_a     1.13510115
-## 16           16          b              16_b     1.27577248
-## 17           17          a              17_a    -0.51559363
-## 18           18          b              18_b     0.37480032
-## 19           19          a              19_a     1.49565894
-## 20           20          b              20_b     1.96757264</code></pre>
+## 1             1          a               1_a    -0.70663916
+## 2             2          b               2_b    -1.43071432
+## 3             3          a               3_a     1.55972003
+## 4             4          b               4_b    -0.32555696
+## 5             5       &lt;NA&gt;              &lt;NA&gt;     2.13345741
+## 6             6          b               6_b     0.28992307
+## 7             7          a               7_a     0.91693840
+## 8             8          b               8_b     0.21422565
+## 9             9          a               9_a     0.22446915
+## 10           10          b              10_b     3.15810182
+## 11           11          a              11_a    -0.06117744
+## 12           12          b              12_b    -0.20462819
+## 13           13          a              13_a     1.56374280
+## 14           14          b              14_b     2.17846445
+## 15           15          a              15_a    -0.04739260
+## 16           16          b              16_b     0.84030672
+## 17           17          a              17_a    -1.61153355
+## 18           18          b              18_b     0.63941960
+## 19           19          a              19_a     1.42956744
+## 20           20          b              20_b     1.88376534</code></pre>
 <pre class="r"><code># task B3
 my_data[my_data$response_times &lt; 0, &quot;response_times&quot;] = 0
 print(my_data)</code></pre>
 <pre><code>##    participants conditions participants_cond response_times
-## 1             1          a               1_a     1.00960977
-## 2             2          b               2_b     0.75613933
-## 3             3          a               3_a     1.14810621
-## 4             4          b               4_b     1.59558656
-## 5             5       &lt;NA&gt;              &lt;NA&gt;     0.13667084
-## 6             6          b               6_b     2.28221779
-## 7             7          a               7_a     0.79982007
-## 8             8          b               8_b     0.01932546
-## 9             9          a               9_a     0.00000000
-## 10           10          b              10_b     0.09379216
-## 11           11          a              11_a     0.00000000
-## 12           12          b              12_b     1.63441626
-## 13           13          a              13_a     0.73045978
-## 14           14          b              14_b     0.42951956
-## 15           15          a              15_a     1.13510115
-## 16           16          b              16_b     1.27577248
-## 17           17          a              17_a     0.00000000
-## 18           18          b              18_b     0.37480032
-## 19           19          a              19_a     1.49565894
-## 20           20          b              20_b     1.96757264</code></pre>
+## 1             1          a               1_a      0.0000000
+## 2             2          b               2_b      0.0000000
+## 3             3          a               3_a      1.5597200
+## 4             4          b               4_b      0.0000000
+## 5             5       &lt;NA&gt;              &lt;NA&gt;      2.1334574
+## 6             6          b               6_b      0.2899231
+## 7             7          a               7_a      0.9169384
+## 8             8          b               8_b      0.2142256
+## 9             9          a               9_a      0.2244691
+## 10           10          b              10_b      3.1581018
+## 11           11          a              11_a      0.0000000
+## 12           12          b              12_b      0.0000000
+## 13           13          a              13_a      1.5637428
+## 14           14          b              14_b      2.1784644
+## 15           15          a              15_a      0.0000000
+## 16           16          b              16_b      0.8403067
+## 17           17          a              17_a      0.0000000
+## 18           18          b              18_b      0.6394196
+## 19           19          a              19_a      1.4295674
+## 20           20          b              20_b      1.8837653</code></pre>
 <pre class="r"><code># task B4
 my_data$log_response_times = log(my_data$response_times)
 print(my_data)</code></pre>
 <pre><code>##    participants conditions participants_cond response_times log_response_times
-## 1             1          a               1_a     1.00960977        0.009563891
-## 2             2          b               2_b     0.75613933       -0.279529623
-## 3             3          a               3_a     1.14810621        0.138113807
-## 4             4          b               4_b     1.59558656        0.467241419
-## 5             5       &lt;NA&gt;              &lt;NA&gt;     0.13667084       -1.990179843
-## 6             6          b               6_b     2.28221779        0.825147687
-## 7             7          a               7_a     0.79982007       -0.223368487
-## 8             8          b               8_b     0.01932546       -3.946331839
-## 9             9          a               9_a     0.00000000               -Inf
-## 10           10          b              10_b     0.09379216       -2.366673997
-## 11           11          a              11_a     0.00000000               -Inf
-## 12           12          b              12_b     1.63441626        0.491285710
-## 13           13          a              13_a     0.73045978       -0.314081107
-## 14           14          b              14_b     0.42951956       -0.845087994
-## 15           15          a              15_a     1.13510115        0.126721770
-## 16           16          b              16_b     1.27577248        0.243551859
-## 17           17          a              17_a     0.00000000               -Inf
-## 18           18          b              18_b     0.37480032       -0.981361864
-## 19           19          a              19_a     1.49565894        0.402566872
-## 20           20          b              20_b     1.96757264        0.676800623</code></pre>
+## 1             1          a               1_a      0.0000000               -Inf
+## 2             2          b               2_b      0.0000000               -Inf
+## 3             3          a               3_a      1.5597200         0.44450634
+## 4             4          b               4_b      0.0000000               -Inf
+## 5             5       &lt;NA&gt;              &lt;NA&gt;      2.1334574         0.75774386
+## 6             6          b               6_b      0.2899231        -1.23813968
+## 7             7          a               7_a      0.9169384        -0.08671498
+## 8             8          b               8_b      0.2142256        -1.54072539
+## 9             9          a               9_a      0.2244691        -1.49401701
+## 10           10          b              10_b      3.1581018         1.14997116
+## 11           11          a              11_a      0.0000000               -Inf
+## 12           12          b              12_b      0.0000000               -Inf
+## 13           13          a              13_a      1.5637428         0.44708218
+## 14           14          b              14_b      2.1784644         0.77862025
+## 15           15          a              15_a      0.0000000               -Inf
+## 16           16          b              16_b      0.8403067        -0.17398831
+## 17           17          a              17_a      0.0000000               -Inf
+## 18           18          b              18_b      0.6394196        -0.44719439
+## 19           19          a              19_a      1.4295674         0.35737191
+## 20           20          b              20_b      1.8837653         0.63327261</code></pre>
 <pre class="r"><code># task B5
 my_data$correct_response = rbinom(n=20, size=1, prob=.65)
 print(my_data)</code></pre>
 <pre><code>##    participants conditions participants_cond response_times log_response_times correct_response
-## 1             1          a               1_a     1.00960977        0.009563891                1
-## 2             2          b               2_b     0.75613933       -0.279529623                1
-## 3             3          a               3_a     1.14810621        0.138113807                0
-## 4             4          b               4_b     1.59558656        0.467241419                1
-## 5             5       &lt;NA&gt;              &lt;NA&gt;     0.13667084       -1.990179843                0
-## 6             6          b               6_b     2.28221779        0.825147687                1
-## 7             7          a               7_a     0.79982007       -0.223368487                1
-## 8             8          b               8_b     0.01932546       -3.946331839                0
-## 9             9          a               9_a     0.00000000               -Inf                1
-## 10           10          b              10_b     0.09379216       -2.366673997                1
-## 11           11          a              11_a     0.00000000               -Inf                1
-## 12           12          b              12_b     1.63441626        0.491285710                1
-## 13           13          a              13_a     0.73045978       -0.314081107                0
-## 14           14          b              14_b     0.42951956       -0.845087994                0
-## 15           15          a              15_a     1.13510115        0.126721770                1
-## 16           16          b              16_b     1.27577248        0.243551859                0
-## 17           17          a              17_a     0.00000000               -Inf                1
-## 18           18          b              18_b     0.37480032       -0.981361864                1
-## 19           19          a              19_a     1.49565894        0.402566872                1
-## 20           20          b              20_b     1.96757264        0.676800623                1</code></pre>
+## 1             1          a               1_a      0.0000000               -Inf                1
+## 2             2          b               2_b      0.0000000               -Inf                0
+## 3             3          a               3_a      1.5597200         0.44450634                1
+## 4             4          b               4_b      0.0000000               -Inf                1
+## 5             5       &lt;NA&gt;              &lt;NA&gt;      2.1334574         0.75774386                1
+## 6             6          b               6_b      0.2899231        -1.23813968                0
+## 7             7          a               7_a      0.9169384        -0.08671498                0
+## 8             8          b               8_b      0.2142256        -1.54072539                1
+## 9             9          a               9_a      0.2244691        -1.49401701                1
+## 10           10          b              10_b      3.1581018         1.14997116                1
+## 11           11          a              11_a      0.0000000               -Inf                1
+## 12           12          b              12_b      0.0000000               -Inf                0
+## 13           13          a              13_a      1.5637428         0.44708218                1
+## 14           14          b              14_b      2.1784644         0.77862025                0
+## 15           15          a              15_a      0.0000000               -Inf                1
+## 16           16          b              16_b      0.8403067        -0.17398831                1
+## 17           17          a              17_a      0.0000000               -Inf                0
+## 18           18          b              18_b      0.6394196        -0.44719439                1
+## 19           19          a              19_a      1.4295674         0.35737191                0
+## 20           20          b              20_b      1.8837653         0.63327261                1</code></pre>
 <pre class="r"><code># task B6
 mean(my_data$response_times)</code></pre>
-<pre><code>## [1] 0.8442285</code></pre>
+<pre><code>## [1] 0.8516051</code></pre>
 <pre class="r"><code>mean(my_data$correct_response)</code></pre>
-<pre><code>## [1] 0.7</code></pre>
+<pre><code>## [1] 0.65</code></pre>
 <pre class="r"><code># task B7
 data_correct = my_data[my_data$correct_response == 1,]
 data_incorrect = my_data[my_data$correct_response == 0,]
 print(data_correct)</code></pre>
 <pre><code>##    participants conditions participants_cond response_times log_response_times correct_response
-## 1             1          a               1_a     1.00960977        0.009563891                1
-## 2             2          b               2_b     0.75613933       -0.279529623                1
-## 4             4          b               4_b     1.59558656        0.467241419                1
-## 6             6          b               6_b     2.28221779        0.825147687                1
-## 7             7          a               7_a     0.79982007       -0.223368487                1
-## 9             9          a               9_a     0.00000000               -Inf                1
-## 10           10          b              10_b     0.09379216       -2.366673997                1
-## 11           11          a              11_a     0.00000000               -Inf                1
-## 12           12          b              12_b     1.63441626        0.491285710                1
-## 15           15          a              15_a     1.13510115        0.126721770                1
-## 17           17          a              17_a     0.00000000               -Inf                1
-## 18           18          b              18_b     0.37480032       -0.981361864                1
-## 19           19          a              19_a     1.49565894        0.402566872                1
-## 20           20          b              20_b     1.96757264        0.676800623                1</code></pre>
+## 1             1          a               1_a      0.0000000               -Inf                1
+## 3             3          a               3_a      1.5597200          0.4445063                1
+## 4             4          b               4_b      0.0000000               -Inf                1
+## 5             5       &lt;NA&gt;              &lt;NA&gt;      2.1334574          0.7577439                1
+## 8             8          b               8_b      0.2142256         -1.5407254                1
+## 9             9          a               9_a      0.2244691         -1.4940170                1
+## 10           10          b              10_b      3.1581018          1.1499712                1
+## 11           11          a              11_a      0.0000000               -Inf                1
+## 13           13          a              13_a      1.5637428          0.4470822                1
+## 15           15          a              15_a      0.0000000               -Inf                1
+## 16           16          b              16_b      0.8403067         -0.1739883                1
+## 18           18          b              18_b      0.6394196         -0.4471944                1
+## 20           20          b              20_b      1.8837653          0.6332726                1</code></pre>
 <pre class="r"><code>print(data_incorrect)</code></pre>
 <pre><code>##    participants conditions participants_cond response_times log_response_times correct_response
-## 3             3          a               3_a     1.14810621          0.1381138                0
-## 5             5       &lt;NA&gt;              &lt;NA&gt;     0.13667084         -1.9901798                0
-## 8             8          b               8_b     0.01932546         -3.9463318                0
-## 13           13          a              13_a     0.73045978         -0.3140811                0
-## 14           14          b              14_b     0.42951956         -0.8450880                0
-## 16           16          b              16_b     1.27577248          0.2435519                0</code></pre>
+## 2             2          b               2_b      0.0000000               -Inf                0
+## 6             6          b               6_b      0.2899231        -1.23813968                0
+## 7             7          a               7_a      0.9169384        -0.08671498                0
+## 12           12          b              12_b      0.0000000               -Inf                0
+## 14           14          b              14_b      2.1784644         0.77862025                0
+## 17           17          a              17_a      0.0000000               -Inf                0
+## 19           19          a              19_a      1.4295674         0.35737191                0</code></pre>
 </div>
 </div>
 

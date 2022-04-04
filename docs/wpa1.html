@@ -264,6 +264,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa3.html">WPA 3</a>
     </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -280,6 +283,9 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="wpa2_solutions.html">WPA 2 solutions</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3 solutions</a>
     </li>
   </ul>
 </li>
@@ -458,65 +464,57 @@ ls()</code></pre>
 movies %&gt;%
   slice(1:5)</code></pre>
 <pre><code>## # A tibble: 5 x 32
-##   title  title_type genre runtime mpaa_rating studio thtr_rel_year thtr_rel_month thtr_rel_day dvd_rel_year dvd_rel_month
-##   &lt;chr&gt;  &lt;fct&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Filly… Feature F… Drama      80 R           Indom…          2013              4           19         2013             7
-## 2 The D… Feature F… Drama     101 PG-13       Warne…          2001              3           14         2001             8
-## 3 Waiti… Feature F… Come…      84 R           Sony …          1996              8           21         2001             8
-## 4 The A… Feature F… Drama     139 PG          Colum…          1993             10            1         2001            11
-## 5 Malev… Feature F… Horr…      90 R           Ancho…          2004              9           10         2005             4
-## # … with 21 more variables: dvd_rel_day &lt;dbl&gt;, imdb_rating &lt;dbl&gt;, imdb_num_votes &lt;int&gt;, critics_rating &lt;fct&gt;,
-## #   critics_score &lt;dbl&gt;, audience_rating &lt;fct&gt;, audience_score &lt;dbl&gt;, best_pic_nom &lt;fct&gt;, best_pic_win &lt;fct&gt;,
-## #   best_actor_win &lt;fct&gt;, best_actress_win &lt;fct&gt;, best_dir_win &lt;fct&gt;, top200_box &lt;fct&gt;, director &lt;chr&gt;, actor1 &lt;chr&gt;,
-## #   actor2 &lt;chr&gt;, actor3 &lt;chr&gt;, actor4 &lt;chr&gt;, actor5 &lt;chr&gt;, imdb_url &lt;chr&gt;, rt_url &lt;chr&gt;</code></pre>
+##   title  title_type genre runtime mpaa_rating studio thtr_rel_year thtr_rel_month thtr_rel_day dvd_rel_year dvd_rel_month dvd_rel_day
+##   &lt;chr&gt;  &lt;fct&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Filly… Feature F… Drama      80 R           Indom…          2013              4           19         2013             7          30
+## 2 The D… Feature F… Drama     101 PG-13       Warne…          2001              3           14         2001             8          28
+## 3 Waiti… Feature F… Come…      84 R           Sony …          1996              8           21         2001             8          21
+## 4 The A… Feature F… Drama     139 PG          Colum…          1993             10            1         2001            11           6
+## 5 Malev… Feature F… Horr…      90 R           Ancho…          2004              9           10         2005             4          19
+## # … with 20 more variables: imdb_rating &lt;dbl&gt;, imdb_num_votes &lt;int&gt;, critics_rating &lt;fct&gt;, critics_score &lt;dbl&gt;,
+## #   audience_rating &lt;fct&gt;, audience_score &lt;dbl&gt;, best_pic_nom &lt;fct&gt;, best_pic_win &lt;fct&gt;, best_actor_win &lt;fct&gt;,
+## #   best_actress_win &lt;fct&gt;, best_dir_win &lt;fct&gt;, top200_box &lt;fct&gt;, director &lt;chr&gt;, actor1 &lt;chr&gt;, actor2 &lt;chr&gt;, actor3 &lt;chr&gt;,
+## #   actor4 &lt;chr&gt;, actor5 &lt;chr&gt;, imdb_url &lt;chr&gt;, rt_url &lt;chr&gt;</code></pre>
 <pre class="r"><code>summary(movies)</code></pre>
-<pre><code>##     title                  title_type                 genre        runtime       mpaa_rating 
-##  Length:651         Documentary : 55   Drama             :305   Min.   : 39.0   G      : 19  
-##  Class :character   Feature Film:591   Comedy            : 87   1st Qu.: 92.0   NC-17  :  2  
-##  Mode  :character   TV Movie    :  5   Action &amp; Adventure: 65   Median :103.0   PG     :118  
-##                                        Mystery &amp; Suspense: 59   Mean   :105.8   PG-13  :133  
-##                                        Documentary       : 52   3rd Qu.:115.8   R      :329  
-##                                        Horror            : 23   Max.   :267.0   Unrated: 50  
-##                                        (Other)           : 60   NA&#39;s   :1                    
-##                               studio    thtr_rel_year  thtr_rel_month   thtr_rel_day    dvd_rel_year  dvd_rel_month   
-##  Paramount Pictures              : 37   Min.   :1970   Min.   : 1.00   Min.   : 1.00   Min.   :1991   Min.   : 1.000  
-##  Warner Bros. Pictures           : 30   1st Qu.:1990   1st Qu.: 4.00   1st Qu.: 7.00   1st Qu.:2001   1st Qu.: 3.000  
-##  Sony Pictures Home Entertainment: 27   Median :2000   Median : 7.00   Median :15.00   Median :2004   Median : 6.000  
-##  Universal Pictures              : 23   Mean   :1998   Mean   : 6.74   Mean   :14.42   Mean   :2004   Mean   : 6.333  
-##  Warner Home Video               : 19   3rd Qu.:2007   3rd Qu.:10.00   3rd Qu.:21.00   3rd Qu.:2008   3rd Qu.: 9.000  
-##  (Other)                         :507   Max.   :2014   Max.   :12.00   Max.   :31.00   Max.   :2015   Max.   :12.000  
-##  NA&#39;s                            :  8                                                  NA&#39;s   :8      NA&#39;s   :8       
-##   dvd_rel_day     imdb_rating    imdb_num_votes           critics_rating critics_score    audience_rating
-##  Min.   : 1.00   Min.   :1.900   Min.   :   180   Certified Fresh:135    Min.   :  1.00   Spilled:275    
-##  1st Qu.: 7.00   1st Qu.:5.900   1st Qu.:  4546   Fresh          :209    1st Qu.: 33.00   Upright:376    
-##  Median :15.00   Median :6.600   Median : 15116   Rotten         :307    Median : 61.00                  
-##  Mean   :15.01   Mean   :6.493   Mean   : 57533                          Mean   : 57.69                  
-##  3rd Qu.:23.00   3rd Qu.:7.300   3rd Qu.: 58300                          3rd Qu.: 83.00                  
-##  Max.   :31.00   Max.   :9.000   Max.   :893008                          Max.   :100.00                  
-##  NA&#39;s   :8                                                                                               
-##  audience_score  best_pic_nom best_pic_win best_actor_win best_actress_win best_dir_win top200_box   director        
-##  Min.   :11.00   no :629      no :644      no :558        no :579          no :608      no :636    Length:651        
-##  1st Qu.:46.00   yes: 22      yes:  7      yes: 93        yes: 72          yes: 43      yes: 15    Class :character  
-##  Median :65.00                                                                                     Mode  :character  
-##  Mean   :62.36                                                                                                       
-##  3rd Qu.:80.00                                                                                                       
-##  Max.   :97.00                                                                                                       
-##                                                                                                                      
-##     actor1             actor2             actor3             actor4             actor5            imdb_url        
-##  Length:651         Length:651         Length:651         Length:651         Length:651         Length:651        
-##  Class :character   Class :character   Class :character   Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-##                                                                                                                   
-##                                                                                                                   
-##                                                                                                                   
-##                                                                                                                   
-##     rt_url         
-##  Length:651        
-##  Class :character  
-##  Mode  :character  
-##                    
-##                    
-##                    
+<pre><code>##     title                  title_type                 genre        runtime       mpaa_rating                               studio   
+##  Length:651         Documentary : 55   Drama             :305   Min.   : 39.0   G      : 19   Paramount Pictures              : 37  
+##  Class :character   Feature Film:591   Comedy            : 87   1st Qu.: 92.0   NC-17  :  2   Warner Bros. Pictures           : 30  
+##  Mode  :character   TV Movie    :  5   Action &amp; Adventure: 65   Median :103.0   PG     :118   Sony Pictures Home Entertainment: 27  
+##                                        Mystery &amp; Suspense: 59   Mean   :105.8   PG-13  :133   Universal Pictures              : 23  
+##                                        Documentary       : 52   3rd Qu.:115.8   R      :329   Warner Home Video               : 19  
+##                                        Horror            : 23   Max.   :267.0   Unrated: 50   (Other)                         :507  
+##                                        (Other)           : 60   NA&#39;s   :1                     NA&#39;s                            :  8  
+##  thtr_rel_year  thtr_rel_month   thtr_rel_day    dvd_rel_year  dvd_rel_month     dvd_rel_day     imdb_rating    imdb_num_votes  
+##  Min.   :1970   Min.   : 1.00   Min.   : 1.00   Min.   :1991   Min.   : 1.000   Min.   : 1.00   Min.   :1.900   Min.   :   180  
+##  1st Qu.:1990   1st Qu.: 4.00   1st Qu.: 7.00   1st Qu.:2001   1st Qu.: 3.000   1st Qu.: 7.00   1st Qu.:5.900   1st Qu.:  4546  
+##  Median :2000   Median : 7.00   Median :15.00   Median :2004   Median : 6.000   Median :15.00   Median :6.600   Median : 15116  
+##  Mean   :1998   Mean   : 6.74   Mean   :14.42   Mean   :2004   Mean   : 6.333   Mean   :15.01   Mean   :6.493   Mean   : 57533  
+##  3rd Qu.:2007   3rd Qu.:10.00   3rd Qu.:21.00   3rd Qu.:2008   3rd Qu.: 9.000   3rd Qu.:23.00   3rd Qu.:7.300   3rd Qu.: 58300  
+##  Max.   :2014   Max.   :12.00   Max.   :31.00   Max.   :2015   Max.   :12.000   Max.   :31.00   Max.   :9.000   Max.   :893008  
+##                                                 NA&#39;s   :8      NA&#39;s   :8        NA&#39;s   :8                                       
+##          critics_rating critics_score    audience_rating audience_score  best_pic_nom best_pic_win best_actor_win best_actress_win
+##  Certified Fresh:135    Min.   :  1.00   Spilled:275     Min.   :11.00   no :629      no :644      no :558        no :579         
+##  Fresh          :209    1st Qu.: 33.00   Upright:376     1st Qu.:46.00   yes: 22      yes:  7      yes: 93        yes: 72         
+##  Rotten         :307    Median : 61.00                   Median :65.00                                                            
+##                         Mean   : 57.69                   Mean   :62.36                                                            
+##                         3rd Qu.: 83.00                   3rd Qu.:80.00                                                            
+##                         Max.   :100.00                   Max.   :97.00                                                            
+##                                                                                                                                   
+##  best_dir_win top200_box   director            actor1             actor2             actor3             actor4         
+##  no :608      no :636    Length:651         Length:651         Length:651         Length:651         Length:651        
+##  yes: 43      yes: 15    Class :character   Class :character   Class :character   Class :character   Class :character  
+##                          Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                                                                        
+##                                                                                                                        
+##                                                                                                                        
+##                                                                                                                        
+##     actor5            imdb_url            rt_url         
+##  Length:651         Length:651         Length:651        
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
 ## </code></pre>
 <div id="continuous-variables" class="section level2">
 <h2>Continuous variables</h2>

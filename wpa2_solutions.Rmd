@@ -1,5 +1,5 @@
 ---
-title: "Solutions for WPA2"
+title: "Solutions to WPA2"
 ---
 
 # Basic R

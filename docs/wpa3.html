@@ -264,6 +264,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa3.html">WPA 3</a>
     </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -280,6 +283,9 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="wpa2_solutions.html">WPA 2 solutions</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3 solutions</a>
     </li>
   </ul>
 </li>
@@ -357,7 +363,7 @@ $(document).ready(function () {
 
 data_a = read_delim(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_a.txt&#39;, delim=&#39;\t&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   index = col_double(),
 ##   participant = col_double(),
@@ -379,7 +385,7 @@ data_a = read_delim(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_a.txt
 ## 6     6           8 male      18 AC             0     854</code></pre>
 <pre class="r"><code>data_b = read_csv(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_b.csv&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   id = col_character(),
 ##   gender = col_double(),
@@ -404,18 +410,18 @@ data_a = read_delim(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_a.txt
 
 head(data_b)</code></pre>
 <pre><code>## # A tibble: 6 x 18
-##   id       gender   age income    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10  task havemore haveless pcmore
-##   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-## 1 R_3PtNn…      2    26      7     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
-## 2 R_2AXrr…      2    32      4     1     1     1     1     1     1     1     1     1     1     0       NA       25     75
-## 3 R_cwEOX…      1    25      2     0     1     1     1     1     1     1     1     0     0     0       NA       10     90
-## 4 R_d59iP…      1    33      5     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
-## 5 R_1f3K2…      1    24      1     1     1     0     1     1     1     1     1     1     1     1       99       NA     99
-## 6 R_3oN5i…      1    22      2     1     1     0     0     1     1     1     1     0     1     0       NA       20     80</code></pre>
+##   id                gender   age income    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10  task havemore haveless pcmore
+##   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 R_3PtNn51LmSFdLNM      2    26      7     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
+## 2 R_2AXrrg62pgFgtMV      2    32      4     1     1     1     1     1     1     1     1     1     1     0       NA       25     75
+## 3 R_cwEOX3HgnMeVQHL      1    25      2     0     1     1     1     1     1     1     1     0     0     0       NA       10     90
+## 4 R_d59iPwL4W6BH8qx      1    33      5     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
+## 5 R_1f3K2HrGzFGNelZ      1    24      1     1     1     0     1     1     1     1     1     1     1     1       99       NA     99
+## 6 R_3oN5ijzTfoMy4ca      1    22      2     1     1     0     0     1     1     1     1     0     1     0       NA       20     80</code></pre>
 <pre class="r"><code>data_c = read_csv2(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_c.csv&#39;)</code></pre>
 <pre><code>## ℹ Using &quot;&#39;,&#39;&quot; as decimal and &quot;&#39;.&#39;&quot; as grouping mark. Use `read_delim()` for more control.</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_character(),
 ##   age = col_double(),
@@ -438,17 +444,16 @@ head(data_b)</code></pre>
 ## ℹ Use `spec()` for the full column specifications.</code></pre>
 <pre class="r"><code>head(data_c)</code></pre>
 <pre><code>## # A tibble: 6 x 33
-##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob     reason  guardian traveltime studytime failures
-##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 GP     F        18 U       GT3     A           4     4 at_home  teacher  course  mother            2         2        0
-## 2 GP     F        17 U       GT3     T           1     1 at_home  other    course  father            1         2        0
-## 3 GP     F        15 U       LE3     T           1     1 at_home  other    other   mother            1         2        0
-## 4 GP     F        15 U       GT3     T           4     2 health   services home    mother            1         3        0
-## 5 GP     F        16 U       GT3     T           3     3 other    other    home    father            1         2        0
-## 6 GP     M        16 U       LE3     T           4     3 services other    reputa… mother            1         2        0
-## # … with 18 more variables: schoolsup &lt;chr&gt;, famsup &lt;chr&gt;, paid &lt;chr&gt;, activities &lt;chr&gt;, nursery &lt;chr&gt;, higher &lt;chr&gt;,
-## #   internet &lt;chr&gt;, romantic &lt;chr&gt;, famrel &lt;dbl&gt;, freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;, Walc &lt;dbl&gt;, health &lt;dbl&gt;,
-## #   absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
+##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob  reason guardian traveltime studytime failures schoolsup famsup
+##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; 
+## 1 GP     F        18 U       GT3     A           4     4 at_home  teac… course mother            2         2        0 yes       no    
+## 2 GP     F        17 U       GT3     T           1     1 at_home  other course father            1         2        0 no        yes   
+## 3 GP     F        15 U       LE3     T           1     1 at_home  other other  mother            1         2        0 yes       no    
+## 4 GP     F        15 U       GT3     T           4     2 health   serv… home   mother            1         3        0 no        yes   
+## 5 GP     F        16 U       GT3     T           3     3 other    other home   father            1         2        0 no        yes   
+## 6 GP     M        16 U       LE3     T           4     3 services other reput… mother            1         2        0 no        yes   
+## # … with 16 more variables: paid &lt;chr&gt;, activities &lt;chr&gt;, nursery &lt;chr&gt;, higher &lt;chr&gt;, internet &lt;chr&gt;, romantic &lt;chr&gt;, famrel &lt;dbl&gt;,
+## #   freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;, Walc &lt;dbl&gt;, health &lt;dbl&gt;, absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
 <pre class="r"><code>library(readxl)
 
 # maybe try first: install.packages(&quot;readxl&quot;)
@@ -457,15 +462,14 @@ data_d = read_excel(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_d.xls
 
 head(data_d)</code></pre>
 <pre><code>## # A tibble: 6 x 9
-##    Year `Average population` `Live births` Deaths `Natural change` `Crude birth rate… `Crude death rat… `Natural change …
-##   &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                         &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;
-## 1  1900 3,300,000            94,316        63,606 30,710                         28.6              19.3               9.3
-## 2  1901 3,341,000            97,028        60,018 37,010                         29                18                11.1
-## 3  1902 3,384,000            96,480        57,702 38,778                         28.5              17.1              11.5
-## 4  1903 3,428,000            93,824        59,626 34,198                         27.4              17.4              10  
-## 5  1904 3,472,000            94,867        60,857 34,010                         27.3              17.5               9.8
-## 6  1905 3,516,000            94,653        61,800 32,853                         26.9              17.6               9.3
-## # … with 1 more variable: Total fertility rates &lt;dbl&gt;</code></pre>
+##    Year `Average population` `Live births` Deaths `Natural change` `Crude birth ra… `Crude death ra… `Natural change… `Total fertilit…
+##   &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1  1900 3,300,000            94,316        63,606 30,710                       28.6             19.3              9.3             3.83
+## 2  1901 3,341,000            97,028        60,018 37,010                       29               18               11.1             3.89
+## 3  1902 3,384,000            96,480        57,702 38,778                       28.5             17.1             11.5             3.82
+## 4  1903 3,428,000            93,824        59,626 34,198                       27.4             17.4             10               3.67
+## 5  1904 3,472,000            94,867        60,857 34,010                       27.3             17.5              9.8             3.66
+## 6  1905 3,516,000            94,653        61,800 32,853                       26.9             17.6              9.3             3.6</code></pre>
 <pre class="r"><code>library(haven)
 # maybe first: install.packages(&quot;haven&quot;)
 
@@ -473,28 +477,28 @@ data_e = read_sav(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_e.sav&#
 
 head(data_e)</code></pre>
 <pre><code>## # A tibble: 6 x 54
-##   case_ID         wave      year weight_wave weight_aggregate      happening cause_original cause_other_text cause_recoded
-##     &lt;dbl&gt;    &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt; &lt;chr&gt;                &lt;dbl+lbl&gt;
-## 1       2 1 [Nov 2008]  1 [2008]        0.54            0.294 3 [Yes]        1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 2       3 1 [Nov 2008]  1 [2008]        0.85            0.463 2 [Don&#39;t know] 1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 3       5 1 [Nov 2008]  1 [2008]        0.49            0.267 2 [Don&#39;t know] 2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 4       6 1 [Nov 2008]  1 [2008]        0.29            0.158 3 [Yes]        2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 5       7 1 [Nov 2008]  1 [2008]        1.29            0.702 3 [Yes]        1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 6       8 1 [Nov 2008]  1 [2008]        2.56            1.39  2 [Don&#39;t know] 2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## # … with 45 more variables: sci_consensus &lt;dbl+lbl&gt;, worry &lt;dbl+lbl&gt;, harm_personally &lt;dbl+lbl&gt;, harm_US &lt;dbl+lbl&gt;,
-## #   harm_dev_countries &lt;dbl+lbl&gt;, harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;, when_harm_US &lt;dbl+lbl&gt;,
-## #   reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;, reg_coal_emissions &lt;dbl+lbl&gt;,
-## #   discuss_GW &lt;dbl+lbl&gt;, hear_GW_media &lt;dbl+lbl&gt;, gender &lt;dbl+lbl&gt;, age &lt;dbl&gt;, age_category &lt;dbl+lbl&gt;,
-## #   generation &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, educ_category &lt;dbl+lbl&gt;, income &lt;dbl+lbl&gt;, income_category &lt;dbl+lbl&gt;,
-## #   race &lt;dbl+lbl&gt;, ideology &lt;dbl+lbl&gt;, party &lt;dbl+lbl&gt;, party_w_leaners &lt;dbl+lbl&gt;, party_x_ideo &lt;dbl+lbl&gt;,
-## #   registered_voter &lt;dbl+lbl&gt;, region9 &lt;dbl+lbl&gt;, region4 &lt;dbl+lbl&gt;, religion &lt;dbl+lbl&gt;, …</code></pre>
+##   case_ID     wave    year weight_wave weight_aggregate happening cause_original cause_other_text cause_recoded sci_consensus   worry
+##     &lt;dbl&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt; &lt;chr&gt;                &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt; &lt;dbl+l&gt;
+## 1       2 1 [Nov … 1 [200…        0.54            0.294 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo… 4 [Most scie… 3 [Som…
+## 2       3 1 [Nov … 1 [200…        0.85            0.463 2 [Don&#39;t… 1 [Caused mos… &quot;&quot;               6 [Caused mo… 1 [Don&#39;t kno… 2 [Not…
+## 3       5 1 [Nov … 1 [200…        0.49            0.267 2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo… 2 [There is … 1 [Not…
+## 4       6 1 [Nov … 1 [200…        0.29            0.158 3 [Yes]   2 [Caused mos… &quot;&quot;               4 [Caused mo… 4 [Most scie… 3 [Som…
+## 5       7 1 [Nov … 1 [200…        1.29            0.702 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo… 2 [There is … 3 [Som…
+## 6       8 1 [Nov … 1 [200…        2.56            1.39  2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo… 2 [There is … 2 [Not…
+## # … with 43 more variables: harm_personally &lt;dbl+lbl&gt;, harm_US &lt;dbl+lbl&gt;, harm_dev_countries &lt;dbl+lbl&gt;, harm_future_gen &lt;dbl+lbl&gt;,
+## #   harm_plants_animals &lt;dbl+lbl&gt;, when_harm_US &lt;dbl+lbl&gt;, reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;,
+## #   fund_research &lt;dbl+lbl&gt;, reg_coal_emissions &lt;dbl+lbl&gt;, discuss_GW &lt;dbl+lbl&gt;, hear_GW_media &lt;dbl+lbl&gt;, gender &lt;dbl+lbl&gt;,
+## #   age &lt;dbl&gt;, age_category &lt;dbl+lbl&gt;, generation &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, educ_category &lt;dbl+lbl&gt;, income &lt;dbl+lbl&gt;,
+## #   income_category &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;, ideology &lt;dbl+lbl&gt;, party &lt;dbl+lbl&gt;, party_w_leaners &lt;dbl+lbl&gt;,
+## #   party_x_ideo &lt;dbl+lbl&gt;, registered_voter &lt;dbl+lbl&gt;, region9 &lt;dbl+lbl&gt;, region4 &lt;dbl+lbl&gt;, religion &lt;dbl+lbl&gt;,
+## #   religion_other_nonchristian &lt;chr&gt;, evangelical &lt;dbl+lbl&gt;, service_attendance &lt;dbl+lbl&gt;, marit_status &lt;dbl+lbl&gt;, …</code></pre>
 </div>
 <div id="file-on-a-website-load-and-save" class="section level1">
 <h1>3. File on a website: load and save</h1>
 <p>Let’s say we want to load in R some data, directly from a website (without saving it to a file). In this case, we get some data from the website “<a href="https://support.spatialkey.com/spatialkey-sample-csv-data/" class="uri">https://support.spatialkey.com/spatialkey-sample-csv-data/</a>”. Instead of writing a local address, we can simply use the same functions with the web address.</p>
 <pre class="r"><code>data_transactions = read_csv(&quot;https://support.spatialkey.com/wp-content/uploads/2021/02/Sacramentorealestatetransactions.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   street = col_character(),
 ##   city = col_character(),
@@ -511,21 +515,21 @@ head(data_e)</code></pre>
 ## )</code></pre>
 <pre class="r"><code>head(data_transactions)</code></pre>
 <pre><code>## # A tibble: 6 x 12
-##   street             city         zip state  beds baths sq__ft type        sale_date             price latitude longitude
-##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00:00 … 59222     38.6     -121.
-## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00:00 … 68212     38.5     -121.
-## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00:00 … 68880     38.6     -121.
-## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00:00 … 69307     38.6     -121.
-## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00:00 … 81900     38.5     -121.
-## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00:00 … 89921     38.7     -121.</code></pre>
+##   street             city         zip state  beds baths sq__ft type        sale_date                    price latitude longitude
+##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00:00 EDT 2008 59222     38.6     -121.
+## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00:00 EDT 2008 68212     38.5     -121.
+## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00:00 EDT 2008 68880     38.6     -121.
+## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00:00 EDT 2008 69307     38.6     -121.
+## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00:00 EDT 2008 81900     38.5     -121.
+## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00:00 EDT 2008 89921     38.7     -121.</code></pre>
 <p>If we want, we can then save it to file from R, using similar set of functions that start with <code>write_</code> instead of <code>read_</code>. You can use such functions also to save your data in a different format from the original for later use.</p>
 <pre class="r"><code># save it to file
 write_csv(data_transactions, file = &quot;~/Dropbox/teaching/r-course22/data/Sacramentorealestatetransactions.csv&quot;)</code></pre>
 <pre class="r"><code># load it again
 data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramentorealestatetransactions.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   street = col_character(),
 ##   city = col_character(),
@@ -542,14 +546,14 @@ data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramento
 ## )</code></pre>
 <pre class="r"><code>head(data_transactions)</code></pre>
 <pre><code>## # A tibble: 6 x 12
-##   street             city         zip state  beds baths sq__ft type        sale_date             price latitude longitude
-##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00:00 … 59222     38.6     -121.
-## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00:00 … 68212     38.5     -121.
-## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00:00 … 68880     38.6     -121.
-## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00:00 … 69307     38.6     -121.
-## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00:00 … 81900     38.5     -121.
-## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00:00 … 89921     38.7     -121.</code></pre>
+##   street             city         zip state  beds baths sq__ft type        sale_date                    price latitude longitude
+##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00:00 EDT 2008 59222     38.6     -121.
+## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00:00 EDT 2008 68212     38.5     -121.
+## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00:00 EDT 2008 68880     38.6     -121.
+## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00:00 EDT 2008 69307     38.6     -121.
+## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00:00 EDT 2008 81900     38.5     -121.
+## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00:00 EDT 2008 89921     38.7     -121.</code></pre>
 </div>
 <div id="get-raw-files-from-github" class="section level1">
 <h1>4. Get raw files from GitHub</h1>
@@ -561,7 +565,7 @@ data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramento
 <p>You can use now this url with one of our <code>read_</code> functions:</p>
 <pre class="r"><code>data_tdcs = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/tdcs.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   RT = col_double(),
 ##   acc_spd = col_character(),
