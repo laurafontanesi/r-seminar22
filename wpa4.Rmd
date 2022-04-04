@@ -2,3 +2,687 @@
 title: "Data wrangling"
 ---
 
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_4_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 4
+# Name: Laura Fontanesi
+# Date: 5 April 2022
+```
+
+# Load data in R
+
+Download the data `ccam_original.sav` from the [data folder on Github](https://github.com/laurafontanesi/r-seminar22/tree/main/data) and load them in R.
+
+```{r}
+library(tidyverse)
+library(haven)
+
+# Load data in R
+survey_data_raw = read_spss("data/ccam_original.sav")
+```
+
+# 1. What is data wrangling?
+
+Data wrangling is the process of transforming data from a raw format (in which they were collected) into another format with the intent of making it more appropriate and valuable for exploratory and confirmatory data analyses.
+
+Today's class is based on specific functions in the tidyverse that will serve exactly this purpuse.
+
+# 2. Functions to know and some examples
+
+Virtually all you need to know is in [this cheatsheet](https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+The more frequent functions you will use are:
+
+- `%>%`: The pipe operator, to chain functions (not recommended at the beginning).
+
+- `arrange`: order the dataframe based on values of variables.
+
+- `rename`: to rename specific columns.
+
+- `filter` and `slice`: to select subsets of rows.
+
+- `select`: to select subsets of columns.
+
+- `mutate`: make new columns based on modifications of existing ones.
+
+- `mutate_all`: make the same modification on all columns. 
+
+- `mutate_if`: make the same modification on columns satisfying specific conditions. 
+
+Look [here](https://dplyr.tidyverse.org/reference/mutate_all.html) for other kinds of mutate.
+
+- `summarize`: to calculate summary statistics.
+
+- `summarize_all`: to calculate summary statistics on all columns. 
+
+- `summarize_if`: to calculate summary statistics on columns satisfying specific conditions. 
+
+Look [here](https://dplyr.tidyverse.org/reference/summarise_all.html) for other kinds of summarize.
+
+- `group_by`: to group the data based on some variables, so that subsequent calculations are done on such variables.
+
+- `full_join`, `left_join`, `right_join`: to join separate dataframes.
+
+- `bind_rows` and `bind_cols`: to append dataframes vertically or horizontally.
+
+- `gather` and `spread`: bring wide form to long form and viceversa.
+
+- `unite`: make a column from multiple columns.
+
+- `separate`: make multiple columns from one column.
+
+## Ways to "see" the data: Glimpse, sort, head, and tail
+
+The first thing you want to do when importing data, is to inspect it visually, to get to know the information it contains. You can always click on the data in the Environment tab, but there are also other useful functions that allow us to see the data types (`glimpse`), to sort the data based on the values of one or more clomuns (`arrange`), and to visualize the first or the last n rows (`head` and `tail`, respectively).
+
+```{r}
+glimpse(survey_data_raw)
+```
+
+```{r}
+# sort by one variable, and only show the first 6 values
+head(arrange(survey_data_raw, wave), 6)
+```
+
+```{r}
+# sort by 2 variables (one in opposite order), and only show the last 10 values
+tail(arrange(survey_data_raw, wave, desc(year)), 10)
+```
+
+## Select or drop specific columns and rows (indexing)
+
+In basic R, we saw that we can select specific columns and rows using indexing. In tidyverse, we have `select` (for columns based on column labels, similar to indexing with character vectors or with the `$` operator), `filter` (for rows based on values, similar to indexing with logical vectors) and `slice` (for rows based on row numbers, similar to indexing with a numerical vector). 
+
+```{r}
+interesting_columns = c('wave', 'year', 'happening', 'cause_recoded', 'sci_consensus', 'worry', 'harm_personally', 
+                        'harm_US', 'harm_dev_countries', 'harm_future_gen', 'harm_plants_animals', 'when_harm_US',
+                        'reg_CO2_pollutant', 'reg_utilities', 'fund_research', 'discuss_GW',
+                        'gender', 'age_category', 'educ_category', 'income_category', 'race', 'party_x_ideo', 'region4', 'employment')
+
+columns_to_drop = c('case_ID', 'weight_wave', 'weight_aggregate', 'cause_original', 'cause_other_text',
+                    'reg_coal_emissions', 'hear_GW_media', 'age', 'generation', 'educ', 'income', 'ideology',
+                    'party', 'party_w_leaners', 'registered_voter', 'region9', 'religion', 'religion_other_nonchristian',
+                    'evangelical', 'service_attendance', 'marit_status', 'house_head', 'house_size',
+                    'house_ages0to1', 'house_ages2to5', 'house_ages6to12', 'house_ages13to17', 'house_ages18plus',
+                    'house_type', 'house_own')
+
+# use all_of to inlcude columns
+survey_data = select(survey_data_raw, all_of(interesting_columns))
+
+# use -all_of to exclude columns
+survey_data = select(survey_data_raw, -all_of(columns_to_drop))
+```
+
+
+```{r}
+# equivalent to survey_data[200:210,]
+slice(survey_data, 200:210)
+```
+
+```{r}
+# eliminate people (i.e., rows) who didn't reply in some variables of interest (an absence of reply was coded as -1 here)
+survey_data = filter(survey_data, 
+                     happening > 0, 
+                     cause_recoded > 0, 
+                     sci_consensus > 0, 
+                     worry > 0)
+```
+
+## Change values or value types (indexing and reassigning)
+
+In basic R, we saw that we can change information in the dataset by indexing specific columns and/or rows and reassigning values to them. In tidyverse we have specific functions that do this directly: the `mutate` functions. `mutate_all` applies one transforming function to all columns, while `mutate` allows to to do specific changes to single columns.
+
+```{r}
+# convert all data to integers type
+survey_data = mutate_all(survey_data, 
+                         as.integer)
+```
+
+Note that when you use an existing column label, the column is replaced with the new values.
+If you want to simply add a column based on the values of an existing one, use a non-existing label instead.
+
+```{r}
+survey_data = mutate(survey_data, 
+                     happening_cont = happening + rnorm(mean=0, sd=.5, n=nrow(survey_data)),
+                     worry_cont = worry + rnorm(mean=0, sd=.5, n=nrow(survey_data)),
+                     year=recode(year, 
+                                 `1` = 2008,
+                                 `2` = 2010,
+                                 `3` = 2011,
+                                 `4` = 2012, 
+                                 `5` = 2013,
+                                 `6` = 2014,
+                                 `7` = 2015,
+                                 `8` = 2016,
+                                 `9` = 2017),
+                     happening_labels=recode(happening,
+                                             `1` = "no",
+                                             `2` = "dont know",
+                                             `3` = "yes"),
+                     cause_recoded=recode(cause_recoded,
+                                          `1` = "dont know",
+                                          `2` = "other",
+                                          `3` = "not happening",
+                                          `4` = "natural",
+                                          `5` = "human",
+                                          `6` = "natural and human"),
+                     sci_consensus=recode(sci_consensus,
+                                          `1` = "dont know",
+                                          `2` = "disagreement",
+                                          `3` = "not happening",
+                                          `4` = "happening"),
+                     gender=recode(gender,
+                                   `1` = "male",
+                                   `2` = "female"),
+                     age_category_labels=recode(age_category,
+                                                `1` = "18-34",
+                                                `2` = "35-54",
+                                                `3` = "55+"),
+                     educ_category_labels=recode(educ_category,
+                                                 `1` = "no highschool",
+                                                 `2` = "highschool",
+                                                 `3` = "college",
+                                                 `4` = "bachelor or higher"),
+                     income_category_labels=recode(income_category,
+                                                   `1` = "less 50000",
+                                                   `2` = "50000-99999",
+                                                   `3` = "more 100000"),
+                     race=recode(race,
+                                 `1` = 'white non hisp',
+                                 `2` = 'black non hisp',
+                                 `3` = 'other non hisp',
+                                 `4` = 'hisp'),
+                     party_x_ideo=recode(party_x_ideo,
+                                         `-2` = "no interest",
+                                         `-1` = "refused",
+                                         `1` = "liberal democrat",
+                                         `2` = "moderate democrate",
+                                         `3` = "independent",
+                                         `4` = "moderate republican",
+                                         `5` = "conservative republican"),
+                     region4 = recode(region4,
+                                      `1` = "northeast",
+                                      `2` = "midwest",
+                                      `3` = "south",
+                                      `4` = "west"),
+                     employment = recode(employment,
+                                         `1` = "Working/as a paid employee",
+                                         `2` = "Working/selfemploye",
+                                         `3` = "Not working/temporary",
+                                         `4` = "Not working/looking",
+                                         `5` = "Not working/retired",
+                                         `6` = "Not working/disabled",
+                                         `7` = "Not working/other"))
+```
+
+## Compute summary statistics
+
+Another way to inspect the data, is to compute summary statistics (like mean, SD, quantiles, percentages, etc.) on each column. In tidyverse, the function `summarise` allows you to specify what to compute for each column:
+
+```{r}
+summarise(survey_data, 
+          count=n(), 
+          min_worry=min(worry_cont),
+          quantile25_worry=quantile(worry_cont, .25, na.rm = TRUE),
+          mean_worry=mean(worry_cont), 
+          quantile75_worry=quantile(worry_cont, .75, na.rm = TRUE),
+          max_worry=max(worry_cont),
+          min_happening=min(happening_cont),
+          quantile25_happening=quantile(happening_cont, .25, na.rm = TRUE),
+          mean_happening=mean(happening_cont),
+          quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
+          max_happening=max(happening_cont))
+```
+
+```{r}
+summarise(survey_data,
+          mean_happening = mean(happening))
+```
+
+By default, `summarise` computes statistics on the whole dataset. However, when you have different experimental conditions and/or hierarchical data (repeated measures, longitudinal data, multi-site data, etc.), you might want to compute different stats per group/level defined by a categorical variable (the one that would specify the condition/group). In tidyverse, this can be achieved by using the `group_by` function together with the `summarise` function:
+
+```{r}
+grouped_data = group_by(survey_data, year)
+
+summarise(grouped_data, 
+          count=n(), 
+          min_worry=min(worry_cont),
+          quantile25_worry=quantile(worry_cont, .25, na.rm = TRUE),
+          mean_worry=mean(worry_cont), 
+          quantile75_worry=quantile(worry_cont, .75, na.rm = TRUE),
+          max_worry=max(worry_cont),
+          min_happening=min(happening_cont),
+          quantile25_happening=quantile(happening_cont, .25, na.rm = TRUE),
+          mean_happening=mean(happening_cont),
+          quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
+          max_happening=max(happening_cont))
+```
+
+## Split character columns
+
+Sometimes, we get data with categorical variables that contain more than one variable. For example, in our dataset, in the `employment` column, we have information about whether the person is working or is unemployed (this is one categorical variable with 2 levels) and about the working type (this is another categorical variable with as many levels as there are employment types).
+
+With the `separate` function we can indeed separate this information based on specific text separators (in this case, `/`):
+
+```{r}
+survey_data = separate(survey_data,
+                       col = employment,
+                       into = c('working', 'working_type'),
+                       sep = '/',
+                       remove = FALSE)
+head(select(survey_data, employment, working, working_type), 10)
+```
+
+You can also create a new column via `mutate` and the `case_when` function for specific categories you are interested in your analysis:
+```{r}
+survey_data = mutate(survey_data,
+                     working_recoded = case_when(working == "Not working" & working_type == 'looking' ~ 0,
+                                                 working == "Not working" & working_type != 'looking' ~ 1,
+                                                 working == "Working" ~ 2))
+                     
+head(select(survey_data, employment, working, working_type, working_recoded), 10)
+```
+
+Once you have these groups, you can calculate the statistics you are interested in:
+
+```{r}
+grouped_data = group_by(survey_data, working)
+
+summarise(grouped_data, 
+          count=n(), 
+          min_worry=min(worry_cont),
+          quantile25_worry=quantile(worry_cont, .25, na.rm = TRUE),
+          mean_worry=mean(worry_cont), 
+          quantile75_worry=quantile(worry_cont, .75, na.rm = TRUE),
+          max_worry=max(worry_cont),
+          min_happening=min(happening_cont),
+          quantile25_happening=quantile(happening_cont, .25, na.rm = TRUE),
+          mean_happening=mean(happening_cont),
+          quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
+          max_happening=max(happening_cont))
+```
+
+```{r}
+# first filter, and then get summary statistics per group
+not_working_data = filter(survey_data, working == "Not working")
+
+grouped_data = group_by(not_working_data, working_type)
+
+summarise(grouped_data, 
+          count=n(), 
+          min_worry=min(worry_cont),
+          quantile25_worry=quantile(worry_cont, .25, na.rm = TRUE),
+          mean_worry=mean(worry_cont), 
+          quantile75_worry=quantile(worry_cont, .75, na.rm = TRUE),
+          max_worry=max(worry_cont),
+          min_happening=min(happening_cont),
+          quantile25_happening=quantile(happening_cont, .25, na.rm = TRUE),
+          mean_happening=mean(happening_cont),
+          quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
+          max_happening=max(happening_cont))
+```
+
+## Merge character columns
+
+As we have done in basic R with the `paste` function, we can also merge the values of two columns to create new groups we might be interested in. In tidyverse we use `unite`:
+
+```{r}
+survey_data = unite(survey_data,
+                    "race_gender",
+                    race, 
+                    gender,
+                    sep = "_",
+                    remove=FALSE)
+
+head(select(survey_data, race, gender, race_gender))
+```
+
+```{r}
+grouped_data = group_by(survey_data, race_gender)
+
+summarise(grouped_data, 
+          count=n(), 
+          min_worry=min(worry_cont),
+          quantile25_worry=quantile(worry_cont, .25, na.rm = TRUE),
+          mean_worry=mean(worry_cont), 
+          quantile75_worry=quantile(worry_cont, .75, na.rm = TRUE),
+          max_worry=max(worry_cont),
+          min_happening=min(happening_cont),
+          quantile25_happening=quantile(happening_cont, .25, na.rm = TRUE),
+          mean_happening=mean(happening_cont),
+          quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
+          max_happening=max(happening_cont))
+```
+
+Or you can just use 2 grouping variables to compute statistics:
+
+```{r}
+grouped_data = group_by(survey_data, race, gender)
+
+summarise(grouped_data, 
+          count=n(), 
+          min_worry=min(worry_cont),
+          quantile25_worry=quantile(worry_cont, .25, na.rm = TRUE),
+          mean_worry=mean(worry_cont), 
+          quantile75_worry=quantile(worry_cont, .75, na.rm = TRUE),
+          max_worry=max(worry_cont),
+          min_happening=min(happening_cont),
+          quantile25_happening=quantile(happening_cont, .25, na.rm = TRUE),
+          mean_happening=mean(happening_cont),
+          quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
+          max_happening=max(happening_cont))
+```
+
+# 3. Pipes
+
+Until now, we have used the tidyverse functions as all other functions we have used in basic R:
+
+```
+new_object = function1(old_object, some_argument)
+new_object = function2(new_object, some_argument)
+new_object = function3(new_object, some_argument)
+```
+However, in tidyverse, we can compact this notation using pipes:
+
+```
+new_object = old_object %>%
+  function1(some_argument) %>%
+  function2(some_argument) %>%
+  function3(some_argument)
+```
+As you see, this allows us to define an analysis pipeline in which each computation is done on the results of the previous computation. 
+
+Here is how we could rewrite all previous computations from loading the raw data to the grouped summary statistics:
+
+```{r}
+survey_data_raw = read_spss("data/ccam_original.sav")
+
+survey_data = survey_data_raw %>%
+    select(all_of(interesting_columns)) %>%
+    filter(happening > 0, 
+           cause_recoded > 0, 
+           sci_consensus > 0, 
+           worry > 0)  %>%
+    mutate_all(as.integer) %>%
+    mutate(happening_cont = happening + rnorm(mean=0, sd=.5, n=n()),
+           worry_cont = worry + rnorm(mean=0, sd=.5, n=n()),
+           year=recode(year, 
+                       `1` = 2008, 
+                       `2` = 2010,
+                       `3` = 2011,
+                       `4` = 2012, 
+                       `5` = 2013,
+                       `6` = 2014,
+                       `7` = 2015,
+                       `8` = 2016,
+                       `9` = 2017),
+           happening_labels=recode(happening,
+                                   `1` = "no",
+                                   `2` = "dont know",
+                                   `3` = "yes"),
+           cause_recoded=recode(cause_recoded,
+                                `1` = "dont know",
+                                `2` = "other",
+                                `3` = "not happening",
+                                `4` = "natural",
+                                `5` = "human",
+                                `6` = "natural and human"),
+           sci_consensus=recode(sci_consensus,
+                                `1` = "dont know",
+                                `2` = "disagreement",
+                                `3` = "not happening",
+                                `4` = "happening"),
+           gender=recode(gender,
+                         `1` = "male",
+                         `2` = "female"),
+           age_category_labels=recode(age_category,
+                                      `1` = "18-34",
+                                      `2` = "35-54",
+                                      `3` = "55+"),
+           educ_category_labels=recode(educ_category,
+                                       `1` = "no highschool",
+                                       `2` = "highschool",
+                                       `3` = "college",
+                                       `4` = "bachelor or higher"),
+           income_category_labels=recode(income_category,
+                        `1` = "less 50000",
+                        `2` = "50000-99999",
+                        `3` = "more 100000"),
+           race=recode(race,
+                      `1` = 'white non hisp',
+                      `2` = 'black non hisp',
+                      `3` = 'other non hisp',
+                      `4` = 'hisp'),
+           party_x_ideo=recode(party_x_ideo,
+                               `-2` = "no interest",
+                               `-1` = "refused",
+                               `1` = "liberal democrat",
+                               `2` = "moderate democrate",
+                               `3` = "independent",
+                               `4` = "moderate republican",
+                               `5` = "conservative republican"),
+           region4 = recode(region4,
+                            `1` = "northeast",
+                            `2` = "midwest",
+                            `3` = "south",
+                            `4` = "west"),
+           employment = recode(employment,
+                               `1` = "Working/as a paid employee",
+                               `2` = "Working/selfemploye",
+                               `3` = "Not working/temporary",
+                               `4` = "Not working/looking",
+                               `5` = "Not working/retired",
+                               `6` = "Not working/disabled",
+                               `7` = "Not working/other")) %>%
+    separate(col = employment,
+             into = c('working', 'working_type'),
+             sep = '/') %>%
+    filter(working == "Not working")  %>%
+    group_by(working_type) %>%
+    summarise(count=n(), 
+              min_worry=min(worry_cont),
+              quantile25_worry=quantile(worry_cont, .25),
+              mean_worry=mean(worry_cont), 
+              quantile75_worry=quantile(worry_cont, .75),
+              max_worry=max(worry_cont),
+              min_happening=min(happening_cont),
+              quantile25_happening=quantile(happening_cont, .25),
+              mean_happening=mean(happening_cont),
+              quantile75_happening=quantile(happening_cont, .75),
+              max_happening=max(happening_cont))
+```
+
+```{r}
+print(survey_data)
+```
+
+# 4. Join dataframes
+
+In basic R, we have seen how we can add separate dataframes using the `cbind` and `rbind` functions. The corresponding functions in tidyverse are `bind_cols` and `bind_rows`:
+
+```{r}
+# Create fake data:
+N = 15
+
+mean_score_students = runif(N, 5, 10)
+fake_data_first_batch = tibble( # same as data.frame but in tidyverse!
+    student = 1:N,
+    age = round(rnorm(N, 30, 5)),
+    score_wpa1 = mean_score_students,
+    score_wpa2 = mean_score_students*0.9 + rnorm(N, 0, 0.1),
+    score_wpa3 = mean_score_students*0.5 + rnorm(N, 0, 1),
+    score_wpa4 = mean_score_students*0.7 + rnorm(N, 0, 0.2)
+)
+print(fake_data_first_batch)
+
+mean_score_students = runif(N, 5, 10)
+fake_data_second_batch = tibble( # same as data.frame but in tidyverse!
+    student = (N+1):(2*N),
+    age = round(rnorm(N, 30, 5)),
+    score_wpa1 = mean_score_students,
+    score_wpa2 = mean_score_students*0.9 + rnorm(N, 0, 0.1),
+    score_wpa3 = mean_score_students*0.5 + rnorm(N, 0, 1)
+)
+print(fake_data_second_batch)
+```
+
+```{r}
+fake_data = bind_rows(fake_data_first_batch, fake_data_second_batch)
+fake_data
+```
+
+```{r}
+# new variables
+new_info = tibble(
+    student = 1:(2*N),
+    score_wpa5 = mean_score_students*0.5 + rnorm(2*N, 0, 1),
+    gender = rbinom(2*N, 1, .5)
+)
+
+print(new_info)
+```
+
+```{r}
+fake_data = bind_cols(fake_data,
+                      new_info)
+print(fake_data)
+```
+
+However, a better way to join dataframes is to use the `join` functions, as these allow us to join dataframes based on specific ID. This is very important when there are repeating info and/or missing info:
+
+```{r}
+N = 15
+mean_score_students = runif(N, 5, 10)
+first_batch = tibble(
+    student = 1:N,
+    age = round(rnorm(N, 30, 5)),
+    score_wpa1 = mean_score_students,
+    score_wpa2 = mean_score_students*0.9 + rnorm(N, 0, 0.1),
+    score_wpa3 = mean_score_students*0.5 + rnorm(N, 0, 1),
+    score_wpa4 = mean_score_students*0.7 + rnorm(N, 0, 0.2)
+)
+print(first_batch)
+M = 5
+mean_score_students = runif(M, 8, 10)
+second_batch = tibble( 
+    student = (N+1):(N+M),
+    age = round(rnorm(M, 30, 5)),
+    score_wpa1 = mean_score_students,
+    score_wpa2 = mean_score_students*0.9 + rnorm(M, 0, 0.1),
+    score_wpa5 = mean_score_students*0.5 + rnorm(M, 0, 1)
+)
+print(second_batch)
+new_info = tibble(
+    student = 1:(N+M),
+    score_wpa6 = runif(N+M, 6, 10)*0.5 + rnorm(N+M, 0, 1),
+    gender = rbinom(N+M, 1, .5)
+)
+print(new_info)
+```
+
+```{r}
+full_join(first_batch, second_batch, by='student')
+```
+
+```{r}
+full_join(first_batch, second_batch, by=c('student', 'age', "score_wpa1", "score_wpa2"))
+```
+
+```{r}
+left_join(first_batch, new_info, by=c('student'))
+```
+
+```{r}
+right_join(new_info, second_batch, by=c('student'))
+```
+
+# 6. Now it's your turn
+
+Now you will analyze data from Matthews et al. (2016): Why do we overestimate others' willingness to pay? The purpose of this research was to test if our beliefs about other people's affluence (i.e.; wealth) affect how much we think they will be willing to pay for items. You can find the full paper at http://journal.sjdm.org/15/15909/jdm15909.pdf.
+
+**Variables description:**
+
+Here are descriptions of the data variables (taken from the author's dataset notes available at http://journal.sjdm.org/15/15909/Notes.txt)
+
+- `id`: participant id code
+- `gender`: participant gender. 1 = male, 2 = female
+- `age`: participant age
+- `income`: participant annual household income on categorical scale with 8 categorical options: Less than 5,000; 15,001–25,000; 25,001–35,000; 35,001–50,000; 50,001–75,000; 75,001–100,000; 100,001–150,000; greater than 150,000.
+- `p1-p10`: whether the "typical" survey respondent would pay more (coded 1) or less (coded 0) than oneself, for each of the 10 products 
+- `task`: whether the participant had to judge the proportion of other people who "have more money than you do" (coded 1) or the proportion who "have less money than you do" (coded 0)
+- `havemore`: participant's response when task = 1
+- `haveless`: participant's response when task = 0
+- `pcmore`: participant's estimate of the proportion of people who have more than they do (calculated as 100-haveless when task=0)
+
+**Task A**
+
+First, download the `data_wpa4.csv` and `matthews_demographics.csv` datasets from the [data folder on Github](https://github.com/laurafontanesi/r-seminar22/tree/main/data) and load them in R.
+
+Note: do not use pipes from 1 to 4.
+
+1. Currently `gender` is coded as 1 and 2. Create a new dataframe called `new_matthews_data`, in which there is a new column called `gender_labels` that codes gender as "male" and "female". Do it using `mutate`. Then, rename the original `gender` column to `gender_binary` using `rename`. Subtract 1 to all values of `gender_binary`, so that it is coded as 0 and 1 instead of 1 and 2 using `mutate` again.
+
+2. In `new_matthews_data`, create new column called `income_labels` that codes income based on the data description above using `mutate`. Then, create a new column, called `income_recoded`, where you only have 4 income categories (coded as numbers from 1 to 4): below 25,000, 25,000-50,000, 50,000-100,000, and above 100,000 using `case_when`. How many observations are there for each of these 4 categories? Use `summarise` to reply.
+
+3. In `new_matthews_data`, transform all numeric columns into integers numbers using `mutate_if`.
+
+4. From `new_matthews_data`, create a summary of the dataset using `summarise`, to answer the following questions: What percent of participants were female? What was the minimum, mean, and maximum `income`? What was the 25th percentile, median, and the 75th percentile of `age`? Use good names for columns.
+
+5. Repeat steps from 1 to 4 (apart from the `summarise` in point 2) using pipes and assign the result to `new_matthews_data_summary`.
+
+**Task B**
+
+1. From `new_matthews_data`, calculate the mean `p1` to `p10` across participants using `summarise_all` and `select`. Which product scored the highest? Do it again, grouping the data by gender. Is there a difference across gender? What is the mean of the mean `p1` to `p10` across participants? Calculate it on the result of the previous step. You can do these either using pipes or not.
+
+2. Transform the data from wide to long format. In particular, you want 10 rows per subjects, with their responses on the products 1 to 10 in a column called `wtp`, and the product label in a column called `product`. Call the resulting dataframe `new_matthews_data_long`. Re-order it by `id`. Print the first 20 cases to check this worked. Check that `new_matthews_data_long` has 10 times more rows than `new_matthews_data`.
+
+```
+# these are the solutions for B2, as we will cover wide to long data transformation later in the seminar
+new_matthews_data_long = gather(new_matthews_data,
+                                key='product',
+                                value='wtp',
+                                p1:p10)
+
+new_matthews_data_long = arrange(new_matthews_data_long, id)
+```
+
+**Task C**
+
+1. Drop the `X1` column in `demographics` using `select`.
+
+2. Join `new_matthews_data_long` and `demographics` based on the `id`, in order to retain as many rows and columns as possible. Call the resulting dataframe `matthews_data_all`.
+
+3. Calculate the mean `wtp` per subject using `group_by`. You can use pipes or not. Called the resulting dataframe `mean_matthews_data_all`. This should have as many rows as the number of subjects and 2 columns (`id` and mean wtp). Add as a third and fourth columns `heigth` and `race` using one of the join functions.
+
+4. Using `mean_matthews_data_all`, make a barplot showing the mean `wtp` across ethnic groups. Plot confidence intervals. Give appropriate labels to the plot. Do you think there is a difference in willingness to pay across groups?
+
+```
+# these are the solutions for B4, as we will cover plotting later in the seminar
+ggplot(data = mean_matthews_data_all, mapping = aes(x = factor(race), y = mean_wtp)) +
+    stat_summary(fun = "mean", geom="bar") +
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", size=1, width=.4) +
+    labs(x = 'Race', y = 'Mean WTP') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+5. Using `mean_matthews_data_all`, make a scatterplot showing the wtp on the y-axis and the height on the x-axis. Add a regression line. Do you think height predicts willingness to pay?
+
+```
+# these are the solutions for B5, as we will cover plotting later in the seminar
+ggplot(data = mean_matthews_data_all, mapping = aes(x = height, y = mean_wtp)) + 
+    geom_point(alpha = 0.3, size= 2) +
+    geom_smooth(method = lm, color='grey') +
+    labs(x='Height', y='Mean WTP') +
+    ggtitle("Relationship betweenheight and WTP")
+```
+
+## Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of Friday.
