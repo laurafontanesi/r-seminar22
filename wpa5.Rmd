@@ -1,0 +1,191 @@
+---
+title: "Tidying data"
+---
+
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_5_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 5
+# Name: Laura Fontanesi
+# Date: 12 April 2022
+```
+
+# 1. Definition of tidy data
+
+In tidy data:
+- Each variable forms a **column**.
+- Each observation forms a **row**.
+
+This means that data in [wide format](https://en.wikipedia.org/wiki/Wide_and_narrow_data) are *not* tidy.
+
+Funtions to transform dataset:
+
+- `pivot_longer()`(https://tidyr.tidyverse.org/reference/pivot_longer.html)
+
+- `pivot_wider()`(https://tidyr.tidyverse.org/reference/pivot_wider.html)
+
+# 2. Some examples
+
+We can install the [fivethirtyeight](https://fivethirtyeight-r.netlify.com/articles/fivethirtyeight.html) which contains many datasets to practice tidying data.
+
+```{r}
+library(tidyverse)
+
+#install.packages('fivethirtyeight')
+library(fivethirtyeight)
+```
+
+
+## Pulitzer dataset
+
+```{r}
+head(pulitzer)
+```
+
+Here is the article connected to this dataset: https://fivethirtyeight.com/features/do-pulitzers-help-newspapers-keep-readers/
+
+This format might be good if you are interested in analysing the `pctchg_circ` variable, which summarizes the percentage change in daily circulation numbers from the year 2004 to the year 2013.
+
+But what if you want to look at the daily circulations? These are two observations done in two different years. Therefore, the data in this format are not tidy.
+
+To make it more tidy, we should pivot the dataset to a longer format:
+
+```{r}
+pulitzer_new = pulitzer %>%
+    pivot_longer(cols = starts_with("circ"), # circ2004:circ2013
+                 names_to = "year_circulation",
+                 names_prefix = "circ", # not necessary in this case, but better to add
+                 values_to = "daily_circulations") %>%
+    arrange(year_circulation) # not necessary, but for easier reading/checking
+
+print(dim(pulitzer))
+print(dim(pulitzer_new))
+head(pulitzer_new)
+```
+
+To visualize, we can plot the daily circulation numbers, divided by year and across the different newspapers:
+
+```{r}
+ggplot(data = pulitzer_new, mapping = aes(x = reorder(newspaper, daily_circulations), y = daily_circulations, fill = factor(year_circulation))) +
+    geom_col(position='dodge') +
+    labs(x = 'Newspaper', y = 'Daily circulations', fill='Year') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+
+## Drug use dataset
+
+```{r}
+glimpse(drug_use)
+```
+
+The data were given to us again in a **wide format**, as many observations are stored in separate columns: `alchohol_use` and `heroin_use`, for example, are two observations of "drug use" for each of the age categories, so it would make sense to have them in separate rows.
+
+Because in each column name two information are stored, namely the name of the drug and the type of measure (whether it is use of frequency), we need to specify which character divides this information, and give two separate names of columns where we want this information to end up in:
+
+```{r}
+# First we need to fix the "pain_releiver_use" and "_freq" columns (because they are exceptions):
+drug_use_new = rename(drug_use,
+                      painreleiver_use = pain_releiver_use,
+                      painreleiver_freq = pain_releiver_freq)
+
+drug_use_new = pivot_longer(drug_use_new,
+                            cols = alcohol_use:sedative_freq,
+                            names_to = c("drug", "measure"),
+                            names_sep = "_",
+                            values_to = "value")
+
+print(dim(drug_use))
+print(dim(drug_use_new))
+head(drug_use_new)
+```
+
+Now, want to have `use` and `freq` as separate columns, as they are two different measures, or variables for each of the observations.
+
+So we need to go 1 step back and make it "wider":
+```{r}
+drug_use_new = pivot_wider(drug_use_new,
+                           names_from = measure, 
+                           values_from = value)
+
+drug_use_new = arrange(drug_use_new,
+                       drug)
+
+print(dim(drug_use_new))
+head(drug_use_new, 10)
+```
+
+```{r}
+ggplot(data = drug_use_new, mapping = aes(x = age, y = use)) +
+    geom_col() +
+    labs(x = 'Age', y = 'Use') + 
+    theme(axis.text.x = element_text(angle = 90)) +
+    facet_wrap( ~ reorder(drug, -use))
+```
+
+# 3. Now it's your turn
+
+**Task A**
+
+Inspect the `police_locals` dataset. Here is the article attached to it: https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/.
+
+1. Create a new dataset, called `police_locals_new`, made of the following columns: `city`, `force_size`, `ethnic_group`, `perc_locals`. You should create the `ethnic_group` column using a pivot function, as shown in this wpa or in wpa_4. The values in this column should be `all`, `white`, `non_white`, `black`, `hispanic`, `asian`. The `perc_locals` column should contain the percentage of officers that live in the town where they work, corresponding to their ethnic group. Rearrange based on the `ethnic_group` and inspect it by printing the first 10 lines.
+
+2. Make a boxplot, with `ethnic_group` on the x-axis and `perc_locals` on the y-axis. `ethnic_group` should be ordered from the lowest `perc_locals` to the highest. Put appropriate labels.
+
+```
+# these are the solutions for A2, as we will cover plotting later in the seminar
+ggplot(data = police_locals_new, mapping = aes(x = reorder(ethnic_group, perc_locals), y = perc_locals)) +
+    geom_boxplot() +
+    labs(x = 'Ethnic group', y = 'Mean Percentage Locals') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+**Task B**
+
+Inspect the `unisex_names` dataset. Here is the article attached to it: https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/.
+
+1. Create a new dataset, called `unisex_names_new`, made of the following columns: `name`, `total`, `gap`, `gender`, `share`. The `gender` column should only contain the values "male" and "female". The `share` column should contain the percentages. 
+
+2. Multiply the `share` column by 100. Re-arrange so that the first rows contain the names with the highest `total`. Print the first 10 rows of the newly created dataset. Create now a new dataset, called `unisex_names_common`, with the names in `unisex_names_new` that have a total higher than 50000.
+
+3. Using `unisex_names_common`, make a barplot that has `share` on the y-axis, `name` on the x-axis, and with each bar split vertically by color based on the `gender`.
+
+```
+# these are the solutions for B3, as we will cover plotting later in the seminar
+ggplot(data = unisex_names_common, mapping = aes(x = name, y = share, fill = gender)) +
+    geom_col() +
+    labs(x = 'Name', y = 'Share', fill='Gender') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+**Task C**
+
+Inspect the `tv_states` dataset. Here is the article attached to it: https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/.
+
+1. Create a new dataset, with a different name, that is the long version of `tv_states`. You should decide how to call the new columns, as well as which columns should be used for the transformation.
+
+2. With the newly created dataset, make a plot of your choosing to illustrate the information contained in this dataset. As an inspiration, you can have a look at what plot was done in the article above.
+
+```
+# these are the solutions for C2, as we will cover plotting later in the seminar
+ggplot(data = tv_states_new, mapping = aes(x = date, y= share_of_sentences, fill = state)) + 
+    geom_col() +
+    labs(x = 'Date', fill = 'State', y= 'Share of sentences')
+    
+ggplot(tv_states_new, aes(x=date, y=share_of_sentences, group=state, color=state)) +  
+    geom_line() + 
+    labs(x = 'Date', y = 'News coverage (%)', color='Area') + 
+    scale_color_manual(values=c("#54F708", "blue", "red")) + 
+    theme(axis.text.x = element_text(angle = 90, size = 6))
+```
+
+## Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of Friday.
