@@ -44,7 +44,7 @@ library(fivethirtyeight)
 
 ## Pulitzer dataset
 
-```{r}
+```{r paged.print=TRUE}
 head(pulitzer)
 ```
 
@@ -56,7 +56,7 @@ But what if you want to look at the daily circulations? These are two observatio
 
 To make it more tidy, we should pivot the dataset to a longer format:
 
-```{r}
+```{r paged.print=TRUE}
 pulitzer_new = pulitzer %>%
     pivot_longer(cols = starts_with("circ"), # circ2004:circ2013
                  names_to = "year_circulation",
