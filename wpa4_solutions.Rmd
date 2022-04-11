@@ -1,0 +1,222 @@
+---
+title: "Solutions to WPA4"
+---
+
+# 6. Now it's your turn
+
+Now you will analyze data from Matthews et al. (2016): Why do we overestimate others' willingness to pay? The purpose of this research was to test if our beliefs about other people's affluence (i.e.; wealth) affect how much we think they will be willing to pay for items. You can find the full paper at http://journal.sjdm.org/15/15909/jdm15909.pdf.
+
+**Variables description:**
+
+Here are descriptions of the data variables (taken from the author's dataset notes available at http://journal.sjdm.org/15/15909/Notes.txt)
+
+- `id`: participant id code
+- `gender`: participant gender. 1 = male, 2 = female
+- `age`: participant age
+- `income`: participant annual household income on categorical scale with 8 categorical options: Less than 5,000; 15,001–25,000; 25,001–35,000; 35,001–50,000; 50,001–75,000; 75,001–100,000; 100,001–150,000; greater than 150,000.
+- `p1-p10`: whether the "typical" survey respondent would pay more (coded 1) or less (coded 0) than oneself, for each of the 10 products 
+- `task`: whether the participant had to judge the proportion of other people who "have more money than you do" (coded 1) or the proportion who "have less money than you do" (coded 0)
+- `havemore`: participant's response when task = 1
+- `haveless`: participant's response when task = 0
+- `pcmore`: participant's estimate of the proportion of people who have more than they do (calculated as 100-haveless when task=0)
+
+**Task A**
+
+First, download the `data_wpa4.csv` and `matthews_demographics.csv` datasets from the [data folder on Github](https://github.com/laurafontanesi/r-seminar22/tree/main/data) and load them in R.
+
+```{r}
+library(tidyverse)
+
+matthews_data = read_csv('https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/data_wpa4.csv')
+
+demographics = read_csv("https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/matthews_demographics.csv")
+
+glimpse(matthews_data)
+
+glimpse(demographics)
+```
+
+Note: do not use pipes from 1 to 4.
+
+1. Currently `gender` is coded as 1 and 2. Create a new dataframe called `new_matthews_data`, in which there is a new column called `gender_labels` that codes gender as "male" and "female". Do it using `mutate`. Then, rename the original `gender` column to `gender_binary` using `rename`. Subtract 1 to all values of `gender_binary`, so that it is coded as 0 and 1 instead of 1 and 2 using `mutate` again.
+
+```{r}
+new_matthews_data = mutate(matthews_data,
+                           gender_labels = recode(gender,
+                                                  `1`="male",
+                                                  `2`="female"))
+new_matthews_data = rename(new_matthews_data,
+                           gender_binary = gender)
+
+new_matthews_data = mutate(new_matthews_data,
+                           gender_binary = gender_binary - 1)
+head(select(new_matthews_data, gender_binary, gender_labels))
+```
+
+2. In `new_matthews_data`, create new column called `income_labels` that codes income based on the data description above using `mutate`. Then, create a new column, called `income_recoded`, where you only have 4 income categories (coded as numbers from 1 to 4): below 25,000, 25,000-50,000, 50,000-100,000, and above 100,000 using `case_when`. How many observations are there for each of these 4 categories? Use `summarise` to reply.
+
+```{r}
+new_matthews_data = mutate(new_matthews_data,
+                           income_lables = recode(income,
+                                                  `1`='less5,000',
+                                                  `2`='15,001–25,000',
+                                                  `3`='25,001–35,000',
+                                                  `4`='35,001–50,000',
+                                                  `5`='50,001–75,000',
+                                                  `6`='75,001–100,000',
+                                                  `7`='100,001–150,000',
+                                                  `8`='greater150,000'
+                                                 ),
+                           income_recoded = case_when(income < 3 ~ 1,
+                                                      income >=3 & income < 5 ~ 2,
+                                                      income >= 5 & income < 7 ~ 3,
+                                                      income >=7 ~ 4))
+
+summarise(group_by(new_matthews_data, income_recoded), 
+          n = n())
+```
+
+3. In `new_matthews_data`, transform all numeric columns into integers numbers using `mutate_if`.
+
+```{r}
+new_matthews_data = mutate_if(new_matthews_data,
+                              is.numeric, 
+                              as.integer)
+head(new_matthews_data)
+```
+
+4. From `new_matthews_data`, create a summary of the dataset using `summarise`, to answer the following questions: What percent of participants were female? What was the minimum, mean, and maximum `income`? What was the 25th percentile, median, and the 75th percentile of `age`? Use good names for columns.
+
+```{r}
+summarise(new_matthews_data,
+          perc_female = mean(gender_binary)*100,
+          min_income = min(income),
+          mean_income = mean(income),
+          max_income = max(income),
+          perc25_age = quantile(age, .25),
+          median_age = quantile(age, .5),
+          perc75_age = quantile(age, .75)
+          )
+```
+
+5. Repeat steps from 1 to 4 (apart from the `summarise` in point 2) using pipes and assign the result to `new_matthews_data_summary`.
+
+```{r}
+new_matthews_data_summary = matthews_data %>% 
+    mutate(gender_labels = recode(gender,
+                                 `1`="male",
+                                 `2`="female"))  %>% 
+    rename(gender_binary = gender)  %>% 
+    mutate(gender_binary = gender_binary - 1) %>%
+    mutate(income_lables = recode(income,
+                                  `1`='less5,000',
+                                  `2`='15,001–25,000',
+                                  `3`='25,001–35,000',
+                                  `4`='35,001–50,000',
+                                  `5`='50,001–75,000',
+                                  `6`='75,001–100,000',
+                                  `7`='100,001–150,000',
+                                  `8`='greater150,000'),
+           income_recoded = case_when(income < 3 ~ 1,
+                                      income >=3 & income < 5 ~ 2,
+                                      income >= 5 & income < 7 ~ 3,
+                                      income >=7 ~ 4)) %>%
+    mutate_if(is.numeric, 
+              as.integer) %>%
+    summarise(perc_female = mean(gender_binary)*100,
+              min_income = min(income),
+              mean_income = mean(income),
+              max_income = max(income),
+              perc25_age = quantile(age, .25),
+              median_age = quantile(age, .5),
+              perc75_age = quantile(age, .75))
+
+print(new_matthews_data_summary)
+```
+
+**Task B**
+
+1. From `new_matthews_data`, calculate the mean `p1` to `p10` across participants using `summarise_all` and `select`. Which product scored the highest? Do it again, grouping the data by gender. Is there a difference across gender? What is the mean of the mean `p1` to `p10` across participants? Calculate it on the result of the previous step. You can do these either using pipes or not.
+
+```{r}
+# with pipes
+new_matthews_data %>%
+    group_by(gender_binary) %>%
+    select(p1:p10) %>%
+    summarise_all(mean)
+
+# without pipes
+selected_data = select(new_matthews_data, p1:p10, gender_binary)
+grouped_data = group_by(selected_data, gender_binary)
+summarise_all(grouped_data, mean)
+```
+
+2. Transform the data from wide to long format. In particular, you want 10 rows per subjects, with their responses on the products 1 to 10 in a column called `wtp`, and the product label in a column called `product`. Call the resulting dataframe `new_matthews_data_long`. Re-order it by `id`. Print the first 20 cases to check this worked. Check that `new_matthews_data_long` has 10 times more rows than `new_matthews_data`.
+
+```{r}
+# these are the solutions for B2, as we will cover wide to long data transformation later in the seminar
+new_matthews_data_long = gather(new_matthews_data,
+                                key='product',
+                                value='wtp',
+                                p1:p10)
+
+new_matthews_data_long = arrange(new_matthews_data_long, id)
+
+head(new_matthews_data_long)
+```
+
+**Task C**
+
+1. Drop the `X1` column in `demographics` using `select`.
+
+```{r}
+demographics = select(demographics, -c(X1))
+
+head(demographics)
+```
+
+2. Join `new_matthews_data_long` and `demographics` based on the `id`, in order to retain as many rows and columns as possible. Call the resulting dataframe `matthews_data_all`.
+
+```{r}
+matthews_data_all = full_join(new_matthews_data_long, demographics, by="id")
+
+head(matthews_data_all)
+```
+
+3. Calculate the mean `wtp` per subject using `group_by`. You can use pipes or not. Called the resulting dataframe `mean_matthews_data_all`. This should have as many rows as the number of subjects and 2 columns (`id` and mean wtp). Add as a third and fourth columns `heigth` and `race` using one of the join functions.
+
+```{r}
+mean_matthews_data_all = matthews_data_all %>%
+    group_by(id) %>%
+    summarise(mean_wtp=mean(wtp))
+
+mean_matthews_data_all = full_join(mean_matthews_data_all, demographics, by="id")
+
+head(mean_matthews_data_all)
+```
+
+4. Using `mean_matthews_data_all`, make a barplot showing the mean `wtp` across ethnic groups. Plot confidence intervals. Give appropriate labels to the plot. Do you think there is a difference in willingness to pay across groups?
+
+```{r}
+# these are the solutions for B4, as we will cover plotting later in the seminar
+ggplot(data = mean_matthews_data_all, mapping = aes(x = factor(race), y = mean_wtp)) +
+    stat_summary(fun = "mean", geom="bar") +
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", size=1, width=.4) +
+    labs(x = 'Race', y = 'Mean WTP') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+5. Using `mean_matthews_data_all`, make a scatterplot showing the wtp on the y-axis and the height on the x-axis. Add a regression line. Do you think height predicts willingness to pay?
+
+```{r}
+# these are the solutions for B5, as we will cover plotting later in the seminar
+ggplot(data = mean_matthews_data_all, mapping = aes(x = height, y = mean_wtp)) + 
+    geom_point(alpha = 0.3, size= 2) +
+    geom_smooth(method = lm, color='grey') +
+    labs(x='Height', y='Mean WTP') +
+    ggtitle("Relationship betweenheight and WTP")
+```
+
+## Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of Friday.

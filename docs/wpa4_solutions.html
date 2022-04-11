@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Solutions to WPA4</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R seminar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Syllabus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display"></span>
+     
+    WPAs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1 solutions</a>
+    </li>
+    <li>
+      <a href="wpa2_solutions.html">WPA 2 solutions</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3 solutions</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Solutions to WPA4</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#now-its-your-turn">6. Now it’s your turn</a>
+<ul>
+<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="now-its-your-turn" class="section level1">
+<h1>6. Now it’s your turn</h1>
+<p>Now you will analyze data from Matthews et al. (2016): Why do we overestimate others’ willingness to pay? The purpose of this research was to test if our beliefs about other people’s affluence (i.e.; wealth) affect how much we think they will be willing to pay for items. You can find the full paper at <a href="http://journal.sjdm.org/15/15909/jdm15909.pdf" class="uri">http://journal.sjdm.org/15/15909/jdm15909.pdf</a>.</p>
+<p><strong>Variables description:</strong></p>
+<p>Here are descriptions of the data variables (taken from the author’s dataset notes available at <a href="http://journal.sjdm.org/15/15909/Notes.txt" class="uri">http://journal.sjdm.org/15/15909/Notes.txt</a>)</p>
+<ul>
+<li><code>id</code>: participant id code</li>
+<li><code>gender</code>: participant gender. 1 = male, 2 = female</li>
+<li><code>age</code>: participant age</li>
+<li><code>income</code>: participant annual household income on categorical scale with 8 categorical options: Less than 5,000; 15,001–25,000; 25,001–35,000; 35,001–50,000; 50,001–75,000; 75,001–100,000; 100,001–150,000; greater than 150,000.</li>
+<li><code>p1-p10</code>: whether the “typical” survey respondent would pay more (coded 1) or less (coded 0) than oneself, for each of the 10 products</li>
+<li><code>task</code>: whether the participant had to judge the proportion of other people who “have more money than you do” (coded 1) or the proportion who “have less money than you do” (coded 0)</li>
+<li><code>havemore</code>: participant’s response when task = 1</li>
+<li><code>haveless</code>: participant’s response when task = 0</li>
+<li><code>pcmore</code>: participant’s estimate of the proportion of people who have more than they do (calculated as 100-haveless when task=0)</li>
+</ul>
+<p><strong>Task A</strong></p>
+<p>First, download the <code>data_wpa4.csv</code> and <code>matthews_demographics.csv</code> datasets from the <a href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data folder on Github</a> and load them in R.</p>
+<pre class="r"><code>library(tidyverse)
+
+matthews_data = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/data_wpa4.csv&#39;)</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   id = col_character(),
+##   gender = col_double(),
+##   age = col_double(),
+##   income = col_double(),
+##   p1 = col_double(),
+##   p2 = col_double(),
+##   p3 = col_double(),
+##   p4 = col_double(),
+##   p5 = col_double(),
+##   p6 = col_double(),
+##   p7 = col_double(),
+##   p8 = col_double(),
+##   p9 = col_double(),
+##   p10 = col_double(),
+##   task = col_double(),
+##   havemore = col_double(),
+##   haveless = col_double(),
+##   pcmore = col_double()
+## )</code></pre>
+<pre class="r"><code>demographics = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/matthews_demographics.csv&quot;)</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   X1 = col_double(),
+##   id = col_character(),
+##   height = col_double(),
+##   race = col_character()
+## )</code></pre>
+<pre class="r"><code>glimpse(matthews_data)</code></pre>
+<pre><code>## Rows: 190
+## Columns: 18
+## $ id       &lt;chr&gt; &quot;R_3PtNn51LmSFdLNM&quot;, &quot;R_2AXrrg62pgFgtMV&quot;, &quot;R_cwEOX3HgnMeVQHL&quot;, &quot;R_d59iPwL4W6BH8qx&quot;, &quot;R_1f3K2HrGzFGNelZ&quot;, &quot;R_3oN5i…
+## $ gender   &lt;dbl&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1,…
+## $ age      &lt;dbl&gt; 26, 32, 25, 33, 24, 22, 47, 26, 29, 32, 29, 28, 31, 24, 25, 28, 20, 41, 44, 23, 49, 26, 19, 57, 30, 25, 26, 60, 3…
+## $ income   &lt;dbl&gt; 7, 4, 2, 5, 1, 2, 3, 4, 1, 7, 4, 3, 2, 2, 6, 3, 2, 2, 1, 3, 3, 6, 4, 5, 5, 2, 3, 2, 5, 4, 6, 7, 5, 1, 5, 2, 4, 4,…
+## $ p1       &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ p2       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,…
+## $ p3       &lt;dbl&gt; 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0,…
+## $ p4       &lt;dbl&gt; 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,…
+## $ p5       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1,…
+## $ p6       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0,…
+## $ p7       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1,…
+## $ p8       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,…
+## $ p9       &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0,…
+## $ p10      &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,…
+## $ task     &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1,…
+## $ havemore &lt;dbl&gt; NA, NA, NA, NA, 99, NA, 95, NA, 70, 25, 50, 50, NA, NA, NA, 95, NA, NA, 85, NA, 45, 25, NA, 50, 50, NA, 45, 25, N…
+## $ haveless &lt;dbl&gt; 50, 25, 10, 50, NA, 20, NA, 30, NA, NA, NA, NA, 44, 20, 65, NA, 50, 2, NA, 85, NA, NA, 25, NA, NA, 30, NA, NA, 35…
+## $ pcmore   &lt;dbl&gt; 50, 75, 90, 50, 99, 80, 95, 70, 70, 25, 50, 50, 56, 80, 35, 95, 50, 98, 85, 15, 45, 25, 75, 50, 50, 70, 45, 25, 6…</code></pre>
+<pre class="r"><code>glimpse(demographics)</code></pre>
+<pre><code>## Rows: 190
+## Columns: 4
+## $ X1     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, …
+## $ id     &lt;chr&gt; &quot;R_2zOA03wY3kZPHKj&quot;, &quot;R_1f30AbYQR0D1wpt&quot;, &quot;R_2YgEERKijE2Hz6K&quot;, &quot;R_1CdL2n22srUR26d&quot;, &quot;R_1HnsqBRimnKphfg&quot;, &quot;R_12PUXbJ…
+## $ height &lt;dbl&gt; 182, 184, 175, 177, 187, 178, 168, 193, 180, 159, 160, 172, 165, 162, 169, 169, 167, 168, 178, 167, 162, 169, 178, …
+## $ race   &lt;chr&gt; &quot;black&quot;, &quot;white&quot;, &quot;hispanic&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;hispanic&quot;, &quot;white&quot;, &quot;hispanic&quot;…</code></pre>
+<p>Note: do not use pipes from 1 to 4.</p>
+<ol style="list-style-type: decimal">
+<li>Currently <code>gender</code> is coded as 1 and 2. Create a new dataframe called <code>new_matthews_data</code>, in which there is a new column called <code>gender_labels</code> that codes gender as “male” and “female”. Do it using <code>mutate</code>. Then, rename the original <code>gender</code> column to <code>gender_binary</code> using <code>rename</code>. Subtract 1 to all values of <code>gender_binary</code>, so that it is coded as 0 and 1 instead of 1 and 2 using <code>mutate</code> again.</li>
+</ol>
+<pre class="r"><code>new_matthews_data = mutate(matthews_data,
+                           gender_labels = recode(gender,
+                                                  `1`=&quot;male&quot;,
+                                                  `2`=&quot;female&quot;))
+new_matthews_data = rename(new_matthews_data,
+                           gender_binary = gender)
+
+new_matthews_data = mutate(new_matthews_data,
+                           gender_binary = gender_binary - 1)
+head(select(new_matthews_data, gender_binary, gender_labels))</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   gender_binary gender_labels
+##           &lt;dbl&gt; &lt;chr&gt;        
+## 1             1 female       
+## 2             1 female       
+## 3             0 male         
+## 4             0 male         
+## 5             0 male         
+## 6             0 male</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>In <code>new_matthews_data</code>, create new column called <code>income_labels</code> that codes income based on the data description above using <code>mutate</code>. Then, create a new column, called <code>income_recoded</code>, where you only have 4 income categories (coded as numbers from 1 to 4): below 25,000, 25,000-50,000, 50,000-100,000, and above 100,000 using <code>case_when</code>. How many observations are there for each of these 4 categories? Use <code>summarise</code> to reply.</li>
+</ol>
+<pre class="r"><code>new_matthews_data = mutate(new_matthews_data,
+                           income_lables = recode(income,
+                                                  `1`=&#39;less5,000&#39;,
+                                                  `2`=&#39;15,001–25,000&#39;,
+                                                  `3`=&#39;25,001–35,000&#39;,
+                                                  `4`=&#39;35,001–50,000&#39;,
+                                                  `5`=&#39;50,001–75,000&#39;,
+                                                  `6`=&#39;75,001–100,000&#39;,
+                                                  `7`=&#39;100,001–150,000&#39;,
+                                                  `8`=&#39;greater150,000&#39;
+                                                 ),
+                           income_recoded = case_when(income &lt; 3 ~ 1,
+                                                      income &gt;=3 &amp; income &lt; 5 ~ 2,
+                                                      income &gt;= 5 &amp; income &lt; 7 ~ 3,
+                                                      income &gt;=7 ~ 4))
+
+summarise(group_by(new_matthews_data, income_recoded), 
+          n = n())</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   income_recoded     n
+##            &lt;dbl&gt; &lt;int&gt;
+## 1              1    72
+## 2              2    56
+## 3              3    52
+## 4              4    10</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>In <code>new_matthews_data</code>, transform all numeric columns into integers numbers using <code>mutate_if</code>.</li>
+</ol>
+<pre class="r"><code>new_matthews_data = mutate_if(new_matthews_data,
+                              is.numeric, 
+                              as.integer)
+head(new_matthews_data)</code></pre>
+<pre><code>## # A tibble: 6 x 21
+##   id           gender_binary   age income    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10  task havemore haveless pcmore
+##   &lt;chr&gt;                &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;
+## 1 R_3PtNn51Lm…             1    26      7     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
+## 2 R_2AXrrg62p…             1    32      4     1     1     1     1     1     1     1     1     1     1     0       NA       25     75
+## 3 R_cwEOX3Hgn…             0    25      2     0     1     1     1     1     1     1     1     0     0     0       NA       10     90
+## 4 R_d59iPwL4W…             0    33      5     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
+## 5 R_1f3K2HrGz…             0    24      1     1     1     0     1     1     1     1     1     1     1     1       99       NA     99
+## 6 R_3oN5ijzTf…             0    22      2     1     1     0     0     1     1     1     1     0     1     0       NA       20     80
+## # … with 3 more variables: gender_labels &lt;chr&gt;, income_lables &lt;chr&gt;, income_recoded &lt;int&gt;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>From <code>new_matthews_data</code>, create a summary of the dataset using <code>summarise</code>, to answer the following questions: What percent of participants were female? What was the minimum, mean, and maximum <code>income</code>? What was the 25th percentile, median, and the 75th percentile of <code>age</code>? Use good names for columns.</li>
+</ol>
+<pre class="r"><code>summarise(new_matthews_data,
+          perc_female = mean(gender_binary)*100,
+          min_income = min(income),
+          mean_income = mean(income),
+          max_income = max(income),
+          perc25_age = quantile(age, .25),
+          median_age = quantile(age, .5),
+          perc75_age = quantile(age, .75)
+          )</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   perc_female min_income mean_income max_income perc25_age median_age perc75_age
+##         &lt;dbl&gt;      &lt;int&gt;       &lt;dbl&gt;      &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1        37.4          1        3.53          8         25         30         35</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Repeat steps from 1 to 4 (apart from the <code>summarise</code> in point 2) using pipes and assign the result to <code>new_matthews_data_summary</code>.</li>
+</ol>
+<pre class="r"><code>new_matthews_data_summary = matthews_data %&gt;% 
+    mutate(gender_labels = recode(gender,
+                                 `1`=&quot;male&quot;,
+                                 `2`=&quot;female&quot;))  %&gt;% 
+    rename(gender_binary = gender)  %&gt;% 
+    mutate(gender_binary = gender_binary - 1) %&gt;%
+    mutate(income_lables = recode(income,
+                                  `1`=&#39;less5,000&#39;,
+                                  `2`=&#39;15,001–25,000&#39;,
+                                  `3`=&#39;25,001–35,000&#39;,
+                                  `4`=&#39;35,001–50,000&#39;,
+                                  `5`=&#39;50,001–75,000&#39;,
+                                  `6`=&#39;75,001–100,000&#39;,
+                                  `7`=&#39;100,001–150,000&#39;,
+                                  `8`=&#39;greater150,000&#39;),
+           income_recoded = case_when(income &lt; 3 ~ 1,
+                                      income &gt;=3 &amp; income &lt; 5 ~ 2,
+                                      income &gt;= 5 &amp; income &lt; 7 ~ 3,
+                                      income &gt;=7 ~ 4)) %&gt;%
+    mutate_if(is.numeric, 
+              as.integer) %&gt;%
+    summarise(perc_female = mean(gender_binary)*100,
+              min_income = min(income),
+              mean_income = mean(income),
+              max_income = max(income),
+              perc25_age = quantile(age, .25),
+              median_age = quantile(age, .5),
+              perc75_age = quantile(age, .75))
+
+print(new_matthews_data_summary)</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   perc_female min_income mean_income max_income perc25_age median_age perc75_age
+##         &lt;dbl&gt;      &lt;int&gt;       &lt;dbl&gt;      &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1        37.4          1        3.53          8         25         30         35</code></pre>
+<p><strong>Task B</strong></p>
+<ol style="list-style-type: decimal">
+<li>From <code>new_matthews_data</code>, calculate the mean <code>p1</code> to <code>p10</code> across participants using <code>summarise_all</code> and <code>select</code>. Which product scored the highest? Do it again, grouping the data by gender. Is there a difference across gender? What is the mean of the mean <code>p1</code> to <code>p10</code> across participants? Calculate it on the result of the previous step. You can do these either using pipes or not.</li>
+</ol>
+<pre class="r"><code># with pipes
+new_matthews_data %&gt;%
+    group_by(gender_binary) %&gt;%
+    select(p1:p10) %&gt;%
+    summarise_all(mean)</code></pre>
+<pre><code>## Adding missing grouping variables: `gender_binary`</code></pre>
+<pre><code>## # A tibble: 2 x 11
+##   gender_binary    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10
+##           &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1             0 0.723 0.849 0.630 0.857 0.790 0.782 0.866 0.874 0.689 0.706
+## 2             1 0.648 0.887 0.831 0.845 0.746 0.831 0.859 0.944 0.648 0.775</code></pre>
+<pre class="r"><code># without pipes
+selected_data = select(new_matthews_data, p1:p10, gender_binary)
+grouped_data = group_by(selected_data, gender_binary)
+summarise_all(grouped_data, mean)</code></pre>
+<pre><code>## # A tibble: 2 x 11
+##   gender_binary    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10
+##           &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1             0 0.723 0.849 0.630 0.857 0.790 0.782 0.866 0.874 0.689 0.706
+## 2             1 0.648 0.887 0.831 0.845 0.746 0.831 0.859 0.944 0.648 0.775</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Transform the data from wide to long format. In particular, you want 10 rows per subjects, with their responses on the products 1 to 10 in a column called <code>wtp</code>, and the product label in a column called <code>product</code>. Call the resulting dataframe <code>new_matthews_data_long</code>. Re-order it by <code>id</code>. Print the first 20 cases to check this worked. Check that <code>new_matthews_data_long</code> has 10 times more rows than <code>new_matthews_data</code>.</li>
+</ol>
+<pre class="r"><code># these are the solutions for B2, as we will cover wide to long data transformation later in the seminar
+new_matthews_data_long = gather(new_matthews_data,
+                                key=&#39;product&#39;,
+                                value=&#39;wtp&#39;,
+                                p1:p10)
+
+new_matthews_data_long = arrange(new_matthews_data_long, id)
+
+head(new_matthews_data_long)</code></pre>
+<pre><code>## # A tibble: 6 x 13
+##   id              gender_binary   age income  task havemore haveless pcmore gender_labels income_lables income_recoded product   wtp
+##   &lt;chr&gt;                   &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;   &lt;int&gt;
+## 1 R_0JLtfRpOyh8p…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p1          1
+## 2 R_0JLtfRpOyh8p…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p2          1
+## 3 R_0JLtfRpOyh8p…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p3          1
+## 4 R_0JLtfRpOyh8p…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p4          1
+## 5 R_0JLtfRpOyh8p…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p5          1
+## 6 R_0JLtfRpOyh8p…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p6          0</code></pre>
+<p><strong>Task C</strong></p>
+<ol style="list-style-type: decimal">
+<li>Drop the <code>X1</code> column in <code>demographics</code> using <code>select</code>.</li>
+</ol>
+<pre class="r"><code>demographics = select(demographics, -c(X1))
+
+head(demographics)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   id                height race    
+##   &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;   
+## 1 R_2zOA03wY3kZPHKj    182 black   
+## 2 R_1f30AbYQR0D1wpt    184 white   
+## 3 R_2YgEERKijE2Hz6K    175 hispanic
+## 4 R_1CdL2n22srUR26d    177 white   
+## 5 R_1HnsqBRimnKphfg    187 white   
+## 6 R_12PUXbJhfNF9GAE    178 white</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Join <code>new_matthews_data_long</code> and <code>demographics</code> based on the <code>id</code>, in order to retain as many rows and columns as possible. Call the resulting dataframe <code>matthews_data_all</code>.</li>
+</ol>
+<pre class="r"><code>matthews_data_all = full_join(new_matthews_data_long, demographics, by=&quot;id&quot;)
+
+head(matthews_data_all)</code></pre>
+<pre><code>## # A tibble: 6 x 15
+##   id       gender_binary   age income  task havemore haveless pcmore gender_labels income_lables income_recoded product   wtp height
+##   &lt;chr&gt;            &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;
+## 1 R_0JLtf…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p1          1    176
+## 2 R_0JLtf…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p2          1    176
+## 3 R_0JLtf…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p3          1    176
+## 4 R_0JLtf…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p4          1    176
+## 5 R_0JLtf…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p5          1    176
+## 6 R_0JLtf…             1    45      4     1       80       NA     80 female        35,001–50,000              2 p6          0    176
+## # … with 1 more variable: race &lt;chr&gt;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate the mean <code>wtp</code> per subject using <code>group_by</code>. You can use pipes or not. Called the resulting dataframe <code>mean_matthews_data_all</code>. This should have as many rows as the number of subjects and 2 columns (<code>id</code> and mean wtp). Add as a third and fourth columns <code>heigth</code> and <code>race</code> using one of the join functions.</li>
+</ol>
+<pre class="r"><code>mean_matthews_data_all = matthews_data_all %&gt;%
+    group_by(id) %&gt;%
+    summarise(mean_wtp=mean(wtp))
+
+mean_matthews_data_all = full_join(mean_matthews_data_all, demographics, by=&quot;id&quot;)
+
+head(mean_matthews_data_all)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   id                mean_wtp height race    
+##   &lt;chr&gt;                &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   
+## 1 R_0JLtfRpOyh8pOCN      0.9    176 black   
+## 2 R_0O52mja29pBTphb      0.6    171 asian   
+## 3 R_0OnZ5ZwmVAU6w2V      0.8    150 hispanic
+## 4 R_0oXJeSTrYNzQlRH      0.8    180 asian   
+## 5 R_10CVQqqmFiczGPS      0.7    173 asian   
+## 6 R_10HKEOMi0HhWe7T      0.7    177 asian</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Using <code>mean_matthews_data_all</code>, make a barplot showing the mean <code>wtp</code> across ethnic groups. Plot confidence intervals. Give appropriate labels to the plot. Do you think there is a difference in willingness to pay across groups?</li>
+</ol>
+<pre class="r"><code># these are the solutions for B4, as we will cover plotting later in the seminar
+ggplot(data = mean_matthews_data_all, mapping = aes(x = factor(race), y = mean_wtp)) +
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;bar&quot;) +
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;, size=1, width=.4) +
+    labs(x = &#39;Race&#39;, y = &#39;Mean WTP&#39;) + 
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="wpa4_solutions_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Using <code>mean_matthews_data_all</code>, make a scatterplot showing the wtp on the y-axis and the height on the x-axis. Add a regression line. Do you think height predicts willingness to pay?</li>
+</ol>
+<pre class="r"><code># these are the solutions for B5, as we will cover plotting later in the seminar
+ggplot(data = mean_matthews_data_all, mapping = aes(x = height, y = mean_wtp)) + 
+    geom_point(alpha = 0.3, size= 2) +
+    geom_smooth(method = lm, color=&#39;grey&#39;) +
+    labs(x=&#39;Height&#39;, y=&#39;Mean WTP&#39;) +
+    ggtitle(&quot;Relationship betweenheight and WTP&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="wpa4_solutions_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div id="submit-your-assignment" class="section level2">
+<h2>Submit your assignment</h2>
+<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of Friday.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

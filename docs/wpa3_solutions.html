@@ -323,10 +323,10 @@ library(&#39;haven&#39;)</code></pre>
 
 head(qualtrics_data, 2)</code></pre>
 <pre><code>## # A tibble: 2 x 58
-##   cur_emp     yrs_workforce yrs_curjob num_emp_work num_emp_man for_profit yrs_for_profit non_profit yrs_non_profit public yrs_public
-##   &lt;chr&gt;               &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
-## 1 I work in …          17         15   500-999      50-99       Yes                     6 No                     NA Yes            15
-## 2 I work in …          21.2       21.2 50-99        9-May       Yes                     4 No                     NA Yes            28
+##   cur_emp    yrs_workforce yrs_curjob num_emp_work num_emp_man for_profit yrs_for_profit non_profit yrs_non_profit public yrs_public
+##   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+## 1 I work in…          17         15   500-999      50-99       Yes                     6 No                     NA Yes            15
+## 2 I work in…          21.2       21.2 50-99        9-May       Yes                     4 No                     NA Yes            28
 ## # … with 47 more variables: eng &lt;dbl&gt;, eng_i_u &lt;dbl&gt;, eng_i_l &lt;dbl&gt;, eng_d_u &lt;dbl&gt;, eng_d_l &lt;dbl&gt;, eng_pct_pass &lt;dbl&gt;,
 ## #   eng_more_useful_comp &lt;chr&gt;, eng_why_select_comp &lt;chr&gt;, eng_hist &lt;chr&gt;, eng_soc &lt;chr&gt;, age &lt;dbl&gt;, educ &lt;chr&gt;, prof_degree &lt;chr&gt;,
 ## #   prof_degree_other &lt;chr&gt;, gender &lt;chr&gt;, gender_other &lt;dbl&gt;, race &lt;chr&gt;, race_other &lt;chr&gt;, hispanic &lt;chr&gt;, math &lt;dbl&gt;,
@@ -338,7 +338,7 @@ head(qualtrics_data, 2)</code></pre>
 <pre><code>## ℹ Using &quot;&#39;,&#39;&quot; as decimal and &quot;&#39;.&#39;&quot; as grouping mark. Use `read_delim()` for more control.</code></pre>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_logical(),
 ##   Locations = col_character(),
@@ -359,7 +359,7 @@ head(qualtrics_data, 2)</code></pre>
 ## 6 NA    Iran[g]             23049   1812 8376      [39][40]</code></pre>
 <pre class="r"><code>data_g = read_delim(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_g.txt&#39;, delim=&#39;\t&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   Symptom = col_character(),
 ##   `%` = col_character()
@@ -376,7 +376,7 @@ head(qualtrics_data, 2)</code></pre>
 ## 6 Shortness of breath          18.6%</code></pre>
 <pre class="r"><code>data_h = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_h.csv&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   Name = col_character(),
 ##   Canton = col_character(),
@@ -409,14 +409,14 @@ head(qualtrics_data, 2)</code></pre>
 
 head(british_cross_sectional_data)</code></pre>
 <pre><code>## # A tibble: 6 x 363
-##   finalserialno serial    a01          a02     a03   m02_1   m02_2   m02_3   m02_4   m02_5   m02_6     b01      b02      b04      b05
-##           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl+lbl&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt;
-## 1         10115 000000399 nhs     1 [Labo… 2 [Fai… 4 [Agr… 4 [Agr… 3 [Nei… 2 [Dis… 4 [Agr… 4 [Agr… 1 [Yes…  1 [Lab… NA        1 [In …
-## 2         10119 000000398 brexit  0 [None… 2 [Fai… 3 [Nei… 1 [Str… 4 [Agr… 4 [Agr… 3 [Nei… 4 [Agr… 1 [Yes…  1 [Lab… NA        1 [In …
-## 3         10125 000000400 socie… -1 [Don`… 2 [Fai… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 2 [Dis… 2 [No,… NA        2 [Con… NA      
-## 4         10215 000000347 immig… -1 [Don`… 2 [Fai… 4 [Agr… 5 [Str… 5 [Str… 5 [Str… 5 [Str… 4 [Agr… 1 [Yes…  1 [Lab… NA        1 [In …
-## 5         10216 000000349 brexit  1 [Labo… 2 [Fai… 3 [Nei… 2 [Dis… 2 [Dis… 2 [Dis… 2 [Dis… 3 [Nei… 1 [Yes…  1 [Lab… NA        3 [By …
-## 6         10217 000000374 getti… -1 [Don`… 2 [Fai… 2 [Dis… 4 [Agr… 2 [Dis… 2 [Dis… 3 [Nei… 2 [Dis… 1 [Yes…  1 [Lab… NA        1 [In …
+##   finalserialno serial    a01         a02     a03   m02_1   m02_2   m02_3   m02_4   m02_5   m02_6     b01      b02      b04      b05
+##           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt;
+## 1         10115 000000399 nhs     1 [Lab… 2 [Fai… 4 [Agr… 4 [Agr… 3 [Nei… 2 [Dis… 4 [Agr… 4 [Agr… 1 [Yes…  1 [Lab… NA        1 [In …
+## 2         10119 000000398 brexit  0 [Non… 2 [Fai… 3 [Nei… 1 [Str… 4 [Agr… 4 [Agr… 3 [Nei… 4 [Agr… 1 [Yes…  1 [Lab… NA        1 [In …
+## 3         10125 000000400 socie… -1 [Don… 2 [Fai… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 2 [Dis… 2 [No,… NA        2 [Con… NA      
+## 4         10215 000000347 immig… -1 [Don… 2 [Fai… 4 [Agr… 5 [Str… 5 [Str… 5 [Str… 5 [Str… 4 [Agr… 1 [Yes…  1 [Lab… NA        1 [In …
+## 5         10216 000000349 brexit  1 [Lab… 2 [Fai… 3 [Nei… 2 [Dis… 2 [Dis… 2 [Dis… 2 [Dis… 3 [Nei… 1 [Yes…  1 [Lab… NA        3 [By …
+## 6         10217 000000374 getti… -1 [Don… 2 [Fai… 2 [Dis… 4 [Agr… 2 [Dis… 2 [Dis… 3 [Nei… 2 [Dis… 1 [Yes…  1 [Lab… NA        1 [In …
 ## # … with 348 more variables: b0601 &lt;dbl+lbl&gt;, b0602 &lt;dbl+lbl&gt;, b0603 &lt;dbl+lbl&gt;, b0604 &lt;dbl+lbl&gt;, b0605 &lt;dbl+lbl&gt;, b0606 &lt;dbl+lbl&gt;,
 ## #   b0607 &lt;dbl+lbl&gt;, b0608 &lt;dbl+lbl&gt;, b0609 &lt;dbl+lbl&gt;, b0610 &lt;dbl+lbl&gt;, b0611 &lt;dbl+lbl&gt;, b0612 &lt;dbl+lbl&gt;, b0613 &lt;dbl+lbl&gt;,
 ## #   b0614 &lt;dbl+lbl&gt;, b0615 &lt;dbl+lbl&gt;, b0616 &lt;dbl+lbl&gt;, b0617 &lt;dbl+lbl&gt;, b0618 &lt;dbl+lbl&gt;, b0619 &lt;dbl+lbl&gt;, b06a &lt;dbl+lbl&gt;,
