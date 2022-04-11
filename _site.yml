@@ -17,17 +17,21 @@ navbar:
         href: wpa3.html
       - text: "WPA 4"
         href: wpa4.html
+      - text: "WPA 5"
+        href: wpa5.html
     - text: "Solutions"
       icon: fa-display-arrow-down
       menu:
-      - text: "WPA 1 solutions"
+      - text: "WPA 1"
         href: wpa1_solutions.html
-      - text: "WPA 2 solutions"
+      - text: "WPA 2"
         href: wpa2_solutions.html
-      - text: "WPA 3 solutions"
+      - text: "WPA 3"
         href: wpa3_solutions.html
+      - text: "WPA 4"
+        href: wpa4_solutions.html
 output:
   html_document:
-    theme: yeti
+    theme: paper
     highlight: textmate
     toc: true
