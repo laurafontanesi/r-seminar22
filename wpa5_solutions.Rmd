@@ -40,10 +40,10 @@ police_locals_new = police_locals %>%
     pivot_longer(cols = all:asian,
                  names_to = "ethnic_group",
                  values_to = "perc_locals",
-                 names_repair = "minimal") %>%
-    arrange(ethnic_group)
+                 names_repair = "minimal")
 
 dim(police_locals)
+head(police_locals, 10)
 dim(police_locals_new)
 head(police_locals_new, 30)
 ```
@@ -72,6 +72,7 @@ unisex_names_new = unisex_names %>%
     arrange(desc(total))
 
 dim(unisex_names)
+head(unisex_names, 10)
 dim(unisex_names_new)
 head(unisex_names_new, 10)
 ```
@@ -97,6 +98,7 @@ tv_states_new = pivot_longer(tv_states,
                              values_to = 'share_of_sentences')
 
 dim(tv_states)
+head(tv_states, 10)
 dim(tv_states_new)
 head(tv_states_new, 10)
 ```

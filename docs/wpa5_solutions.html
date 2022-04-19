@@ -358,27 +358,40 @@ police_locals_new = police_locals %&gt;%
     pivot_longer(cols = all:asian,
                  names_to = &quot;ethnic_group&quot;,
                  values_to = &quot;perc_locals&quot;,
-                 names_repair = &quot;minimal&quot;) %&gt;%
-    arrange(ethnic_group)
+                 names_repair = &quot;minimal&quot;)
 
 dim(police_locals)</code></pre>
 <pre><code>## [1] 75  8</code></pre>
+<pre class="r"><code>head(police_locals, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 8
+##    city         force_size   all  white non_white black hispanic  asian
+##    &lt;chr&gt;             &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1 New York          32300 0.618 0.446      0.764 0.771   0.763   0.749
+##  2 Chicago           12120 0.875 0.872      0.877 0.897   0.840   0.967
+##  3 Los Angeles       10100 0.228 0.153      0.264 0.387   0.218   0.305
+##  4 Washington         9340 0.116 0.0568     0.157 0.170   0.0899  0.231
+##  5 Houston            7700 0.292 0.174      0.399 0.366   0.457   0.408
+##  6 Philadelphia       6045 0.835 0.777      0.899 0.925   0.817  NA    
+##  7 Phoenix            4475 0.312 0.271      0.427 0.522   0.428  NA    
+##  8 San Diego          4460 0.362 0.373      0.348 0.538   0.298   0.516
+##  9 Dallas             3605 0.191 0.172      0.213 0.215   0.257  NA    
+## 10 Detroit            3265 0.371 0.0820     0.543 0.568   0.333  NA</code></pre>
 <pre class="r"><code>dim(police_locals_new)</code></pre>
 <pre><code>## [1] 450   4</code></pre>
 <pre class="r"><code>head(police_locals_new, 30)</code></pre>
 <pre><code>## # A tibble: 30 x 4
-##    city         force_size ethnic_group perc_locals
-##    &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
-##  1 New York          32300 all                0.618
-##  2 Chicago           12120 all                0.875
-##  3 Los Angeles       10100 all                0.228
-##  4 Washington         9340 all                0.116
-##  5 Houston            7700 all                0.292
-##  6 Philadelphia       6045 all                0.835
-##  7 Phoenix            4475 all                0.312
-##  8 San Diego          4460 all                0.362
-##  9 Dallas             3605 all                0.191
-## 10 Detroit            3265 all                0.371
+##    city     force_size ethnic_group perc_locals
+##    &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+##  1 New York      32300 all                0.618
+##  2 New York      32300 white              0.446
+##  3 New York      32300 non_white          0.764
+##  4 New York      32300 black              0.771
+##  5 New York      32300 hispanic           0.763
+##  6 New York      32300 asian              0.749
+##  7 Chicago       12120 all                0.875
+##  8 Chicago       12120 white              0.872
+##  9 Chicago       12120 non_white          0.877
+## 10 Chicago       12120 black              0.897
 ## # … with 20 more rows</code></pre>
 <pre class="r"><code>ggplot(data = police_locals_new, mapping = aes(x = reorder(ethnic_group, perc_locals), y = perc_locals)) +
     geom_boxplot() +
@@ -404,6 +417,20 @@ dim(police_locals)</code></pre>
 
 dim(unisex_names)</code></pre>
 <pre><code>## [1] 919   5</code></pre>
+<pre class="r"><code>head(unisex_names, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 5
+##    name      total male_share female_share    gap
+##    &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Casey   176544.      0.584        0.416 0.169 
+##  2 Riley   154861.      0.508        0.492 0.0153
+##  3 Jessie  136382.      0.478        0.522 0.0443
+##  4 Jackie  132929.      0.421        0.579 0.158 
+##  5 Avery   121797.      0.335        0.665 0.330 
+##  6 Jaime   109870.      0.562        0.438 0.124 
+##  7 Peyton   94896.      0.434        0.566 0.133 
+##  8 Kerry    88964.      0.484        0.516 0.0321
+##  9 Jody     80401.      0.352        0.648 0.296 
+## 10 Kendall  79211.      0.372        0.628 0.255</code></pre>
 <pre class="r"><code>dim(unisex_names_new)</code></pre>
 <pre><code>## [1] 1838    5</code></pre>
 <pre class="r"><code>head(unisex_names_new, 10)</code></pre>
@@ -437,6 +464,20 @@ dim(unisex_names)</code></pre>
 
 dim(tv_states)</code></pre>
 <pre><code>## [1] 52  4</code></pre>
+<pre class="r"><code>head(tv_states, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 4
+##    date       florida  texas puerto_rico
+##    &lt;date&gt;       &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
+##  1 2017-08-20  0.0923 0.0286      0     
+##  2 2017-08-21  0.0441 0.0904      0.0099
+##  3 2017-08-22  0.0359 0.0334      0     
+##  4 2017-08-23  0.0431 0.0839      0.0103
+##  5 2017-08-24  0.0492 0.398       0.0184
+##  6 2017-08-25  0.0442 1.46        0     
+##  7 2017-08-26  0.033  2.32        0.0391
+##  8 2017-08-27  0.0825 1.64        0.0459
+##  9 2017-08-28  0.0346 2.51        0.0096
+## 10 2017-08-29  0.0338 2.37        0.0069</code></pre>
 <pre class="r"><code>dim(tv_states_new)</code></pre>
 <pre><code>## [1] 156   3</code></pre>
 <pre class="r"><code>head(tv_states_new, 10)</code></pre>
