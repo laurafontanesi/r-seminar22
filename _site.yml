@@ -19,6 +19,8 @@ navbar:
         href: wpa4.html
       - text: "WPA 5"
         href: wpa5.html
+      - text: "WPA 6"
+        href: wpa6.html
     - text: "Solutions"
       icon: fa-display-arrow-down
       menu:
@@ -30,6 +32,8 @@ navbar:
         href: wpa3_solutions.html
       - text: "WPA 4"
         href: wpa4_solutions.html
+      - text: "WPA 5"
+        href: wpa5_solutions.html
 output:
   html_document:
     theme: paper

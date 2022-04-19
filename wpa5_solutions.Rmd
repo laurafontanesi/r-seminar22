@@ -1,0 +1,116 @@
+---
+title: "Solutions to WPA5"
+---
+
+# 3. Now it's your turn
+
+**Task A**
+
+Inspect the `police_locals` dataset. Here is the article attached to it: https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/.
+
+1. Create a new dataset, called `police_locals_new`, made of the following columns: `city`, `force_size`, `ethnic_group`, `perc_locals`. You should create the `ethnic_group` column using a pivot function, as shown in this wpa or in wpa_4. The values in this column should be `all`, `white`, `non_white`, `black`, `hispanic`, `asian`. The `perc_locals` column should contain the percentage of officers that live in the town where they work, corresponding to their ethnic group. Rearrange based on the `ethnic_group` and inspect it by printing the first 10 lines.
+
+2. Make a boxplot, with `ethnic_group` on the x-axis and `perc_locals` on the y-axis. `ethnic_group` should be ordered from the lowest `perc_locals` to the highest. Put appropriate labels.
+
+**Task B**
+
+Inspect the `unisex_names` dataset. Here is the article attached to it: https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/.
+
+1. Create a new dataset, called `unisex_names_new`, made of the following columns: `name`, `total`, `gap`, `gender`, `share`. The `gender` column should only contain the values "male" and "female". The `share` column should contain the percentages. 
+
+2. Multiply the `share` column by 100. Re-arrange so that the first rows contain the names with the highest `total`. Print the first 10 rows of the newly created dataset. Create now a new dataset, called `unisex_names_common`, with the names in `unisex_names_new` that have a total higher than 50000.
+
+2. Using `unisex_names_common`, make a barplot that has `share` on the y-axis, `name` on the x-axis, and with each bar split vertically by color based on the `gender`.
+
+**Task C**
+
+Inspect the `tv_states` dataset. Here is the article attached to it: https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/.
+
+1. Create a new dataset, with a different name, that is the long version of `tv_states`. You should decide how to call the new columns, as well as which columns should be used for the transformation.
+
+2. With the newly created dataset, make a plot of your choosing to illustrate the information contained in this dataset. As an inspiration, you can have a look at what plot was done in the article above.
+
+## Task A
+
+```{r}
+library(tidyverse)
+library(fivethirtyeight)
+
+police_locals_new = police_locals %>%
+    pivot_longer(cols = all:asian,
+                 names_to = "ethnic_group",
+                 values_to = "perc_locals",
+                 names_repair = "minimal") %>%
+    arrange(ethnic_group)
+
+dim(police_locals)
+dim(police_locals_new)
+head(police_locals_new, 30)
+```
+
+```{r}
+ggplot(data = police_locals_new, mapping = aes(x = reorder(ethnic_group, perc_locals), y = perc_locals)) +
+    geom_boxplot() +
+    labs(x = 'Ethnic group', y = 'Mean Percentage Locals') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+## Task B
+
+```{r}
+unisex_names_new = unisex_names %>%
+    pivot_longer(cols = male_share:female_share,
+                 names_to = "gender",
+                 values_to = "share",
+                 names_repair = "minimal") %>%
+    separate(col = gender,
+             into = c('gender', 'to_delete'),
+             sep = '_',
+             remove = TRUE) %>%
+    select(-to_delete) %>%
+    mutate(share = share*100) %>%
+    arrange(desc(total))
+
+dim(unisex_names)
+dim(unisex_names_new)
+head(unisex_names_new, 10)
+```
+
+```{r}
+unisex_names_common = unisex_names_new %>%
+    filter(total > 50000)
+```
+
+```{r}
+ggplot(data = unisex_names_common, mapping = aes(x = name, y = share, fill = gender)) +
+    geom_col() +
+    labs(x = 'Name', y = 'Share', fill='Gender') + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+## Task C
+
+```{r}
+tv_states_new = pivot_longer(tv_states,
+                             cols = florida:puerto_rico,
+                             names_to = 'state',
+                             values_to = 'share_of_sentences')
+
+dim(tv_states)
+dim(tv_states_new)
+head(tv_states_new, 10)
+```
+
+```{r}
+ggplot(data = tv_states_new, mapping = aes(x = date, y= share_of_sentences, fill = state)) + 
+    geom_col() +
+    labs(x = 'Date', fill = 'State', y= 'Share of sentences')
+```
+
+```{r}
+ggplot(tv_states_new, aes(x=date, y=share_of_sentences, group=state, color=state)) +  
+    geom_line() + 
+    labs(x = 'Date', y = 'News coverage (%)', color='Area') + 
+    scale_color_manual(values=c("#54F708", "blue", "red")) + 
+    theme(axis.text.x = element_text(angle = 90, size = 6))
+```

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Solutions to WPA5</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R seminar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Syllabus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display"></span>
+     
+    WPAs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6.html">WPA 6</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2_solutions.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4_solutions.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5_solutions.html">WPA 5</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Solutions to WPA5</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#now-its-your-turn">3. Now it’s your turn</a>
+<ul>
+<li><a href="#task-a">Task A</a></li>
+<li><a href="#task-b">Task B</a></li>
+<li><a href="#task-c">Task C</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="now-its-your-turn" class="section level1">
+<h1>3. Now it’s your turn</h1>
+<p><strong>Task A</strong></p>
+<p>Inspect the <code>police_locals</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/" class="uri">https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new dataset, called <code>police_locals_new</code>, made of the following columns: <code>city</code>, <code>force_size</code>, <code>ethnic_group</code>, <code>perc_locals</code>. You should create the <code>ethnic_group</code> column using a pivot function, as shown in this wpa or in wpa_4. The values in this column should be <code>all</code>, <code>white</code>, <code>non_white</code>, <code>black</code>, <code>hispanic</code>, <code>asian</code>. The <code>perc_locals</code> column should contain the percentage of officers that live in the town where they work, corresponding to their ethnic group. Rearrange based on the <code>ethnic_group</code> and inspect it by printing the first 10 lines.</p></li>
+<li><p>Make a boxplot, with <code>ethnic_group</code> on the x-axis and <code>perc_locals</code> on the y-axis. <code>ethnic_group</code> should be ordered from the lowest <code>perc_locals</code> to the highest. Put appropriate labels.</p></li>
+</ol>
+<p><strong>Task B</strong></p>
+<p>Inspect the <code>unisex_names</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/" class="uri">https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new dataset, called <code>unisex_names_new</code>, made of the following columns: <code>name</code>, <code>total</code>, <code>gap</code>, <code>gender</code>, <code>share</code>. The <code>gender</code> column should only contain the values “male” and “female”. The <code>share</code> column should contain the percentages.</p></li>
+<li><p>Multiply the <code>share</code> column by 100. Re-arrange so that the first rows contain the names with the highest <code>total</code>. Print the first 10 rows of the newly created dataset. Create now a new dataset, called <code>unisex_names_common</code>, with the names in <code>unisex_names_new</code> that have a total higher than 50000.</p></li>
+<li><p>Using <code>unisex_names_common</code>, make a barplot that has <code>share</code> on the y-axis, <code>name</code> on the x-axis, and with each bar split vertically by color based on the <code>gender</code>.</p></li>
+</ol>
+<p><strong>Task C</strong></p>
+<p>Inspect the <code>tv_states</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/" class="uri">https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new dataset, with a different name, that is the long version of <code>tv_states</code>. You should decide how to call the new columns, as well as which columns should be used for the transformation.</p></li>
+<li><p>With the newly created dataset, make a plot of your choosing to illustrate the information contained in this dataset. As an inspiration, you can have a look at what plot was done in the article above.</p></li>
+</ol>
+<div id="task-a" class="section level2">
+<h2>Task A</h2>
+<pre class="r"><code>library(tidyverse)
+library(fivethirtyeight)
+
+police_locals_new = police_locals %&gt;%
+    pivot_longer(cols = all:asian,
+                 names_to = &quot;ethnic_group&quot;,
+                 values_to = &quot;perc_locals&quot;,
+                 names_repair = &quot;minimal&quot;) %&gt;%
+    arrange(ethnic_group)
+
+dim(police_locals)</code></pre>
+<pre><code>## [1] 75  8</code></pre>
+<pre class="r"><code>dim(police_locals_new)</code></pre>
+<pre><code>## [1] 450   4</code></pre>
+<pre class="r"><code>head(police_locals_new, 30)</code></pre>
+<pre><code>## # A tibble: 30 x 4
+##    city         force_size ethnic_group perc_locals
+##    &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+##  1 New York          32300 all                0.618
+##  2 Chicago           12120 all                0.875
+##  3 Los Angeles       10100 all                0.228
+##  4 Washington         9340 all                0.116
+##  5 Houston            7700 all                0.292
+##  6 Philadelphia       6045 all                0.835
+##  7 Phoenix            4475 all                0.312
+##  8 San Diego          4460 all                0.362
+##  9 Dallas             3605 all                0.191
+## 10 Detroit            3265 all                0.371
+## # … with 20 more rows</code></pre>
+<pre class="r"><code>ggplot(data = police_locals_new, mapping = aes(x = reorder(ethnic_group, perc_locals), y = perc_locals)) +
+    geom_boxplot() +
+    labs(x = &#39;Ethnic group&#39;, y = &#39;Mean Percentage Locals&#39;) + 
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<pre><code>## Warning: Removed 111 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="wpa5_solutions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="task-b" class="section level2">
+<h2>Task B</h2>
+<pre class="r"><code>unisex_names_new = unisex_names %&gt;%
+    pivot_longer(cols = male_share:female_share,
+                 names_to = &quot;gender&quot;,
+                 values_to = &quot;share&quot;,
+                 names_repair = &quot;minimal&quot;) %&gt;%
+    separate(col = gender,
+             into = c(&#39;gender&#39;, &#39;to_delete&#39;),
+             sep = &#39;_&#39;,
+             remove = TRUE) %&gt;%
+    select(-to_delete) %&gt;%
+    mutate(share = share*100) %&gt;%
+    arrange(desc(total))
+
+dim(unisex_names)</code></pre>
+<pre><code>## [1] 919   5</code></pre>
+<pre class="r"><code>dim(unisex_names_new)</code></pre>
+<pre><code>## [1] 1838    5</code></pre>
+<pre class="r"><code>head(unisex_names_new, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 5
+##    name     total    gap gender share
+##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+##  1 Casey  176544. 0.169  male    58.4
+##  2 Casey  176544. 0.169  female  41.6
+##  3 Riley  154861. 0.0153 male    50.8
+##  4 Riley  154861. 0.0153 female  49.2
+##  5 Jessie 136382. 0.0443 male    47.8
+##  6 Jessie 136382. 0.0443 female  52.2
+##  7 Jackie 132929. 0.158  male    42.1
+##  8 Jackie 132929. 0.158  female  57.9
+##  9 Avery  121797. 0.330  male    33.5
+## 10 Avery  121797. 0.330  female  66.5</code></pre>
+<pre class="r"><code>unisex_names_common = unisex_names_new %&gt;%
+    filter(total &gt; 50000)</code></pre>
+<pre class="r"><code>ggplot(data = unisex_names_common, mapping = aes(x = name, y = share, fill = gender)) +
+    geom_col() +
+    labs(x = &#39;Name&#39;, y = &#39;Share&#39;, fill=&#39;Gender&#39;) + 
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="wpa5_solutions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="task-c" class="section level2">
+<h2>Task C</h2>
+<pre class="r"><code>tv_states_new = pivot_longer(tv_states,
+                             cols = florida:puerto_rico,
+                             names_to = &#39;state&#39;,
+                             values_to = &#39;share_of_sentences&#39;)
+
+dim(tv_states)</code></pre>
+<pre><code>## [1] 52  4</code></pre>
+<pre class="r"><code>dim(tv_states_new)</code></pre>
+<pre><code>## [1] 156   3</code></pre>
+<pre class="r"><code>head(tv_states_new, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    date       state       share_of_sentences
+##    &lt;date&gt;     &lt;chr&gt;                    &lt;dbl&gt;
+##  1 2017-08-20 florida                 0.0923
+##  2 2017-08-20 texas                   0.0286
+##  3 2017-08-20 puerto_rico             0     
+##  4 2017-08-21 florida                 0.0441
+##  5 2017-08-21 texas                   0.0904
+##  6 2017-08-21 puerto_rico             0.0099
+##  7 2017-08-22 florida                 0.0359
+##  8 2017-08-22 texas                   0.0334
+##  9 2017-08-22 puerto_rico             0     
+## 10 2017-08-23 florida                 0.0431</code></pre>
+<pre class="r"><code>ggplot(data = tv_states_new, mapping = aes(x = date, y= share_of_sentences, fill = state)) + 
+    geom_col() +
+    labs(x = &#39;Date&#39;, fill = &#39;State&#39;, y= &#39;Share of sentences&#39;)</code></pre>
+<p><img src="wpa5_solutions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(tv_states_new, aes(x=date, y=share_of_sentences, group=state, color=state)) +  
+    geom_line() + 
+    labs(x = &#39;Date&#39;, y = &#39;News coverage (%)&#39;, color=&#39;Area&#39;) + 
+    scale_color_manual(values=c(&quot;#54F708&quot;, &quot;blue&quot;, &quot;red&quot;)) + 
+    theme(axis.text.x = element_text(angle = 90, size = 6))</code></pre>
+<p><img src="wpa5_solutions_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
