@@ -273,6 +273,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa6.html">WPA 6</a>
     </li>
+    <li>
+      <a href="wpa7.html">WPA 7</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -298,6 +301,9 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="wpa5_solutions.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6_solutions.html">WPA 6</a>
     </li>
   </ul>
 </li>
@@ -352,12 +358,9 @@ $(document).ready(function () {
 <div id="task-a" class="section level2">
 <h2>Task A</h2>
 <pre class="r"><code>library(tidyverse)
-library(fivethirtyeight)</code></pre>
-<pre><code>## Some larger datasets need to be installed separately, like senators and house_district_forecast. To install
-## these, we recommend you install the fivethirtyeightdata package by running:
-## install.packages(&#39;fivethirtyeightdata&#39;, repos = &#39;https://fivethirtyeightdata.github.io/drat/&#39;, type =
-## &#39;source&#39;)</code></pre>
-<pre class="r"><code>police_locals_new = police_locals %&gt;%
+library(fivethirtyeight)
+
+police_locals_new = police_locals %&gt;%
     pivot_longer(cols = all:asian,
                  names_to = &quot;ethnic_group&quot;,
                  values_to = &quot;perc_locals&quot;)

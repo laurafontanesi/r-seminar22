@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Writing Functions and Loops</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R seminar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Syllabus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display"></span>
+     
+    WPAs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6.html">WPA 6</a>
+    </li>
+    <li>
+      <a href="wpa7.html">WPA 7</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2_solutions.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4_solutions.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5_solutions.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6_solutions.html">WPA 6</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Writing Functions and Loops</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#creating-r-functions">1. Creating R Functions</a>
+<ul>
+<li><a href="#conditional-satements">2. Conditional satements</a></li>
+<li><a href="#loops">3. Loops</a></li>
+<li><a href="#now-its-your-turn">4. Now it’s your turn</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Open RStudio.</p>
+<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_7_LastFirst.R</code> (where Last and First is your last and first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<pre><code># Assignment: WPA 7
+# Name: Laura Fontanesi
+# Date: 26 April 2022</code></pre>
+<div id="creating-r-functions" class="section level1">
+<h1>1. Creating R Functions</h1>
+<p>R scripts are a way to organize and save data, complicated expressions, or sequences of operations for re-use.</p>
+<p>Whenever we re-use a code snippet, instead of copy-pasting and thus increasing the chances of typos and other mistakes, we should rather think about how to generalize our code, so that it can be re-used later in the script or other scripts on slightly different data.</p>
+<p>Functions are perfect for this purpose. We already used many functions, that other people have defined for us and saved in packages that we could load in R.</p>
+<p>Now we see how to create our own functions: # The basic structure of a function NAME = function(ARGUMENTS) {</p>
+<p>ACTIONS</p>
+<p>return(OUTPUT) # optional.. you can also just create a function that prints something, without returning anything</p>
+<p>}</p>
+<pre class="r"><code>percentage = function(x, total) {
+    ratio = x/total
+    perc = ratio*100
+    
+    return(perc)
+}</code></pre>
+<pre class="r"><code>percentage(5, 20)</code></pre>
+<p>25</p>
+<pre class="r"><code>a = percentage(45, 80)
+
+a</code></pre>
+<p>56.25</p>
+<pre class="r"><code>a + percentage(35, 80)</code></pre>
+<p>100</p>
+<pre class="r"><code>print_percentage = function(x, total) {
+    ratio = x/total
+    perc = ratio*100
+    
+    print(paste(perc, &#39;%&#39;))
+}</code></pre>
+<pre class="r"><code>print_percentage(6, 20)</code></pre>
+<pre><code>[1] &quot;30 %&quot;</code></pre>
+<pre class="r"><code>a = print_percentage(45, 80)
+
+a</code></pre>
+<pre><code>[1] &quot;56.25 %&quot;</code></pre>
+<p>‘56.25 %’</p>
+<pre class="r"><code>print_percentage_decimals = function(x, total, n_decimals) {
+    ratio = x/total
+    perc = ratio*100
+    
+    rounded_perc = round(perc, n_decimals)
+    
+    print(paste(rounded_perc, &#39;%&#39;))
+}</code></pre>
+<pre class="r"><code>print_percentage_decimals(45, 80, 1)
+print_percentage_decimals(45, 80, 0)
+print_percentage_decimals(79, 81, 4)</code></pre>
+<pre><code>[1] &quot;56.2 %&quot;
+[1] &quot;56 %&quot;
+[1] &quot;97.5309 %&quot;</code></pre>
+<pre class="r"><code>print_percentage_decimals = function(x, total, n_decimals=3) { # define a default argument
+    ratio = x/total
+    perc = ratio*100
+    
+    rounded_perc = round(perc, n_decimals)
+    
+    print(paste(rounded_perc, &#39;%&#39;))
+}</code></pre>
+<pre class="r"><code>print_percentage_decimals(79, 81)</code></pre>
+<pre><code>[1] &quot;97.531 %&quot;</code></pre>
+<pre class="r"><code>print_percentage_decimals(79, 81, 1)</code></pre>
+<pre><code>[1] &quot;97.5 %&quot;</code></pre>
+<div id="conditional-satements" class="section level2">
+<h2>2. Conditional satements</h2>
+<p>Conditional statements can help us improve our functions, so that different operations can be done depending on the input to the function. if (statement_is_true) { do_this } else { do_this_instead }</p>
+<pre class="r"><code>x = 2
+
+if (x &gt; 0) {
+    print(&quot;x is positive&quot;)
+} else {
+    print(&quot;x is not positive&quot;)
+}</code></pre>
+<pre><code>[1] &quot;x is positive&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart = function(x, total, n_decimals=0) { # define a default argument
+    if (x &lt;= total &amp; x &gt;=0 &amp; total &gt; 0) {
+        ratio = x/total
+        perc = ratio*100
+
+        rounded_perc = round(perc, n_decimals)
+        print(paste(rounded_perc, &#39;%&#39;))
+        
+    } else {
+        print(&quot;Invalid x/total value: x should be positive and smaller than its total and total should be positive.&quot;)
+    }
+}</code></pre>
+<pre class="r"><code>print_percentage_smart(3, 40, 1)</code></pre>
+<pre><code>[1] &quot;7.5 %&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart(-3, 40, 1)</code></pre>
+<pre><code>[1] &quot;Invalid x/total value: x should be positive and smaller than its total and total should be positive.&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart(42, 40, 1)</code></pre>
+<pre><code>[1] &quot;Invalid x/total value: x should be positive and smaller than its total and total should be positive.&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart(42, 0, 1)</code></pre>
+<pre><code>[1] &quot;Invalid x/total value: x should be positive and smaller than its total and total should be positive.&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart = function(x, total, n_decimals=0) { # define a default argument
+    if (x &lt;= total &amp; x &gt;=0 &amp; total &gt; 0) {
+        ratio = x/total
+        perc = ratio*100
+
+        rounded_perc = round(perc, n_decimals)
+        print(paste(rounded_perc, &#39;%&#39;))
+        
+    } else if (x &gt; total) {
+        print(&quot;Invalid x value: x should be smaller than its total.&quot;)
+    } else if (x &lt; 0 ) {
+        print(&quot;Invalid x value: x should be positive.&quot;)
+    } else {
+        print(&quot;Invalid total value: total should be positive.&quot;)
+    }
+}</code></pre>
+<pre class="r"><code>print_percentage_smart(3, 40, 1)</code></pre>
+<pre><code>[1] &quot;7.5 %&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart(-3, 40, 1)</code></pre>
+<pre><code>[1] &quot;Invalid x value: x should be positive.&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart(42, 40, 1)</code></pre>
+<pre><code>[1] &quot;Invalid x value: x should be smaller than its total.&quot;</code></pre>
+<pre class="r"><code>print_percentage_smart(2, 0, 1)</code></pre>
+<pre><code>[1] &quot;Invalid x value: x should be smaller than its total.&quot;</code></pre>
+</div>
+<div id="loops" class="section level2">
+<h2>3. Loops</h2>
+<p>Another construct that can help you repeat the same code on different inputs is a loop. We now look at 2 types of loops: <code>for</code> and <code>while</code> loops: for (val in sequence) { calculation }</p>
+<pre class="r"><code>vector = seq(1, 10)
+second_vector = c()
+
+second_vector</code></pre>
+<pre><code>NULL</code></pre>
+<pre class="r"><code>for (x in seq(10, 30)) {
+    print(x)
+}</code></pre>
+<pre><code>[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1] 15
+[1] 16
+[1] 17
+[1] 18
+[1] 19
+[1] 20
+[1] 21
+[1] 22
+[1] 23
+[1] 24
+[1] 25
+[1] 26
+[1] 27
+[1] 28
+[1] 29
+[1] 30</code></pre>
+<pre class="r"><code>for (value in vector) {
+    second_vector = c(second_vector, value+2)
+}</code></pre>
+<pre class="r"><code>second_vector</code></pre>
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline">
+<li>
+3
+</li>
+<li>
+4
+</li>
+<li>
+5
+</li>
+<li>
+6
+</li>
+<li>
+7
+</li>
+<li>
+8
+</li>
+<li>
+9
+</li>
+<li>
+10
+</li>
+<li>
+11
+</li>
+<li>
+12
+</li>
+</ol>
+<p>while (test_expression) { statement }</p>
+<pre class="r"><code>count = 1
+third_vector = c()
+
+while (count &lt;= 12) {
+    
+    third_vector = c(third_vector, count**2)
+    count = count + 1
+}</code></pre>
+<pre class="r"><code>third_vector</code></pre>
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline">
+<li>
+1
+</li>
+<li>
+4
+</li>
+<li>
+9
+</li>
+<li>
+16
+</li>
+<li>
+25
+</li>
+<li>
+36
+</li>
+<li>
+49
+</li>
+<li>
+64
+</li>
+<li>
+81
+</li>
+<li>
+100
+</li>
+<li>
+121
+</li>
+<li>
+144
+</li>
+</ol>
+<pre class="r"><code>student_data = data.frame(student=seq(1, 40),
+                          total_points=round(runif(n=40, min=0, max=18), 1))
+head(student_data)</code></pre>
+<table class="dataframe">
+<caption>
+A data.frame: 6 × 2
+</caption>
+<thead>
+<tr>
+<th>
+</th>
+<th scope="col">
+student
+</th>
+<th scope="col">
+total_points
+</th>
+</tr>
+<tr>
+<th>
+</th>
+<th scope="col">
+&lt;int&gt;
+</th>
+<th scope="col">
+&lt;dbl&gt;
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">
+1
+</th>
+<td>
+1
+</td>
+<td>
+4.4
+</td>
+</tr>
+<tr>
+<th scope="row">
+2
+</th>
+<td>
+2
+</td>
+<td>
+15.0
+</td>
+</tr>
+<tr>
+<th scope="row">
+3
+</th>
+<td>
+3
+</td>
+<td>
+8.8
+</td>
+</tr>
+<tr>
+<th scope="row">
+4
+</th>
+<td>
+4
+</td>
+<td>
+6.1
+</td>
+</tr>
+<tr>
+<th scope="row">
+5
+</th>
+<td>
+5
+</td>
+<td>
+11.6
+</td>
+</tr>
+<tr>
+<th scope="row">
+6
+</th>
+<td>
+6
+</td>
+<td>
+12.0
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>subset_students = c(5, 16, 3, 9, 37, 30, 25, 28)</code></pre>
+<pre class="r"><code>for (student in subset_students) {
+    print(student)
+}</code></pre>
+<pre><code>[1] 5
+[1] 16
+[1] 3
+[1] 9
+[1] 37
+[1] 30
+[1] 25
+[1] 28</code></pre>
+<pre class="r"><code>for (student in subset_students) {
+    print(paste(&quot;Student&quot;, student))
+}</code></pre>
+<pre><code>[1] &quot;Student 5&quot;
+[1] &quot;Student 16&quot;
+[1] &quot;Student 3&quot;
+[1] &quot;Student 9&quot;
+[1] &quot;Student 37&quot;
+[1] &quot;Student 30&quot;
+[1] &quot;Student 25&quot;
+[1] &quot;Student 28&quot;</code></pre>
+<pre class="r"><code>for (i in subset_students) {
+    
+    points_student = student_data[student_data$student == i, &quot;total_points&quot;]
+    grade = percentage(points_student, 18)
+    rounded_grade = round(grade)
+    
+    print(paste(&quot;Student:&quot;, i, &quot;-&quot;, &quot;Grade:&quot;, rounded_grade, &#39;%&#39;))
+}</code></pre>
+<pre><code>[1] &quot;Student: 5 - Grade: 4 %&quot;
+[1] &quot;Student: 16 - Grade: 65 %&quot;
+[1] &quot;Student: 3 - Grade: 16 %&quot;
+[1] &quot;Student: 9 - Grade: 24 %&quot;
+[1] &quot;Student: 37 - Grade: 61 %&quot;
+[1] &quot;Student: 30 - Grade: 87 %&quot;
+[1] &quot;Student: 25 - Grade: 53 %&quot;
+[1] &quot;Student: 28 - Grade: 17 %&quot;</code></pre>
+<pre class="r"><code>something = 3
+
+sequence = seq(3, 13)
+
+for (x in sequence) {
+    print(x + something)
+}</code></pre>
+<pre><code>[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1] 15
+[1] 16</code></pre>
+<pre class="r"><code>x = 4
+while(x &lt; 10) {
+    print(x)
+    x = x + 1
+}</code></pre>
+<pre><code>[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9</code></pre>
+<p>The equivalent way to write this loop with a <code>while</code> loop instead:</p>
+<pre class="r"><code>subset_students</code></pre>
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline">
+<li>
+5
+</li>
+<li>
+16
+</li>
+<li>
+3
+</li>
+<li>
+9
+</li>
+<li>
+37
+</li>
+<li>
+30
+</li>
+<li>
+25
+</li>
+<li>
+28
+</li>
+</ol>
+<pre class="r"><code>n_subset = length(subset_students)
+n = 1
+
+while (n &lt;= n_subset) {
+    student = subset_students[n]
+    
+    points_student = student_data[student_data$student == student, &quot;total_points&quot;]
+    grade = percentage(points_student, 18)
+    rounded_grade = round(grade)
+    
+    print(paste(&quot;Student:&quot;, student, &quot;-&quot;, &quot;Grade:&quot;, rounded_grade, &#39;%&#39;))
+    
+    n = n + 1 # crucial!
+}</code></pre>
+<pre><code>[1] &quot;Student: 5 - Grade: 64 %&quot;
+[1] &quot;Student: 16 - Grade: 54 %&quot;
+[1] &quot;Student: 3 - Grade: 49 %&quot;
+[1] &quot;Student: 9 - Grade: 71 %&quot;
+[1] &quot;Student: 37 - Grade: 12 %&quot;
+[1] &quot;Student: 30 - Grade: 80 %&quot;
+[1] &quot;Student: 25 - Grade: 33 %&quot;
+[1] &quot;Student: 28 - Grade: 88 %&quot;</code></pre>
+</div>
+<div id="now-its-your-turn" class="section level2">
+<h2>4. Now it’s your turn</h2>
+<p>In this WPA, you will analyze data from another fake study. In this fake study the researchers were interested in whether playing video games had cognitive benefits compared to other leisure activities. In the study, 90 University students were asked to do one of 3 leisure activities for 1 hour a day for the next month. 30 participants were asked to play visio games, 30 to read and 30 to juggle. At the end of the month each participant did 3 cognitive tests, a problem solving test (<strong>logic</strong>) and a reflex/response test (<strong>reflex</strong>) and a written comprehension test (<strong>comprehension</strong>).</p>
+<div id="datafile-description" class="section level4">
+<h4>Datafile description</h4>
+<p>The data file has 90 rows and 7 columns. Here are the columns</p>
+<ul>
+<li><p><code>id</code>: The participant ID</p></li>
+<li><p><code>age</code>: The age of the participant</p></li>
+<li><p><code>gender</code>: The gender of the particiant</p></li>
+<li><p><code>activity</code>: Which leisure activity the participant was assigned for the last month (“reading”, “juggling”, “gaming”)</p></li>
+<li><p><code>logic</code>: Score out of 120 on a problem solving task. Higher is better.</p></li>
+<li><p><code>reflex</code>: Score out of 25 on a reflex test. Higher indicates faster reflexes.</p></li>
+<li><p><code>comprehension</code>: Score out of 100 on a reading comprehension test. Higher is better.</p></li>
+</ul>
+<p><strong>Task A</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Load the <code>data_wpa7.txt</code> dataset in R (find it on Github) and save it as a new object called <code>leisure</code>. Inspect the dataset first.</p></li>
+<li><p>Write a function called <code>feed_me()</code> that takes a string <code>food</code> as an argument, and returns (in case <code>food = 'pizza'</code>) the sentence “I love to eat pizza”. Try your function by running <code>feed_me("apples")</code> (it should then return “I love to eat apples”).</p></li>
+<li><p>Without using the <code>mean()</code> function, calculate the mean of the vector <code>vec_1 = seq(1, 100, 5)</code>.</p></li>
+<li><p>Write a function called <code>my_mean()</code> that takes a vector <code>x</code> as an argument, and returns the mean of the vector <code>x</code>. Use your code for task A3 as your starting point. Test it on the vector from task A3.</p></li>
+<li><p>Try your <code>my_mean()</code> function to calculate the mean ‘logic’ rating of participants in the <code>leisure</code> dataset and compare the result to the built-in <code>mean()</code> function (using <code>==</code>) to make sure you get the same result.</p></li>
+<li><p>Create a loop that prints the squares of integers from 1 to 10.</p></li>
+<li><p>Modify the previous code so that it saves the squared integers as a vector called <code>squares</code>. You’ll need to pre-create a vector, and use indexing to update it.</p></li>
+</ol>
+<p><strong>Task B</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Create a function called <code>standardize</code>, that, given an input vector, returns its standardized version. Remember that to normalize a score, also called z-transforming it, you first subtract the mean score from the individual scores and then divide by the standard deviation.</p></li>
+<li><p>Create a copy of the <code>leisure</code> dataset. Call this copy <code>z_leisure</code>. Normalise the <code>logic</code>, <code>reflex</code>, <code>age</code> and <code>comprehension</code> columns using the <code>standardize</code> function using a <code>for</code> loop. In each iteration of the loop, you should standardize one of these 4 columns. You can create a vector first, called <code>columns_to_standardize</code> where you store these columns and use them later in the loop. You should not add them as additional columns, but overwrite the original columns.</p></li>
+</ol>
+<p><strong>Task C</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Create a scatterplot of <code>age</code> and <code>reflex</code> of participants in the <code>leisure</code> datset. Cutomise it and add a regression line.</p></li>
+<li><p>Create a function called <code>my_plot()</code> that takes arguments <code>x</code> and <code>y</code> and returns a customised scatterplot with your customizations and the regression line.</p></li>
+<li><p>Now test your <code>my_plot()</code> function on the <code>age</code> and <code>reflec</code> of participants in the <code>leisure</code> dataset.</p></li>
+</ol>
+<p><strong>Task D</strong></p>
+<ol style="list-style-type: decimal">
+<li>Create a loop that returns the sum of the vector <code>1:10</code>. (i.e. Don’t use the existing <code>sum</code> function).</li>
+<li>Use this loop to create a function, called <code>my_sum</code> that returns the sum of any vector x. Test it on the <code>logic</code> ratings.</li>
+<li>Modify the function you created in task D2, to instead calculate the mean of a vector. Call this new function <code>my_mean2</code> and compare it to both the <code>my_mean</code> function you created, and the in-built <code>mean</code> function. (Bonus: Can you also think of a way to do this without using the the length function)</li>
+</ol>
+<p><strong>Task E (extra)</strong></p>
+<ol style="list-style-type: decimal">
+<li>What is the probability of getting a significant p-value if the null hypothesis is true? Test this by conducting the following simulation:</li>
+</ol>
+<ul>
+<li>Create a vector called <code>p_values</code> with 100 NA values.</li>
+<li>Draw a sample of size 10 from a normal distribution with mean = 0 and standard deviation = 1.</li>
+<li>Do a one-sample t-test testing if the mean of the distribution is different from 0. Save the p-value from this test in the 1st position of <code>p_values</code>.</li>
+<li>Repeat these steps with a loop to fill <code>p_values</code> with 100 p-values.</li>
+<li>Create a histogram of <code>p_values</code> and calculate the proportion of p-values that are significant at the .05 level.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Create a function called <code>p_simulation</code> with 4 arguments: <code>sim</code>: the number of simulations, <code>samplesize</code>: the sample size, <code>mu_true</code>: the true mean, and <code>sd_true</code>: the true standard deviation. Your function should repeat the simulation from the previous question with the given arguments. That is, it should calculate <code>sim</code> p-values testing whether <code>samplesize</code> samples from a normal distribution with mean = <code>mu_true</code> and standard deviation = <code>sd_true</code> is significantly different from 0. The function should return a vector of p-values.</li>
+</ol>
+<p><em>Note</em>: to get the p-value of a t-test: p_value = t.test(x)$p.value # Calculate the p.vale for the sample x ## Submit your assignment</p>
+<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of <strong>Friday</strong>.</p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
