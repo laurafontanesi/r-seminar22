@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Solutions to WPA6</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R seminar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Syllabus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display"></span>
+     
+    WPAs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6.html">WPA 6</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2_solutions.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4_solutions.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5_solutions.html">WPA 5</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Solutions to WPA6</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#now-its-your-turn">5. Now it’s your turn</a></li>
+</ul>
+</div>
+
+<div id="now-its-your-turn" class="section level1">
+<h1>5. Now it’s your turn</h1>
+<p>First, download the <code>tdcs.csv</code> datasets from the <a href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data folder on Github</a> and load them in R.</p>
+<pre class="r"><code>library(tidyverse)
+
+tdcs_data = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv&#39;)</code></pre>
+<pre><code>## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   RT = col_double(),
+##   acc_spd = col_character(),
+##   accuracy = col_double(),
+##   angle = col_double(),
+##   block = col_double(),
+##   coherence = col_double(),
+##   dataset = col_character(),
+##   id = col_character(),
+##   left_right = col_double(),
+##   subj_idx = col_double(),
+##   tdcs = col_character(),
+##   trial_NR = col_double()
+## )</code></pre>
+<pre class="r"><code>glimpse(tdcs_data)</code></pre>
+<pre><code>## Rows: 52,800
+## Columns: 12
+## $ RT         &lt;dbl&gt; 799, 613, 627, 1280, 800, 760, 719, 799, 520, 1066, 480, 627, 467, 560, 867, 733, 759, 600, 706, 653…
+## $ acc_spd    &lt;chr&gt; &quot;spd&quot;, &quot;spd&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;spd&quot;, &quot;spd&quot;, &quot;spd&quot;, &quot;a…
+## $ accuracy   &lt;dbl&gt; 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1…
+## $ angle      &lt;dbl&gt; 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, …
+## $ block      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ coherence  &lt;dbl&gt; 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.41…
+## $ dataset    &lt;chr&gt; &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;berkeley&quot;, &quot;ber…
+## $ id         &lt;chr&gt; &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.1&quot;, &quot;S1.…
+## $ left_right &lt;dbl&gt; 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2…
+## $ subj_idx   &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ tdcs       &lt;chr&gt; &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sham&quot;, &quot;sha…
+## $ trial_NR   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 2…</code></pre>
+<p><strong>Task A</strong></p>
+<ol style="list-style-type: decimal">
+<li>Show the distribution of response times (<code>RT</code>) with a <strong>density plot</strong>, separately by the accuracy vs. speed conditions (<code>acc_spd</code>) using different colors of the density plots per condition. Be sure to adjust the transparency so that they are both clearly visible and put appropriate axes labels and legend title.</li>
+</ol>
+<pre class="r"><code>ggplot(data = tdcs_data, mapping = aes(x = RT, fill = acc_spd)) + 
+    geom_density(alpha = .3) +
+    labs(x = &#39;Response times&#39;, fill = &#39;Condition&#39;) +
+    scale_fill_discrete(labels = c(&quot;accuracy&quot;, &quot;speed&quot;))</code></pre>
+<p><img src="wpa6_solutions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Show the distribution of response times (<code>RT</code>) with a <strong>histogram</strong>, separately by the accuracy vs. speed conditions (<code>acc_spd</code>) using different colors of the density plots per condition. Be sure to adjust the transparency and binwidth, so that they are clearly visible and put appropriate axes labels and legend title. This time, split it furtherly by TDCS manipulation (<code>tdcs</code>) using <code>facet_grid()</code>.</li>
+</ol>
+<pre class="r"><code>ggplot(data = tdcs_data, mapping = aes(x = RT, fill = acc_spd)) + 
+    geom_histogram(binwidth=50, alpha = .3, position=&quot;identity&quot;) + 
+    labs(x = &#39;Response times&#39;, fill = &#39;Condition&#39;) +
+    facet_grid( ~ tdcs) +
+    scale_fill_discrete(labels = c(&quot;accuracy&quot;, &quot;speed&quot;))</code></pre>
+<p><img src="wpa6_solutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Show the response times (<code>RT</code>) with a <strong>violinplot</strong>, separately by the place the data were collected (<code>dataset</code>). Split further by accuracy vs. speed conditions using colors. Add the 10%, 30%, 50%, 70%, and 90% quantiles, that are the most common in response times data analyses. Change labels appropriately.</li>
+</ol>
+<pre class="r"><code>ggplot(data = tdcs_data, mapping = aes(x = dataset, y = RT, fill = acc_spd)) + 
+    geom_violin(draw_quantiles = c(0.1, 0.3, 0.5, 0.7, 0.9)) +
+    labs(x = &quot;Place collected&quot;, y=&#39;RTs&#39;)  +
+    scale_fill_discrete(name=&quot;Condition&quot;, labels = c(&quot;accuracy&quot;, &quot;speed&quot;))</code></pre>
+<p><img src="wpa6_solutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>Task B</strong></p>
+<p>Now, I am creating a summary of the data, where we look at mean response times and accuracy per subject, separately by coherence (how difficult the task was) and the speed vs. accuracy manipulation:</p>
+<pre class="r"><code>summary_tdcs_data = summarise(group_by(tdcs_data, id, coherence, acc_spd),
+                              mean_RT=mean(RT), 
+                              mean_accuracy=mean(accuracy))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;id&#39;, &#39;coherence&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>glimpse(summary_tdcs_data)</code></pre>
+<pre><code>## Rows: 176
+## Columns: 5
+## Groups: id, coherence [88]
+## $ id            &lt;chr&gt; &quot;A10.1&quot;, &quot;A10.1&quot;, &quot;A10.2&quot;, &quot;A10.2&quot;, &quot;A11.1&quot;, &quot;A11.1&quot;, &quot;A11.2&quot;, &quot;A11.2&quot;, &quot;A12.1&quot;, &quot;A12.1&quot;, &quot;A12.2&quot;…
+## $ coherence     &lt;dbl&gt; 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.4171, 0.1658, 0.1658, 0.1658, 0.1658, 0…
+## $ acc_spd       &lt;chr&gt; &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;, &quot;acc&quot;, &quot;spd&quot;,…
+## $ mean_RT       &lt;dbl&gt; 566.1254, 555.3443, 499.8281, 492.7937, 603.8807, 490.6762, 499.9799, 451.5980, 748.8424, 645.387…
+## $ mean_accuracy &lt;dbl&gt; 0.6237288, 0.6327869, 0.6561404, 0.6571429, 0.8771930, 0.8380952, 0.8829431, 0.8239203, 0.5176849…</code></pre>
+<p>Using the summarized data:</p>
+<ol style="list-style-type: decimal">
+<li><p>Plot the relationship between mean response times (<code>mean_RT</code>) and mean accuracy (<code>mean_accuracy</code>) using a <strong>scatterplot</strong>.</p></li>
+<li><p>Use <code>facet_grid</code> to split the plot based on the speed vs. accuracy manipulation (<code>acc_spd</code>).</p></li>
+<li><p>Add the regression lines.</p></li>
+<li><p>Change with appropriate plot titles and x- and y-axes labels.</p></li>
+<li><p>Add the coherence levels as color of the dots. Because coherence is a continuous variable and not categorical, you can use <code>scale_colour_gradient</code> to adjust the gradient.</p></li>
+<li><p>Change the color of the regression lines to grey.</p></li>
+</ol>
+<pre class="r"><code>ggplot(data = summary_tdcs_data, mapping = aes(x = mean_RT, y = mean_accuracy, color = coherence)) + 
+    geom_point(alpha = 0.6, size= 2) +
+    geom_smooth(method = lm, color=&#39;grey&#39;) +
+    labs(x=&#39;Mean RTs&#39;, y=&#39;Mean accuracy&#39;) +
+    ggtitle(&quot;Relationship between mean RTs and accuracy&quot;) + 
+    scale_colour_gradient(low = &quot;blue&quot;, high = &quot;gold&quot;, limits=range(summary_tdcs_data[,&#39;coherence&#39;])) +
+    facet_grid( ~ acc_spd)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="wpa6_solutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><strong>Task C</strong></p>
+<p>Using the summarized data:</p>
+<ol style="list-style-type: decimal">
+<li><p>Plot the mean <code>mean_accuracy</code>, separately by <code>factor(coherence)</code> using <code>stat_summary</code> with arguments <code>geom="bar"</code> and <code>position = 'dodge'</code>. Split further based on the accuracy vs. speed manipulation (<code>acc_spd</code>) with different colors.</p></li>
+<li><p>Now add error bars representing confidence intervals and using <code>stat_summary</code> again with arguments <code>width=.9</code>, <code>position = 'dodge'</code>. Adjust the <code>width</code> argument if the error bars are not centered in each of the bars.</p></li>
+</ol>
+<pre class="r"><code>ggplot(data = summary_tdcs_data, mapping = aes(x = factor(coherence), y = mean_accuracy, fill=acc_spd)) +
+    # stat_summary with arg &quot;fun&quot;:
+    
+    # A function that returns a single number, in this case the mean worry_cont for each level of cause_recoded:
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;bar&quot;, position = &#39;dodge&#39;) +
+
+    # mean_cl_normal( ) is intended for use with stat_summary. It calculates
+    # sample mean and lower and upper Gaussian confidence limits based on the 
+    # t-distribution
+    
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;,  size=.2, width=.9, position = &#39;dodge&#39;) +
+    labs(x = &#39;Coherence level&#39;, y = &#39;Mean accuracy&#39;, fill=&#39;Condition&#39;) + 
+    
+    # to change the orientation of the x-ticks labels:
+    theme(axis.text.x = element_text(angle = 90)) +
+  
+    # fix labels in legend
+    scale_fill_discrete(labels = c(&quot;accuracy&quot;, &quot;speed&quot;))</code></pre>
+<p><img src="wpa6_solutions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Do the same again, but:
+<ul>
+<li>using points instead of bars</li>
+<li>standard errors instead of confidence intervals</li>
+<li>mean RTs instead of accuracy</li>
+</ul></li>
+</ol>
+<pre class="r"><code>ggplot(data = summary_tdcs_data, mapping = aes(x = factor(coherence), y = mean_RT, color=acc_spd)) +
+    # stat_summary with arg &quot;fun&quot;:
+    # A function that returns a single number, in this case the mean worry_cont for each level of cause_recoded:
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;point&quot;) +
+
+    stat_summary(fun.data = mean_se, geom = &quot;errorbar&quot;, size=.8, width=.4) +
+
+    labs(x = &#39;Coherence level&#39;, y = &#39;Mean RTs&#39;, color=&#39;Condition&#39;) +
+
+    # to change the orientation of the x-ticks labels:
+    theme(axis.text.x = element_text(angle = 90))  +
+  
+    # fix labels in legend
+    scale_color_discrete(labels = c(&quot;accuracy&quot;, &quot;speed&quot;))</code></pre>
+<p><img src="wpa6_solutions_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><em>Note</em> that you do not need the <code>position = 'dodge'</code> here anymore, and that you might have to adjust <code>size</code> and <code>width</code> of the error bars.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

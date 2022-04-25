@@ -1,0 +1,134 @@
+---
+title: "Solutions to WPA6"
+---
+
+# 5. Now it's your turn
+
+First, download the `tdcs.csv` datasets from the [data folder on Github](https://github.com/laurafontanesi/r-seminar22/tree/main/data) and load them in R.
+
+```{r}
+library(tidyverse)
+
+tdcs_data = read_csv('https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv')
+
+glimpse(tdcs_data)
+```
+
+**Task A** 
+
+1. Show the distribution of response times (`RT`) with a **density plot**, separately by the accuracy vs. speed conditions (`acc_spd`) using different colors of the density plots per condition. Be sure to adjust the transparency so that they are both clearly visible and put appropriate axes labels and legend title.
+
+```{r}
+ggplot(data = tdcs_data, mapping = aes(x = RT, fill = acc_spd)) + 
+    geom_density(alpha = .3) +
+    labs(x = 'Response times', fill = 'Condition') +
+    scale_fill_discrete(labels = c("accuracy", "speed"))
+```
+
+2. Show the distribution of response times (`RT`) with a **histogram**, separately by the accuracy vs. speed conditions (`acc_spd`) using different colors of the density plots per condition. Be sure to adjust the transparency and binwidth, so that they are clearly visible and put appropriate axes labels and legend title. This time, split it furtherly by TDCS manipulation (`tdcs`) using `facet_grid()`.
+
+```{r}
+ggplot(data = tdcs_data, mapping = aes(x = RT, fill = acc_spd)) + 
+    geom_histogram(binwidth=50, alpha = .3, position="identity") + 
+    labs(x = 'Response times', fill = 'Condition') +
+    facet_grid( ~ tdcs) +
+    scale_fill_discrete(labels = c("accuracy", "speed"))
+```
+
+3. Show the response times (`RT`) with a **violinplot**, separately by the place the data were collected (`dataset`). Split further by accuracy vs. speed conditions using colors. Add the 10%, 30%, 50%, 70%, and 90% quantiles, that are the most common in response times data analyses. Change labels appropriately.
+
+```{r}
+ggplot(data = tdcs_data, mapping = aes(x = dataset, y = RT, fill = acc_spd)) + 
+    geom_violin(draw_quantiles = c(0.1, 0.3, 0.5, 0.7, 0.9)) +
+    labs(x = "Place collected", y='RTs')  +
+    scale_fill_discrete(name="Condition", labels = c("accuracy", "speed"))
+```
+
+**Task B** 
+
+Now, I am creating a summary of the data, where we look at mean response times and accuracy per subject, separately by coherence (how difficult the task was) and the speed vs. accuracy manipulation:
+
+```{r}
+summary_tdcs_data = summarise(group_by(tdcs_data, id, coherence, acc_spd),
+                              mean_RT=mean(RT), 
+                              mean_accuracy=mean(accuracy))
+
+glimpse(summary_tdcs_data)
+```
+
+Using the summarized data:
+
+1. Plot the relationship between mean response times (`mean_RT`) and mean accuracy (`mean_accuracy`) using a **scatterplot**. 
+
+2. Use `facet_grid` to split the plot based on the speed vs. accuracy manipulation (`acc_spd`). 
+
+3. Add the regression lines.
+
+4. Change with appropriate plot titles and x- and y-axes labels. 
+
+5. Add the coherence levels as color of the dots. Because coherence is a continuous variable and not categorical, you can use `scale_colour_gradient` to adjust the gradient. 
+
+6. Change the color of the regression lines to grey.
+
+```{r}
+ggplot(data = summary_tdcs_data, mapping = aes(x = mean_RT, y = mean_accuracy, color = coherence)) + 
+    geom_point(alpha = 0.6, size= 2) +
+    geom_smooth(method = lm, color='grey') +
+    labs(x='Mean RTs', y='Mean accuracy') +
+    ggtitle("Relationship between mean RTs and accuracy") + 
+    scale_colour_gradient(low = "blue", high = "gold", limits=range(summary_tdcs_data[,'coherence'])) +
+    facet_grid( ~ acc_spd)
+```
+
+**Task C**
+
+Using the summarized data:
+
+1. Plot the mean `mean_accuracy`, separately by `factor(coherence)` using `stat_summary` with arguments `geom="bar"` and `position = 'dodge'`. Split further based on the accuracy vs. speed manipulation (`acc_spd`) with different colors.
+
+2. Now add error bars representing confidence intervals and using `stat_summary` again with arguments `width=.9`, `position = 'dodge'`. Adjust the `width` argument if the error bars are not centered in each of the bars.
+    
+```{r}
+ggplot(data = summary_tdcs_data, mapping = aes(x = factor(coherence), y = mean_accuracy, fill=acc_spd)) +
+    # stat_summary with arg "fun":
+    
+    # A function that returns a single number, in this case the mean worry_cont for each level of cause_recoded:
+    stat_summary(fun = "mean", geom="bar", position = 'dodge') +
+
+    # mean_cl_normal( ) is intended for use with stat_summary. It calculates
+    # sample mean and lower and upper Gaussian confidence limits based on the 
+    # t-distribution
+    
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar",  size=.2, width=.9, position = 'dodge') +
+    labs(x = 'Coherence level', y = 'Mean accuracy', fill='Condition') + 
+    
+    # to change the orientation of the x-ticks labels:
+    theme(axis.text.x = element_text(angle = 90)) +
+  
+    # fix labels in legend
+    scale_fill_discrete(labels = c("accuracy", "speed"))
+```
+
+3. Do the same again, but:
+    - using points instead of bars
+    - standard errors instead of confidence intervals
+    - mean RTs instead of accuracy
+
+```{r}
+ggplot(data = summary_tdcs_data, mapping = aes(x = factor(coherence), y = mean_RT, color=acc_spd)) +
+    # stat_summary with arg "fun":
+    # A function that returns a single number, in this case the mean worry_cont for each level of cause_recoded:
+    stat_summary(fun = "mean", geom="point") +
+
+    stat_summary(fun.data = mean_se, geom = "errorbar", size=.8, width=.4) +
+
+    labs(x = 'Coherence level', y = 'Mean RTs', color='Condition') +
+
+    # to change the orientation of the x-ticks labels:
+    theme(axis.text.x = element_text(angle = 90))  +
+  
+    # fix labels in legend
+    scale_color_discrete(labels = c("accuracy", "speed"))
+```
+
+*Note* that you do not need the `position = 'dodge'` here anymore, and that you might have to adjust `size` and `width` of the error bars.

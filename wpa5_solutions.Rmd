@@ -39,8 +39,8 @@ library(fivethirtyeight)
 police_locals_new = police_locals %>%
     pivot_longer(cols = all:asian,
                  names_to = "ethnic_group",
-                 values_to = "perc_locals",
-                 names_repair = "minimal")
+                 values_to = "perc_locals")
+                 #names_repair = "minimal")
 
 dim(police_locals)
 head(police_locals, 10)

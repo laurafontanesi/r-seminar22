@@ -634,7 +634,7 @@ survey_data = mutate_all(survey_data,
 <pre><code>## # A tibble: 1 x 11
 ##   count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happeni… mean_happening
 ##   &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;               &lt;dbl&gt;          &lt;dbl&gt;
-## 1 18514    -0.698             1.75       2.52             3.28      5.80        -0.834                1.94           2.50
+## 1 18514    -0.699             1.73       2.52             3.28      5.68        -0.713                1.95           2.51
 ## # … with 2 more variables: quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 <pre class="r"><code>summarise(survey_data,
           mean_happening = mean(happening))</code></pre>
@@ -660,15 +660,15 @@ summarise(grouped_data,
 <pre><code>## # A tibble: 9 x 12
 ##    year count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happening
 ##   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;                &lt;dbl&gt;
-## 1  2008  2130    -0.545             1.91       2.61             3.32      5.37        -0.430                 2.12
-## 2  2010  1993    -0.470             1.62       2.42             3.18      5.36        -0.834                 1.69
-## 3  2011  1946    -0.698             1.72       2.45             3.21      5.80        -0.449                 1.84
-## 4  2012  2050    -0.497             1.80       2.51             3.26      5.24        -0.441                 1.98
-## 5  2013  1858    -0.253             1.63       2.45             3.20      5.15        -0.495                 1.89
-## 6  2014  2282    -0.380             1.73       2.48             3.25      5.63        -0.425                 1.86
-## 7  2015  1263    -0.415             1.63       2.43             3.16      5.61        -0.440                 1.78
-## 8  2016  2427    -0.478             1.81       2.58             3.37      5.25        -0.421                 2.11
-## 9  2017  2565    -0.440             1.82       2.62             3.41      5.36        -0.359                 2.09
+## 1  2008  2130    -0.522             1.91       2.62             3.34      5.62        -0.713                 2.12
+## 2  2010  1993    -0.549             1.61       2.41             3.19      5.27        -0.323                 1.67
+## 3  2011  1946    -0.437             1.71       2.46             3.21      5.41        -0.568                 1.83
+## 4  2012  2050    -0.404             1.74       2.51             3.28      5.56        -0.343                 1.98
+## 5  2013  1858    -0.328             1.64       2.48             3.27      5.10        -0.259                 1.89
+## 6  2014  2282    -0.328             1.70       2.50             3.28      5.55        -0.554                 1.84
+## 7  2015  1263    -0.169             1.64       2.44             3.17      5.68        -0.538                 1.85
+## 8  2016  2427    -0.699             1.81       2.58             3.34      5.44        -0.396                 2.13
+## 9  2017  2565    -0.284             1.84       2.60             3.41      5.54        -0.625                 2.11
 ## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 <div id="split-character-columns" class="section level2">
@@ -732,8 +732,8 @@ summarise(grouped_data,
 <pre><code>## # A tibble: 2 x 12
 ##   working     count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happening
 ##   &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;                &lt;dbl&gt;
-## 1 Not working  7996    -0.698             1.71       2.50             3.27      5.80        -0.495                 1.92
-## 2 Working     10518    -0.545             1.78       2.53             3.28      5.69        -0.834                 1.95
+## 1 Not working  7996    -0.549             1.69       2.50             3.30      5.68        -0.625                 1.94
+## 2 Working     10518    -0.699             1.77       2.53             3.28      5.62        -0.713                 1.96
 ## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 <pre class="r"><code># first filter, and then get summary statistics per group
 not_working_data = filter(survey_data, working == &quot;Not working&quot;)
@@ -755,11 +755,11 @@ summarise(grouped_data,
 <pre><code>## # A tibble: 5 x 12
 ##   working_type count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happening
 ##   &lt;chr&gt;        &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;                &lt;dbl&gt;
-## 1 disabled      1259   -0.134              1.82       2.64             3.42      5.30       -0.261                  2.04
-## 2 looking       1112   -0.342              1.84       2.59             3.36      5.63       -0.0433                 2.02
-## 3 other         1370   -0.497              1.64       2.45             3.21      5.80       -0.357                  1.81
-## 4 retired       4099   -0.698              1.66       2.44             3.22      5.61       -0.495                  1.88
-## 5 temporary      156   -0.0667             1.87       2.68             3.41      4.99        0.381                  1.87
+## 1 disabled      1259    -0.341             1.84       2.63             3.40      5.56        -0.217                 2.11
+## 2 looking       1112    -0.312             1.87       2.59             3.33      5.19        -0.396                 2.05
+## 3 other         1370    -0.249             1.64       2.46             3.24      5.41        -0.211                 1.82
+## 4 retired       4099    -0.549             1.63       2.45             3.25      5.68        -0.625                 1.90
+## 5 temporary      156    -0.328             1.84       2.64             3.41      4.76        -0.140                 1.80
 ## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 <div id="merge-character-columns" class="section level2">
@@ -799,14 +799,14 @@ summarise(grouped_data,
 <pre><code>## # A tibble: 8 x 12
 ##   race_gender           count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happ…
 ##   &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 black non hisp_female   875   -0.470              1.90       2.61             3.35      5.30        0.186              2.24
-## 2 black non hisp_male     724   -0.342              1.98       2.64             3.31      5.35        0.0311             2.23
-## 3 hisp_female             875   -0.0971             2.18       2.84             3.55      5.15       -0.248              2.24
-## 4 hisp_male               919   -0.355              1.95       2.68             3.46      5.36        0.0221             2.12
-## 5 other non hisp_female   562   -0.103              2.07       2.73             3.46      5.06       -0.0185             2.08
-## 6 other non hisp_male     570    0.0469             1.84       2.61             3.35      5.08       -0.377              2.07
-## 7 white non hisp_female  7000   -0.524              1.84       2.57             3.31      5.80       -0.834              1.98
-## 8 white non hisp_male    6989   -0.698              1.53       2.35             3.13      5.63       -0.482              1.71
+## 1 black non hisp_female   875   -0.296              1.86       2.61             3.36      5.54      -0.0810              2.25
+## 2 black non hisp_male     724   -0.0159             1.90       2.61             3.31      5.16       0.00440             2.25
+## 3 hisp_female             875   -0.549              2.23       2.84             3.56      5.44      -0.211               2.24
+## 4 hisp_male               919   -0.378              1.94       2.65             3.41      4.97      -0.404               2.20
+## 5 other non hisp_female   562   -0.154              2.07       2.71             3.45      5.24      -0.254               2.16
+## 6 other non hisp_male     570   -0.0634             1.95       2.65             3.42      5.27      -0.572               2.12
+## 7 white non hisp_female  7000   -0.699              1.82       2.57             3.32      5.38      -0.438               1.99
+## 8 white non hisp_male    6989   -0.522              1.55       2.36             3.15      5.68      -0.713               1.72
 ## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 <p>Or you can just use 2 grouping variables to compute statistics:</p>
 <pre class="r"><code>grouped_data = group_by(survey_data, race, gender)
@@ -828,14 +828,14 @@ summarise(grouped_data,
 ## # Groups:   race [4]
 ##   race           gender count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happ…
 ##   &lt;chr&gt;          &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 black non hisp female   875   -0.470              1.90       2.61             3.35      5.30        0.186              2.24
-## 2 black non hisp male     724   -0.342              1.98       2.64             3.31      5.35        0.0311             2.23
-## 3 hisp           female   875   -0.0971             2.18       2.84             3.55      5.15       -0.248              2.24
-## 4 hisp           male     919   -0.355              1.95       2.68             3.46      5.36        0.0221             2.12
-## 5 other non hisp female   562   -0.103              2.07       2.73             3.46      5.06       -0.0185             2.08
-## 6 other non hisp male     570    0.0469             1.84       2.61             3.35      5.08       -0.377              2.07
-## 7 white non hisp female  7000   -0.524              1.84       2.57             3.31      5.80       -0.834              1.98
-## 8 white non hisp male    6989   -0.698              1.53       2.35             3.13      5.63       -0.482              1.71
+## 1 black non hisp female   875   -0.296              1.86       2.61             3.36      5.54      -0.0810              2.25
+## 2 black non hisp male     724   -0.0159             1.90       2.61             3.31      5.16       0.00440             2.25
+## 3 hisp           female   875   -0.549              2.23       2.84             3.56      5.44      -0.211               2.24
+## 4 hisp           male     919   -0.378              1.94       2.65             3.41      4.97      -0.404               2.20
+## 5 other non hisp female   562   -0.154              2.07       2.71             3.45      5.24      -0.254               2.16
+## 6 other non hisp male     570   -0.0634             1.95       2.65             3.42      5.27      -0.572               2.12
+## 7 white non hisp female  7000   -0.699              1.82       2.57             3.32      5.38      -0.438               1.99
+## 8 white non hisp male    6989   -0.522              1.55       2.36             3.15      5.68      -0.713               1.72
 ## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -951,11 +951,11 @@ survey_data = survey_data_raw %&gt;%
 <pre><code>## # A tibble: 5 x 12
 ##   working_type count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happening
 ##   &lt;chr&gt;        &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;                &lt;dbl&gt;
-## 1 disabled      1259    -0.135             1.81       2.60             3.40      5.24        -0.677                 2.01
-## 2 looking       1112    -0.335             1.88       2.59             3.27      5.60        -0.468                 2.04
-## 3 other         1370    -0.220             1.66       2.46             3.21      5.53        -0.390                 1.79
-## 4 retired       4099    -0.230             1.66       2.46             3.22      5.79        -0.509                 1.91
-## 5 temporary      156     0.149             1.92       2.67             3.39      5.00         0.360                 1.96
+## 1 disabled      1259    -0.495             1.81       2.63             3.47      5.60        -0.433                 2.03
+## 2 looking       1112    -0.127             1.86       2.58             3.29      5.11        -0.462                 2.02
+## 3 other         1370    -0.244             1.64       2.46             3.25      5.50        -0.471                 1.81
+## 4 retired       4099    -0.760             1.65       2.44             3.23      5.69        -0.733                 1.91
+## 5 temporary      156    -0.305             1.87       2.63             3.29      5.54         0.128                 1.83
 ## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 <div id="join-dataframes" class="section level1">
@@ -977,21 +977,21 @@ print(fake_data_first_batch)</code></pre>
 <pre><code>## # A tibble: 15 x 6
 ##    student   age score_wpa1 score_wpa2 score_wpa3 score_wpa4
 ##      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1       1    28       9.30       8.39       3.21       6.32
-##  2       2    28       8.63       7.65       3.72       5.92
-##  3       3    20       5.07       4.44       1.61       3.95
-##  4       4    32       9.34       8.46       6.86       6.55
-##  5       5    39       8.15       7.37       3.17       5.82
-##  6       6    23       5.30       4.88       1.95       3.39
-##  7       7    24       7.01       6.37       4.60       4.76
-##  8       8    35       8.74       8.03       4.71       6.23
-##  9       9    40       8.22       7.54       4.17       6.06
-## 10      10    26       8.48       7.59       5.31       5.75
-## 11      11    31       7.46       6.63       5.93       5.48
-## 12      12    27       5.77       5.27       3.24       3.52
-## 13      13    32       8.19       7.57       3.80       6.09
-## 14      14    39       5.04       4.51       4.37       3.62
-## 15      15    25       7.83       7.17       3.72       5.42</code></pre>
+##  1       1    17       5.65       5.01      2.48        4.05
+##  2       2    24       9.10       8.16      5.68        6.54
+##  3       3    25       9.81       8.95      5.10        6.81
+##  4       4    29       7.67       6.94      4.33        5.35
+##  5       5    32       8.84       7.89      4.85        5.78
+##  6       6    40       7.04       6.40      4.38        4.93
+##  7       7    26       6.61       5.90      4.72        4.20
+##  8       8    28       5.50       5.02      3.40        3.86
+##  9       9    29       9.81       8.88      4.54        7.07
+## 10      10    35       6.60       5.91      0.596       4.54
+## 11      11    36       7.21       6.51      3.44        5.11
+## 12      12    25       5.85       5.14      4.24        4.28
+## 13      13    35       7.78       6.86      2.77        5.33
+## 14      14    27       9.76       8.95      4.78        7.02
+## 15      15    30       7.96       7.27      3.93        5.39</code></pre>
 <pre class="r"><code>mean_score_students = runif(N, 5, 10)
 fake_data_second_batch = tibble( # same as data.frame but in tidyverse!
     student = (N+1):(2*N),
@@ -1004,36 +1004,36 @@ print(fake_data_second_batch)</code></pre>
 <pre><code>## # A tibble: 15 x 5
 ##    student   age score_wpa1 score_wpa2 score_wpa3
 ##      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1      16    30       5.65       5.29       5.05
-##  2      17    23       6.55       6.00       1.12
-##  3      18    15       6.86       6.27       4.19
-##  4      19    24       5.58       4.93       3.50
-##  5      20    26       6.62       6.11       2.90
-##  6      21    22       7.09       6.31       3.63
-##  7      22    26       6.66       5.93       2.45
-##  8      23    35       5.85       5.31       3.68
-##  9      24    26       6.20       5.44       3.76
-## 10      25    28       7.66       7.05       3.98
-## 11      26    29       8.29       7.52       4.31
-## 12      27    33       9.01       8.23       4.66
-## 13      28    30       8.86       8.01       5.25
-## 14      29    30       8.78       7.85       4.79
-## 15      30    34       7.36       6.60       4.94</code></pre>
+##  1      16    27       7.01       6.47       4.62
+##  2      17    25       9.15       8.26       3.92
+##  3      18    34       6.81       6.24       2.79
+##  4      19    31       6.43       6.02       5.63
+##  5      20    28       7.37       6.77       2.99
+##  6      21    31       7.65       6.85       3.36
+##  7      22    31       9.85       8.93       6.14
+##  8      23    36       7.73       6.92       3.45
+##  9      24    30       6.27       5.48       3.13
+## 10      25    24       6.39       5.71       3.38
+## 11      26    21       5.72       5.24       1.82
+## 12      27    31       6.03       5.40       2.89
+## 13      28    27       9.44       8.46       5.05
+## 14      29    26       7.29       6.68       4.66
+## 15      30    24       5.90       5.24       2.16</code></pre>
 <pre class="r"><code>fake_data = bind_rows(fake_data_first_batch, fake_data_second_batch)
 fake_data</code></pre>
 <pre><code>## # A tibble: 30 x 6
 ##    student   age score_wpa1 score_wpa2 score_wpa3 score_wpa4
 ##      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1       1    28       9.30       8.39       3.21       6.32
-##  2       2    28       8.63       7.65       3.72       5.92
-##  3       3    20       5.07       4.44       1.61       3.95
-##  4       4    32       9.34       8.46       6.86       6.55
-##  5       5    39       8.15       7.37       3.17       5.82
-##  6       6    23       5.30       4.88       1.95       3.39
-##  7       7    24       7.01       6.37       4.60       4.76
-##  8       8    35       8.74       8.03       4.71       6.23
-##  9       9    40       8.22       7.54       4.17       6.06
-## 10      10    26       8.48       7.59       5.31       5.75
+##  1       1    17       5.65       5.01      2.48        4.05
+##  2       2    24       9.10       8.16      5.68        6.54
+##  3       3    25       9.81       8.95      5.10        6.81
+##  4       4    29       7.67       6.94      4.33        5.35
+##  5       5    32       8.84       7.89      4.85        5.78
+##  6       6    40       7.04       6.40      4.38        4.93
+##  7       7    26       6.61       5.90      4.72        4.20
+##  8       8    28       5.50       5.02      3.40        3.86
+##  9       9    29       9.81       8.88      4.54        7.07
+## 10      10    35       6.60       5.91      0.596       4.54
 ## # … with 20 more rows</code></pre>
 <pre class="r"><code># new variables
 new_info = tibble(
@@ -1046,16 +1046,16 @@ print(new_info)</code></pre>
 <pre><code>## # A tibble: 30 x 3
 ##    student score_wpa5 gender
 ##      &lt;int&gt;      &lt;dbl&gt;  &lt;int&gt;
-##  1       1       5.06      1
-##  2       2       2.60      0
-##  3       3       3.97      1
-##  4       4       3.31      1
-##  5       5       4.02      1
-##  6       6       1.45      1
-##  7       7       4.05      0
-##  8       8       3.92      0
-##  9       9       2.80      1
-## 10      10       3.83      1
+##  1       1       3.74      1
+##  2       2       3.73      1
+##  3       3       4.59      1
+##  4       4       3.44      1
+##  5       5       1.96      0
+##  6       6       5.02      1
+##  7       7       5.21      1
+##  8       8       4.95      0
+##  9       9       2.49      0
+## 10      10       3.30      0
 ## # … with 20 more rows</code></pre>
 <pre class="r"><code>fake_data = bind_cols(fake_data,
                       new_info)</code></pre>
@@ -1066,16 +1066,16 @@ print(new_info)</code></pre>
 <pre><code>## # A tibble: 30 x 9
 ##    student...1   age score_wpa1 score_wpa2 score_wpa3 score_wpa4 student...7 score_wpa5 gender
 ##          &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;int&gt;      &lt;dbl&gt;  &lt;int&gt;
-##  1           1    28       9.30       8.39       3.21       6.32           1       5.06      1
-##  2           2    28       8.63       7.65       3.72       5.92           2       2.60      0
-##  3           3    20       5.07       4.44       1.61       3.95           3       3.97      1
-##  4           4    32       9.34       8.46       6.86       6.55           4       3.31      1
-##  5           5    39       8.15       7.37       3.17       5.82           5       4.02      1
-##  6           6    23       5.30       4.88       1.95       3.39           6       1.45      1
-##  7           7    24       7.01       6.37       4.60       4.76           7       4.05      0
-##  8           8    35       8.74       8.03       4.71       6.23           8       3.92      0
-##  9           9    40       8.22       7.54       4.17       6.06           9       2.80      1
-## 10          10    26       8.48       7.59       5.31       5.75          10       3.83      1
+##  1           1    17       5.65       5.01      2.48        4.05           1       3.74      1
+##  2           2    24       9.10       8.16      5.68        6.54           2       3.73      1
+##  3           3    25       9.81       8.95      5.10        6.81           3       4.59      1
+##  4           4    29       7.67       6.94      4.33        5.35           4       3.44      1
+##  5           5    32       8.84       7.89      4.85        5.78           5       1.96      0
+##  6           6    40       7.04       6.40      4.38        4.93           6       5.02      1
+##  7           7    26       6.61       5.90      4.72        4.20           7       5.21      1
+##  8           8    28       5.50       5.02      3.40        3.86           8       4.95      0
+##  9           9    29       9.81       8.88      4.54        7.07           9       2.49      0
+## 10          10    35       6.60       5.91      0.596       4.54          10       3.30      0
 ## # … with 20 more rows</code></pre>
 <p>However, a better way to join dataframes is to use the <code>join</code> functions, as these allow us to join dataframes based on specific ID. This is very important when there are repeating info and/or missing info:</p>
 <pre class="r"><code>N = 15
@@ -1092,21 +1092,21 @@ print(first_batch)</code></pre>
 <pre><code>## # A tibble: 15 x 6
 ##    student   age score_wpa1 score_wpa2 score_wpa3 score_wpa4
 ##      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1       1    24       5.77       4.97      2.12        3.88
-##  2       2    31       5.54       5.02      3.03        3.92
-##  3       3    33       5.70       5.06      0.741       4.11
-##  4       4    32       5.81       5.16      1.57        3.79
-##  5       5    31       7.25       6.50      3.63        5.03
-##  6       6    24       5.30       4.72      2.78        3.57
-##  7       7    17       8.33       7.61      4.32        5.72
-##  8       8    33       8.74       7.81      5.88        6.19
-##  9       9    30       9.55       8.43      4.19        6.91
-## 10      10    31       5.39       4.88      2.74        3.72
-## 11      11    40       7.52       6.86      2.15        5.40
-## 12      12    32       7.03       6.43      3.36        5.15
-## 13      13    25       7.72       7.17      4.10        5.33
-## 14      14    36       5.21       4.56      1.63        3.34
-## 15      15    36       7.58       6.80      4.15        5.22</code></pre>
+##  1       1    31       8.79       7.96       3.41       6.37
+##  2       2    28       9.08       8.23       3.38       6.18
+##  3       3    25       5.78       5.13       2.10       4.04
+##  4       4    36       5.74       5.15       2.97       4.00
+##  5       5    30       8.71       7.81       4.13       6.26
+##  6       6    26       9.38       8.47       4.09       6.55
+##  7       7    22       6.36       5.76       2.82       4.33
+##  8       8    30       5.92       5.34       2.64       4.40
+##  9       9    25       7.10       6.34       3.02       5.23
+## 10      10    37       9.36       8.46       6.20       6.43
+## 11      11    31       8.73       7.96       4.05       6.28
+## 12      12    28       7.83       6.87       2.89       5.41
+## 13      13    35       7.97       7.14       4.51       5.30
+## 14      14    26       8.88       8.02       4.22       5.98
+## 15      15    26       8.84       7.81       4.55       6.38</code></pre>
 <pre class="r"><code>M = 5
 mean_score_students = runif(M, 8, 10)
 second_batch = tibble( 
@@ -1120,11 +1120,11 @@ print(second_batch)</code></pre>
 <pre><code>## # A tibble: 5 x 5
 ##   student   age score_wpa1 score_wpa2 score_wpa5
 ##     &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1      16    36       9.42       8.55       4.46
-## 2      17    33       8.47       7.54       4.68
-## 3      18    22       8.17       7.38       2.67
-## 4      19    29       8.26       7.21       5.22
-## 5      20    25       9.69       8.57       4.50</code></pre>
+## 1      16    31       9.87       8.77       3.75
+## 2      17    24       8.28       7.56       4.73
+## 3      18    22       8.10       7.25       3.81
+## 4      19    34       8.00       7.16       4.15
+## 5      20    29       8.62       7.66       5.29</code></pre>
 <pre class="r"><code>new_info = tibble(
     student = 1:(N+M),
     score_wpa6 = runif(N+M, 6, 10)*0.5 + rnorm(N+M, 0, 1),
@@ -1134,102 +1134,102 @@ print(new_info)</code></pre>
 <pre><code>## # A tibble: 20 x 3
 ##    student score_wpa6 gender
 ##      &lt;int&gt;      &lt;dbl&gt;  &lt;int&gt;
-##  1       1       6.03      1
-##  2       2       2.05      0
-##  3       3       2.36      1
-##  4       4       4.55      0
-##  5       5       3.87      1
-##  6       6       3.59      0
-##  7       7       4.05      1
-##  8       8       3.60      1
-##  9       9       3.24      0
-## 10      10       2.57      1
-## 11      11       3.25      1
-## 12      12       4.28      1
-## 13      13       3.72      0
-## 14      14       4.05      1
-## 15      15       3.91      1
-## 16      16       3.61      0
-## 17      17       2.37      0
-## 18      18       3.44      0
-## 19      19       4.72      0
-## 20      20       3.76      1</code></pre>
+##  1       1       3.70      1
+##  2       2       4.31      0
+##  3       3       2.71      1
+##  4       4       4.13      0
+##  5       5       3.01      0
+##  6       6       4.14      1
+##  7       7       4.93      1
+##  8       8       4.10      0
+##  9       9       2.63      0
+## 10      10       3.38      1
+## 11      11       3.14      1
+## 12      12       4.04      1
+## 13      13       5.25      1
+## 14      14       4.49      1
+## 15      15       4.63      0
+## 16      16       5.53      1
+## 17      17       4.65      0
+## 18      18       3.80      1
+## 19      19       3.82      0
+## 20      20       6.26      0</code></pre>
 <pre class="r"><code>full_join(first_batch, second_batch, by=&#39;student&#39;)</code></pre>
 <pre><code>## # A tibble: 20 x 10
 ##    student age.x score_wpa1.x score_wpa2.x score_wpa3 score_wpa4 age.y score_wpa1.y score_wpa2.y score_wpa5
 ##      &lt;int&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
-##  1       1    24         5.77         4.97      2.12        3.88    NA        NA           NA         NA   
-##  2       2    31         5.54         5.02      3.03        3.92    NA        NA           NA         NA   
-##  3       3    33         5.70         5.06      0.741       4.11    NA        NA           NA         NA   
-##  4       4    32         5.81         5.16      1.57        3.79    NA        NA           NA         NA   
-##  5       5    31         7.25         6.50      3.63        5.03    NA        NA           NA         NA   
-##  6       6    24         5.30         4.72      2.78        3.57    NA        NA           NA         NA   
-##  7       7    17         8.33         7.61      4.32        5.72    NA        NA           NA         NA   
-##  8       8    33         8.74         7.81      5.88        6.19    NA        NA           NA         NA   
-##  9       9    30         9.55         8.43      4.19        6.91    NA        NA           NA         NA   
-## 10      10    31         5.39         4.88      2.74        3.72    NA        NA           NA         NA   
-## 11      11    40         7.52         6.86      2.15        5.40    NA        NA           NA         NA   
-## 12      12    32         7.03         6.43      3.36        5.15    NA        NA           NA         NA   
-## 13      13    25         7.72         7.17      4.10        5.33    NA        NA           NA         NA   
-## 14      14    36         5.21         4.56      1.63        3.34    NA        NA           NA         NA   
-## 15      15    36         7.58         6.80      4.15        5.22    NA        NA           NA         NA   
-## 16      16    NA        NA           NA        NA          NA       36         9.42         8.55       4.46
-## 17      17    NA        NA           NA        NA          NA       33         8.47         7.54       4.68
-## 18      18    NA        NA           NA        NA          NA       22         8.17         7.38       2.67
-## 19      19    NA        NA           NA        NA          NA       29         8.26         7.21       5.22
-## 20      20    NA        NA           NA        NA          NA       25         9.69         8.57       4.50</code></pre>
+##  1       1    31         8.79         7.96       3.41       6.37    NA        NA           NA         NA   
+##  2       2    28         9.08         8.23       3.38       6.18    NA        NA           NA         NA   
+##  3       3    25         5.78         5.13       2.10       4.04    NA        NA           NA         NA   
+##  4       4    36         5.74         5.15       2.97       4.00    NA        NA           NA         NA   
+##  5       5    30         8.71         7.81       4.13       6.26    NA        NA           NA         NA   
+##  6       6    26         9.38         8.47       4.09       6.55    NA        NA           NA         NA   
+##  7       7    22         6.36         5.76       2.82       4.33    NA        NA           NA         NA   
+##  8       8    30         5.92         5.34       2.64       4.40    NA        NA           NA         NA   
+##  9       9    25         7.10         6.34       3.02       5.23    NA        NA           NA         NA   
+## 10      10    37         9.36         8.46       6.20       6.43    NA        NA           NA         NA   
+## 11      11    31         8.73         7.96       4.05       6.28    NA        NA           NA         NA   
+## 12      12    28         7.83         6.87       2.89       5.41    NA        NA           NA         NA   
+## 13      13    35         7.97         7.14       4.51       5.30    NA        NA           NA         NA   
+## 14      14    26         8.88         8.02       4.22       5.98    NA        NA           NA         NA   
+## 15      15    26         8.84         7.81       4.55       6.38    NA        NA           NA         NA   
+## 16      16    NA        NA           NA         NA         NA       31         9.87         8.77       3.75
+## 17      17    NA        NA           NA         NA         NA       24         8.28         7.56       4.73
+## 18      18    NA        NA           NA         NA         NA       22         8.10         7.25       3.81
+## 19      19    NA        NA           NA         NA         NA       34         8.00         7.16       4.15
+## 20      20    NA        NA           NA         NA         NA       29         8.62         7.66       5.29</code></pre>
 <pre class="r"><code>full_join(first_batch, second_batch, by=c(&#39;student&#39;, &#39;age&#39;, &quot;score_wpa1&quot;, &quot;score_wpa2&quot;))</code></pre>
 <pre><code>## # A tibble: 20 x 7
 ##    student   age score_wpa1 score_wpa2 score_wpa3 score_wpa4 score_wpa5
 ##      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1       1    24       5.77       4.97      2.12        3.88      NA   
-##  2       2    31       5.54       5.02      3.03        3.92      NA   
-##  3       3    33       5.70       5.06      0.741       4.11      NA   
-##  4       4    32       5.81       5.16      1.57        3.79      NA   
-##  5       5    31       7.25       6.50      3.63        5.03      NA   
-##  6       6    24       5.30       4.72      2.78        3.57      NA   
-##  7       7    17       8.33       7.61      4.32        5.72      NA   
-##  8       8    33       8.74       7.81      5.88        6.19      NA   
-##  9       9    30       9.55       8.43      4.19        6.91      NA   
-## 10      10    31       5.39       4.88      2.74        3.72      NA   
-## 11      11    40       7.52       6.86      2.15        5.40      NA   
-## 12      12    32       7.03       6.43      3.36        5.15      NA   
-## 13      13    25       7.72       7.17      4.10        5.33      NA   
-## 14      14    36       5.21       4.56      1.63        3.34      NA   
-## 15      15    36       7.58       6.80      4.15        5.22      NA   
-## 16      16    36       9.42       8.55     NA          NA          4.46
-## 17      17    33       8.47       7.54     NA          NA          4.68
-## 18      18    22       8.17       7.38     NA          NA          2.67
-## 19      19    29       8.26       7.21     NA          NA          5.22
-## 20      20    25       9.69       8.57     NA          NA          4.50</code></pre>
+##  1       1    31       8.79       7.96       3.41       6.37      NA   
+##  2       2    28       9.08       8.23       3.38       6.18      NA   
+##  3       3    25       5.78       5.13       2.10       4.04      NA   
+##  4       4    36       5.74       5.15       2.97       4.00      NA   
+##  5       5    30       8.71       7.81       4.13       6.26      NA   
+##  6       6    26       9.38       8.47       4.09       6.55      NA   
+##  7       7    22       6.36       5.76       2.82       4.33      NA   
+##  8       8    30       5.92       5.34       2.64       4.40      NA   
+##  9       9    25       7.10       6.34       3.02       5.23      NA   
+## 10      10    37       9.36       8.46       6.20       6.43      NA   
+## 11      11    31       8.73       7.96       4.05       6.28      NA   
+## 12      12    28       7.83       6.87       2.89       5.41      NA   
+## 13      13    35       7.97       7.14       4.51       5.30      NA   
+## 14      14    26       8.88       8.02       4.22       5.98      NA   
+## 15      15    26       8.84       7.81       4.55       6.38      NA   
+## 16      16    31       9.87       8.77      NA         NA          3.75
+## 17      17    24       8.28       7.56      NA         NA          4.73
+## 18      18    22       8.10       7.25      NA         NA          3.81
+## 19      19    34       8.00       7.16      NA         NA          4.15
+## 20      20    29       8.62       7.66      NA         NA          5.29</code></pre>
 <pre class="r"><code>left_join(first_batch, new_info, by=c(&#39;student&#39;))</code></pre>
 <pre><code>## # A tibble: 15 x 8
 ##    student   age score_wpa1 score_wpa2 score_wpa3 score_wpa4 score_wpa6 gender
 ##      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;int&gt;
-##  1       1    24       5.77       4.97      2.12        3.88       6.03      1
-##  2       2    31       5.54       5.02      3.03        3.92       2.05      0
-##  3       3    33       5.70       5.06      0.741       4.11       2.36      1
-##  4       4    32       5.81       5.16      1.57        3.79       4.55      0
-##  5       5    31       7.25       6.50      3.63        5.03       3.87      1
-##  6       6    24       5.30       4.72      2.78        3.57       3.59      0
-##  7       7    17       8.33       7.61      4.32        5.72       4.05      1
-##  8       8    33       8.74       7.81      5.88        6.19       3.60      1
-##  9       9    30       9.55       8.43      4.19        6.91       3.24      0
-## 10      10    31       5.39       4.88      2.74        3.72       2.57      1
-## 11      11    40       7.52       6.86      2.15        5.40       3.25      1
-## 12      12    32       7.03       6.43      3.36        5.15       4.28      1
-## 13      13    25       7.72       7.17      4.10        5.33       3.72      0
-## 14      14    36       5.21       4.56      1.63        3.34       4.05      1
-## 15      15    36       7.58       6.80      4.15        5.22       3.91      1</code></pre>
+##  1       1    31       8.79       7.96       3.41       6.37       3.70      1
+##  2       2    28       9.08       8.23       3.38       6.18       4.31      0
+##  3       3    25       5.78       5.13       2.10       4.04       2.71      1
+##  4       4    36       5.74       5.15       2.97       4.00       4.13      0
+##  5       5    30       8.71       7.81       4.13       6.26       3.01      0
+##  6       6    26       9.38       8.47       4.09       6.55       4.14      1
+##  7       7    22       6.36       5.76       2.82       4.33       4.93      1
+##  8       8    30       5.92       5.34       2.64       4.40       4.10      0
+##  9       9    25       7.10       6.34       3.02       5.23       2.63      0
+## 10      10    37       9.36       8.46       6.20       6.43       3.38      1
+## 11      11    31       8.73       7.96       4.05       6.28       3.14      1
+## 12      12    28       7.83       6.87       2.89       5.41       4.04      1
+## 13      13    35       7.97       7.14       4.51       5.30       5.25      1
+## 14      14    26       8.88       8.02       4.22       5.98       4.49      1
+## 15      15    26       8.84       7.81       4.55       6.38       4.63      0</code></pre>
 <pre class="r"><code>right_join(new_info, second_batch, by=c(&#39;student&#39;))</code></pre>
 <pre><code>## # A tibble: 5 x 7
 ##   student score_wpa6 gender   age score_wpa1 score_wpa2 score_wpa5
 ##     &lt;int&gt;      &lt;dbl&gt;  &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1      16       3.61      0    36       9.42       8.55       4.46
-## 2      17       2.37      0    33       8.47       7.54       4.68
-## 3      18       3.44      0    22       8.17       7.38       2.67
-## 4      19       4.72      0    29       8.26       7.21       5.22
-## 5      20       3.76      1    25       9.69       8.57       4.50</code></pre>
+## 1      16       5.53      1    31       9.87       8.77       3.75
+## 2      17       4.65      0    24       8.28       7.56       4.73
+## 3      18       3.80      1    22       8.10       7.25       3.81
+## 4      19       3.82      0    34       8.00       7.16       4.15
+## 5      20       6.26      0    29       8.62       7.66       5.29</code></pre>
 </div>
 <div id="now-its-your-turn" class="section level1">
 <h1>6. Now it’s your turn</h1>
