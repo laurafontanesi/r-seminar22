@@ -2,3 +2,399 @@
 title: "Writing Functions and Loops"
 ---
 
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_7_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 7
+# Name: Laura Fontanesi
+# Date: 26 April 2022
+```
+
+# 1. Creating R Functions
+
+R scripts are a way to organize and save data, complicated expressions, or sequences of operations for re-use.
+
+Whenever we re-use a code snippet, instead of copy-pasting and thus increasing the chances of typos and other mistakes, we should rather think about how to **generalize our code**, so that it can be re-used later in the script or other scripts on slightly different data.
+
+Functions are perfect for this purpose. We already used many functions, that other people have defined for us and saved in packages that we could load in R.
+
+Now we see how to create our own functions:
+```
+NAME = function(ARGUMENTS) {
+
+  ACTIONS
+
+  return(OUTPUT) # optional.. you can also just create a function that prints something, without returning anything
+
+}
+```
+
+For example, let's create a function called `percentage` that calculates the percentage of `x` of a `total`: 
+
+```{r}
+percentage = function(x, total) {
+    ratio = x/total
+    perc = ratio*100
+    
+    return(perc)
+}
+```
+
+Now, we can call the function that we created on any new value:
+
+```{r}
+percentage(5, 20)
+```
+
+Or assign its result to a variable:
+
+```{r}
+a = percentage(45, 80)
+
+print(a)
+```
+
+Let's now create a function called `print_percentage` that calculates a percentage but returns the result in a more readable way (addding the `%`):
+
+```{r}
+print_percentage = function(x, total) {
+    ratio = x/total
+    perc = ratio*100
+    
+    print(paste(perc, '%'))
+}
+```
+
+**Note** that we didn't use the `return` now. The output of the function is given by `print` instead.
+
+```{r}
+print_percentage(6, 20)
+```
+
+```{r}
+a = print_percentage(45, 80)
+
+print(a)
+```
+
+You can create functions with any number of arguments, for example we could decide to round the result to `n` decimals before printing:
+
+```{r}
+print_percentage_decimals = function(x, total, n_decimals) {
+    ratio = x/total
+    perc = ratio*100
+    
+    rounded_perc = round(perc, n_decimals)
+    
+    print(paste(rounded_perc, '%'))
+}
+```
+
+```{r}
+print_percentage_decimals(45, 80, 1)
+print_percentage_decimals(45, 80, 0)
+print_percentage_decimals(79, 81, 4)
+```
+
+And we can assign a default value to one of the arguments, so that it doesn't have to be specified every time the function is called:
+  
+```{r}
+print_percentage_decimals = function(x, total, n_decimals=2) {
+    ratio = x/total
+    perc = ratio*100
+    
+    rounded_perc = round(perc, n_decimals)
+    
+    print(paste(rounded_perc, '%'))
+}
+```
+
+
+```{r}
+print_percentage_decimals(79, 81)
+print_percentage_decimals(79, 81, 1)
+```
+
+# 2. Conditional satements
+
+Conditional statements can help us improve our functions, so that different operations can be done depending on the input to the function:
+```
+if (statement_is_true) {
+    do_this
+} else {
+    do_this_instead
+}
+```
+For example, let's write a conditional statement that prints `x is positive` if a variable x is higher than 0, and prints `x is not positive` otherwise:
+```{r}
+x = 2
+
+if (x > 0) {
+    print("x is positive")
+} else {
+    print("x is not positive")
+}
+```
+
+Conditional statements can be very useful inside functions, to specify different outputs depending on which inputs are given. For example, we might want to limit the percentage calculation to positive numbers:
+```{r}
+print_percentage_positive = function(x, total, n_decimals=2) {
+    if (x >=0 & total > 0) {
+        ratio = x/total
+        perc = ratio*100
+
+        rounded_perc = round(perc, n_decimals)
+        print(paste(rounded_perc, '%'))
+        
+    } else {
+        print("Invalid x/total value: x and total should be positive.")
+    }
+}
+```
+
+```{r}
+print_percentage_positive(3, 40, 1)
+
+print_percentage_positive(-3, 40, 1)
+
+print_percentage_positive(2, -40, 1)
+```
+
+But also give more precise output messages:
+```{r}
+print_percentage_positive = function(x, total, n_decimals=2) {
+    if (x >=0 & total > 0) {
+        ratio = x/total
+        perc = ratio*100
+
+        rounded_perc = round(perc, n_decimals)
+        print(paste(rounded_perc, '%'))
+        
+    } else if (x < 0 ) {
+        print("Invalid x value: x should be positive or 0.")
+    } else {
+        print("Invalid total value: total should be positive.")
+    }
+}
+```
+
+```{r}
+print_percentage_positive(3, 40, 1)
+
+print_percentage_positive(-3, 40, 1)
+
+print_percentage_positive(2, -40, 1)
+```
+
+# 3. Loops
+
+Another construct that can help you repeat the same code on different inputs is a loop. We now look at 2 types of loops: `for` and `while` loops.
+
+## The for loop
+```
+for (val in sequence) {
+    calculation
+}
+```
+We can use a for loop for printing the elements of a vector, iteratevely (one by one). In the loop, at each iteration, each element of the vector `a` gets assigned to the variable `i`. Therefore, any calculation that we want to happen iteratively, we should do on `i` (in the example below, only printing):
+```{r}
+a = seq(10, 20)
+
+for (i in a) {
+    print(i)
+}
+```
+
+Here, we create a second vector `b` that is initially empty. At each iteration in the for loop, we add a new element to `b`, specifically, each element of `a` increased by 2: 
+```{r}
+b = c()
+
+for (i in a) {
+  b = c(b, i+2)
+}
+
+print(b)
+```
+
+Note what happens when we define the vector `b` inside the loop, instead of before it:
+```{r}
+for (i in a) {
+  b = c()
+  b = c(b, i+2)
+}
+
+print(b)
+```
+
+Also, note that it does not matter how you name this variable inside the loop:
+```{r}
+some_vector = c(3, 4, 5)
+
+for (x in some_vector) {
+  print(x*100)
+}
+```
+
+## The while loop
+```
+while (test_expression) {
+    statement
+}
+```
+Here, we still have iterations of the calculations defined within the loop (in the `statement` above). However, the loop stops when the `test_expression` is evaluated as False.
+
+For example, here we start with defining a variable `a` equal to 1. At each iteration, we print `a` and multiply it by 10. The loop will stop when `a` is less than 1001, which is after 4 iterations. Note that, unlike in the for loop, we do not have to tell R that there will be 4 iterations, but only the condition to continue (`a < 1001`):
+```{r}
+a = 1
+
+while (a < 1001) {
+  print(a)
+  a = a*10
+}
+
+```
+
+We can also create a variable called `count`, that simply increases of 1 at each iteration, and make the while loop stop when count is equal to (in this example) 12. In this case while is more similar to the for loop, because we know in advance how many iterations we want:
+```{r}
+count = 1
+c = c()
+
+while (count <= 12) {
+  c = c(c, count**2)
+  count = count + 1
+}
+
+print(c)
+```
+
+## Example with dataframes
+
+Now we have a look at a more specific example with dataframes. Let's say we have data from a class of 100 students containing the points in a test:
+```{r}
+n = 100
+student_data = data.frame(student_id=as.integer(runif(n=n, min=1000, max=9000)),
+                          total_points=round(runif(n=n, min=0, max=30), 1))
+head(student_data)
+```
+
+Now, we define a subset of tests that we need to revise, and we want to see to which student they belong to and what was the test result. We can index these student one by one, but that takes a while and it's also an inefficient repetition of code:
+```{r}
+subset_students = c(5, 16, 3, 9, 37, 30, 25, 28, 59, 61, 88, 94, 99)
+
+print(student_data[5,])
+print(student_data[16,])
+```
+Or, we can use a for loop and extract this information iteratively, without code repetition:
+```{r}
+for (i in subset_students) {
+  student_id = student_data[i, "student_id"]  
+  points_student = student_data[i, "total_points"]
+  grade = percentage(points_student, 30)
+  rounded_grade = round(grade)
+    
+  print(paste("Student:", student_id, "-", "Grade:", rounded_grade, '%'))
+}
+```
+
+The equivalent way to write this loop with a `while` loop:
+```{r}
+n_subset = length(subset_students)
+n = 1
+
+while (n <= n_subset) {
+  student_id = student_data[subset_students[n], "student_id"]  
+  points_student = student_data[subset_students[n], "total_points"]
+    
+  grade = percentage(points_student, 30)
+  rounded_grade = round(grade)
+    
+  print(paste("Student:", student_id, "-", "Grade:", rounded_grade, '%'))
+    
+  n = n + 1 # crucial!
+}
+```
+
+# 4. Now it's your turn
+
+In this WPA, you will analyze data from another fake study. In this fake study the researchers were interested in whether playing video games had cognitive benefits compared to other leisure activities. In the study, 90 University students were asked to do one of 3 leisure activities for 1 hour a day for the next month. 30 participants were asked to play visio games, 30 to read and 30 to juggle. At the end of the month each participant did 3 cognitive tests, a problem solving test (**logic**) and a reflex/response test (**reflex**) and a written comprehension test (**comprehension**).
+
+## Datafile description
+
+The data file has 90 rows and 7 columns. Here are the columns
+
+- `id`: The participant ID
+
+- `age`: The age of the participant
+
+- `gender`: The gender of the particiant
+
+- `activity`: Which leisure activity the participant was assigned for the last month ("reading", "juggling", "gaming")
+
+- `logic`: Score out of 120 on a problem solving task. Higher is better.
+
+- `reflex`: Score out of  25 on a reflex test. Higher indicates faster reflexes.
+
+- `comprehension`: Score out of 100 on a reading comprehension test. Higher is better.
+
+**Task A**
+
+1. Load the `data_wpa7.txt` dataset in R (find it on Github) and save it as a new object called `leisure`. Inspect the dataset first.
+
+2. Write a function called `feed_me()` that takes a string `food` as an argument, and returns (in case `food = 'pizza'`) the sentence "I love to eat pizza". Try your function by running `feed_me("apples")` (it should then return "I love to eat apples").
+
+3. Without using the `mean()` function, calculate the mean of the vector `vec_1 = seq(1, 100, 5)`.
+
+4. Write a function called `my_mean()` that takes a vector `x` as an argument, and returns the mean of the vector `x`. Use your code for task A3 as your starting point. Test it on the vector from task A3.
+
+5. Try your `my_mean()` function to calculate the mean 'logic' rating of participants in the `leisure` dataset and compare the result to the built-in `mean()` function (using `==`) to make sure you get the same result.
+
+6. Create a loop that prints the squares of integers from 1 to 10.
+
+7. Modify the previous code so that it saves the squared integers as a vector called `squares`. You'll need to pre-create a vector, and use indexing to update it.
+
+**Task B**
+
+1. Create a function called `standardize`, that, given an input vector, returns its standardized version. Remember that to normalize a score, also called z-transforming it, you first subtract the mean score from the individual scores and then divide by the standard deviation.
+
+2. Create a copy of the `leisure` dataset. Call this copy `z_leisure`. Normalise the `logic`, `reflex`, `age` and `comprehension` columns using the `standardize` function using a `for` loop. In each iteration of the loop, you should standardize one of these 4 columns. You can create a vector first, called `columns_to_standardize` where you store these columns and use them later in the loop. You should not add them as additional columns, but overwrite the original columns.
+
+**Task C**
+
+1. Create a scatterplot of `age` and `reflex` of participants in the `leisure` datset. Cutomise it and add a regression line.
+
+2. Create a function called `my_plot()` that takes arguments `x` and `y` and returns a customised scatterplot with your customizations and the regression line.
+
+3. Now test your `my_plot()` function on the `age` and `reflec` of participants in the `leisure` dataset.
+
+**Task D**
+
+1. Create a loop that returns the sum of the vector `1:10`. (i.e. Don't use the existing `sum` function).
+2. Use this loop to create a function, called `my_sum` that returns the sum of any vector x. Test it on the `logic` ratings.
+3. Modify the function you created in task D2, to instead calculate the mean of a vector. Call this new function `my_mean2` and compare it to both the `my_mean` function you created, and the in-built `mean` function. (Bonus: Can you also think of a way to do this without using the the length function)
+
+**Task E (extra, but doable)**
+
+1. What is the probability of getting a significant p-value if the null hypothesis is true? Test this by conducting the following simulation:
+
+  - Create a vector called `p_values` with 100 NA values. 
+  - Draw a sample of size 10 from a normal distribution with mean = 0 and standard deviation = 1.
+  - Do a one-sample t-test testing if the mean of the distribution is different from 0. Save the p-value from this test in the 1st position of `p_values`.
+  - Repeat these steps with a loop to fill `p_values` with 100 p-values.
+  - Create a histogram of `p_values` and calculate the proportion of p-values that are significant at the .05 level.
+
+2. Create a function called `p_simulation` with 4 arguments: `sim`: the number of simulations, `samplesize`: the sample size, `mu_true`: the true mean, and `sd_true`: the true standard deviation. Your function should repeat the simulation from the previous question with the given arguments. That is, it should calculate `sim` p-values testing whether `samplesize` samples from a normal distribution with mean = `mu_true` and standard deviation = `sd_true` is significantly different from 0. The function should return a vector of p-values. 
+
+*Note*: to get the p-value of a t-test:
+```
+p_value = t.test(x)$p.value     # Calculate the p.vale for the sample x
+```
+
+## Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of **Friday**.
