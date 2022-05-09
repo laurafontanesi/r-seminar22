@@ -1,0 +1,334 @@
+---
+title: "Multiple regression and ANOVA"
+---
+
+# 1. Multiple linear regression model
+
+Last week we looked at linear models with 1 predictor (either continuous or categorical with 2 levels). Now we are going to extend this to linear models with more than 1 predictor.
+
+We have already seen the assumptions of multiple linear regression last week. They are essentially the same as for simple linear regression but now we should also check that the predictors are not correlated.
+
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_9_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 9
+# Name: Laura Fontanesi
+# Date: 9 May 2022
+```
+
+## Model fitting
+
+Model fit can be achieved as in simple linear regression using `lm()`.
+
+the only thing to take into account is how to change the formula argument:
+
+- `outcome ~ predictor1 + predictor2`: tests main effects only of these two predictors
+- `outcome ~ predictor1 * predictor2`: tests all main effects and the interaction effect of these two predictors
+- `outcome ~ predictor1 * predictor2 * predictor3`: tests all main effects and all interaction effect of these three predictors
+- `outcome ~ predictor1 + predictor2 + predictor3 + predictor1*predictor2`: tests main all three main effects and only the interaction effect of the first and second predictor
+
+Download the `house_prices.csv` dataset from the [Github folder]("https://github.com/laurafontanesi/r-seminar22/tree/main/data") and load it in R:
+
+```{r}
+library(tidyverse)
+
+house_prices = read_csv('data/house_prices.csv')
+
+glimpse(house_prices)
+```
+
+GrLivArea: Above grade (ground) living area square feet
+
+LotArea: Lot size in square feet
+
+GarageArea: Size of garage in square feet
+
+### Main effects model:
+
+```{r}
+model_fit = lm(SalePrice ~ LotArea + GarageArea + GrLivArea, 
+               data = house_prices)
+summary(model_fit)
+```
+
+### Full model (including also interactions effects):
+
+```{r}
+model_fit = lm(SalePrice ~ LotArea*GarageArea*GrLivArea, 
+               data = house_prices)
+summary(model_fit)
+
+# Note: Have main effects changed?
+```
+
+## How to visualize it?
+
+```{r}
+ggplot(data = house_prices, aes(x = LotArea, y = SalePrice, color=GarageArea)) +
+  geom_jitter(alpha=.2, size=.5) +
+  scale_colour_gradient(low = "blue", high = "gold", limits=range(house_prices[,'GarageArea']))
+
+ggplot(data = house_prices, aes(x = GrLivArea, y = SalePrice, color=GarageArea)) +
+  geom_jitter(alpha=.2, size=.5) +
+  scale_colour_gradient(low = "blue", high = "gold", limits=range(house_prices[,'GarageArea']))
+```
+
+## Multicollinearity checks
+
+From the plots above we can see that the predictors are somewhat correlated. But how can we check this best?
+
+```{r}
+M = cor(select(house_prices, LotArea, GarageArea, GrLivArea))
+M
+```
+
+To more formally test (bewtween 2 variables):
+
+```{r}
+cor.test(house_prices$GarageArea, house_prices$GrLivArea)
+```
+
+This means that the assumptions were violated and the coefficients should be interpreted with caution.
+
+### Hypothesis tests for all pairwise correlations:
+
+```{r}
+#install.packages("lsr")
+
+library(lsr)
+
+correlate(as.data.frame(select(house_prices, LotArea, GarageArea, GrLivArea)), test=TRUE)
+```
+
+To better visualize the correlation matrix:
+
+```{r}
+#install.packages("corrplot")
+
+library('corrplot')
+
+corrplot(M)
+```
+
+## Calculating standardised regression coefficients
+
+One more thing that you might want to do is to calculate “standardised” regression coefficients: your predictors are often on different scales and this makes it very difficult to compare the coefficients of different predictors.
+
+The standardised coefficients are the coefficients that you would have obtained if you’d converted all the variables to z-scores before running the regression.
+
+You can then either standardize them first, or use the `standardCoefs` function in R.
+
+```{r}
+model_fit = lm(SalePrice ~ LotArea+GarageArea+GrLivArea, 
+               data = house_prices)
+summary(model_fit)
+standardCoefs(model_fit)
+```
+
+```{r}
+house_prices = mutate(house_prices,
+                      z_LotArea = scale(LotArea, center = TRUE, scale = TRUE),
+                      z_GarageArea = scale(GarageArea, center = TRUE, scale = TRUE),
+                      z_GrLivArea = scale(GrLivArea, center = TRUE, scale = TRUE),
+                      z_SalePrice = scale(SalePrice, center = TRUE, scale = TRUE))
+
+st_model_fit = lm(z_SalePrice ~ z_LotArea+z_GarageArea+z_GrLivArea, 
+               data = house_prices)
+summary(st_model_fit)
+```
+
+What happened now to the intercept?
+
+# 2. ANOVA
+
+## General linear models
+
+We use linear regression models when we want to predict a continuous variable based on one or more continuous variables, assuming a linear relationship.
+
+But we can also predict a continuous variable based on one or more categorical variables using the ANOVA.
+
+Both linear regression and ANOVA, however, are part of the same category of models: [general linear models](https://en.wikipedia.org/wiki/General_linear_model).
+
+The general linear model or **multivariate regression model** is a statistical linear model. It may be written as:
+
+**Y = XB + U**,
+
+where:
+- **Y** is a matrix with series of multivariate measurements (each column being a set of measurements on one of the dependent variables), 
+- **X** is a matrix of observations on independent variables that might be a design matrix (each column being a set of observations on one of the independent variables), 
+- **B** is a matrix containing parameters that are usually to be estimated 
+- and **U** is a matrix containing errors (noise). The errors are usually assumed to be uncorrelated across measurements, and follow a multivariate normal distribution.
+
+The general linear model incorporates a number of different statistical models: ANOVA, ANCOVA, MANOVA, MANCOVA, ordinary linear regression, t-test and F-test.
+
+## When to use ANOVA/linear regression?
+In practice, we use Analysis of variance (ANOVA) when we have categorical-only predictors. As soon as we have at least one continuous predictor we would switch to linear regression. 
+
+The conversion between ANOVA and regression depends on how we code the categorical predictors (see [here](https://www.theanalysisfactor.com/why-anova-and-linear-regression-are-the-same-analysis/) for a clear example).
+
+## Different types of ANOVAS
+
+- **One-way ANOVA** is used to test for differences among two or more independent groups (means), e.g., different levels of urea application in a crop, or different levels of antibiotic action on several different bacterial species, or different levels of effect of some medicine on groups of patients. 
+
+- However, should these groups not be independent, and there is an order in the groups (such as mild, moderate and severe disease), or in the dose of a drug (such as 5 mg/mL, 10 mg/mL, 20 mg/mL) given to the same group of patients, then a linear trend estimation should be used. Typically, however, the one-way ANOVA is used to test for differences among at least three groups, since the two-group case can be covered by a t-test. **When there are only two means to compare, the t-test and the ANOVA F-test are equivalent**; the relation between ANOVA and t is given by F = t2.
+
+- **Two-way ANOVA** is an extension of the one-way ANOVA that examines the influence of two different categorical independent variables on one continuous dependent variable. The two-way ANOVA not only aims at assessing the main effect of each independent variable but also if there is any interaction between them.
+
+- **Repeated measures ANOVA** is used when the same subjects are used for each treatment (e.g., in a longitudinal study).
+
+- **Multivariate analysis of variance (MANOVA)** is used when there is more than one response variable.
+
+## ANOVA's assumptions
+
+Because ANOVA and linear regression are *essentially* the same (see better explanations above), the model's assumptions are also very similar:
+
+- **Normality**: The residuals are assumed to be normally distributed. As we saw for linear regression, we can assess this by looking at QQ plots or running a Shapiro-Wilk test.
+- **Homogeneity of variance (homoscedasticity)**: ANOVA assumes that the population standard deviation is the same for all groups.  We can assess this using the Levene's test (see below) and visually using a violin or similar plots.
+- **Independence**: the observations should be independent. In case of repeated measures study, you should then use the repeated measure ANOVA (that we don't cover in this course).
+
+## Model checking and fitting
+
+To fit ANOVAs, we use the `aov()` function.
+
+This function works very similarly to the `lm()` function: you need a `formula` argument and a `data` argument to make it work.
+
+```{r}
+sub_house_prices = filter(house_prices, Foundation == "Slab" | Foundation == "Stone" | Foundation == "Wood")
+
+arrange(summarize(group_by(sub_house_prices, Foundation),
+          mean_SalePrice = mean(SalePrice),
+          sd_SalePrice = sd(SalePrice)),
+        mean_SalePrice)
+```
+
+```{r}
+ggplot(data = sub_house_prices, mapping = aes(y = SalePrice, x = Foundation)) +
+  geom_violin()
+```
+
+Note that you can also here check whether the normality assumption is violated or not. You can do so by also plotting separate histograms per level of your categorical variable.
+
+More formally:
+
+```{r}
+shapiro.test(filter(sub_house_prices, Foundation == "Slab")$SalePrice)
+shapiro.test(filter(sub_house_prices, Foundation == "Stone")$SalePrice)
+shapiro.test(filter(sub_house_prices, Foundation == "Wood")$SalePrice)
+```
+
+Levene's test of equal variance: Low p-value means the variances are not equal.
+
+For the test of equal variances, we need a package called `car`.
+
+The first argument in the function is thr continuous dependent variable, the second argument is the categorical independent variable. 
+
+```{r}
+#install.packages("car")
+
+library(car)
+leveneTest(sub_house_prices$SalePrice, sub_house_prices$Foundation) 
+```
+
+Finally, the actual ANOVA:
+
+```{r}
+model_fit = aov(SalePrice ~ Foundation, 
+                data = sub_house_prices)
+summary(model_fit)
+
+print(model_fit)
+```
+
+## Tukey’s honest significant difference test
+
+Note that ANOVA tests the null hypothesis that the means in all our groups are equal. A rejection of this null hypothesis means that there is a significant difference in at least one of the possible pairs of means. 
+
+To get an idea of which pair of means contains a significant difference, we can follow up with Tukey’s test that will give us all pairwise comparisons. 
+
+Tukey’s test corrects the p-values upwards — so it is more conservative in deciding something is significant — because the comparisons are post-hoc or exploratory:
+
+```{r}
+TukeyHSD(model_fit, "Foundation")
+```
+
+# 3. Now it's your turn
+
+## Student Performance
+
+From github, get the `student-mat.csv` and `student-por.csv` datasets.
+
+**Task A**
+
+1. Using the `student_math` dataset, create a regression object called `model_fit_1` predicting third period grade (G3) based on sex, age, internet, and failures. How do you interpret the regression output? Which variables are significantly related to third period grade?
+
+2. Check the model's assumptions. Which are violated?
+
+3. Load the `student-por.csv` in R as `student_port`. Inspect the dataset first.
+
+4. Create a new regression object called `model_fit_2` using the same variables as question 1: however, this time use the portugese dataset.
+
+5. What are the key differences between the beta values for the portugese dataset (`model_fit_2`) and the math dataset (`model_fit_1`)?
+
+**Task B**
+
+1. Using the `student_math` dataset, create a regression object called `model_fit_3` predicting first period grade (G1) based on guardian. Guardian is a nominal variable with 3 levels.
+
+2. Use `summary` to look at the output. You should see 2 predictors listed ("guardianmother" and "guardiananother"), rather than the expected 1 ("guardian"). `lm` has dummy coded your variables with "father" set as the reference group. Look at the levels of the guardian factor to see why "father" is the reference group.  How would you interpret the results? 
+
+3. What is the predicted grade for those with a father as their guardian? Those with a mother? Those with other? Compare these to the means of each group again.
+
+**Task C**
+
+1. Using the `student_math` dataset, create a regression object called `model_fit_4` predicting a student's first period grade (G1) based on all variables in the dataset (*Hint*: use the notation `formula = y ~ .` to include all variables)
+
+2. Save the fitted values from the `model_fit_4` object as a vector called `model_4_fitted`.
+
+3. Using the `student_math` dataset, create a scatterplot showing the relationship between a student's first period grade (G1) and the fitted values from the model. Does the model appear to correctly fit a student's first period grade? Use `geom_abline()` with `slope=1` and `intercept=0` to plot the identity line and better answer to this question.
+
+4. Create a new regression object, called `model_fit_5` which doesn't include G2 or G3 as predictors, but still includes all other variables. Save the fitted values from the `model_fit_5` object as a vector called `model_5_fitted`.
+
+5. Plot the predicted grades against the actual ones, as predicted by model `model_fit_5`, as in question 3. How well does the new model perform now?
+
+**Task D**
+
+- For each question, conduct the appropriate ANOVA. Write the conclusion in APA style. To summarize an effect in an ANOVA, use the format F(XXX, YYY) = FFF, p = PPP, where XXX is the degrees of freedom of the variable you are testing, YYY is the degrees of freedom of the residuals, FFF is the F value for the variable you are testing, and PPP is the p-value. If the p-value is less than .01, just write p < .01.
+
+- For the purposes of this class, if the p-value of the ANOVA is less than .05, conduct post-hoc tests. If you are only testing one independent variable, write APA conclusions for the post-hoc test. **If you are testing more than one independent variable in your ANOVA, you do not need to write APA style conclusions for post-hoc tests -- just comment the result.**
+
+For example, here is how you would analyze and answer the question: "Was there an effect of diets on Chicken Weights?""
+
+```
+# ANOVA on Chicken Weights
+#   IV = Diet, DV = weight
+
+# ANOVA
+model_fit = aov(formula = weight ~ Diet, data = ChickWeight)
+
+summary(model_fit)
+
+# ANOVA was significant (p < .01), so I'll conduct post-hoc tests
+
+# Tukey post-hoc tests
+TukeyHSD(model_fit)
+
+# There was a significant main effect of diets on chicken weights (F(3, 574) = 10.81, p < .01). 
+# Pairwise Tukey HSD tests showed significant differences between diets 1 and 3 (diff = 40.30, p < .01) 
+# and diets 1 and 4 (diff = 32.62, p < .01). 
+# All other pairwise differences were not significant at the 0.05 significance threshold.
+```
+
+1. Using the `student_math` dataset, was there a main effect of the school support on G1? Conduct a one-way ANOVA. If the result is significant (p < .05), conduct post-hoc tests.
+
+2. Using the `student_math` dataset, was there a main effect of the family support on G1? Conduct a one-way ANOVA. If the result is significant (p < .05), conduct post-hoc tests.
+
+3. Conduct a two-way ANOVA on G1 with both school support and family support as IVs. Do your results for each variable change compared to your previous one-way ANOVAs on these variables? (You do not need to give APA results or conduct post-hoc tests, just answer the question verbally).
+
+## Submit your assignment
+
+Save and email your script to me at [laura.fontanesi@unibas.ch](mailto:laura.fontanesi@unibas.ch) by the end of **Friday**.

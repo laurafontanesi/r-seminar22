@@ -25,6 +25,8 @@ navbar:
         href: wpa7.html
       - text: "WPA 8"
         href: wpa8.html
+      - text: "WPA 9"
+        href: wpa9.html
     - text: "Solutions"
       icon: fa-display-arrow-down
       menu:
@@ -42,6 +44,8 @@ navbar:
         href: wpa6_solutions.html
       - text: "WPA 7"
         href: wpa7_solutions.html
+      - text: "WPA 8"
+        href: wpa8_solutions.html
 output:
   html_document:
     theme: paper

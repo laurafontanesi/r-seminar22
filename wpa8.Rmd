@@ -275,7 +275,7 @@ Here is the data description (taken directly from the original website):
 
 5. Given that school support is a nominal variable with 2 levels, how can you tell from the output which direction the effect is? How does this relate to the way the dataset has stored the levels of the school support factor?
 
-5. From the regression, what would be your best guess for the first period grade for a student with no school support? What about for a student with school support?
+6. From the regression, what would be your best guess for the first period grade for a student with no school support? What about for a student with school support?
 
 ## Submit your assignment
 

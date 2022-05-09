@@ -1,0 +1,240 @@
+---
+title: "Solutions to WPA8"
+---
+
+## 3. Now it's your turn
+
+## Student Performance
+
+In this WPA, you will analyze data from a study on student performance in two classes: math and Portugese. These data come from the UCI Machine Learning database at http://archive.ics.uci.edu/ml/datasets/Student+Performance#
+
+**A1. Download the data from the website (by clicking on Data Folder, and unzipping the downloaded student folder on your computer). We are going to use one of the files contained in the student folder: student-mat.csv. Load it in R as student_math. Inspect the dataset first.**
+
+```{r}
+library(tidyverse)
+
+student_math = read_csv2('data/student-mat.csv')
+
+glimpse(student_math)
+
+head(student_math)
+```
+
+**A2. Create a regression object called model_fit_math_1 predicting first period grade (G1) based on age. How do you interpret the relationship between age and first period grade? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.**
+
+```{r}
+model_fit_math_1 = lm(G1 ~ age, data = student_math)
+summary(model_fit_math_1)
+
+# looks like there is no relationship with age
+# the age coefficient is not significant, as well as the F-test, meaning that the intercept model is better than the intercept+age model
+```
+
+```{r}
+ggplot(data = student_math, mapping = aes(x = age, y = G1)) + 
+    geom_point(alpha = 0.8, size= 1) +
+    geom_smooth(method = lm, color='red')
+```
+
+```{r}
+# Obtain standardised residuals:
+res_stu = rstudent(model = model_fit_math_1)
+# Obtain model's predictions:
+pred = model_fit_math_1$fitted.values
+
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)
+```
+
+```{r}
+ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour="darkgrey", fill="white") + # Note: add aes(y=..density..) to have density instead of frequencies
+    labs(x = 'Studentized residuals', y='Density') + 
+    geom_density(alpha=.2, fill="red", colour="darkgrey")  + # Overlay with transparent density plot
+    geom_vline(aes(xintercept=mean(res_stu)), color="red", linetype="dashed", size=.5) # Add mean residuals
+
+ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()
+
+ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)
+```
+
+You can also use a more formal test for normality:
+
+```{r}
+shapiro.test(model_checks$res_stu)
+```
+
+This test shows that we can reject the null hypothesis that the residuals came from a normal distribution.
+
+See [here](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test) for more info.
+
+And you can also use a more formal test for heteroskedacity:
+
+```{r}
+#install.packages('lmtest')
+#install.packages('zoo')
+
+library(lmtest)
+```
+
+```{r}
+bptest(model_fit_math_1)
+```
+
+This test shows that we cannot reject the null that the variance of the residuals is constant, thus heteroskedacity is not present. 
+
+See [here](https://en.wikipedia.org/wiki/Breusch%E2%80%93Pagan_test) for more info.
+
+**A3. Create a regression object called model_fit_math_2 predicting first period grade (G1) based on absences. How do you interpret the relationship between absences and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.**
+
+```{r}
+model_fit_math_2 = lm(G1 ~ absences, data = student_math)
+summary(model_fit_math_2)
+
+# looks like there is no relationship with absences
+# the absences coefficient is not significant, as well as the F-test, meaning that the intercept model is better than the intercept+absences model
+```
+
+```{r}
+ggplot(data = student_math, mapping = aes(x = absences, y = G1)) + 
+    geom_point(alpha = 0.8, size= 1) +
+    geom_smooth(method = lm, color='red')
+```
+
+```{r}
+# Obtain standardised residuals:
+res_stu = rstudent(model = model_fit_math_2)
+# Obtain model's predictions:
+pred = model_fit_math_2$fitted.values
+
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)
+```
+
+```{r}
+ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour="darkgrey", fill="white") + # Note: add aes(y=..density..) to have density instead of frequencies
+    labs(x = 'Studentized residuals', y='Density') + 
+    geom_density(alpha=.2, fill="red", colour="darkgrey")  + # Overlay with transparent density plot
+    geom_vline(aes(xintercept=mean(res_stu)), color="red", linetype="dashed", size=.5) # Add mean residuals
+
+ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()
+
+ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)
+```
+
+```{r}
+shapiro.test(model_checks$res_stu)
+
+bptest(model_fit_math_2)
+```
+
+**A4. Create a regression object called model_fit_math_3 predicting first period grade (G1) based on school support. How do you interpret the relationship between school support and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.**
+
+```{r}
+model_fit_math_3 = lm(G1 ~ schoolsup, data = student_math)
+summary(model_fit_math_3)
+
+# looks like there is a relationship with absences
+# the absences coefficient is significant, as well as the F-test, meaning that the schoolsup+intercept model is better than the intercept model
+```
+
+```{r}
+student_math = mutate(student_math,
+                      schoolsup_bin = recode(schoolsup, "yes" = 1, "no" = 0))
+```
+
+```{r}
+distinct(student_math, schoolsup, schoolsup_bin)
+```
+
+```{r}
+# To make the plot "work" I created the dummy variable schoolsup_bin
+
+ggplot(data = student_math, mapping = aes(x = schoolsup_bin, y = G1)) + 
+    geom_point(alpha = 0.8, size= 1) +
+    geom_smooth(method = lm, color='red')
+```
+
+```{r}
+# Note that the result is the same using the dummy variable:
+
+model_fit_math_3 = lm(G1 ~ schoolsup_bin, data = student_math)
+summary(model_fit_math_3)
+```
+
+```{r}
+# Obtain standardised residuals:
+res_stu = rstudent(model = model_fit_math_3)
+# Obtain model's predictions:
+pred = model_fit_math_3$fitted.values
+
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)
+```
+
+```{r}
+ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour="darkgrey", fill="white") + # Note: add aes(y=..density..) to have density instead of frequencies
+    labs(x = 'Studentized residuals', y='Density') + 
+    geom_density(alpha=.2, fill="red", colour="darkgrey")  + # Overlay with transparent density plot
+    geom_vline(aes(xintercept=mean(res_stu)), color="red", linetype="dashed", size=.5) # Add mean residuals
+
+ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()
+
+ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)
+```
+
+```{r}
+shapiro.test(model_checks$res_stu)
+
+bptest(model_fit_math_3)
+```
+
+They are both significant: both assumptions have been violated.
+
+**A5. Given that school support is a nominal variable with 2 levels, how can you tell from the output which direction the effect is? How does this relate to the way the dataset has stored the levels of the school support factor?**
+
+There is a negative relationship between school support and first period grade (b = -2.1): Students with extra support from the school have worse Period 1 grades on average.
+
+In the regression, rather than a predictor labelled schoolsup because it is a nominal variable we are given the variable schoolsupyes. 
+This tells us that the regression coefficient is the change in grade caused by going from no school support to yes school support. 
+In essence, R has dummy coded the variable so that students with no school support are given a value of 0 and those with yes school support a value of 1. 
+
+If we look at the factor levels for the school support column we see that no is level 1 and yes level two. 'lm()' will always code predictors as the change 
+from level 1 to level 2 (i.e. level 1 is coded as 0, and level 2 as 1).")
+
+```{r}
+levels(factor(student_math$schoolsup))
+```
+
+**A6. From the regression, what would be your best guess for the first period grade for a student with no school support? What about for a student with school support?**
+
+The intercept estimate tells us the best estimate for first period grade when all predictor vairables have a value of 0. 
+
+In this case, we only have 1 predictor (school support) and it is dummy coded so that those without school support have a value of 0. 
+
+Therefore, the predicted first period grade for those without school support is 11.18 (the intercept estimate). 
+
+We can also use our schoolsupportyes estimate to calculate our prediction for those with school support: Our estimate tells us that those on school support are predicted to have a first period grade that is 2.1 lower than those without school support, 
+therefore they have a predicted grade of 9.08.
+
+Because we have a single categorical predictor, these predicted scores should also be the mean of each of the groups:
+
+
+```{r}
+summarize(group_by(student_math, schoolsup),
+          mean_G1 = mean(G1))
+```
