@@ -35,6 +35,7 @@ Link | Description
 [Base R cheat sheet](https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf) | A handy R guide.
 [Tidyverse cheat sheets](https://medium.com/@brianward1428/introduction-to-tidyverse-7b3dbf2337d5) | Quick reference guide for tidyverse, with different cheat sheets separated by topic.
 [ggplot2 reference guide](https://ggplot2.tidyverse.org/reference/index.html) | Your main reference guide for plotting.
+[Learning statistics with R](https://learningstatisticswithr.com/) | Great manual on statistics in R, starting from scratch.
 
 **Note**:
 If you are still experiencing issues with ggplot or tidyverse, do the following (in this order):
