@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Solutions to WPA8</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R seminar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Syllabus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display"></span>
+     
+    WPAs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6.html">WPA 6</a>
+    </li>
+    <li>
+      <a href="wpa7.html">WPA 7</a>
+    </li>
+    <li>
+      <a href="wpa8.html">WPA 8</a>
+    </li>
+    <li>
+      <a href="wpa9.html">WPA 9</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2_solutions.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4_solutions.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5_solutions.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6_solutions.html">WPA 6</a>
+    </li>
+    <li>
+      <a href="wpa7_solutions.html">WPA 7</a>
+    </li>
+    <li>
+      <a href="wpa8_solutions.html">WPA 8</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Solutions to WPA8</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#now-its-your-turn">3. Now it’s your turn</a></li>
+<li><a href="#student-performance">Student Performance</a></li>
+</ul>
+</div>
+
+<div id="now-its-your-turn" class="section level2">
+<h2>3. Now it’s your turn</h2>
+</div>
+<div id="student-performance" class="section level2">
+<h2>Student Performance</h2>
+<p>In this WPA, you will analyze data from a study on student performance in two classes: math and Portugese. These data come from the UCI Machine Learning database at <a href="http://archive.ics.uci.edu/ml/datasets/Student+Performance#" class="uri">http://archive.ics.uci.edu/ml/datasets/Student+Performance#</a></p>
+<p><strong>A1. Download the data from the website (by clicking on Data Folder, and unzipping the downloaded student folder on your computer). We are going to use one of the files contained in the student folder: student-mat.csv. Load it in R as student_math. Inspect the dataset first.</strong></p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.1.0     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>student_math = read_csv2(&#39;data/student-mat.csv&#39;)</code></pre>
+<pre><code>## ℹ Using &quot;&#39;,&#39;&quot; as decimal and &quot;&#39;.&#39;&quot; as grouping mark. Use `read_delim()` for more control.</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_character(),
+##   age = col_double(),
+##   Medu = col_double(),
+##   Fedu = col_double(),
+##   traveltime = col_double(),
+##   studytime = col_double(),
+##   failures = col_double(),
+##   famrel = col_double(),
+##   freetime = col_double(),
+##   goout = col_double(),
+##   Dalc = col_double(),
+##   Walc = col_double(),
+##   health = col_double(),
+##   absences = col_double(),
+##   G1 = col_double(),
+##   G2 = col_double(),
+##   G3 = col_double()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>glimpse(student_math)</code></pre>
+<pre><code>## Rows: 395
+## Columns: 33
+## $ school     &lt;chr&gt; &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;,…
+## $ sex        &lt;chr&gt; &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;,…
+## $ age        &lt;dbl&gt; 18, 17, 15, 15, 16, 16, 16, 17, 15, 15, 15, 15, 15, 15, 15,…
+## $ address    &lt;chr&gt; &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;,…
+## $ famsize    &lt;chr&gt; &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;LE…
+## $ Pstatus    &lt;chr&gt; &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;,…
+## $ Medu       &lt;dbl&gt; 4, 1, 1, 4, 3, 4, 2, 4, 3, 3, 4, 2, 4, 4, 2, 4, 4, 3, 3, 4,…
+## $ Fedu       &lt;dbl&gt; 4, 1, 1, 2, 3, 3, 2, 4, 2, 4, 4, 1, 4, 3, 2, 4, 4, 3, 2, 3,…
+## $ Mjob       &lt;chr&gt; &quot;at_home&quot;, &quot;at_home&quot;, &quot;at_home&quot;, &quot;health&quot;, &quot;other&quot;, &quot;servic…
+## $ Fjob       &lt;chr&gt; &quot;teacher&quot;, &quot;other&quot;, &quot;other&quot;, &quot;services&quot;, &quot;other&quot;, &quot;other&quot;, …
+## $ reason     &lt;chr&gt; &quot;course&quot;, &quot;course&quot;, &quot;other&quot;, &quot;home&quot;, &quot;home&quot;, &quot;reputation&quot;, …
+## $ guardian   &lt;chr&gt; &quot;mother&quot;, &quot;father&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;father&quot;, &quot;mother&quot;,…
+## $ traveltime &lt;dbl&gt; 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 1, 2, 1, 1, 1, 3, 1, 1,…
+## $ studytime  &lt;dbl&gt; 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 3, 2, 1, 1,…
+## $ failures   &lt;dbl&gt; 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0,…
+## $ schoolsup  &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;n…
+## $ famsup     &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;,…
+## $ paid       &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, …
+## $ activities &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;ye…
+## $ nursery    &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes…
+## $ higher     &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;ye…
+## $ internet   &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;,…
+## $ romantic   &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;…
+## $ famrel     &lt;dbl&gt; 4, 5, 4, 3, 4, 5, 4, 4, 4, 5, 3, 5, 4, 5, 4, 4, 3, 5, 5, 3,…
+## $ freetime   &lt;dbl&gt; 3, 3, 3, 2, 3, 4, 4, 1, 2, 5, 3, 2, 3, 4, 5, 4, 2, 3, 5, 1,…
+## $ goout      &lt;dbl&gt; 4, 3, 2, 2, 2, 2, 4, 4, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3,…
+## $ Dalc       &lt;dbl&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,…
+## $ Walc       &lt;dbl&gt; 1, 1, 3, 1, 2, 2, 1, 1, 1, 1, 2, 1, 3, 2, 1, 2, 2, 1, 4, 3,…
+## $ health     &lt;dbl&gt; 3, 3, 3, 5, 5, 5, 3, 1, 1, 5, 2, 4, 5, 3, 3, 2, 2, 4, 5, 5,…
+## $ absences   &lt;dbl&gt; 6, 4, 10, 2, 4, 10, 0, 6, 0, 0, 0, 4, 2, 2, 0, 4, 6, 4, 16,…
+## $ G1         &lt;dbl&gt; 5, 5, 7, 15, 6, 15, 12, 6, 16, 14, 10, 10, 14, 10, 14, 14, …
+## $ G2         &lt;dbl&gt; 6, 5, 8, 14, 10, 15, 12, 5, 18, 15, 8, 12, 14, 10, 16, 14, …
+## $ G3         &lt;dbl&gt; 6, 6, 10, 15, 10, 15, 11, 6, 19, 15, 9, 12, 14, 11, 16, 14,…</code></pre>
+<pre class="r"><code>head(student_math)</code></pre>
+<pre><code>## # A tibble: 6 x 33
+##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob     reason
+##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; 
+## 1 GP     F        18 U       GT3     A           4     4 at_home  teacher  course
+## 2 GP     F        17 U       GT3     T           1     1 at_home  other    course
+## 3 GP     F        15 U       LE3     T           1     1 at_home  other    other 
+## 4 GP     F        15 U       GT3     T           4     2 health   services home  
+## 5 GP     F        16 U       GT3     T           3     3 other    other    home  
+## 6 GP     M        16 U       LE3     T           4     3 services other    reput…
+## # … with 22 more variables: guardian &lt;chr&gt;, traveltime &lt;dbl&gt;, studytime &lt;dbl&gt;,
+## #   failures &lt;dbl&gt;, schoolsup &lt;chr&gt;, famsup &lt;chr&gt;, paid &lt;chr&gt;,
+## #   activities &lt;chr&gt;, nursery &lt;chr&gt;, higher &lt;chr&gt;, internet &lt;chr&gt;,
+## #   romantic &lt;chr&gt;, famrel &lt;dbl&gt;, freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;,
+## #   Walc &lt;dbl&gt;, health &lt;dbl&gt;, absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
+<p><strong>A2. Create a regression object called model_fit_math_1 predicting first period grade (G1) based on age. How do you interpret the relationship between age and first period grade? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</strong></p>
+<pre class="r"><code>model_fit_math_1 = lm(G1 ~ age, data = student_math)
+summary(model_fit_math_1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = G1 ~ age, data = student_math)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.6915 -2.7749 -0.1916  2.3085  8.3085 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  13.6919     2.1926   6.245  1.1e-09 ***
+## age          -0.1667     0.1309  -1.273    0.204    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.317 on 393 degrees of freedom
+## Multiple R-squared:  0.004106,   Adjusted R-squared:  0.001572 
+## F-statistic:  1.62 on 1 and 393 DF,  p-value: 0.2038</code></pre>
+<pre class="r"><code># looks like there is no relationship with age
+# the age coefficient is not significant, as well as the F-test, meaning that the intercept model is better than the intercept+age model</code></pre>
+<pre class="r"><code>ggplot(data = student_math, mapping = aes(x = age, y = G1)) + 
+    geom_point(alpha = 0.8, size= 1) +
+    geom_smooth(method = lm, color=&#39;red&#39;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code># Obtain standardised residuals:
+res_stu = rstudent(model = model_fit_math_1)
+# Obtain model&#39;s predictions:
+pred = model_fit_math_1$fitted.values
+
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)</code></pre>
+<pre class="r"><code>ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour=&quot;darkgrey&quot;, fill=&quot;white&quot;) + # Note: add aes(y=..density..) to have density instead of frequencies
+    labs(x = &#39;Studentized residuals&#39;, y=&#39;Density&#39;) + 
+    geom_density(alpha=.2, fill=&quot;red&quot;, colour=&quot;darkgrey&quot;)  + # Overlay with transparent density plot
+    geom_vline(aes(xintercept=mean(res_stu)), color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=.5) # Add mean residuals</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
+<p>You can also use a more formal test for normality:</p>
+<pre class="r"><code>shapiro.test(model_checks$res_stu)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  model_checks$res_stu
+## W = 0.98114, p-value = 4.999e-05</code></pre>
+<p>This test shows that we can reject the null hypothesis that the residuals came from a normal distribution.</p>
+<p>See <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">here</a> for more info.</p>
+<p>And you can also use a more formal test for heteroskedacity:</p>
+<pre class="r"><code>#install.packages(&#39;lmtest&#39;)
+#install.packages(&#39;zoo&#39;)
+
+library(lmtest)</code></pre>
+<pre><code>## Warning: package &#39;lmtest&#39; was built under R version 4.0.5</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre class="r"><code>bptest(model_fit_math_1)</code></pre>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  model_fit_math_1
+## BP = 0.37268, df = 1, p-value = 0.5415</code></pre>
+<p>This test shows that we cannot reject the null that the variance of the residuals is constant, thus heteroskedacity is not present.</p>
+<p>See <a href="https://en.wikipedia.org/wiki/Breusch%E2%80%93Pagan_test">here</a> for more info.</p>
+<p><strong>A3. Create a regression object called model_fit_math_2 predicting first period grade (G1) based on absences. How do you interpret the relationship between absences and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</strong></p>
+<pre class="r"><code>model_fit_math_2 = lm(G1 ~ absences, data = student_math)
+summary(model_fit_math_2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = G1 ~ absences, data = student_math)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.8794 -2.9115  0.0177  2.2363  8.0692 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 10.98227    0.20539  53.470   &lt;2e-16 ***
+## absences    -0.01286    0.02091  -0.615    0.539    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.322 on 393 degrees of freedom
+## Multiple R-squared:  0.0009612,  Adjusted R-squared:  -0.001581 
+## F-statistic: 0.3781 on 1 and 393 DF,  p-value: 0.539</code></pre>
+<pre class="r"><code># looks like there is no relationship with absences
+# the absences coefficient is not significant, as well as the F-test, meaning that the intercept model is better than the intercept+absences model</code></pre>
+<pre class="r"><code>ggplot(data = student_math, mapping = aes(x = absences, y = G1)) + 
+    geom_point(alpha = 0.8, size= 1) +
+    geom_smooth(method = lm, color=&#39;red&#39;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code># Obtain standardised residuals:
+res_stu = rstudent(model = model_fit_math_2)
+# Obtain model&#39;s predictions:
+pred = model_fit_math_2$fitted.values
+
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)</code></pre>
+<pre class="r"><code>ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour=&quot;darkgrey&quot;, fill=&quot;white&quot;) + # Note: add aes(y=..density..) to have density instead of frequencies
+    labs(x = &#39;Studentized residuals&#39;, y=&#39;Density&#39;) + 
+    geom_density(alpha=.2, fill=&quot;red&quot;, colour=&quot;darkgrey&quot;)  + # Overlay with transparent density plot
+    geom_vline(aes(xintercept=mean(res_stu)), color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=.5) # Add mean residuals</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-12-3.png" width="672" /></p>
+<pre class="r"><code>shapiro.test(model_checks$res_stu)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  model_checks$res_stu
+## W = 0.97877, p-value = 1.512e-05</code></pre>
+<pre class="r"><code>bptest(model_fit_math_2)</code></pre>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  model_fit_math_2
+## BP = 1.4807, df = 1, p-value = 0.2237</code></pre>
+<p><strong>A4. Create a regression object called model_fit_math_3 predicting first period grade (G1) based on school support. How do you interpret the relationship between school support and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</strong></p>
+<pre class="r"><code>model_fit_math_3 = lm(G1 ~ schoolsup, data = student_math)
+summary(model_fit_math_3)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = G1 ~ schoolsup, data = student_math)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.1802 -2.1802 -0.1802  2.8198  7.8198 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   11.1802     0.1751  63.854  &lt; 2e-16 ***
+## schoolsupyes  -2.1018     0.4873  -4.313 2.04e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.247 on 393 degrees of freedom
+## Multiple R-squared:  0.0452, Adjusted R-squared:  0.04277 
+## F-statistic: 18.61 on 1 and 393 DF,  p-value: 2.036e-05</code></pre>
+<pre class="r"><code># looks like there is a relationship with absences
+# the absences coefficient is significant, as well as the F-test, meaning that the schoolsup+intercept model is better than the intercept model</code></pre>
+<pre class="r"><code>student_math = mutate(student_math,
+                      schoolsup_bin = recode(schoolsup, &quot;yes&quot; = 1, &quot;no&quot; = 0))</code></pre>
+<pre class="r"><code>distinct(student_math, schoolsup, schoolsup_bin)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   schoolsup schoolsup_bin
+##   &lt;chr&gt;             &lt;dbl&gt;
+## 1 yes                   1
+## 2 no                    0</code></pre>
+<pre class="r"><code># To make the plot &quot;work&quot; I created the dummy variable schoolsup_bin
+
+ggplot(data = student_math, mapping = aes(x = schoolsup_bin, y = G1)) + 
+    geom_point(alpha = 0.8, size= 1) +
+    geom_smooth(method = lm, color=&#39;red&#39;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code># Note that the result is the same using the dummy variable:
+
+model_fit_math_3 = lm(G1 ~ schoolsup_bin, data = student_math)
+summary(model_fit_math_3)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = G1 ~ schoolsup_bin, data = student_math)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.1802 -2.1802 -0.1802  2.8198  7.8198 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    11.1802     0.1751  63.854  &lt; 2e-16 ***
+## schoolsup_bin  -2.1018     0.4873  -4.313 2.04e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.247 on 393 degrees of freedom
+## Multiple R-squared:  0.0452, Adjusted R-squared:  0.04277 
+## F-statistic: 18.61 on 1 and 393 DF,  p-value: 2.036e-05</code></pre>
+<pre class="r"><code># Obtain standardised residuals:
+res_stu = rstudent(model = model_fit_math_3)
+# Obtain model&#39;s predictions:
+pred = model_fit_math_3$fitted.values
+
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)</code></pre>
+<pre class="r"><code>ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour=&quot;darkgrey&quot;, fill=&quot;white&quot;) + # Note: add aes(y=..density..) to have density instead of frequencies
+    labs(x = &#39;Studentized residuals&#39;, y=&#39;Density&#39;) + 
+    geom_density(alpha=.2, fill=&quot;red&quot;, colour=&quot;darkgrey&quot;)  + # Overlay with transparent density plot
+    geom_vline(aes(xintercept=mean(res_stu)), color=&quot;red&quot;, linetype=&quot;dashed&quot;, size=.5) # Add mean residuals</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)</code></pre>
+<p><img src="wpa8_solutions_files/figure-html/unnamed-chunk-20-3.png" width="672" /></p>
+<pre class="r"><code>shapiro.test(model_checks$res_stu)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  model_checks$res_stu
+## W = 0.98203, p-value = 7.983e-05</code></pre>
+<pre class="r"><code>bptest(model_fit_math_3)</code></pre>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  model_fit_math_3
+## BP = 10.851, df = 1, p-value = 0.0009873</code></pre>
+<p>They are both significant: both assumptions have been violated.</p>
+<p><strong>A5. Given that school support is a nominal variable with 2 levels, how can you tell from the output which direction the effect is? How does this relate to the way the dataset has stored the levels of the school support factor?</strong></p>
+<p>There is a negative relationship between school support and first period grade (b = -2.1): Students with extra support from the school have worse Period 1 grades on average.</p>
+<p>In the regression, rather than a predictor labelled schoolsup because it is a nominal variable we are given the variable schoolsupyes. This tells us that the regression coefficient is the change in grade caused by going from no school support to yes school support. In essence, R has dummy coded the variable so that students with no school support are given a value of 0 and those with yes school support a value of 1.</p>
+<p>If we look at the factor levels for the school support column we see that no is level 1 and yes level two. ‘lm()’ will always code predictors as the change from level 1 to level 2 (i.e. level 1 is coded as 0, and level 2 as 1).")</p>
+<pre class="r"><code>levels(factor(student_math$schoolsup))</code></pre>
+<pre><code>## [1] &quot;no&quot;  &quot;yes&quot;</code></pre>
+<p><strong>A6. From the regression, what would be your best guess for the first period grade for a student with no school support? What about for a student with school support?</strong></p>
+<p>The intercept estimate tells us the best estimate for first period grade when all predictor vairables have a value of 0.</p>
+<p>In this case, we only have 1 predictor (school support) and it is dummy coded so that those without school support have a value of 0.</p>
+<p>Therefore, the predicted first period grade for those without school support is 11.18 (the intercept estimate).</p>
+<p>We can also use our schoolsupportyes estimate to calculate our prediction for those with school support: Our estimate tells us that those on school support are predicted to have a first period grade that is 2.1 lower than those without school support, therefore they have a predicted grade of 9.08.</p>
+<p>Because we have a single categorical predictor, these predicted scores should also be the mean of each of the groups:</p>
+<pre class="r"><code>summarize(group_by(student_math, schoolsup),
+          mean_G1 = mean(G1))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   schoolsup mean_G1
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 no          11.2 
+## 2 yes          9.08</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
