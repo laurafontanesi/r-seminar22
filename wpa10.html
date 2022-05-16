@@ -11,7 +11,7 @@
 
 
 
-<title>Solutions to WPA1</title>
+<title>Multilevel regression</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -337,83 +337,12 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Solutions to WPA1</h1>
+<h1 class="title toc-ignore">Multilevel regression</h1>
 
 </div>
 
 
-<pre class="r"><code>library(&#39;tidyverse&#39;)
 
-con = url(&#39;https://github.com/laurafontanesi/r-seminar22/blob/main/data/movies.RData?raw=true&#39;)
-load(con)
-close(con)</code></pre>
-<p><strong>Task A</strong></p>
-<ol style="list-style-type: decimal">
-<li>Plot the relationship between: <code>imdb_rating</code>, <code>imdb_num_votes</code> and <code>audience_score</code>.</li>
-<li>Change the coloring of the scatterplot. You can either have a look <a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">here</a> or simply change the two colors in the gradients, and have a look for example <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">here</a>.</li>
-<li>Compute the regression for such relationship.</li>
-</ol>
-<pre class="r"><code>ggplot(data = movies, aes(x = imdb_rating, y = audience_score, color=imdb_num_votes)) +
-  geom_jitter() +
-  scale_colour_gradient(low = &quot;blue&quot;, high = &quot;gold&quot;, limits=range(movies[,&#39;imdb_num_votes&#39;]), trans=&#39;log&#39;) +
-  labs(x = &#39;IMDb rating&#39;, y = &quot;Audience Score&quot;, color=&quot;log(Number Votes)&quot;) +
-  ggtitle(&quot;Relationship Between Ratings, Audience Score and Number of Votes On Rotten Tomatoes&quot;)</code></pre>
-<p><img src="wpa1_solutions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code># Run a regression
-regression_fit = lm(formula = audience_score ~ imdb_num_votes + imdb_rating, 
-                    data = movies)
-
-# Print summary results
-summary(regression_fit)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = audience_score ~ imdb_num_votes + imdb_rating, data = movies)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -26.780  -6.535   0.654   5.701  52.861 
-## 
-## Coefficients:
-##                  Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    -4.221e+01  2.499e+00 -16.896   &lt;2e-16 ***
-## imdb_num_votes  6.909e-07  3.769e-06   0.183    0.855    
-## imdb_rating     1.610e+01  3.896e-01  41.322   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 10.17 on 648 degrees of freedom
-## Multiple R-squared:  0.748,  Adjusted R-squared:  0.7472 
-## F-statistic: 961.7 on 2 and 648 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><strong>Task B</strong></p>
-<ol style="list-style-type: decimal">
-<li>Plot the relationship between <code>best_actor_win</code>, <code>best_actress_win</code> and <code>audience_score</code>.</li>
-<li>Compute the ANOVA for such relationship.</li>
-</ol>
-<pre class="r"><code>ggplot(data = movies, aes(x = best_actor_win, y = audience_score, fill = best_actress_win)) +
-  geom_boxplot() +
-  labs(x = &quot;Best Actor Won Oscar&quot;, y = &quot;Audience Score&quot;, fill = &quot;Best Actress Won Oscar&quot;) +
-  ggtitle(&quot;Relationship Between Audience Score and Actors achievements&quot;)</code></pre>
-<p><img src="wpa1_solutions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code># Run an ANOVA
-anova_fit = aov(formula = audience_score ~ best_actor_win * best_actress_win, 
-                data = movies)
-
-# Print summary results
-summary(anova_fit)</code></pre>
-<pre><code>##                                  Df Sum Sq Mean Sq F value Pr(&gt;F)
-## best_actor_win                    1     87    87.0   0.212  0.645
-## best_actress_win                  1    155   155.1   0.378  0.539
-## best_actor_win:best_actress_win   1    318   317.7   0.775  0.379
-## Residuals                       647 265261   410.0</code></pre>
-<p><strong>Task C</strong></p>
-<ol style="list-style-type: decimal">
-<li>Plot the number of movies in each <code>mpaa_rating</code> category.</li>
-</ol>
-<pre class="r"><code>ggplot(data = movies, aes(x = mpaa_rating)) +
-  geom_bar() +
-  ggtitle(&quot;Number of movies in the database per mpaa_rating&quot;) +
-  labs(x = &quot;mpaa_rating&quot;, y = &quot;Count&quot;)</code></pre>
-<p><img src="wpa1_solutions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 
 
 
