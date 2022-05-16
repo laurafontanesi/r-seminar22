@@ -1,3 +1,195 @@
 ---
 title: "Solutions to WPA9"
 ---
+
+```{r}
+library(tidyverse)
+student_math = read_csv2('data/student-mat.csv')
+
+glimpse(student_math)
+```
+
+**Task A**
+
+1. Using the `student_math` dataset, create a regression object called `model_fit_1` predicting third period grade (G3) based on sex, age, internet, and failures. How do you interpret the regression output? Which variables are significantly related to third period grade?
+
+```{r}
+model_fit_1 = lm(G3 ~ sex + age + internet + failures, data = student_math)
+summary(model_fit_1)
+
+# Sex and failures predict third period grade. 
+# Men perform better than women (b = 1.04, p = 0.015), 
+# and the more failures a person has the lower their grade (b = -2.13, p<.01).
+```
+
+2. Check the model's assumptions. Which are violated?
+
+```{r}
+library(lsr)
+library(lmtest)
+
+student_math = mutate(student_math,
+                      sex_binary = case_when(sex == 'F' ~ 0,
+                                             sex == 'M' ~ 1),
+                      internet_binary = case_when(internet == 'yes' ~ 1,
+                                                  internet == 'no' ~ 0))
+
+correlate(as.data.frame(select(student_math, sex_binary, age, internet_binary, failures)), test=TRUE)
+
+res_stu = rstudent(model = model_fit_1)
+pred = model_fit_1$fitted.values
+model_checks = data.frame(pred = pred, res_stu = res_stu)
+model_checks = as_tibble(model_checks)
+
+ggplot(data = model_checks, mapping = aes(x = res_stu)) + 
+    geom_histogram(aes(y=..density..), binwidth=.1, colour="darkgrey", fill="white") +
+    labs(x = 'Studentized residuals', y='Density') + 
+    geom_density(alpha=.2, fill="red", colour="darkgrey")  +
+    geom_vline(aes(xintercept=mean(res_stu)), color="red", linetype="dashed", size=.5)
+
+ggplot(model_checks, mapping = aes(sample = res_stu)) +
+    stat_qq() + 
+    stat_qq_line()
+
+ggplot(data = model_checks, mapping = aes(x = pred, y = res_stu)) + 
+    geom_point(alpha = 0.6, size= 2) + 
+    geom_hline(yintercept=0)
+
+shapiro.test(model_checks$res_stu)
+bptest(model_fit_1)
+
+# It looks like age and failure are actually correlated.
+# This could affect interpretation of the corresponding coefficients.
+# It also looks like the residuals are not normally distriburted.
+```
+
+3. Load the `student-por.csv` in R as `student_port`. Inspect the dataset first.
+
+```{r}
+student_por = read_csv2('data/student-por.csv')
+glimpse(student_por)
+```
+
+4. Create a new regression object called `model_fit_2` using the same variables as question 1: however, this time use the portugese dataset.
+
+```{r}
+model_fit_2 = lm(G3 ~ sex + age + internet + failures, data = student_por)
+summary(model_fit_2)
+```
+
+5. What are the key differences between the beta values for the portugese dataset (`model_fit_2`) and the math dataset (`model_fit_1`)?
+
+In the portugese datset, men do worse than women (b = -0.72, p < .01), and internet actually helps performance (b = 0.93, p < .01). Failures still lower grades (b = -2.05, p < .01).
+
+**Task B**
+
+1. Using the `student_math` dataset, create a regression object called `model_fit_3` predicting first period grade (G1) based on guardian. Guardian is a nominal variable with 3 levels.
+
+```{r}
+model_fit_3 = lm(G1 ~ guardian, data = student_math)
+```
+
+2. Use `summary` to look at the output. You should see 2 predictors listed ("guardianmother" and "guardiananother"), rather than the expected 1 ("guardian"). `lm` has dummy coded your variables with "father" set as the reference group. Look at the levels of the guardian factor to see why "father" is the reference group.  How would you interpret the results? 
+
+```{r}
+summary(model_fit_3)
+```
+
+
+3. What is the predicted grade for those with a father as their guardian? Those with a mother? Those with other? Compare these to the means of each group again.
+
+We can use our three estimates to calculate these predictions. Father is a reference group/coded as 0, so the predicted grade is the intercept estimate (11.11). For the other two groups we just need to add their estimate to the intercept, therefore our predicted grade for those with a mother is 10.88 and for those with other it is 10.56.
+
+```{r}
+summarize(group_by(student_math, guardian),
+          mean_G1 = mean(G1))
+```
+
+**Task C**
+
+1. Using the `student_math` dataset, create a regression object called `model_fit_4` predicting a student's first period grade (G1) based on all variables in the dataset (*Hint*: use the notation `formula = y ~ .` to include all variables)
+
+```{r}
+model_fit_4 = lm(G1 ~ ., data = student_math)
+```
+
+2. Save the fitted values from the `model_fit_4` object as a vector called `model_4_fitted`.
+
+```{r}
+model_4_fitted = model_fit_4$fitted.values
+
+student_math$predicted_values = model_4_fitted
+```
+
+3. Using the `student_math` dataset, create a scatterplot showing the relationship between a student's first period grade (G1) and the fitted values from the model. Does the model appear to correctly fit a student's first period grade? Use `geom_abline()` with `slope=1` and `intercept=0` to plot the identity line and better answer to this question.
+
+```{r}
+ggplot(data = student_math, aes(x = G1, y = predicted_values)) +
+  geom_jitter(alpha=.5, size=1) + 
+  geom_abline(slope=1, intercept=0, color='maroon', alpha=.5) + 
+  labs(x='Actual grade', y='Predicted grade')
+
+# Yes it seems to work well. 
+# This is probably because we are including both G2 and G3 as predictors.
+```
+
+4. Create a new regression object, called `model_fit_5` which doesn't include G2 or G3 as predictors, but still includes all other variables. Save the fitted values from the `model_fit_5` object as a vector called `model_5_fitted`.
+
+```{r}
+model_fit_5 = lm(G1 ~ ., data = select(student_math, -predicted_values, -G2, -G3))
+
+model_5_fitted = model_fit_5$fitted.values
+
+student_math$predicted_values = model_5_fitted
+
+summary(model_fit_5)
+```
+
+5. Plot the predicted grades against the actual ones, as predicted by model `model_fit_5`, as in question 3. How well does the new model perform now?
+
+```{r}
+ggplot(data = student_math, aes(x = G1, y = predicted_values)) +
+  geom_jitter(alpha=.5, size=1) + 
+  geom_abline(slope=1, intercept=0, color='maroon', alpha=.5) + 
+  labs(x='Actual grade', y='Predicted grade')
+
+# It's performing a lot worse (Actually still explains like 30% of the variability so not that bad)
+```
+
+**Task D**
+
+- For each question, conduct the appropriate ANOVA. Write the conclusion in APA style. To summarize an effect in an ANOVA, use the format F(XXX, YYY) = FFF, p = PPP, where XXX is the degrees of freedom of the variable you are testing, YYY is the degrees of freedom of the residuals, FFF is the F value for the variable you are testing, and PPP is the p-value. If the p-value is less than .01, just write p < .01.
+
+- For the purposes of this class, if the p-value of the ANOVA is less than .05, conduct post-hoc tests. If you are only testing one independent variable, write APA conclusions for the post-hoc test. **If you are testing more than one independent variable in your ANOVA, you do not need to write APA style conclusions for post-hoc tests -- just comment the result.**
+
+1. Using the `student_math` dataset, was there a main effect of the school support on G1? Conduct a one-way ANOVA. If the result is significant (p < .05), conduct post-hoc tests.
+
+```{r}
+aov_1 = aov(formula = G1 ~ schoolsup,
+            data = student_math)
+
+summary(aov_1)
+
+TukeyHSD(aov_1)
+```
+There was a significant main effect of school support on the first period grade (F(1, 393) = 18.61, p < .01). Pairwise Tukey HSD tests showed significant differences between presence and absence of support (diff = -2.10, p < .01), with students with school support having on average a better grade.
+
+2. Using the `student_math` dataset, was there a main effect of the family support on G1? Conduct a one-way ANOVA. If the result is significant (p < .05), conduct post-hoc tests.
+
+```{r}
+aov_2 = aov(formula = G1 ~ famsup,
+            data = student_math)
+
+summary(aov_2)
+```
+There was no significant main effect of family support on the first period grade (F(1, 393) = 2.83, p = .09).
+
+3. Conduct a two-way ANOVA on G1 with both school support and family support as IVs. Do your results for each variable change compared to your previous one-way ANOVAs on these variables? (You do not need to give APA results or conduct post-hoc tests, just answer the question verbally).
+
+```{r}
+aov_3 = aov(formula = G1 ~ schoolsup*famsup,
+            data = student_math)
+
+summary(aov_3)
+```
+No, we would come to the same conclusions.

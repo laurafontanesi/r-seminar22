@@ -372,7 +372,7 @@ $(document).ready(function () {
 
 matthews_data = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/data_wpa4.csv&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   id = col_character(),
 ##   gender = col_double(),
@@ -396,7 +396,7 @@ matthews_data = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r
 <pre class="r"><code>demographics = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/matthews_demographics.csv&quot;)</code></pre>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_double(),
 ##   id = col_character(),
@@ -406,31 +406,31 @@ matthews_data = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r
 <pre class="r"><code>glimpse(matthews_data)</code></pre>
 <pre><code>## Rows: 190
 ## Columns: 18
-## $ id       &lt;chr&gt; &quot;R_3PtNn51LmSFdLNM&quot;, &quot;R_2AXrrg62pgFgtMV&quot;, &quot;R_cwEOX3HgnMeVQHL&quot;…
-## $ gender   &lt;dbl&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2…
-## $ age      &lt;dbl&gt; 26, 32, 25, 33, 24, 22, 47, 26, 29, 32, 29, 28, 31, 24, 25, 2…
-## $ income   &lt;dbl&gt; 7, 4, 2, 5, 1, 2, 3, 4, 1, 7, 4, 3, 2, 2, 6, 3, 2, 2, 1, 3, 3…
-## $ p1       &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0…
-## $ p2       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1…
-## $ p3       &lt;dbl&gt; 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1…
-## $ p4       &lt;dbl&gt; 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ p5       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ p6       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1…
-## $ p7       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0…
-## $ p8       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ p9       &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ p10      &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1…
-## $ task     &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1…
-## $ havemore &lt;dbl&gt; NA, NA, NA, NA, 99, NA, 95, NA, 70, 25, 50, 50, NA, NA, NA, 9…
-## $ haveless &lt;dbl&gt; 50, 25, 10, 50, NA, 20, NA, 30, NA, NA, NA, NA, 44, 20, 65, N…
-## $ pcmore   &lt;dbl&gt; 50, 75, 90, 50, 99, 80, 95, 70, 70, 25, 50, 50, 56, 80, 35, 9…</code></pre>
+## $ id       &lt;chr&gt; &quot;R_3PtNn51LmSFdLNM&quot;, &quot;R_2AXrrg62pgFgtMV&quot;, &quot;R_cwEOX3HgnMeVQHL&quot;, &quot;R_d59iPwL4W6BH8qx&quot;, &quot;R_1f3K2HrGz…
+## $ gender   &lt;dbl&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 2, …
+## $ age      &lt;dbl&gt; 26, 32, 25, 33, 24, 22, 47, 26, 29, 32, 29, 28, 31, 24, 25, 28, 20, 41, 44, 23, 49, 26, 19, 57, …
+## $ income   &lt;dbl&gt; 7, 4, 2, 5, 1, 2, 3, 4, 1, 7, 4, 3, 2, 2, 6, 3, 2, 2, 1, 3, 3, 6, 4, 5, 5, 2, 3, 2, 5, 4, 6, 7, …
+## $ p1       &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, …
+## $ p2       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, …
+## $ p3       &lt;dbl&gt; 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, …
+## $ p4       &lt;dbl&gt; 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, …
+## $ p5       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, …
+## $ p6       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, …
+## $ p7       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, …
+## $ p8       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ p9       &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, …
+## $ p10      &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, …
+## $ task     &lt;dbl&gt; 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, …
+## $ havemore &lt;dbl&gt; NA, NA, NA, NA, 99, NA, 95, NA, 70, 25, 50, 50, NA, NA, NA, 95, NA, NA, 85, NA, 45, 25, NA, 50, …
+## $ haveless &lt;dbl&gt; 50, 25, 10, 50, NA, 20, NA, 30, NA, NA, NA, NA, 44, 20, 65, NA, 50, 2, NA, 85, NA, NA, 25, NA, N…
+## $ pcmore   &lt;dbl&gt; 50, 75, 90, 50, 99, 80, 95, 70, 70, 25, 50, 50, 56, 80, 35, 95, 50, 98, 85, 15, 45, 25, 75, 50, …</code></pre>
 <pre class="r"><code>glimpse(demographics)</code></pre>
 <pre><code>## Rows: 190
 ## Columns: 4
-## $ X1     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …
-## $ id     &lt;chr&gt; &quot;R_2zOA03wY3kZPHKj&quot;, &quot;R_1f30AbYQR0D1wpt&quot;, &quot;R_2YgEERKijE2Hz6K&quot;, …
-## $ height &lt;dbl&gt; 182, 184, 175, 177, 187, 178, 168, 193, 180, 159, 160, 172, 165…
-## $ race   &lt;chr&gt; &quot;black&quot;, &quot;white&quot;, &quot;hispanic&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white…</code></pre>
+## $ X1     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,…
+## $ id     &lt;chr&gt; &quot;R_2zOA03wY3kZPHKj&quot;, &quot;R_1f30AbYQR0D1wpt&quot;, &quot;R_2YgEERKijE2Hz6K&quot;, &quot;R_1CdL2n22srUR26d&quot;, &quot;R_1HnsqBRimnK…
+## $ height &lt;dbl&gt; 182, 184, 175, 177, 187, 178, 168, 193, 180, 159, 160, 172, 165, 162, 169, 169, 167, 168, 178, 167…
+## $ race   &lt;chr&gt; &quot;black&quot;, &quot;white&quot;, &quot;hispanic&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;hispanic&quot;, &quot;w…</code></pre>
 <p>Note: do not use pipes from 1 to 4.</p>
 <ol style="list-style-type: decimal">
 <li>Currently <code>gender</code> is coded as 1 and 2. Create a new dataframe called <code>new_matthews_data</code>, in which there is a new column called <code>gender_labels</code> that codes gender as “male” and “female”. Do it using <code>mutate</code>. Then, rename the original <code>gender</code> column to <code>gender_binary</code> using <code>rename</code>. Subtract 1 to all values of <code>gender_binary</code>, so that it is coded as 0 and 1 instead of 1 and 2 using <code>mutate</code> again.</li>
@@ -490,17 +490,16 @@ summarise(group_by(new_matthews_data, income_recoded),
                               as.integer)
 head(new_matthews_data)</code></pre>
 <pre><code>## # A tibble: 6 x 21
-##   id        gender_binary   age income    p1    p2    p3    p4    p5    p6    p7
-##   &lt;chr&gt;             &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-## 1 R_3PtNn5…             1    26      7     1     1     1     1     1     1     1
-## 2 R_2AXrrg…             1    32      4     1     1     1     1     1     1     1
-## 3 R_cwEOX3…             0    25      2     0     1     1     1     1     1     1
-## 4 R_d59iPw…             0    33      5     1     1     1     1     1     1     1
-## 5 R_1f3K2H…             0    24      1     1     1     0     1     1     1     1
-## 6 R_3oN5ij…             0    22      2     1     1     0     0     1     1     1
-## # … with 10 more variables: p8 &lt;int&gt;, p9 &lt;int&gt;, p10 &lt;int&gt;, task &lt;int&gt;,
-## #   havemore &lt;int&gt;, haveless &lt;int&gt;, pcmore &lt;int&gt;, gender_labels &lt;chr&gt;,
-## #   income_lables &lt;chr&gt;, income_recoded &lt;int&gt;</code></pre>
+##   id          gender_binary   age income    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10  task havemore
+##   &lt;chr&gt;               &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;
+## 1 R_3PtNn51L…             1    26      7     1     1     1     1     1     1     1     1     1     1     0       NA
+## 2 R_2AXrrg62…             1    32      4     1     1     1     1     1     1     1     1     1     1     0       NA
+## 3 R_cwEOX3Hg…             0    25      2     0     1     1     1     1     1     1     1     0     0     0       NA
+## 4 R_d59iPwL4…             0    33      5     1     1     1     1     1     1     1     1     1     1     0       NA
+## 5 R_1f3K2HrG…             0    24      1     1     1     0     1     1     1     1     1     1     1     1       99
+## 6 R_3oN5ijzT…             0    22      2     1     1     0     0     1     1     1     1     0     1     0       NA
+## # … with 5 more variables: haveless &lt;int&gt;, pcmore &lt;int&gt;, gender_labels &lt;chr&gt;, income_lables &lt;chr&gt;,
+## #   income_recoded &lt;int&gt;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>From <code>new_matthews_data</code>, create a summary of the dataset using <code>summarise</code>, to answer the following questions: What percent of participants were female? What was the minimum, mean, and maximum <code>income</code>? What was the 25th percentile, median, and the 75th percentile of <code>age</code>? Use good names for columns.</li>
 </ol>
@@ -591,16 +590,15 @@ new_matthews_data_long = arrange(new_matthews_data_long, id)
 
 head(new_matthews_data_long)</code></pre>
 <pre><code>## # A tibble: 6 x 13
-##   id     gender_binary   age income  task havemore haveless pcmore gender_labels
-##   &lt;chr&gt;          &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;        
-## 1 R_0JL…             1    45      4     1       80       NA     80 female       
-## 2 R_0JL…             1    45      4     1       80       NA     80 female       
-## 3 R_0JL…             1    45      4     1       80       NA     80 female       
-## 4 R_0JL…             1    45      4     1       80       NA     80 female       
-## 5 R_0JL…             1    45      4     1       80       NA     80 female       
-## 6 R_0JL…             1    45      4     1       80       NA     80 female       
-## # … with 4 more variables: income_lables &lt;chr&gt;, income_recoded &lt;int&gt;,
-## #   product &lt;chr&gt;, wtp &lt;int&gt;</code></pre>
+##   id                gender_binary   age income  task havemore haveless pcmore gender_labels income_lables income_recoded
+##   &lt;chr&gt;                     &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                  &lt;int&gt;
+## 1 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 2 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 3 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 4 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 5 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 6 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## # … with 2 more variables: product &lt;chr&gt;, wtp &lt;int&gt;</code></pre>
 <p><strong>Task C</strong></p>
 <ol style="list-style-type: decimal">
 <li>Drop the <code>X1</code> column in <code>demographics</code> using <code>select</code>.</li>
@@ -624,16 +622,15 @@ head(demographics)</code></pre>
 
 head(matthews_data_all)</code></pre>
 <pre><code>## # A tibble: 6 x 15
-##   id     gender_binary   age income  task havemore haveless pcmore gender_labels
-##   &lt;chr&gt;          &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;        
-## 1 R_0JL…             1    45      4     1       80       NA     80 female       
-## 2 R_0JL…             1    45      4     1       80       NA     80 female       
-## 3 R_0JL…             1    45      4     1       80       NA     80 female       
-## 4 R_0JL…             1    45      4     1       80       NA     80 female       
-## 5 R_0JL…             1    45      4     1       80       NA     80 female       
-## 6 R_0JL…             1    45      4     1       80       NA     80 female       
-## # … with 6 more variables: income_lables &lt;chr&gt;, income_recoded &lt;int&gt;,
-## #   product &lt;chr&gt;, wtp &lt;int&gt;, height &lt;dbl&gt;, race &lt;chr&gt;</code></pre>
+##   id                gender_binary   age income  task havemore haveless pcmore gender_labels income_lables income_recoded
+##   &lt;chr&gt;                     &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                  &lt;int&gt;
+## 1 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 2 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 3 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 4 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 5 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## 6 R_0JLtfRpOyh8pOCN             1    45      4     1       80       NA     80 female        35,001–50,000              2
+## # … with 4 more variables: product &lt;chr&gt;, wtp &lt;int&gt;, height &lt;dbl&gt;, race &lt;chr&gt;</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Calculate the mean <code>wtp</code> per subject using <code>group_by</code>. You can use pipes or not. Called the resulting dataframe <code>mean_matthews_data_all</code>. This should have as many rows as the number of subjects and 2 columns (<code>id</code> and mean wtp). Add as a third and fourth columns <code>heigth</code> and <code>race</code> using one of the join functions.</li>
 </ol>

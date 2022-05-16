@@ -430,8 +430,7 @@ print(v)</code></pre>
 <pre class="r"><code>print(y)</code></pre>
 <pre><code>##  [1] 10.4  5.6  3.1  6.4 21.7  0.0 10.4  5.6  3.1  6.4 21.7</code></pre>
 <pre class="r"><code>w = 2*x + y + 1</code></pre>
-<pre><code>## Warning in 2 * x + y: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in 2 * x + y: longer object length is not a multiple of shorter object length</code></pre>
 <pre class="r"><code>print(w)</code></pre>
 <pre><code>##  [1] 32.2 17.8 10.3 20.2 66.1 21.8 22.6 12.8 16.9 50.8 43.5</code></pre>
 <p>It gives us the Warning that <code>y</code> (the longest object, of lenght 11) is not a multiple of <code>x</code> (the shortest, with length 5).</p>
@@ -452,8 +451,7 @@ print(v)</code></pre>
 <pre class="r"><code>range(y)</code></pre>
 <pre><code>## [1]  0.0 21.7</code></pre>
 <pre class="r"><code>log(y)</code></pre>
-<pre><code>##  [1] 2.341806 1.722767 1.131402 1.856298 3.077312     -Inf 2.341806 1.722767
-##  [9] 1.131402 1.856298 3.077312</code></pre>
+<pre><code>##  [1] 2.341806 1.722767 1.131402 1.856298 3.077312     -Inf 2.341806 1.722767 1.131402 1.856298 3.077312</code></pre>
 <pre class="r"><code>length(y)</code></pre>
 <pre><code>## [1] 11</code></pre>
 <pre class="r"><code>sort(y)</code></pre>
@@ -663,16 +661,15 @@ print(x)</code></pre>
           &quot;nsw&quot;, &quot;wa&quot;, &quot;sa&quot;, &quot;act&quot;, &quot;nsw&quot;, &quot;vic&quot;, &quot;vic&quot;, &quot;act&quot;)
 
 sort(state)</code></pre>
-<pre><code>##  [1] &quot;act&quot; &quot;act&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nt&quot;  &quot;nt&quot;  &quot;qld&quot; &quot;qld&quot;
-## [13] &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot;  &quot;tas&quot; &quot;tas&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot;
-## [25] &quot;vic&quot; &quot;vic&quot; &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;</code></pre>
+<pre><code>##  [1] &quot;act&quot; &quot;act&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nsw&quot; &quot;nt&quot;  &quot;nt&quot;  &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;qld&quot; &quot;sa&quot;  &quot;sa&quot;  &quot;sa&quot; 
+## [19] &quot;sa&quot;  &quot;tas&quot; &quot;tas&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;vic&quot; &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;  &quot;wa&quot;</code></pre>
 <p>Notice that in the case of a character vector, “sorted” means sorted in alphabetical order.</p>
 <p>A factor is similarly created using the <code>factor()</code> function:</p>
 <pre class="r"><code>state_factor = factor(state)
 
 print(state_factor)</code></pre>
-<pre><code>##  [1] tas sa  qld nsw nsw nt  wa  wa  qld vic nsw vic qld qld sa  tas sa  nt  wa 
-## [20] vic qld nsw nsw wa  sa  act nsw vic vic act
+<pre><code>##  [1] tas sa  qld nsw nsw nt  wa  wa  qld vic nsw vic qld qld sa  tas sa  nt  wa  vic qld nsw nsw wa  sa  act nsw
+## [28] vic vic act
 ## Levels: act nsw nt qld sa tas vic wa</code></pre>
 <p>To find out the levels of a factor the function <code>levels()</code> can be used.</p>
 <pre class="r"><code>levels(state_factor)</code></pre>
@@ -826,12 +823,9 @@ print(df)</code></pre>
 <div id="get-and-change-column-names" class="section level2">
 <h2>10.3 Get and change column names</h2>
 <pre class="r"><code>colnames(df)</code></pre>
-<pre><code>## [1] &quot;n&quot;                                      
-## [2] &quot;s&quot;                                      
-## [3] &quot;b&quot;                                      
-## [4] &quot;first&quot;                                  
-## [5] &quot;second&quot;                                 
-## [6] &quot;seq(from = 700, by = 5, length.out = 3)&quot;</code></pre>
+<pre><code>## [1] &quot;n&quot;                                       &quot;s&quot;                                      
+## [3] &quot;b&quot;                                       &quot;first&quot;                                  
+## [5] &quot;second&quot;                                  &quot;seq(from = 700, by = 5, length.out = 3)&quot;</code></pre>
 <pre class="r"><code>colnames(df) = c(&quot;n&quot;, &quot;s&quot;, &quot;b&quot;, &quot;first&quot;, &quot;second&quot;, &quot;third&quot;)
 
 print(df)</code></pre>
@@ -1022,8 +1016,7 @@ design_final</code></pre>
 </tbody>
 </table>
 <pre class="r"><code>runif(n=10, min=1, max=10)</code></pre>
-<pre><code>##  [1] 3.616166 3.146535 9.039520 2.549289 2.429659 7.060039 1.861648 4.280454
-##  [9] 2.053068 7.363585</code></pre>
+<pre><code>##  [1] 3.616166 3.146535 9.039520 2.549289 2.429659 7.060039 1.861648 4.280454 2.053068 7.363585</code></pre>
 <pre class="r"><code>x = rnorm(n=20, mean=20, sd=5)
 
 mean(x)</code></pre>
