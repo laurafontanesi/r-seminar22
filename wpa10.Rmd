@@ -1,3 +1,110 @@
 ---
 title: "Multilevel regression"
 ---
+
+Open RStudio.
+
+Open a new R script in R and **save it as** `wpa_10_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Assignment: WPA 10
+# Name: Laura Fontanesi
+# Date: 17 May 2022
+```
+
+Download the `Bressoux Data AnPsycho.xls` dataset from the following OSF repository: https://osf.io/q7zph/.
+Load it into R.
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+data = read_excel('data/Bressoux Data AnPsycho.xls')
+
+glimpse(data)
+```
+
+This dataset contains the beginning and end of year score at standardized French and Math tests in 16 different French psrimary schools. It comes with additional demographic and school information.
+
+Let's say that we are interested in understanding the relationship between the beginning and end of the year scores.
+
+By simply plotting them using scatterplots, we see that there likely is a strong relationship between the 2:
+
+```{r}
+ggplot(data = data, mapping = aes(x = MATH3, y = MATH4)) + 
+    geom_point() + 
+    geom_smooth(method='lm') +
+    ggtitle("Beginning and end of the year math scores")
+
+ggplot(data = data, mapping = aes(x = FRAN3, y = FRAN4)) + 
+    geom_point() + 
+    geom_smooth(method='lm') +
+    ggtitle("Beginning and end of the year French scores")
+```
+
+However, as we mentioned in the lecture on regression models, we are assuming that the residuals in the data are independent and that there is homogeneity of variance. These assumptions are likely violated when we collect data in groups, as in this example. Here, the data were collected across different schools and classes. What tells us that the effect we are looking for is: 
+1) as strong across all schools (so that it makes sense to have a common slope)? 
+2) the baseline scores are the same across groups (so that it makes sense to have a common intercept)?
+
+We cannot answer these questions using a simple regression... we need a model that takes into account that the data are **hierarchical** (or nested), which means that they already have a structure, since they were collected in multiple levels (in this case, classes and schools), and that they are therefore not all interchangeable. These models are called, indeed, hierarchical or multilevel models (https://en.wikipedia.org/wiki/Multilevel_model). The package in R to fit such models is `lme4`.
+
+**Note**: By using the `facet_grid` function in `ggplot`, we can already have an idea of potential differences in slopes and intercepts across schools, but the more complex the models and the more levels there are, this might not be enough.
+
+```{r}
+ggplot(data = data, mapping = aes(x = MATH3, y = MATH4)) + 
+    geom_point() + 
+    geom_smooth(method='lm') +
+    facet_grid(~ ECOLE2)
+
+ggplot(data = data, mapping = aes(x = FRAN3, y = FRAN4)) + 
+    geom_point() + 
+    geom_smooth(method='lm') +
+    facet_grid(~ ECOLE2)
+```
+
+# Types of models
+
+Multilevel models differ according to whether parameter values (slopes and intercept parameters) are fixed or random. **Fixed parameters** are composed of a constant over all the groups, whereas a **random parameter** has a different value for each of the groups. 
+
+Here an overview also on more complex models: https://rpsychologist.com/r-guide-longitudinal-lme-lmer
+
+```{r}
+library(lme4)
+
+lm(MATH4 ~ MATH3, data = data)
+
+# Run a random intercept model
+randintmodel = lmer(MATH4 ~ MATH3 + (1 | ECOLE2), data = data)
+
+summary(randintmodel)
+```
+
+The output of lmer consists of three parts:
+1. The first part under Formula: and Data: reports a range of summary statistics (AIC, BIC, LogLik,…). 
+2. The second part under Random effects: summarises the variance and standard deviation of each random effect (including the level 1 model residuals). Underneath the random effects table, the total number of observations is provided along with the number of units (or groups) for each higher level in the model. Here, schools are our only higher level and the output reports that we have 16 different schools.
+3. The final part of the output is the Fixed effects: table which reports the parameter estimate (Estimate) standard error (Std. Error) and t-value (t value), for each parameter in the model. For models with more than one fixed part explanatory variable (including the intercept), a correlation table between these variables is also provided underneath the table of parameter estimates.
+
+```{r}
+lm(MATH4 ~ 0 + MATH3, data = data)
+
+# Run a random slope model
+randslopemodel = lmer(MATH4 ~ MATH3 + (0 + MATH3 | ECOLE2), data = data)
+
+summary(randslopemodel)
+
+# Run a random intercept & slope model
+randintslopemodel = lmer(MATH4 ~ MATH3 + (MATH3 | ECOLE2), data = data)
+
+summary(randintslopemodel)
+```
+
+# Now it's your turn
+
+1. Create a new variable in the dataset, called `improvement_math`, which is the difference between `MATH4` and `MATH3`; and `improvement_french` which is the difference between `FRAN4` and `FRAN3`.
+2. Run a multilevel model (separately for math and french), in which the improvement in math and french is predicted by at least 2 variables of your choice in the dataset, and that takes into account the school level. Run a random slope model, a random intercept model, and a random slope and intercept model.
+
+3. (extra) Collapse the data across classrooms. Can you look at the effect of the number of student per classrrom on the improvements of math and french, taking into account the school level as well?

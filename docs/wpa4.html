@@ -419,100 +419,100 @@ survey_data_raw = read_spss(&quot;data/ccam_original.sav&quot;)</code></pre>
 <pre class="r"><code>glimpse(survey_data_raw)</code></pre>
 <pre><code>## Rows: 20,024
 ## Columns: 54
-## $ case_ID                     &lt;dbl&gt; 2, 3, 5, 6, 7, 8, 9, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, …
-## $ wave                        &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ year                        &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ weight_wave                 &lt;dbl&gt; 0.54, 0.85, 0.49, 0.29, 1.29, 2.56, 0.23, 0.82, 0.38, 0.35, 0.91, 1.01, 0.82,…
-## $ weight_aggregate            &lt;dbl&gt; 0.29392628, 0.46266174, 0.26671088, 0.15784930, 0.70215723, 1.39342829, 0.125…
-## $ happening                   &lt;dbl+lbl&gt; 3, 2, 2, 3, 3, 2, 3, 1, 1, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 1, 3, 3, 3…
-## $ cause_original              &lt;dbl+lbl&gt; 1, 1, 2, 2, 1, 2, 1, 1, 4, 2, 1, 1, 1, 1, 3, 2, 1, 1, 1, 3, 1, 2, 2, 2, 1…
-## $ cause_other_text            &lt;chr&gt; &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;both of the above&quot;, …
-## $ cause_recoded               &lt;dbl+lbl&gt; 6, 6, 4, 4, 6, 4, 6, 6, 3, 4, 6, 6, 6, 6, 5, 4, 6, 6, 6, 5, 6, 4, 4, 4, 6…
-## $ sci_consensus               &lt;dbl+lbl&gt; 4, 1, 2, 4, 2, 2, 2, 3, 2, 4, 1, 2, 4, 4, 4, 2, 2, 1, 4, 4, 4, 2, 2, 2, 4…
-## $ worry                       &lt;dbl+lbl&gt; 3, 2, 1, 3, 3, 2, 3, 2, 1, 3, 2, 3, 3, 3, 4, 2, 4, 2, 4, 1, 3, 1, 2, 2, 2…
-## $ harm_personally             &lt;dbl+lbl&gt; 2, 2, 1, 2, 0, 0, 2, 3, 1, 0, 0, 1, 3, 2, 4, 2, 3, 3, 3, 1, 3, 1, 2, 2, 1…
-## $ harm_US                     &lt;dbl+lbl&gt;  3, -1,  1,  2,  0,  0,  3,  3,  1,  0,  0,  0,  3,  2,  4,  2,  3,  3,  …
-## $ harm_dev_countries          &lt;dbl+lbl&gt; 4, 2, 1, 3, 0, 0, 4, 3, 1, 0, 0, 0, 4, 2, 4, 2, 4, 0, 3, 1, 4, 1, 2, 2, 3…
-## $ harm_future_gen             &lt;dbl+lbl&gt;  4,  3,  1,  3,  0,  0,  4,  3,  1,  4,  0,  0,  4,  3,  4,  3,  4,  0,  …
-## $ harm_plants_animals         &lt;dbl+lbl&gt; 4, 3, 1, 3, 3, 0, 4, 3, 1, 4, 0, 3, 4, 2, 4, 3, 4, 3, 4, 1, 4, 1, 2, 3, 3…
-## $ when_harm_US                &lt;dbl+lbl&gt; 5, 3, 1, 4, 2, 2, 5, 4, 1, 3, 3, 3, 5, 4, 5, 2, 5, 6, 6, 1, 6, 1, 2, 2, 4…
-## $ reg_CO2_pollutant           &lt;dbl+lbl&gt;  4,  3,  2,  3,  3,  1,  3,  2,  2,  3,  3,  4,  4,  3,  3,  2,  3,  4,  …
-## $ reg_utilities               &lt;dbl+lbl&gt;  4,  3,  1,  4,  1,  1,  2,  2,  2,  4,  3,  1,  4,  3,  2,  2,  3,  1,  …
-## $ fund_research               &lt;dbl+lbl&gt;  4,  3,  1,  4,  4,  3,  4,  2,  3,  4,  3,  1,  3,  3,  4,  3,  4,  3,  …
-## $ reg_coal_emissions          &lt;dbl+lbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ discuss_GW                  &lt;dbl+lbl&gt; 3, 2, 1, 2, 1, 2, 3, 2, 3, 3, 2, 2, 2, 1, 3, 2, 2, 1, 3, 1, 4, 1, 2, 2, 2…
-## $ hear_GW_media               &lt;dbl+lbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ gender                      &lt;dbl+lbl&gt; 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2…
-## $ age                         &lt;dbl&gt; 78, 45, 54, 71, 26, 29, 29, 34, 46, 60, 65, 67, 68, 60, 63, 32, 44, 76, 38, 4…
-## $ age_category                &lt;dbl+lbl&gt; 3, 2, 2, 3, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 3, 1, 2, 3, 2, 2, 2, 3, 2, 1, 3…
-## $ generation                  &lt;dbl+lbl&gt; 5, 4, 4, 5, 2, 3, 3, 3, 4, 4, 5, 5, 5, 4, 5, 3, 4, 5, 3, 4, 3, 5, 3, 3, 5…
-## $ educ                        &lt;dbl+lbl&gt;  9,  6, 14, 13, 10, 12, 12, 12, 12, 12,  9, 14,  9, 10,  9, 13, 12,  9, 1…
-## $ educ_category               &lt;dbl+lbl&gt; 2, 1, 4, 4, 3, 4, 4, 4, 4, 4, 2, 4, 2, 3, 2, 4, 4, 2, 4, 3, 4, 2, 4, 2, 4…
-## $ income                      &lt;dbl+lbl&gt; 12,  9,  9, 16, 13, 14,  3, 12, 16, 17,  8,  7, 16,  1,  7, 16, 16,  7,  …
-## $ income_category             &lt;dbl+lbl&gt; 2, 1, 1, 3, 2, 2, 1, 2, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 1, 2, 3, 1, 2, 2, 1…
-## $ race                        &lt;dbl+lbl&gt; 1, 1, 4, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ ideology                    &lt;dbl+lbl&gt; 4, 3, 4, 4, 4, 5, 4, 2, 4, 5, 3, 4, 3, 3, 1, 4, 2, 3, 2, 4, 2, 5, 5, 3, 1…
-## $ party                       &lt;dbl+lbl&gt; 1, 5, 1, 3, 1, 3, 1, 3, 3, 1, 2, 1, 3, 2, 2, 1, 2, 2, 3, 5, 2, 1, 1, 3, 2…
-## $ party_w_leaners             &lt;dbl+lbl&gt; 1, 4, 1, 1, 1, 1, 1, 3, 3, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 4, 2, 1, 1, 1, 2…
-## $ party_x_ideo                &lt;dbl+lbl&gt;  5, -2,  5,  5,  5,  5,  5,  3,  3,  5,  2,  5,  2,  2,  1,  5,  1,  2,  …
-## $ registered_voter            &lt;dbl+lbl&gt; 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1…
-## $ region9                     &lt;dbl+lbl&gt; 5, 3, 8, 5, 6, 9, 8, 8, 2, 7, 5, 7, 2, 4, 7, 7, 4, 2, 1, 5, 8, 5, 3, 7, 5…
-## $ region4                     &lt;dbl+lbl&gt; 3, 2, 4, 3, 3, 4, 4, 4, 1, 3, 3, 3, 1, 2, 3, 3, 2, 1, 1, 3, 4, 3, 2, 3, 3…
-## $ religion                    &lt;dbl+lbl&gt;  2,  2,  4,  2,  1, 11,  4, 15,  2,  1,  2,  2,  5,  3,  1, 11,  2,  2, 1…
-## $ religion_other_nonchristian &lt;chr&gt; &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;…
-## $ evangelical                 &lt;dbl+lbl&gt; 2, 3, 2, 2, 1, 1, 2, 2, 1, 1, 2, 1, 2, 2, 3, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2…
-## $ service_attendance          &lt;dbl+lbl&gt; 5, 2, 5, 2, 5, 5, 5, 1, 5, 4, 3, 2, 2, 1, 5, 5, 5, 3, 1, 5, 3, 6, 5, 2, 2…
-## $ marit_status                &lt;dbl+lbl&gt; 2, 5, 1, 1, 1, 1, 1, 3, 1, 1, 2, 3, 1, 3, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 3…
-## $ employment                  &lt;dbl+lbl&gt; 5, 6, 4, 5, 1, 2, 1, 1, 2, 7, 1, 5, 5, 5, 1, 7, 1, 5, 1, 1, 1, 5, 1, 1, 5…
-## $ house_head                  &lt;dbl+lbl&gt; 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
-## $ house_size                  &lt;dbl&gt; 3, 2, 2, 2, 2, 3, 2, 2, 2, 4, 1, 1, 2, 1, 2, 3, 4, 2, 1, 5, 3, 3, 3, 4, 1, 1,…
-## $ house_ages0to1              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ house_ages2to5              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ house_ages6to12             &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 1, 2, 0, 0,…
-## $ house_ages13to17            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,…
-## $ house_ages18plus            &lt;dbl&gt; 3, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 2, 1, 2, 2, 2, 2, 1, 3, 2, 3, 2, 2, 1, 1,…
-## $ house_type                  &lt;dbl+lbl&gt; 1, 4, 1, 1, 1, 2, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3, 3, 2, 1, 1, 1, 1, 3…
-## $ house_own                   &lt;dbl+lbl&gt; 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1…</code></pre>
+## $ case_ID                     &lt;dbl&gt; 2, 3, 5, 6, 7, 8, 9, 11, 12, 14, 15, 16, 1…
+## $ wave                        &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ year                        &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ weight_wave                 &lt;dbl&gt; 0.54, 0.85, 0.49, 0.29, 1.29, 2.56, 0.23, …
+## $ weight_aggregate            &lt;dbl&gt; 0.2939263, 0.4626617, 0.2667109, 0.1578493…
+## $ happening                   &lt;dbl+lbl&gt; 3, 2, 2, 3, 3, 2, 3, 1, 1, 3, 3, 3, 3,…
+## $ cause_original              &lt;dbl+lbl&gt; 1, 1, 2, 2, 1, 2, 1, 1, 4, 2, 1, 1, 1,…
+## $ cause_other_text            &lt;chr&gt; &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;…
+## $ cause_recoded               &lt;dbl+lbl&gt; 6, 6, 4, 4, 6, 4, 6, 6, 3, 4, 6, 6, 6,…
+## $ sci_consensus               &lt;dbl+lbl&gt; 4, 1, 2, 4, 2, 2, 2, 3, 2, 4, 1, 2, 4,…
+## $ worry                       &lt;dbl+lbl&gt; 3, 2, 1, 3, 3, 2, 3, 2, 1, 3, 2, 3, 3,…
+## $ harm_personally             &lt;dbl+lbl&gt; 2, 2, 1, 2, 0, 0, 2, 3, 1, 0, 0, 1, 3,…
+## $ harm_US                     &lt;dbl+lbl&gt;  3, -1,  1,  2,  0,  0,  3,  3,  1,  0…
+## $ harm_dev_countries          &lt;dbl+lbl&gt; 4, 2, 1, 3, 0, 0, 4, 3, 1, 0, 0, 0, 4,…
+## $ harm_future_gen             &lt;dbl+lbl&gt; 4, 3, 1, 3, 0, 0, 4, 3, 1, 4, 0, 0, 4,…
+## $ harm_plants_animals         &lt;dbl+lbl&gt; 4, 3, 1, 3, 3, 0, 4, 3, 1, 4, 0, 3, 4,…
+## $ when_harm_US                &lt;dbl+lbl&gt; 5, 3, 1, 4, 2, 2, 5, 4, 1, 3, 3, 3, 5,…
+## $ reg_CO2_pollutant           &lt;dbl+lbl&gt; 4, 3, 2, 3, 3, 1, 3, 2, 2, 3, 3, 4, 4,…
+## $ reg_utilities               &lt;dbl+lbl&gt; 4, 3, 1, 4, 1, 1, 2, 2, 2, 4, 3, 1, 4,…
+## $ fund_research               &lt;dbl+lbl&gt; 4, 3, 1, 4, 4, 3, 4, 2, 3, 4, 3, 1, 3,…
+## $ reg_coal_emissions          &lt;dbl+lbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ discuss_GW                  &lt;dbl+lbl&gt; 3, 2, 1, 2, 1, 2, 3, 2, 3, 3, 2, 2, 2,…
+## $ hear_GW_media               &lt;dbl+lbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ gender                      &lt;dbl+lbl&gt; 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2,…
+## $ age                         &lt;dbl&gt; 78, 45, 54, 71, 26, 29, 29, 34, 46, 60, 65…
+## $ age_category                &lt;dbl+lbl&gt; 3, 2, 2, 3, 1, 1, 1, 1, 2, 3, 3, 3, 3,…
+## $ generation                  &lt;dbl+lbl&gt; 5, 4, 4, 5, 2, 3, 3, 3, 4, 4, 5, 5, 5,…
+## $ educ                        &lt;dbl+lbl&gt;  9,  6, 14, 13, 10, 12, 12, 12, 12, 12…
+## $ educ_category               &lt;dbl+lbl&gt; 2, 1, 4, 4, 3, 4, 4, 4, 4, 4, 2, 4, 2,…
+## $ income                      &lt;dbl+lbl&gt; 12,  9,  9, 16, 13, 14,  3, 12, 16, 17…
+## $ income_category             &lt;dbl+lbl&gt; 2, 1, 1, 3, 2, 2, 1, 2, 3, 3, 1, 1, 3,…
+## $ race                        &lt;dbl+lbl&gt; 1, 1, 4, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1,…
+## $ ideology                    &lt;dbl+lbl&gt; 4, 3, 4, 4, 4, 5, 4, 2, 4, 5, 3, 4, 3,…
+## $ party                       &lt;dbl+lbl&gt; 1, 5, 1, 3, 1, 3, 1, 3, 3, 1, 2, 1, 3,…
+## $ party_w_leaners             &lt;dbl+lbl&gt; 1, 4, 1, 1, 1, 1, 1, 3, 3, 1, 2, 1, 2,…
+## $ party_x_ideo                &lt;dbl+lbl&gt;  5, -2,  5,  5,  5,  5,  5,  3,  3,  5…
+## $ registered_voter            &lt;dbl+lbl&gt; 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ region9                     &lt;dbl+lbl&gt; 5, 3, 8, 5, 6, 9, 8, 8, 2, 7, 5, 7, 2,…
+## $ region4                     &lt;dbl+lbl&gt; 3, 2, 4, 3, 3, 4, 4, 4, 1, 3, 3, 3, 1,…
+## $ religion                    &lt;dbl+lbl&gt;  2,  2,  4,  2,  1, 11,  4, 15,  2,  1…
+## $ religion_other_nonchristian &lt;chr&gt; &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;…
+## $ evangelical                 &lt;dbl+lbl&gt; 2, 3, 2, 2, 1, 1, 2, 2, 1, 1, 2, 1, 2,…
+## $ service_attendance          &lt;dbl+lbl&gt; 5, 2, 5, 2, 5, 5, 5, 1, 5, 4, 3, 2, 2,…
+## $ marit_status                &lt;dbl+lbl&gt; 2, 5, 1, 1, 1, 1, 1, 3, 1, 1, 2, 3, 1,…
+## $ employment                  &lt;dbl+lbl&gt; 5, 6, 4, 5, 1, 2, 1, 1, 2, 7, 1, 5, 5,…
+## $ house_head                  &lt;dbl+lbl&gt; 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+## $ house_size                  &lt;dbl&gt; 3, 2, 2, 2, 2, 3, 2, 2, 2, 4, 1, 1, 2, 1, …
+## $ house_ages0to1              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ house_ages2to5              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ house_ages6to12             &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ house_ages13to17            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ house_ages18plus            &lt;dbl&gt; 3, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 2, 1, …
+## $ house_type                  &lt;dbl+lbl&gt; 1, 4, 1, 1, 1, 2, 3, 1, 1, 1, 1, 2, 1,…
+## $ house_own                   &lt;dbl+lbl&gt; 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1,…</code></pre>
 <pre class="r"><code># sort by one variable, and only show the first 6 values
 head(arrange(survey_data_raw, wave), 6)</code></pre>
 <pre><code>## # A tibble: 6 x 54
-##   case_ID         wave      year weight_wave weight_aggregate happening cause_original cause_other_text cause_recoded
-##     &lt;dbl&gt;    &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt; &lt;chr&gt;                &lt;dbl+lbl&gt;
-## 1       2 1 [Nov 2008]  1 [2008]        0.54            0.294 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 2       3 1 [Nov 2008]  1 [2008]        0.85            0.463 2 [Don&#39;t… 1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 3       5 1 [Nov 2008]  1 [2008]        0.49            0.267 2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 4       6 1 [Nov 2008]  1 [2008]        0.29            0.158 3 [Yes]   2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 5       7 1 [Nov 2008]  1 [2008]        1.29            0.702 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 6       8 1 [Nov 2008]  1 [2008]        2.56            1.39  2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## # … with 45 more variables: sci_consensus &lt;dbl+lbl&gt;, worry &lt;dbl+lbl&gt;, harm_personally &lt;dbl+lbl&gt;,
-## #   harm_US &lt;dbl+lbl&gt;, harm_dev_countries &lt;dbl+lbl&gt;, harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;,
-## #   when_harm_US &lt;dbl+lbl&gt;, reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;,
-## #   reg_coal_emissions &lt;dbl+lbl&gt;, discuss_GW &lt;dbl+lbl&gt;, hear_GW_media &lt;dbl+lbl&gt;, gender &lt;dbl+lbl&gt;, age &lt;dbl&gt;,
-## #   age_category &lt;dbl+lbl&gt;, generation &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, educ_category &lt;dbl+lbl&gt;, income &lt;dbl+lbl&gt;,
-## #   income_category &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;, ideology &lt;dbl+lbl&gt;, party &lt;dbl+lbl&gt;, party_w_leaners &lt;dbl+lbl&gt;,
-## #   party_x_ideo &lt;dbl+lbl&gt;, registered_voter &lt;dbl+lbl&gt;, region9 &lt;dbl+lbl&gt;, region4 &lt;dbl+lbl&gt;, …</code></pre>
+##   case_ID         wave      year weight_wave weight_aggregate happening cause_original
+##     &lt;dbl&gt;    &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt;
+## 1       2 1 [Nov 2008]  1 [2008]        0.54            0.294 3 [Yes]   1 [Caused mos…
+## 2       3 1 [Nov 2008]  1 [2008]        0.85            0.463 2 [Don&#39;t… 1 [Caused mos…
+## 3       5 1 [Nov 2008]  1 [2008]        0.49            0.267 2 [Don&#39;t… 2 [Caused mos…
+## 4       6 1 [Nov 2008]  1 [2008]        0.29            0.158 3 [Yes]   2 [Caused mos…
+## 5       7 1 [Nov 2008]  1 [2008]        1.29            0.702 3 [Yes]   1 [Caused mos…
+## 6       8 1 [Nov 2008]  1 [2008]        2.56            1.39  2 [Don&#39;t… 2 [Caused mos…
+## # … with 47 more variables: cause_other_text &lt;chr&gt;, cause_recoded &lt;dbl+lbl&gt;,
+## #   sci_consensus &lt;dbl+lbl&gt;, worry &lt;dbl+lbl&gt;, harm_personally &lt;dbl+lbl&gt;,
+## #   harm_US &lt;dbl+lbl&gt;, harm_dev_countries &lt;dbl+lbl&gt;, harm_future_gen &lt;dbl+lbl&gt;,
+## #   harm_plants_animals &lt;dbl+lbl&gt;, when_harm_US &lt;dbl+lbl&gt;,
+## #   reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;,
+## #   fund_research &lt;dbl+lbl&gt;, reg_coal_emissions &lt;dbl+lbl&gt;,
+## #   discuss_GW &lt;dbl+lbl&gt;, hear_GW_media &lt;dbl+lbl&gt;, gender &lt;dbl+lbl&gt;, …</code></pre>
 <pre class="r"><code># sort by 2 variables (one in opposite order), and only show the last 10 values
 tail(arrange(survey_data_raw, wave, desc(year)), 10)</code></pre>
 <pre><code>## # A tibble: 10 x 54
-##    case_ID          wave      year weight_wave weight_aggregate happening cause_original cause_other_text cause_recoded
-##      &lt;dbl&gt;     &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt; &lt;chr&gt;                &lt;dbl+lbl&gt;
-##  1   35442 17 [Oct 2017]  9 [2017]       1.29             1.17  3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-##  2   35443 17 [Oct 2017]  9 [2017]       0.502            0.454 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-##  3   35445 17 [Oct 2017]  9 [2017]       0.879            0.794 3 [Yes]   2 [Caused mos… &quot;&quot;               4 [Caused mo…
-##  4   35446 17 [Oct 2017]  9 [2017]       0.759            0.686 3 [Yes]   2 [Caused mos… &quot;&quot;               4 [Caused mo…
-##  5   35448 17 [Oct 2017]  9 [2017]       1.39             1.25  3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-##  6   35450 17 [Oct 2017]  9 [2017]       1.35             1.22  3 [Yes]   2 [Caused mos… &quot;&quot;               4 [Caused mo…
-##  7   35451 17 [Oct 2017]  9 [2017]       0.911            0.823 3 [Yes]   3 [Other (Ple… &quot;combination of… 5 [Caused by…
-##  8   35452 17 [Oct 2017]  9 [2017]       1.04             0.936 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-##  9   35454 17 [Oct 2017]  9 [2017]       0.606            0.547 2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 10   35455 17 [Oct 2017]  9 [2017]       1.18             1.06  3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## # … with 45 more variables: sci_consensus &lt;dbl+lbl&gt;, worry &lt;dbl+lbl&gt;, harm_personally &lt;dbl+lbl&gt;,
-## #   harm_US &lt;dbl+lbl&gt;, harm_dev_countries &lt;dbl+lbl&gt;, harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;,
-## #   when_harm_US &lt;dbl+lbl&gt;, reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;,
-## #   reg_coal_emissions &lt;dbl+lbl&gt;, discuss_GW &lt;dbl+lbl&gt;, hear_GW_media &lt;dbl+lbl&gt;, gender &lt;dbl+lbl&gt;, age &lt;dbl&gt;,
-## #   age_category &lt;dbl+lbl&gt;, generation &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, educ_category &lt;dbl+lbl&gt;, income &lt;dbl+lbl&gt;,
-## #   income_category &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;, ideology &lt;dbl+lbl&gt;, party &lt;dbl+lbl&gt;, party_w_leaners &lt;dbl+lbl&gt;,
-## #   party_x_ideo &lt;dbl+lbl&gt;, registered_voter &lt;dbl+lbl&gt;, region9 &lt;dbl+lbl&gt;, region4 &lt;dbl+lbl&gt;, …</code></pre>
+##    case_ID          wave      year weight_wave weight_aggregate      happening
+##      &lt;dbl&gt;     &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl+lbl&gt;
+##  1   35442 17 [Oct 2017]  9 [2017]       1.29             1.17  3 [Yes]       
+##  2   35443 17 [Oct 2017]  9 [2017]       0.502            0.454 3 [Yes]       
+##  3   35445 17 [Oct 2017]  9 [2017]       0.879            0.794 3 [Yes]       
+##  4   35446 17 [Oct 2017]  9 [2017]       0.759            0.686 3 [Yes]       
+##  5   35448 17 [Oct 2017]  9 [2017]       1.39             1.25  3 [Yes]       
+##  6   35450 17 [Oct 2017]  9 [2017]       1.35             1.22  3 [Yes]       
+##  7   35451 17 [Oct 2017]  9 [2017]       0.911            0.823 3 [Yes]       
+##  8   35452 17 [Oct 2017]  9 [2017]       1.04             0.936 3 [Yes]       
+##  9   35454 17 [Oct 2017]  9 [2017]       0.606            0.547 2 [Don&#39;t know]
+## 10   35455 17 [Oct 2017]  9 [2017]       1.18             1.06  3 [Yes]       
+## # … with 48 more variables: cause_original &lt;dbl+lbl&gt;, cause_other_text &lt;chr&gt;,
+## #   cause_recoded &lt;dbl+lbl&gt;, sci_consensus &lt;dbl+lbl&gt;, worry &lt;dbl+lbl&gt;,
+## #   harm_personally &lt;dbl+lbl&gt;, harm_US &lt;dbl+lbl&gt;, harm_dev_countries &lt;dbl+lbl&gt;,
+## #   harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;,
+## #   when_harm_US &lt;dbl+lbl&gt;, reg_CO2_pollutant &lt;dbl+lbl&gt;,
+## #   reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;,
+## #   reg_coal_emissions &lt;dbl+lbl&gt;, discuss_GW &lt;dbl+lbl&gt;, …</code></pre>
 </div>
 <div id="select-or-drop-specific-columns-and-rows-indexing" class="section level2">
 <h2>Select or drop specific columns and rows (indexing)</h2>
@@ -537,23 +537,26 @@ survey_data = select(survey_data_raw, -all_of(columns_to_drop))</code></pre>
 <pre class="r"><code># equivalent to survey_data[200:210,]
 slice(survey_data, 200:210)</code></pre>
 <pre><code>## # A tibble: 11 x 24
-##            wave      year      happening cause_recoded sci_consensus   worry harm_personally harm_US harm_dev_countr…
-##       &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt; &lt;dbl+l&gt;       &lt;dbl+lbl&gt; &lt;dbl+l&gt;        &lt;dbl+lbl&gt;
-##  1 1 [Nov 2008]  1 [2008] 3 [Yes]        5 [Caused by… 2 [There is … 1 [Not… 1 [Not at all]  3 [A m… 3 [A moderate a…
-##  2 1 [Nov 2008]  1 [2008] 2 [Don&#39;t know] 4 [Caused mo… 2 [There is … 3 [Som… 0 [Don&#39;t know]  0 [Don… 0 [Don&#39;t know]  
-##  3 1 [Nov 2008]  1 [2008] 1 [No]         4 [Caused mo… 2 [There is … 1 [Not… 1 [Not at all]  1 [Not… 1 [Not at all]  
-##  4 1 [Nov 2008]  1 [2008] 2 [Don&#39;t know] 4 [Caused mo… 2 [There is … 2 [Not… 1 [Not at all]  1 [Not… 1 [Not at all]  
-##  5 1 [Nov 2008]  1 [2008] 1 [No]         4 [Caused mo… 2 [There is … 1 [Not… 1 [Not at all]  3 [A m… 1 [Not at all]  
-##  6 1 [Nov 2008]  1 [2008] 3 [Yes]        6 [Caused mo… 4 [Most scie… 3 [Som… 3 [A moderate … 3 [A m… 3 [A moderate a…
-##  7 1 [Nov 2008]  1 [2008] 3 [Yes]        6 [Caused mo… 4 [Most scie… 4 [Ver… 2 [Only a litt… 3 [A m… 4 [A great deal]
-##  8 1 [Nov 2008]  1 [2008] 3 [Yes]        5 [Caused by… 4 [Most scie… 3 [Som… 3 [A moderate … 3 [A m… 3 [A moderate a…
-##  9 1 [Nov 2008]  1 [2008] 3 [Yes]        6 [Caused mo… 4 [Most scie… 1 [Not… 1 [Not at all]  1 [Not… 1 [Not at all]  
-## 10 1 [Nov 2008]  1 [2008] 3 [Yes]        6 [Caused mo… 4 [Most scie… 3 [Som… 3 [A moderate … 4 [A g… 4 [A great deal]
-## 11 1 [Nov 2008]  1 [2008] 1 [No]         4 [Caused mo… 2 [There is … 1 [Not… 1 [Not at all]  1 [Not… 1 [Not at all]  
-## # … with 15 more variables: harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;, when_harm_US &lt;dbl+lbl&gt;,
-## #   reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;, discuss_GW &lt;dbl+lbl&gt;,
-## #   gender &lt;dbl+lbl&gt;, age_category &lt;dbl+lbl&gt;, educ_category &lt;dbl+lbl&gt;, income_category &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;,
-## #   party_x_ideo &lt;dbl+lbl&gt;, region4 &lt;dbl+lbl&gt;, employment &lt;dbl+lbl&gt;</code></pre>
+##            wave      year happening cause_recoded sci_consensus   worry harm_personally
+##       &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt; &lt;dbl+l&gt;       &lt;dbl+lbl&gt;
+##  1 1 [Nov 2008]  1 [2008] 3 [Yes]   5 [Caused by… 2 [There is … 1 [Not… 1 [Not at all] 
+##  2 1 [Nov 2008]  1 [2008] 2 [Don&#39;t… 4 [Caused mo… 2 [There is … 3 [Som… 0 [Don&#39;t know] 
+##  3 1 [Nov 2008]  1 [2008] 1 [No]    4 [Caused mo… 2 [There is … 1 [Not… 1 [Not at all] 
+##  4 1 [Nov 2008]  1 [2008] 2 [Don&#39;t… 4 [Caused mo… 2 [There is … 2 [Not… 1 [Not at all] 
+##  5 1 [Nov 2008]  1 [2008] 1 [No]    4 [Caused mo… 2 [There is … 1 [Not… 1 [Not at all] 
+##  6 1 [Nov 2008]  1 [2008] 3 [Yes]   6 [Caused mo… 4 [Most scie… 3 [Som… 3 [A moderate …
+##  7 1 [Nov 2008]  1 [2008] 3 [Yes]   6 [Caused mo… 4 [Most scie… 4 [Ver… 2 [Only a litt…
+##  8 1 [Nov 2008]  1 [2008] 3 [Yes]   5 [Caused by… 4 [Most scie… 3 [Som… 3 [A moderate …
+##  9 1 [Nov 2008]  1 [2008] 3 [Yes]   6 [Caused mo… 4 [Most scie… 1 [Not… 1 [Not at all] 
+## 10 1 [Nov 2008]  1 [2008] 3 [Yes]   6 [Caused mo… 4 [Most scie… 3 [Som… 3 [A moderate …
+## 11 1 [Nov 2008]  1 [2008] 1 [No]    4 [Caused mo… 2 [There is … 1 [Not… 1 [Not at all] 
+## # … with 17 more variables: harm_US &lt;dbl+lbl&gt;, harm_dev_countries &lt;dbl+lbl&gt;,
+## #   harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;,
+## #   when_harm_US &lt;dbl+lbl&gt;, reg_CO2_pollutant &lt;dbl+lbl&gt;,
+## #   reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;, discuss_GW &lt;dbl+lbl&gt;,
+## #   gender &lt;dbl+lbl&gt;, age_category &lt;dbl+lbl&gt;, educ_category &lt;dbl+lbl&gt;,
+## #   income_category &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;, party_x_ideo &lt;dbl+lbl&gt;,
+## #   region4 &lt;dbl+lbl&gt;, employment &lt;dbl+lbl&gt;</code></pre>
 <pre class="r"><code># eliminate people (i.e., rows) who didn&#39;t reply in some variables of interest (an absence of reply was coded as -1 here)
 survey_data = filter(survey_data, 
                      happening &gt; 0, 
@@ -656,10 +659,11 @@ survey_data = mutate_all(survey_data,
           quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
           max_happening=max(happening_cont))</code></pre>
 <pre><code>## # A tibble: 1 x 11
-##   count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happening
-##   &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;                &lt;dbl&gt;
-## 1 18514    -0.950             1.74       2.51             3.28      5.79        -0.500                 1.94
-## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
+##   count min_worry quantile25_worry mean_worry quantile75_worry max_worry
+##   &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+## 1 18514    -0.950             1.74       2.51             3.28      5.79
+## # … with 5 more variables: min_happening &lt;dbl&gt;, quantile25_happening &lt;dbl&gt;,
+## #   mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 <pre class="r"><code>summarise(survey_data,
           mean_happening = mean(happening))</code></pre>
 <pre><code>## # A tibble: 1 x 1
@@ -682,18 +686,19 @@ summarise(grouped_data,
           quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
           max_happening=max(happening_cont))</code></pre>
 <pre><code>## # A tibble: 9 x 12
-##    year count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happening
-##   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;                &lt;dbl&gt;
-## 1  2008  2130    -0.403             1.91       2.61             3.34      5.57        -0.367                 2.10
-## 2  2010  1993    -0.950             1.63       2.41             3.18      5.21        -0.440                 1.69
-## 3  2011  1946    -0.631             1.70       2.45             3.20      5.31        -0.500                 1.82
-## 4  2012  2050    -0.793             1.74       2.51             3.26      5.46        -0.388                 1.97
-## 5  2013  1858    -0.586             1.68       2.46             3.23      5.08        -0.326                 1.88
-## 6  2014  2282    -0.399             1.67       2.46             3.22      5.50        -0.495                 1.84
-## 7  2015  1263    -0.472             1.69       2.44             3.17      5.79        -0.408                 1.76
-## 8  2016  2427    -0.124             1.81       2.57             3.38      5.79        -0.268                 2.08
-## 9  2017  2565    -0.358             1.80       2.62             3.45      5.43        -0.425                 2.09
-## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
+##    year count min_worry quantile25_worry mean_worry quantile75_worry max_worry
+##   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2008  2130    -0.403             1.91       2.61             3.34      5.57
+## 2  2010  1993    -0.950             1.63       2.41             3.18      5.21
+## 3  2011  1946    -0.631             1.70       2.45             3.20      5.31
+## 4  2012  2050    -0.793             1.74       2.51             3.26      5.46
+## 5  2013  1858    -0.586             1.68       2.46             3.23      5.08
+## 6  2014  2282    -0.399             1.67       2.46             3.22      5.50
+## 7  2015  1263    -0.472             1.69       2.44             3.17      5.79
+## 8  2016  2427    -0.124             1.81       2.57             3.38      5.79
+## 9  2017  2565    -0.358             1.80       2.62             3.45      5.43
+## # … with 5 more variables: min_happening &lt;dbl&gt;, quantile25_happening &lt;dbl&gt;,
+## #   mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 <div id="split-character-columns" class="section level2">
 <h2>Split character columns</h2>
@@ -754,11 +759,12 @@ summarise(grouped_data,
           quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
           max_happening=max(happening_cont))</code></pre>
 <pre><code>## # A tibble: 2 x 12
-##   working     count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happ…
-##   &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Not working  7996    -0.793             1.70       2.50             3.30      5.79        -0.440             1.92
-## 2 Working     10518    -0.950             1.77       2.52             3.27      5.79        -0.500             1.95
-## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
+##   working     count min_worry quantile25_worry mean_worry quantile75_worry max_worry
+##   &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Not working  7996    -0.793             1.70       2.50             3.30      5.79
+## 2 Working     10518    -0.950             1.77       2.52             3.27      5.79
+## # … with 5 more variables: min_happening &lt;dbl&gt;, quantile25_happening &lt;dbl&gt;,
+## #   mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 <pre class="r"><code># first filter, and then get summary statistics per group
 not_working_data = filter(survey_data, working == &quot;Not working&quot;)
 
@@ -777,15 +783,16 @@ summarise(grouped_data,
           quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
           max_happening=max(happening_cont))</code></pre>
 <pre><code>## # A tibble: 5 x 12
-##   working_type count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening
-##   &lt;chr&gt;        &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-## 1 disabled      1259    -0.793             1.85       2.65             3.48      4.98        -0.326
-## 2 looking       1112    -0.286             1.85       2.60             3.35      5.37        -0.123
-## 3 other         1370    -0.472             1.59       2.45             3.31      5.43        -0.440
-## 4 retired       4099    -0.586             1.65       2.45             3.23      5.79        -0.408
-## 5 temporary      156    -0.333             2.03       2.62             3.22      5.19        -0.204
-## # … with 4 more variables: quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;,
-## #   max_happening &lt;dbl&gt;</code></pre>
+##   working_type count min_worry quantile25_worry mean_worry quantile75_worry
+##   &lt;chr&gt;        &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+## 1 disabled      1259    -0.793             1.85       2.65             3.48
+## 2 looking       1112    -0.286             1.85       2.60             3.35
+## 3 other         1370    -0.472             1.59       2.45             3.31
+## 4 retired       4099    -0.586             1.65       2.45             3.23
+## 5 temporary      156    -0.333             2.03       2.62             3.22
+## # … with 6 more variables: max_worry &lt;dbl&gt;, min_happening &lt;dbl&gt;,
+## #   quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;,
+## #   quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 <div id="merge-character-columns" class="section level2">
 <h2>Merge character columns</h2>
@@ -822,17 +829,19 @@ summarise(grouped_data,
           quantile75_happening=quantile(happening_cont, .75, na.rm = TRUE),
           max_happening=max(happening_cont))</code></pre>
 <pre><code>## # A tibble: 8 x 12
-##   race_gender           count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening quantile25_happ…
-##   &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 black non hisp_female   875  -0.793               1.88       2.59             3.33      5.32       -0.0238             2.25
-## 2 black non hisp_male     724  -0.111               1.86       2.59             3.30      5.19       -0.150              2.15
-## 3 hisp_female             875  -0.0312              2.23       2.86             3.57      5.32       -0.367              2.17
-## 4 hisp_male               919  -0.950               1.93       2.68             3.47      5.31        0.0384             2.11
-## 5 other non hisp_female   562  -0.289               2.09       2.70             3.43      5.43       -0.440              2.09
-## 6 other non hisp_male     570   0.00646             1.78       2.57             3.39      5.79       -0.500              2.08
-## 7 white non hisp_female  7000  -0.586               1.82       2.56             3.29      5.79       -0.495              1.98
-## 8 white non hisp_male    6989  -0.631               1.53       2.36             3.15      5.57       -0.408              1.73
-## # … with 3 more variables: mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
+##   race_gender           count min_worry quantile25_worry mean_worry quantile75_worry
+##   &lt;chr&gt;                 &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+## 1 black non hisp_female   875  -0.793               1.88       2.59             3.33
+## 2 black non hisp_male     724  -0.111               1.86       2.59             3.30
+## 3 hisp_female             875  -0.0312              2.23       2.86             3.57
+## 4 hisp_male               919  -0.950               1.93       2.68             3.47
+## 5 other non hisp_female   562  -0.289               2.09       2.70             3.43
+## 6 other non hisp_male     570   0.00646             1.78       2.57             3.39
+## 7 white non hisp_female  7000  -0.586               1.82       2.56             3.29
+## 8 white non hisp_male    6989  -0.631               1.53       2.36             3.15
+## # … with 6 more variables: max_worry &lt;dbl&gt;, min_happening &lt;dbl&gt;,
+## #   quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;,
+## #   quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 <p>Or you can just use 2 grouping variables to compute statistics:</p>
 <pre class="r"><code>grouped_data = group_by(survey_data, race, gender)
 
@@ -851,18 +860,19 @@ summarise(grouped_data,
 <pre><code>## `summarise()` has grouped output by &#39;race&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 8 x 13
 ## # Groups:   race [4]
-##   race           gender count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening
-##   &lt;chr&gt;          &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-## 1 black non hisp female   875  -0.793               1.88       2.59             3.33      5.32       -0.0238
-## 2 black non hisp male     724  -0.111               1.86       2.59             3.30      5.19       -0.150 
-## 3 hisp           female   875  -0.0312              2.23       2.86             3.57      5.32       -0.367 
-## 4 hisp           male     919  -0.950               1.93       2.68             3.47      5.31        0.0384
-## 5 other non hisp female   562  -0.289               2.09       2.70             3.43      5.43       -0.440 
-## 6 other non hisp male     570   0.00646             1.78       2.57             3.39      5.79       -0.500 
-## 7 white non hisp female  7000  -0.586               1.82       2.56             3.29      5.79       -0.495 
-## 8 white non hisp male    6989  -0.631               1.53       2.36             3.15      5.57       -0.408 
-## # … with 4 more variables: quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;,
-## #   max_happening &lt;dbl&gt;</code></pre>
+##   race           gender count min_worry quantile25_worry mean_worry quantile75_worry
+##   &lt;chr&gt;          &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+## 1 black non hisp female   875  -0.793               1.88       2.59             3.33
+## 2 black non hisp male     724  -0.111               1.86       2.59             3.30
+## 3 hisp           female   875  -0.0312              2.23       2.86             3.57
+## 4 hisp           male     919  -0.950               1.93       2.68             3.47
+## 5 other non hisp female   562  -0.289               2.09       2.70             3.43
+## 6 other non hisp male     570   0.00646             1.78       2.57             3.39
+## 7 white non hisp female  7000  -0.586               1.82       2.56             3.29
+## 8 white non hisp male    6989  -0.631               1.53       2.36             3.15
+## # … with 6 more variables: max_worry &lt;dbl&gt;, min_happening &lt;dbl&gt;,
+## #   quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;,
+## #   quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <div id="pipes" class="section level1">
@@ -975,15 +985,16 @@ survey_data = survey_data_raw %&gt;%
               max_happening=max(happening_cont))</code></pre>
 <pre class="r"><code>print(survey_data)</code></pre>
 <pre><code>## # A tibble: 5 x 12
-##   working_type count min_worry quantile25_worry mean_worry quantile75_worry max_worry min_happening
-##   &lt;chr&gt;        &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-## 1 disabled      1259    -0.371             1.83       2.65             3.47      5.81        0.0177
-## 2 looking       1112    -0.258             1.91       2.60             3.34      5.41       -0.103 
-## 3 other         1370    -0.206             1.66       2.44             3.20      5.11       -0.426 
-## 4 retired       4099    -0.341             1.64       2.44             3.23      5.60       -0.217 
-## 5 temporary      156     0.376             1.98       2.65             3.32      4.93       -0.505 
-## # … with 4 more variables: quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;, quantile75_happening &lt;dbl&gt;,
-## #   max_happening &lt;dbl&gt;</code></pre>
+##   working_type count min_worry quantile25_worry mean_worry quantile75_worry
+##   &lt;chr&gt;        &lt;int&gt;     &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+## 1 disabled      1259    -0.371             1.83       2.65             3.47
+## 2 looking       1112    -0.258             1.91       2.60             3.34
+## 3 other         1370    -0.206             1.66       2.44             3.20
+## 4 retired       4099    -0.341             1.64       2.44             3.23
+## 5 temporary      156     0.376             1.98       2.65             3.32
+## # … with 6 more variables: max_worry &lt;dbl&gt;, min_happening &lt;dbl&gt;,
+## #   quantile25_happening &lt;dbl&gt;, mean_happening &lt;dbl&gt;,
+## #   quantile75_happening &lt;dbl&gt;, max_happening &lt;dbl&gt;</code></pre>
 </div>
 <div id="join-dataframes" class="section level1">
 <h1>4. Join dataframes</h1>
@@ -1091,19 +1102,19 @@ print(new_info)</code></pre>
 ## * student -&gt; student...7</code></pre>
 <pre class="r"><code>print(fake_data)</code></pre>
 <pre><code>## # A tibble: 30 x 9
-##    student...1   age score_wpa1 score_wpa2 score_wpa3 score_wpa4 student...7 score_wpa5 gender
-##          &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;int&gt;      &lt;dbl&gt;  &lt;int&gt;
-##  1           1    35       6.57       5.79       3.41       4.72           1       4.73      0
-##  2           2    30       7.31       6.50       3.80       5.33           2       4.16      1
-##  3           3    31       6.74       6.08       2.59       4.54           3       3.61      0
-##  4           4    25       9.05       8.05       1.79       6.21           4       5.06      1
-##  5           5    26       8.34       7.50       4.22       6.20           5       5.74      1
-##  6           6    30       6.21       5.61       1.65       4.34           6       4.17      0
-##  7           7    31       6.38       5.70       4.85       4.66           7       2.44      0
-##  8           8    34       6.82       6.00       2.12       4.85           8       4.61      0
-##  9           9    42       8.63       7.81       5.12       5.99           9       3.16      0
-## 10          10    31       6.87       6.16       4.27       4.72          10       1.95      1
-## # … with 20 more rows</code></pre>
+##    student...1   age score_wpa1 score_wpa2 score_wpa3 score_wpa4 student...7
+##          &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;int&gt;
+##  1           1    35       6.57       5.79       3.41       4.72           1
+##  2           2    30       7.31       6.50       3.80       5.33           2
+##  3           3    31       6.74       6.08       2.59       4.54           3
+##  4           4    25       9.05       8.05       1.79       6.21           4
+##  5           5    26       8.34       7.50       4.22       6.20           5
+##  6           6    30       6.21       5.61       1.65       4.34           6
+##  7           7    31       6.38       5.70       4.85       4.66           7
+##  8           8    34       6.82       6.00       2.12       4.85           8
+##  9           9    42       8.63       7.81       5.12       5.99           9
+## 10          10    31       6.87       6.16       4.27       4.72          10
+## # … with 20 more rows, and 2 more variables: score_wpa5 &lt;dbl&gt;, gender &lt;int&gt;</code></pre>
 <p>However, a better way to join dataframes is to use the <code>join</code> functions, as these allow us to join dataframes based on specific ID. This is very important when there are repeating info and/or missing info:</p>
 <pre class="r"><code>N = 15
 mean_score_students = runif(N, 5, 10)
@@ -1183,28 +1194,30 @@ print(new_info)</code></pre>
 ## 20      20       4.11      1</code></pre>
 <pre class="r"><code>full_join(first_batch, second_batch, by=&#39;student&#39;)</code></pre>
 <pre><code>## # A tibble: 20 x 10
-##    student age.x score_wpa1.x score_wpa2.x score_wpa3 score_wpa4 age.y score_wpa1.y score_wpa2.y score_wpa5
-##      &lt;int&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
-##  1       1    24         6.15         5.69       2.36       4.30    NA        NA           NA         NA   
-##  2       2    20         9.40         8.57       6.23       6.63    NA        NA           NA         NA   
-##  3       3    34         5.09         4.44       3.47       3.42    NA        NA           NA         NA   
-##  4       4    32         8.23         7.50       3.91       5.57    NA        NA           NA         NA   
-##  5       5    37         5.06         4.60       2.45       3.84    NA        NA           NA         NA   
-##  6       6    23         6.08         5.49       3.62       4.06    NA        NA           NA         NA   
-##  7       7    31         5.76         5.27       3.25       4.15    NA        NA           NA         NA   
-##  8       8    29         6.74         6.14       2.66       4.78    NA        NA           NA         NA   
-##  9       9    30         7.01         6.33       3.25       4.90    NA        NA           NA         NA   
-## 10      10    28         5.75         5.09       3.99       4.01    NA        NA           NA         NA   
-## 11      11    32         5.83         5.17       3.45       4.19    NA        NA           NA         NA   
-## 12      12    32         9.20         8.24       4.30       6.45    NA        NA           NA         NA   
-## 13      13    34         9.14         8.19       4.27       6.31    NA        NA           NA         NA   
-## 14      14    29         9.01         8.08       3.30       6.34    NA        NA           NA         NA   
-## 15      15    35         7.02         6.31       2.44       4.83    NA        NA           NA         NA   
-## 16      16    NA        NA           NA         NA         NA       28         8.32         7.50       4.38
-## 17      17    NA        NA           NA         NA         NA       35         9.28         8.21       3.79
-## 18      18    NA        NA           NA         NA         NA       33         9.13         8.16       4.11
-## 19      19    NA        NA           NA         NA         NA       34         8.96         8.04       4.07
-## 20      20    NA        NA           NA         NA         NA       22         8.95         7.95       3.90</code></pre>
+##    student age.x score_wpa1.x score_wpa2.x score_wpa3 score_wpa4 age.y
+##      &lt;int&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+##  1       1    24         6.15         5.69       2.36       4.30    NA
+##  2       2    20         9.40         8.57       6.23       6.63    NA
+##  3       3    34         5.09         4.44       3.47       3.42    NA
+##  4       4    32         8.23         7.50       3.91       5.57    NA
+##  5       5    37         5.06         4.60       2.45       3.84    NA
+##  6       6    23         6.08         5.49       3.62       4.06    NA
+##  7       7    31         5.76         5.27       3.25       4.15    NA
+##  8       8    29         6.74         6.14       2.66       4.78    NA
+##  9       9    30         7.01         6.33       3.25       4.90    NA
+## 10      10    28         5.75         5.09       3.99       4.01    NA
+## 11      11    32         5.83         5.17       3.45       4.19    NA
+## 12      12    32         9.20         8.24       4.30       6.45    NA
+## 13      13    34         9.14         8.19       4.27       6.31    NA
+## 14      14    29         9.01         8.08       3.30       6.34    NA
+## 15      15    35         7.02         6.31       2.44       4.83    NA
+## 16      16    NA        NA           NA         NA         NA       28
+## 17      17    NA        NA           NA         NA         NA       35
+## 18      18    NA        NA           NA         NA         NA       33
+## 19      19    NA        NA           NA         NA         NA       34
+## 20      20    NA        NA           NA         NA         NA       22
+## # … with 3 more variables: score_wpa1.y &lt;dbl&gt;, score_wpa2.y &lt;dbl&gt;,
+## #   score_wpa5 &lt;dbl&gt;</code></pre>
 <pre class="r"><code>full_join(first_batch, second_batch, by=c(&#39;student&#39;, &#39;age&#39;, &quot;score_wpa1&quot;, &quot;score_wpa2&quot;))</code></pre>
 <pre><code>## # A tibble: 20 x 7
 ##    student   age score_wpa1 score_wpa2 score_wpa3 score_wpa4 score_wpa5
