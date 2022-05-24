@@ -139,7 +139,7 @@ Now it's time to visualize the data set.
 
 - Second, we want to make two separate plots, one for accuracy and one for response times, which show the average performance iin the 6 conditions. The condition should be plotted in the x-axis and the performance (either accuracy or rt) in the y-axis. You can choose whether you would like to have bar plots or point plots. Add error bars representing confidence intervals.
 
-## Part 1.5 Calculate the reward rate (option to do this in Part 2)
+## Part 1.5 Calculate the reward rate (option to do this for next week together with part 2)
 
 In the paper, they define the reward rate as: 
 

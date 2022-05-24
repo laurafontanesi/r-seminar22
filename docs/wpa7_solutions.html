@@ -589,7 +589,7 @@ sample = rnorm(mean=0, sd=1, n=10)
 p_values[1] = t.test(sample)$p.value
 
 p_values[1]</code></pre>
-<pre><code>## [1] 0.7985537</code></pre>
+<pre><code>## [1] 0.7979984</code></pre>
 <pre class="r"><code>p_values = rep(NA, 100)
 
 for (i in 1:100) {
@@ -616,7 +616,7 @@ for (i in 1:100) {
 p_values = p_simulation(sim=1000, samplesize=100, mu_true=0, sd_true=1)
 
 mean(p_values &lt; .05)*100</code></pre>
-<pre><code>## [1] 5.1</code></pre>
+<pre><code>## [1] 6.4</code></pre>
 </div>
 </div>
 
