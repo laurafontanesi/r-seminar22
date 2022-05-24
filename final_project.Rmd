@@ -18,8 +18,10 @@ At the top of your script, write the following (**with appropriate changes**):
 
 The final project is divided in two parts:
 
-- Part 1: Reading, cleaning, and understanding the data (deadline: **27th of May**)
-- Part 2: Fitting statistical models to the data and interpret the results (deadline: **3rd of June**)
+- Part 1: Reading, cleaning, and understanding the data
+- Part 2: Fitting statistical models to the data and interpret the results
+
+Deadline (for both parts): **3rd of June**
 
 # Final project description
 
@@ -69,7 +71,7 @@ For example: the condition of '10014_Optim_Time_Friday 29th of May 2015 11/40/00
 
 ## Part 1.1: Loading the data
 
-You can find the data at the OSF depository: https://osf.io/8592y/ (only download the `Data` folder).
+You can find the data at the OSF depository: https://osf.io/8592y/ (only download the `Data` folder). Or on dropbox: https://www.dropbox.com/sh/pz275wapxekjh6z/AAAsLcgz6hAWLSg8cm5rrdVPa?dl=0
 
 Note that the data of each participant is in separate files. We therefore need to import them and merge them in a unique dataset. Instead of writing yourself all the data paths (which would take forever), you can use the following function: https://www.math.ucla.edu/~anderson/rw1001/library/base/html/list.files.html
 
@@ -119,13 +121,58 @@ As you can see, there are a few things to fix to make the dataset look a bit cle
 
 The columns in the dataset that are not in this list you should remove. The labels of the column that are different you should change to the ones below.
 
+**Hint:** Note that the `accuracy` column corresponds to the `correct` column in the original dataset. The recoding of the conditions should follow the following scheme:
+
+- Norm_Trial = "FixedTrial_LowInformation"
+- Info_Trial = "FixedTrial_MediumInformation"
+- Optim_Trial = "FixedTrial_HighInformation"
+- Norm_Time = "FixedTime_LowInformation"
+- Info_Time = "FixedTime_MediumInformation"
+- Optim_Time = "FixedTime_HighInformation"
+
 ## Part 1.2: Describing the data
 
 - How many participants are in the dataset?
+
+**Hint:** Try summarizing the data using `n_distinct(participant))`.
+
 - How many participants were there in each condition?
+
+**Hint:** First group the data by `condition` and then summarize using `n_distinct(participant))`.
+
 - Did the participants in the fixed time conditions perform more or less trials than the participants in the fixed trials conditions?
+
+**Hint:** First, you can create a new column called for example `block type` with the following recoding of the `condition` column:
+- FixedTrial_LowInformation = "FixedTrial"
+- FixedTrial_MediumInformation = "FixedTrial"
+- FixedTrial_HighInformation = "FixedTrial"
+- FixedTime_LowInformation = "FixedTime"
+- FixedTime_MediumInformation = "FixedTime"
+- FixedTime_HighInformation = "FixedTime"
+
+Then, you can calculate the number of trials per participant (e.g., using `group_by(data, participant)` and then summarize with the count function `n=()`). You should obtain a tibble with as many rows as the number of participants and a column containing the number of trials per participant.
+
+Then, you need to add the information of which condition each participant was assigned to the output of the `summarize` function. An easy way is to use the `distinct` function (https://dplyr.tidyverse.org/reference/distinct.html), specifically using `distinct(data, participant, condition)` which will output a similar tibble as before (i.e., with the same number of rows: one per participant) with the name of the condition each participant was assigned to.
+
+Now, you can join the 2 datasets.
+
+When you have a tibble such as the one below, you can group by `block_type` and calculate the mean number fo trial in each level (time vs trial), using again `group_by` and `summarize`:
+```
+# A tibble: 85 x 3
+   participant n_trials blocktype 
+         <dbl>    <int> <chr>     
+ 1           1      911 FixedTime 
+ 2           2      960 FixedTrial
+ 3           3      753 FixedTime 
+ 4           4      960 FixedTrial
+ ...
+```
+
 - Calculate a summary, which includes the average and SD of accuracy and response time per condition (which are 6 in total) and use this to describe the overall performance across participants in these conditions (i.e., which conditions produced hiigher accuracy, which produced faster responses? Do accuracy and speed always trade off?).
+
 - Calculate a summary, which includes the average accuracy and average response time per participant, as well as the percentage of trials below 150 ms (too fast trials) and above 5000 ms (too slow trials).  Are there any participants with more then 10% fast or slow trials?
+
+**Hint:** Create two new columns in the dataset, `slow_trials` and `fast_trials` using `case_when`. You can assign values of 1 in `slow_trials` when `rt >= 5` and 0 otherwise and assign values of 1 in `fast_trials` when `rt <= .15` and 0 otherwise. Now you have two columns that, when their average is calculated per participant and multiplied by 100, give you the percentage of slow and fast trials for each participant.
 
 ## Part 1.3: Exclude participants
 
