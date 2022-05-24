@@ -29,6 +29,8 @@ navbar:
         href: wpa9.html
       - text: "WPA 10"
         href: wpa10.html
+      - text: "Final Project"
+        href: final_project.html
     - text: "Solutions"
       icon: fa-display-arrow-down
       menu:
@@ -50,6 +52,8 @@ navbar:
         href: wpa8_solutions.html
       - text: "WPA 9"
         href: wpa9_solutions.html
+      - text: "WPA 10"
+        href: wpa10_solutions.html
 output:
   html_document:
     theme: paper

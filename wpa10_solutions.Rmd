@@ -1,0 +1,84 @@
+---
+title: "Solutions to WPA10"
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(lme4)
+
+data = read_excel('~/git/r-seminar/data/Bressoux Data AnPsycho.xls')
+
+glimpse(data)
+```
+
+# Now it's your turn
+
+1. Create a new variable in the dataset, called `improvement_math`, which is the difference between `MATH4` and `MATH3`; and `improvement_french` which is the difference between `FRAN4` and `FRAN3`.
+
+```{r}
+data = mutate(data,
+              improvement_math=(MATH4-MATH3),
+              improvement_french=(FRAN4-FRAN3)
+              )
+```
+
+2. Run a multilevel model (separately for math and french), in which the improvement in math and french is predicted by at least 2 variables of your choice in the dataset, and that takes into account the school level. Run a random slope model, a random intercept model, and a random slope and intercept model.
+
+```{r}
+# Run a random intercept model
+randintmodel = lmer(improvement_math ~ FRAT*FILLE + (1 | ECOLE2), data = data)
+
+confint(randintmodel)
+
+# Run a random slope model
+randslopemodel = lmer(improvement_math ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2), data = data)
+
+summary(randslopemodel)
+
+# Run a random intercept & slope model
+randintslopemodel = lmer(improvement_math ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2), data = data)
+
+summary(randintslopemodel)
+
+# Run a random intercept model
+randintmodel = lmer(improvement_french ~ FRAT*FILLE + (1 | ECOLE2), data = data)
+
+confint(randintmodel)
+
+# Run a random slope model
+randslopemodel = lmer(improvement_french ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2), data = data)
+
+summary(randslopemodel)
+
+# Run a random intercept & slope model
+randintslopemodel = lmer(improvement_french ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2), data = data)
+
+summary(randintslopemodel)
+```
+3. (extra) Collapse the data across classrooms. Can you look at the effect of the number of student per classrrom on the improvements of math and french, taking into account the school level as well?
+
+```{r}
+grouped = group_by(data, 
+                   CLASSE2, )
+collapsed = summarise(grouped, 
+                      mean_improvement_math = mean(improvement_math, na.rm=TRUE),
+                      mean_improvement_french = mean(improvement_french, na.rm=TRUE),
+                      NBEL2 = mean(NBEL2),
+                      ECOLE2 = mean(ECOLE2))
+collapsed
+```
+
+```{r}
+# Run a random intercept & slope model
+randintslopemodel = lmer(mean_improvement_math ~ NBEL2 + (1 | ECOLE2), data = collapsed)
+
+confint(randintslopemodel)
+
+# Run a random intercept & slope model
+randintslopemodel = lmer(mean_improvement_french ~ NBEL2 + (1 | ECOLE2), data = collapsed)
+
+confint(randintslopemodel)
+```
+
+There seem to be no effect of the number of students on the mean improvement.

@@ -1,0 +1,156 @@
+---
+title: "Final Project"
+---
+
+Open RStudio.
+
+Open a new R script in R and **save it as** `final_project_LastFirst.R` (where Last and First is your last and first name). 
+
+Careful about: capitalizing, last and first name order, and using `_` instead of `-`.
+
+At the top of your script, write the following (**with appropriate changes**):
+
+```
+# Final Project
+# Name: Laura Fontanesi
+# Date: 24 May 2022
+```
+
+The final project is divided in two parts:
+
+- Part 1: Reading, cleaning, and understanding the data (deadline: **27th of May**)
+- Part 2: Fitting statistical models to the data and interpret the results (deadline: **3rd of June**)
+
+# Final project description
+
+In your final project, you will analyze data from a random dot motion task, a classical paradigm in perceptual decision making research, published in 2017 by Nathan Evans and Scott Brown; [link to the paper](https://link.springer.com/article/10.3758/s13423-016-1135-1).
+
+In this task, participants were required to decide whether a cloud of 40 moving white dots on a black background was moving towards the top-left or top-right of the screen. Eighty-five participants were randomly assigned into one of **six groups** formed by the factorial combination of two factor variables: block type (fixed time vs. fixed trial) and feedback type (low, high, medium). All participants completed 24 blocks in total. 
+
+In the fixed trial condition, there were 40 trials in each block, while in the fixed time condition each block lasted 1 min. 
+
+Participants in the low feedback detail condition received only the trial-by-trial feedback on correctness. Participants in the medium feedback condition received the same trial-by-trial feedback, plus information on their average accuracy and response time every 200 trials. Participants in the high feedback condition received the trial-by-trial feedback and the feedback every 200 trials, plus extra guidance on how they could change their speed–accuracy tradeoff to achieve an optimal reward rate.
+
+In sum, participants were randomly assigned to the following conditions (you should use these labels in the parsed dataset):
+
+- FixedTrial_LowInformation
+- FixedTrial_MediumInformation
+- FixedTrial_HighInformation
+- FixedTime_LowInformation
+- FixedTime_MediumInformation
+- FixedTime_HighInformation
+
+**Note**: In this data set each subject partipated in only one condition, so each of the condition can be obtained
+from the file names, according to the following labels:
+
+- High information feedback (Optim)
+- Medium information feedback (Info)
+- Low information feedback (Norm)
+- Fixed trial (Trial)
+- Fixed time (Time)
+
+For example: the condition of '10014_Optim_Time_Friday 29th of May 2015 11/40/00 AM.txt' corresponds to Fixed_Time_High_Information.
+
+## Description of variables in the dataset:
+
+- blkNum: This variable specifies the block number.
+- trlNum: This variable specifies the trial number within the block.
+- coherentDots: This variable specifies how many dots are moving in the same direction (are coherent).
+- numberofDots: This variable specifies how many dots there are.
+- percentCoherence: This variable specifies the percentage of dots that are moving in the same direction.
+- winningDirection: This variable specifies the dominant direction of the dots ("left' or 'right').
+- response: This variable specifies which direction the participant selected ("left' or 'right').
+- correct: This variable specifies whether the participant's response was correct or not. Its values can be 0 (false), 1 (true), and 2 ('tooFast' or 'tooSlow').
+- eventCount: Ignore.
+- averageFrameRate: Ignore.
+- RT: This variable specifies the response time in milliseconds.
+
+# Part 1
+
+## Part 1.1: Loading the data
+
+You can find the data at the OSF depository: https://osf.io/8592y/ (only download the `Data` folder).
+
+Note that the data of each participant is in separate files. We therefore need to import them and merge them in a unique dataset. Instead of writing yourself all the data paths (which would take forever), you can use the following function: https://www.math.ucla.edu/~anderson/rw1001/library/base/html/list.files.html
+
+Here is my example code on how to import the files. You only need to adapt the path to the folder on your system where you downloaded the raw data.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# define the data folder
+data_folder = '~/Dropbox/teaching/r-course22/data/final_project/'
+
+# define lists of files
+list_files = paste(data_folder, list.files(path=data_folder), sep="")
+
+# apply the read_delim function to each element in the list
+data_list = lapply(list_files, function(x) read_delim(x, delim='\t')) 
+
+# loop through all the participants to add the participant number as a column as well as the name of the file, since we have no other way to know in which conditions the participants were in
+data = NULL
+participant = 0
+
+for (n in 1:(length(data_list))){
+    participant = participant + 1
+    cond_list = strsplit(list_files[n], "_")
+    condition = paste(cond_list[[1]][3], "_", cond_list[[1]][4], sep="")
+    data=rbind(data,cbind(participant=participant, condition=condition, data_list[[n]]))
+}
+```
+
+```{r}
+head(data)
+
+glimpse(data)
+```
+
+As you can see, there are a few things to fix to make the dataset look a bit cleaner. It's on you now to do the rest: The final data should consist of the following columns:
+
+- participant
+- block_number
+- trial_number
+- condition (use the labels in the description above)
+- percent_coherence
+- dots_direction
+- response
+- accuracy
+- rt (change them to seconds, which means dividing them by 1000)
+
+The columns in the dataset that are not in this list you should remove. The labels of the column that are different you should change to the ones below.
+
+## Part 1.2: Describing the data
+
+- How many participants are in the dataset?
+- How many participants were there in each condition?
+- Did the participants in the fixed time conditions perform more or less trials than the participants in the fixed trials conditions?
+- Calculate a summary, which includes the average and SD of accuracy and response time per condition (which are 6 in total) and use this to describe the overall performance across participants in these conditions (i.e., which conditions produced hiigher accuracy, which produced faster responses? Do accuracy and speed always trade off?).
+- Calculate a summary, which includes the average accuracy and average response time per participant, as well as the percentage of trials below 150 ms (too fast trials) and above 5000 ms (too slow trials).  Are there any participants with more then 10% fast or slow trials?
+
+## Part 1.3: Exclude participants
+
+Exclude from the dataset the participants that have less than 65% performance. The trials with a response time less than 150 ms or greater than 5000 ms should be also excluded. Check that the accuracy variable only contains 0 and 1.
+
+## Part 1.4: Data visualization
+
+Now it's time to visualize the data set. 
+
+- First, we want to have a look at how the accuracy and response time evolve across the blocks. For this purpose, you should make a 2-by-1 grid plot that depicts the response time (top panel) and accuracy (lower panel) across the blocks for each condition. This should recreate Figure 2 fromt he paper: https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2 (excluding the top panel). What trends do you observe?
+
+- Second, we want to make two separate plots, one for accuracy and one for response times, which show the average performance iin the 6 conditions. The condition should be plotted in the x-axis and the performance (either accuracy or rt) in the y-axis. You can choose whether you would like to have bar plots or point plots. Add error bars representing confidence intervals.
+
+## Part 1.5 Calculate the reward rate (option to do this in Part 2)
+
+In the paper, they define the reward rate as: 
+
+$\frac {PC}{MRT + ITI + FDT + (1-PC)*ET}$
+
+where MRT and PC refer to the mean correct response time and probability of a correct response, ITI is the inter-trial interval (i.e., 100 ms), FDT is the feedback display time (i.e., 300 ms), and ET is the error timeout (i.e., 500 ms).
+
+By calculating the MRT and PC per block per participant (i.e., create a summary using `participant` and `block_number` as grouping variables), you can calculate the `reward_rate` by filling in the rest of the equation above.
+
+When you are done, you can add the reward rate to the plot in Part 1.4 (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition, as you did in Part 1.4 for accuracy and RT.
+
+# Part 2: Multi-level regression and ANOVA
+
+(to update for next week)

@@ -88,6 +88,15 @@ The output of lmer consists of three parts:
 2. The second part under Random effects: summarises the variance and standard deviation of each random effect (including the level 1 model residuals). Underneath the random effects table, the total number of observations is provided along with the number of units (or groups) for each higher level in the model. Here, schools are our only higher level and the output reports that we have 16 different schools.
 3. The final part of the output is the Fixed effects: table which reports the parameter estimate (Estimate) standard error (Std. Error) and t-value (t value), for each parameter in the model. For models with more than one fixed part explanatory variable (including the intercept), a correlation table between these variables is also provided underneath the table of parameter estimates.
 
+Note that lme4 does not include p-values [see here for a Discussion on the topic](https://featuredcontent.psychonomic.org/putting-ps-into-lmer-mixed-model-regression-and-statistical-significance/). You can obtain them by re-running the model after loading the `lmerTest` package:
+
+```{r}
+library(lmerTest)
+randintmodel = lmer(MATH4 ~ MATH3 + (1 | ECOLE2), data = data)
+summary(randintmodel)
+
+```
+
 ```{r}
 lm(MATH4 ~ 0 + MATH3, data = data)
 
