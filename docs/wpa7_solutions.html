@@ -379,7 +379,7 @@ $(document).ready(function () {
 
 leisure = read_delim(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/data_wpa7.txt&#39;, delim=&#39;\t&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   index = col_double(),
 ##   id = col_double(),
@@ -589,7 +589,7 @@ sample = rnorm(mean=0, sd=1, n=10)
 p_values[1] = t.test(sample)$p.value
 
 p_values[1]</code></pre>
-<pre><code>## [1] 0.5438188</code></pre>
+<pre><code>## [1] 0.0207195</code></pre>
 <pre class="r"><code>p_values = rep(NA, 100)
 
 for (i in 1:100) {
@@ -616,7 +616,7 @@ for (i in 1:100) {
 p_values = p_simulation(sim=1000, samplesize=100, mu_true=0, sd_true=1)
 
 mean(p_values &lt; .05)*100</code></pre>
-<pre><code>## [1] 5.1</code></pre>
+<pre><code>## [1] 4</code></pre>
 </div>
 </div>
 

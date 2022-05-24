@@ -448,43 +448,36 @@ for (n in 1:(length(data_list))){
     data=rbind(data,cbind(participant=participant, condition=condition, data_list[[n]]))
 }</code></pre>
 <pre class="r"><code>head(data)</code></pre>
-<pre><code>##   participant condition blkNum trlNum coherentDots numberofDots
-## 1           1 Norm_Time      1      1            4           40
-## 2           1 Norm_Time      1      2            4           40
-## 3           1 Norm_Time      1      3            4           40
-## 4           1 Norm_Time      1      4            4           40
-## 5           1 Norm_Time      1      5            4           40
-## 6           1 Norm_Time      1      6            4           40
-##   percentCoherence winningDirection response correct eventCount
-## 1               10             left     left       1         51
-## 2               10             left    right       0         40
-## 3               10            right     left       0         11
-## 4               10            right     left       0         19
-## 5               10             left     left       1         99
-## 6               10             left     left       1         15
-##   averageFrameRate   RT
-## 1           15.389 3314
-## 2           15.250 2623
-## 3           16.492  667
-## 4           15.690 1211
-## 5           15.175 6524
-## 6           16.060  934</code></pre>
+<pre><code>##   participant condition blkNum trlNum coherentDots numberofDots percentCoherence winningDirection response correct
+## 1           1 Norm_Time      1      1            4           40               10             left     left       1
+## 2           1 Norm_Time      1      2            4           40               10             left    right       0
+## 3           1 Norm_Time      1      3            4           40               10            right     left       0
+## 4           1 Norm_Time      1      4            4           40               10            right     left       0
+## 5           1 Norm_Time      1      5            4           40               10             left     left       1
+## 6           1 Norm_Time      1      6            4           40               10             left     left       1
+##   eventCount averageFrameRate   RT
+## 1         51           15.389 3314
+## 2         40           15.250 2623
+## 3         11           16.492  667
+## 4         19           15.690 1211
+## 5         99           15.175 6524
+## 6         15           16.060  934</code></pre>
 <pre class="r"><code>glimpse(data)</code></pre>
 <pre><code>## Rows: 73,075
 ## Columns: 13
-## $ participant      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ condition        &lt;chr&gt; &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;…
-## $ blkNum           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ trlNum           &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16…
-## $ coherentDots     &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,…
-## $ numberofDots     &lt;dbl&gt; 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 4…
-## $ percentCoherence &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1…
-## $ winningDirection &lt;chr&gt; &quot;left&quot;, &quot;left&quot;, &quot;right&quot;, &quot;right&quot;, &quot;left&quot;, &quot;left&quot;, &quot;le…
-## $ response         &lt;chr&gt; &quot;left&quot;, &quot;right&quot;, &quot;left&quot;, &quot;left&quot;, &quot;left&quot;, &quot;left&quot;, &quot;rig…
-## $ correct          &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1,…
-## $ eventCount       &lt;dbl&gt; 51, 40, 11, 19, 99, 15, 10, 16, 10, 13, 21, 9, 18, 10…
-## $ averageFrameRate &lt;dbl&gt; 15.389, 15.250, 16.492, 15.690, 15.175, 16.060, 16.47…
-## $ RT               &lt;dbl&gt; 3314, 2623, 667, 1211, 6524, 934, 607, 994, 654, 814,…</code></pre>
+## $ participant      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ condition        &lt;chr&gt; &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;Norm_Time&quot;, &quot;No…
+## $ blkNum           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2…
+## $ trlNum           &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,…
+## $ coherentDots     &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4…
+## $ numberofDots     &lt;dbl&gt; 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40…
+## $ percentCoherence &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10…
+## $ winningDirection &lt;chr&gt; &quot;left&quot;, &quot;left&quot;, &quot;right&quot;, &quot;right&quot;, &quot;left&quot;, &quot;left&quot;, &quot;left&quot;, &quot;right&quot;, &quot;left&quot;, &quot;right&quot;, &quot;left&quot;, &quot;l…
+## $ response         &lt;chr&gt; &quot;left&quot;, &quot;right&quot;, &quot;left&quot;, &quot;left&quot;, &quot;left&quot;, &quot;left&quot;, &quot;right&quot;, &quot;right&quot;, &quot;left&quot;, &quot;right&quot;, &quot;right&quot;, &quot;…
+## $ correct          &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0…
+## $ eventCount       &lt;dbl&gt; 51, 40, 11, 19, 99, 15, 10, 16, 10, 13, 21, 9, 18, 10, 5, 6, 14, 56, 41, 24, 15, 21, 8, 26, 22…
+## $ averageFrameRate &lt;dbl&gt; 15.389, 15.250, 16.492, 15.690, 15.175, 16.060, 16.474, 16.097, 15.291, 15.971, 15.825, 15.544…
+## $ RT               &lt;dbl&gt; 3314, 2623, 667, 1211, 6524, 934, 607, 994, 654, 814, 1327, 579, 1151, 659, 323, 347, 863, 365…</code></pre>
 <p>As you can see, there are a few things to fix to make the dataset look a bit cleaner. It’s on you now to do the rest: The final data should consist of the following columns:</p>
 <ul>
 <li>participant</li>
@@ -563,8 +556,13 @@ for (n in 1:(length(data_list))){
 <h2>Part 1.4: Data visualization</h2>
 <p>Now it’s time to visualize the data set.</p>
 <ul>
-<li><p>First, we want to have a look at how the accuracy and response time evolve across the blocks. For this purpose, you should make a 2-by-1 grid plot that depicts the response time (top panel) and accuracy (lower panel) across the blocks for each condition. This should recreate Figure 2 fromt he paper: <a href="https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2" class="uri">https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2</a> (excluding the top panel). What trends do you observe?</p></li>
-<li><p>Second, we want to make two separate plots, one for accuracy and one for response times, which show the average performance iin the 6 conditions. The condition should be plotted in the x-axis and the performance (either accuracy or rt) in the y-axis. You can choose whether you would like to have bar plots or point plots. Add error bars representing confidence intervals.</p></li>
+<li>First, we want to have a look at how the accuracy and response time evolve across the blocks. Create two separate plots, one for response times and one for accuracy, where 6 lines (one per condition) show the development of accuracy/response times across the block numbers. This should more or less recreate Figure 2 from the paper: <a href="https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2" class="uri">https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2</a> (excluding the top panel). What trends do you observe?</li>
+</ul>
+<p><strong>Hint:</strong> First, calculate the mean response times and accuracy per condition and block number using again <code>group_by</code> and <code>summarize</code>. Then, use the <code>geom_line()</code> function with the summarized data:</p>
+<pre><code>ggplot(data = ..., mapping = aes(x = block_number, y = ..., color=condition)) + 
+    geom_line()</code></pre>
+<ul>
+<li>Second, we want to make two separate plots, one for accuracy and one for response times, which show the average performance iin the 6 conditions. The condition should be plotted in the x-axis and the performance (either accuracy or rt) in the y-axis. You can choose whether you would like to have bar plots or point plots. Add error bars representing confidence intervals.</li>
 </ul>
 </div>
 <div id="part-1.5-calculate-the-reward-rate-not-required" class="section level2">
@@ -572,8 +570,25 @@ for (n in 1:(length(data_list))){
 <p>In the paper, they define the reward rate as:</p>
 <p><span class="math inline">\(\frac {PC}{MRT + ITI + FDT + (1-PC)*ET}\)</span></p>
 <p>where MRT and PC refer to the mean correct response time and probability of a correct response, ITI is the inter-trial interval (i.e., 100 ms), FDT is the feedback display time (i.e., 300 ms), and ET is the error timeout (i.e., 500 ms).</p>
-<p>By calculating the MRT and PC per block per participant (i.e., create a summary using <code>participant</code> and <code>block_number</code> as grouping variables), you can calculate the <code>reward_rate</code> by filling in the rest of the equation above.</p>
-<p>When you are done, you can add the reward rate to the plot in Part 1.4 (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition, as you did in Part 1.4 for accuracy and RT.</p>
+<p>By calculating the MRT and PC per block per participant (i.e., create a summary using <code>participant</code> and <code>block_number</code> as grouping variables), you can calculate the <code>reward_rate</code> by filling in the rest of the equation above:</p>
+<pre><code>### group data to calculate mean correct response times
+grouped_data_pos = group_by(filter(data, accuracy &gt; 0), participant, block_number)
+
+### group data to calculate mean accuracy
+grouped_data = group_by(data, participant, block_number)
+
+### join the two
+data_summary = full_join(summarise(grouped_data_pos, MRT = mean(rt)),
+                         summarise(grouped_data, PC = mean(accuracy)))
+
+### add condition variable for plotting
+data_summary = full_join(data_summary,
+                         distinct(data, participant, block_number, condition))
+
+### and now calculate the reward rate as in the equation
+data_summary = mutate(data_summary,
+                      reward_rate = PC/(...))</code></pre>
+<p>When you are done, you can plot the reward rate as you did in Part 1.4 for response times and accuracy (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition.</p>
 </div>
 </div>
 <div id="part-2-multi-level-regression-and-anova" class="section level1">

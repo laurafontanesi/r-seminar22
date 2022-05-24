@@ -199,7 +199,14 @@ for (n in 1:length(participants_to_exclude)) {
 
 Now it's time to visualize the data set. 
 
-- First, we want to have a look at how the accuracy and response time evolve across the blocks. For this purpose, you should make a 2-by-1 grid plot that depicts the response time (top panel) and accuracy (lower panel) across the blocks for each condition. This should recreate Figure 2 fromt he paper: https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2 (excluding the top panel). What trends do you observe?
+- First, we want to have a look at how the accuracy and response time evolve across the blocks. Create two separate plots, one for response times and one for accuracy, where 6 lines (one per condition) show the development of accuracy/response times across the block numbers. This should more or less recreate Figure 2 from the paper: https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2 (excluding the top panel). What trends do you observe?
+
+**Hint:** First, calculate the mean response times and accuracy per condition and block number using again `group_by` and `summarize`. Then, use the `geom_line()` function with the summarized data: 
+
+```
+ggplot(data = ..., mapping = aes(x = block_number, y = ..., color=condition)) + 
+    geom_line()
+```
 
 - Second, we want to make two separate plots, one for accuracy and one for response times, which show the average performance iin the 6 conditions. The condition should be plotted in the x-axis and the performance (either accuracy or rt) in the y-axis. You can choose whether you would like to have bar plots or point plots. Add error bars representing confidence intervals.
 
@@ -211,9 +218,29 @@ $\frac {PC}{MRT + ITI + FDT + (1-PC)*ET}$
 
 where MRT and PC refer to the mean correct response time and probability of a correct response, ITI is the inter-trial interval (i.e., 100 ms), FDT is the feedback display time (i.e., 300 ms), and ET is the error timeout (i.e., 500 ms).
 
-By calculating the MRT and PC per block per participant (i.e., create a summary using `participant` and `block_number` as grouping variables), you can calculate the `reward_rate` by filling in the rest of the equation above.
+By calculating the MRT and PC per block per participant (i.e., create a summary using `participant` and `block_number` as grouping variables), you can calculate the `reward_rate` by filling in the rest of the equation above:
 
-When you are done, you can add the reward rate to the plot in Part 1.4 (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition, as you did in Part 1.4 for accuracy and RT.
+```
+### group data to calculate mean correct response times
+grouped_data_pos = group_by(filter(data, accuracy > 0), participant, block_number)
+
+### group data to calculate mean accuracy
+grouped_data = group_by(data, participant, block_number)
+
+### join the two
+data_summary = full_join(summarise(grouped_data_pos, MRT = mean(rt)),
+                         summarise(grouped_data, PC = mean(accuracy)))
+
+### add condition variable for plotting
+data_summary = full_join(data_summary,
+                         distinct(data, participant, block_number, condition))
+
+### and now calculate the reward rate as in the equation
+data_summary = mutate(data_summary,
+                      reward_rate = PC/(...))
+```
+
+When you are done, you can plot the reward rate as you did in Part 1.4 for response times and accuracy (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition.
 
 # Part 2: Multi-level regression and ANOVA
 
