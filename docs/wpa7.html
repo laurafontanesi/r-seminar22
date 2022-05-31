@@ -590,21 +590,21 @@ student_data = data.frame(student_id=as.integer(runif(n=n, min=1000, max=9000)),
                           total_points=round(runif(n=n, min=0, max=30), 1))
 head(student_data)</code></pre>
 <pre><code>##   student_id total_points
-## 1       2780          5.0
-## 2       3896         10.6
-## 3       4587         15.9
-## 4       6854         22.0
-## 5       1812         22.0
-## 6       5885          2.7</code></pre>
+## 1       7878         16.9
+## 2       6129         10.7
+## 3       8263         10.8
+## 4       1561         25.2
+## 5       8951         26.5
+## 6       8978         15.0</code></pre>
 <p>Now, we define a subset of tests that we need to revise, and we want to see to which student they belong to and what was the test result. We can index these student one by one, but that takes a while and it’s also an inefficient repetition of code:</p>
 <pre class="r"><code>subset_students = c(5, 16, 3, 9, 37, 30, 25, 28, 59, 61, 88, 94, 99)
 
 print(student_data[5,])</code></pre>
 <pre><code>##   student_id total_points
-## 5       1812           22</code></pre>
+## 5       8951         26.5</code></pre>
 <pre class="r"><code>print(student_data[16,])</code></pre>
 <pre><code>##    student_id total_points
-## 16       3898         17.3</code></pre>
+## 16       4470         15.4</code></pre>
 <p>Or, we can use a for loop and extract this information iteratively, without code repetition:</p>
 <pre class="r"><code>for (i in subset_students) {
   student_id = student_data[i, &quot;student_id&quot;]  
@@ -614,19 +614,19 @@ print(student_data[5,])</code></pre>
     
   print(paste(&quot;Student:&quot;, student_id, &quot;-&quot;, &quot;Grade:&quot;, rounded_grade, &#39;%&#39;))
 }</code></pre>
-<pre><code>## [1] &quot;Student: 1812 - Grade: 73 %&quot;
-## [1] &quot;Student: 3898 - Grade: 58 %&quot;
-## [1] &quot;Student: 4587 - Grade: 53 %&quot;
-## [1] &quot;Student: 4746 - Grade: 70 %&quot;
-## [1] &quot;Student: 1317 - Grade: 29 %&quot;
-## [1] &quot;Student: 7609 - Grade: 78 %&quot;
-## [1] &quot;Student: 4297 - Grade: 7 %&quot;
-## [1] &quot;Student: 6883 - Grade: 69 %&quot;
-## [1] &quot;Student: 3671 - Grade: 18 %&quot;
-## [1] &quot;Student: 2063 - Grade: 76 %&quot;
-## [1] &quot;Student: 6889 - Grade: 13 %&quot;
-## [1] &quot;Student: 4190 - Grade: 54 %&quot;
-## [1] &quot;Student: 7074 - Grade: 89 %&quot;</code></pre>
+<pre><code>## [1] &quot;Student: 8951 - Grade: 88 %&quot;
+## [1] &quot;Student: 4470 - Grade: 51 %&quot;
+## [1] &quot;Student: 8263 - Grade: 36 %&quot;
+## [1] &quot;Student: 4416 - Grade: 53 %&quot;
+## [1] &quot;Student: 5253 - Grade: 16 %&quot;
+## [1] &quot;Student: 6706 - Grade: 28 %&quot;
+## [1] &quot;Student: 6590 - Grade: 51 %&quot;
+## [1] &quot;Student: 6700 - Grade: 41 %&quot;
+## [1] &quot;Student: 1776 - Grade: 100 %&quot;
+## [1] &quot;Student: 8438 - Grade: 83 %&quot;
+## [1] &quot;Student: 5274 - Grade: 25 %&quot;
+## [1] &quot;Student: 6533 - Grade: 52 %&quot;
+## [1] &quot;Student: 1611 - Grade: 35 %&quot;</code></pre>
 <p>The equivalent way to write this loop with a <code>while</code> loop:</p>
 <pre class="r"><code>n_subset = length(subset_students)
 n = 1
@@ -642,19 +642,19 @@ while (n &lt;= n_subset) {
     
   n = n + 1 # crucial!
 }</code></pre>
-<pre><code>## [1] &quot;Student: 1812 - Grade: 73 %&quot;
-## [1] &quot;Student: 3898 - Grade: 58 %&quot;
-## [1] &quot;Student: 4587 - Grade: 53 %&quot;
-## [1] &quot;Student: 4746 - Grade: 70 %&quot;
-## [1] &quot;Student: 1317 - Grade: 29 %&quot;
-## [1] &quot;Student: 7609 - Grade: 78 %&quot;
-## [1] &quot;Student: 4297 - Grade: 7 %&quot;
-## [1] &quot;Student: 6883 - Grade: 69 %&quot;
-## [1] &quot;Student: 3671 - Grade: 18 %&quot;
-## [1] &quot;Student: 2063 - Grade: 76 %&quot;
-## [1] &quot;Student: 6889 - Grade: 13 %&quot;
-## [1] &quot;Student: 4190 - Grade: 54 %&quot;
-## [1] &quot;Student: 7074 - Grade: 89 %&quot;</code></pre>
+<pre><code>## [1] &quot;Student: 8951 - Grade: 88 %&quot;
+## [1] &quot;Student: 4470 - Grade: 51 %&quot;
+## [1] &quot;Student: 8263 - Grade: 36 %&quot;
+## [1] &quot;Student: 4416 - Grade: 53 %&quot;
+## [1] &quot;Student: 5253 - Grade: 16 %&quot;
+## [1] &quot;Student: 6706 - Grade: 28 %&quot;
+## [1] &quot;Student: 6590 - Grade: 51 %&quot;
+## [1] &quot;Student: 6700 - Grade: 41 %&quot;
+## [1] &quot;Student: 1776 - Grade: 100 %&quot;
+## [1] &quot;Student: 8438 - Grade: 83 %&quot;
+## [1] &quot;Student: 5274 - Grade: 25 %&quot;
+## [1] &quot;Student: 6533 - Grade: 52 %&quot;
+## [1] &quot;Student: 1611 - Grade: 35 %&quot;</code></pre>
 </div>
 </div>
 <div id="now-its-your-turn" class="section level1">

@@ -242,6 +242,23 @@ data_summary = mutate(data_summary,
 
 When you are done, you can plot the reward rate as you did in Part 1.4 for response times and accuracy (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition.
 
-# Part 2: Multi-level regression and ANOVA
+# Part 2: Statistical analyses
 
-(to update for next week)
+## Part 2.1
+
+We now want to run 2 separate ANOVA models to test the three main effects (block number, block type, and feedback type) on response times and accuracy (if you calculated the reward rate, you have the option of also calculate the ANOVA on the reward rates).
+
+This includes 3 steps:
+
+- aggregate the data, so that you have mean response time and accuracy for each participant, block number, block type, and feedback type.
+- run the ANOVAs on the aggregate data
+- interpret the results
+
+## Part 2.2
+
+Finally, we want to run a multilevel regression to the test the three main effects (block number, block type, and feedback type) on response times, **without** aggregating the data. This means that you will have repeated measurements for each participant, block number, block type, and feedback type and that you have to include `participant` as a grouping/hierarchical variable in your multilevel model.
+
+This includes 2 steps:
+
+- run the full model (random slopes and intercapts) on the full dataset
+- interpret the results

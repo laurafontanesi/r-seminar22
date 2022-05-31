@@ -361,7 +361,11 @@ $(document).ready(function () {
 <li><a href="#part-1.4-data-visualization">Part 1.4: Data visualization</a></li>
 <li><a href="#part-1.5-calculate-the-reward-rate-not-required">Part 1.5 Calculate the reward rate (not required)</a></li>
 </ul></li>
-<li><a href="#part-2-multi-level-regression-and-anova">Part 2: Multi-level regression and ANOVA</a></li>
+<li><a href="#part-2-statistical-analyses">Part 2: Statistical analyses</a>
+<ul>
+<li><a href="#part-2.1">Part 2.1</a></li>
+<li><a href="#part-2.2">Part 2.2</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -591,9 +595,27 @@ data_summary = mutate(data_summary,
 <p>When you are done, you can plot the reward rate as you did in Part 1.4 for response times and accuracy (so recreate the full Figure 2 from the paper), and also plot the mean reward rate per condition.</p>
 </div>
 </div>
-<div id="part-2-multi-level-regression-and-anova" class="section level1">
-<h1>Part 2: Multi-level regression and ANOVA</h1>
-<p>(to update for next week)</p>
+<div id="part-2-statistical-analyses" class="section level1">
+<h1>Part 2: Statistical analyses</h1>
+<div id="part-2.1" class="section level2">
+<h2>Part 2.1</h2>
+<p>We now want to run 2 separate ANOVA models to test the three main effects (block number, block type, and feedback type) on response times and accuracy (if you calculated the reward rate, you have the option of also calculate the ANOVA on the reward rates).</p>
+<p>This includes 3 steps:</p>
+<ul>
+<li>aggregate the data, so that you have mean response time and accuracy for each participant, block number, block type, and feedback type.</li>
+<li>run the ANOVAs on the aggregate data</li>
+<li>interpret the results</li>
+</ul>
+</div>
+<div id="part-2.2" class="section level2">
+<h2>Part 2.2</h2>
+<p>Finally, we want to run a multilevel regression to the test the three main effects (block number, block type, and feedback type) on response times, <strong>without</strong> aggregating the data. This means that you will have repeated measurements for each participant, block number, block type, and feedback type and that you have to include <code>participant</code> as a grouping/hierarchical variable in your multilevel model.</p>
+<p>This includes 2 steps:</p>
+<ul>
+<li>run the full model (random slopes and intercapts) on the full dataset</li>
+<li>interpret the results</li>
+</ul>
+</div>
 </div>
 
 
