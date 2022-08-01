@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -343,28 +346,42 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introduction to Rstudio, and seeing what R can do</h1>
+<h1 class="title toc-ignore">Introduction to Rstudio, and seeing what R
+can do</h1>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#rstudio">1. RStudio</a>
+<li><a href="#rstudio" id="toc-rstudio">1. RStudio</a>
 <ul>
-<li><a href="#rstudio-panes">RStudio panes</a></li>
-<li><a href="#code-completion">Code completion</a></li>
-<li><a href="#environment-browser">Environment browser</a></li>
-<li><a href="#run-some-code-in-your-script-file">Run some code in your script file</a></li>
-<li><a href="#retrieving-previous-commands">Retrieving previous commands</a></li>
+<li><a href="#rstudio-panes" id="toc-rstudio-panes">RStudio
+panes</a></li>
+<li><a href="#code-completion" id="toc-code-completion">Code
+completion</a></li>
+<li><a href="#environment-browser"
+id="toc-environment-browser">Environment browser</a></li>
+<li><a href="#run-some-code-in-your-script-file"
+id="toc-run-some-code-in-your-script-file">Run some code in your script
+file</a></li>
+<li><a href="#retrieving-previous-commands"
+id="toc-retrieving-previous-commands">Retrieving previous
+commands</a></li>
 </ul></li>
-<li><a href="#install-and-load-packages">2. Install and load packages</a></li>
-<li><a href="#load-and-inspect-some-data">3. Load and inspect some data</a>
+<li><a href="#install-and-load-packages"
+id="toc-install-and-load-packages">2. Install and load packages</a></li>
+<li><a href="#load-and-inspect-some-data"
+id="toc-load-and-inspect-some-data">3. Load and inspect some data</a>
 <ul>
-<li><a href="#continuous-variables">Continuous variables</a></li>
-<li><a href="#discrete-variables">Discrete variables</a></li>
+<li><a href="#continuous-variables"
+id="toc-continuous-variables">Continuous variables</a></li>
+<li><a href="#discrete-variables" id="toc-discrete-variables">Discrete
+variables</a></li>
 </ul></li>
-<li><a href="#now-its-your-turn">4. Now it’s your turn</a></li>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">4. Now it’s
+your turn</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul>
 </div>
 
@@ -375,45 +392,90 @@ $(document).ready(function () {
 <h2>RStudio panes</h2>
 <p>The RStudio interface consists of four main panes, or windows.</p>
 <ul>
-<li><strong>Bottom left</strong>: console or command window. Here you can type any valid R command after the &gt; prompt followed by Enter and R will execute that command.</li>
-<li><strong>Top left</strong>: text editor or script window. This is where you can save and edit collections of commands.</li>
-<li><strong>Top right</strong>: environment &amp; history window. The environment window contains objects (data, values, functions) R has currently stored in its memory. The history window shows all commands that were executed in the console.</li>
-<li><strong>Bottom right</strong>: files, plots, packages, help, &amp; viewer pane. Here you can open files, view plots, install and load packages, read man pages, and view markdown and other documents in the viewer tab.</li>
+<li><strong>Bottom left</strong>: console or command window. Here you
+can type any valid R command after the &gt; prompt followed by Enter and
+R will execute that command.</li>
+<li><strong>Top left</strong>: text editor or script window. This is
+where you can save and edit collections of commands.</li>
+<li><strong>Top right</strong>: environment &amp; history window. The
+environment window contains objects (data, values, functions) R has
+currently stored in its memory. The history window shows all commands
+that were executed in the console.</li>
+<li><strong>Bottom right</strong>: files, plots, packages, help, &amp;
+viewer pane. Here you can open files, view plots, install and load
+packages, read man pages, and view markdown and other documents in the
+viewer tab.</li>
 </ul>
-<p>The location of these windows can be changed by clicking Tools &gt; Global Options &gt; Pane Layout.</p>
-<p>You may have noticed that, by default, there is no text editor window open. In order to open one, click File &gt; New File &gt; R Script. Alternatively, click the ‘Add new document’ symbol and select R Script.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_1_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about capitalizing, and using <code>_</code> and <strong>not</strong>, e.g., <code>WPA-1-LastFirst.R</code></p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>The location of these windows can be changed by clicking Tools &gt;
+Global Options &gt; Pane Layout.</p>
+<p>You may have noticed that, by default, there is no text editor window
+open. In order to open one, click File &gt; New File &gt; R Script.
+Alternatively, click the ‘Add new document’ symbol and select R
+Script.</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_1_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about capitalizing, and using <code>_</code> and
+<strong>not</strong>, e.g., <code>WPA-1-LastFirst.R</code></p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 1
 # Name: Laura Fontanesi
 # Date: 15 March 2022</code></pre>
 </div>
 <div id="code-completion" class="section level2">
 <h2>Code completion</h2>
-<p>RStudio supports automatic completion of code using the <strong>Tab key</strong>.</p>
-<p>For example, let’s create a new object, named <code>my_block_rewards</code>:</p>
+<p>RStudio supports automatic completion of code using the <strong>Tab
+key</strong>.</p>
+<p>For example, let’s create a new object, named
+<code>my_block_rewards</code>:</p>
 <pre class="r"><code>my_block_rewards = c(34, 36, 90)</code></pre>
-<p>Now, you can type <code>my</code> and then press Tab and RStudio will automatically complete the full name of the object if <code>my</code> is unique; otherwise, RStudio will list all of the objects (or functions) starting with <code>my</code> in your current environment.</p>
-<p>Try now to define another object starting with <code>my</code> and see what happens.</p>
+<p>Now, you can type <code>my</code> and then press Tab and RStudio will
+automatically complete the full name of the object if <code>my</code> is
+unique; otherwise, RStudio will list all of the objects (or functions)
+starting with <code>my</code> in your current environment.</p>
+<p>Try now to define another object starting with <code>my</code> and
+see what happens.</p>
 <pre class="r"><code>my_score = .4</code></pre>
 <p>Code completion also works for function arguments.</p>
-<p><code>data()</code> is a function to load one of R preset dataframes.</p>
-<p>Type <code>data(m</code> in the console, then hit Tab to bring up a list of options. RStudio will automatically add a closing parenthesis for you, but your cursor needs to be between the two parentheses for tab completion to work.</p>
-<p>Choose <code>mtcars</code> from the list and press Enter. What happens?</p>
+<p><code>data()</code> is a function to load one of R preset
+dataframes.</p>
+<p>Type <code>data(m</code> in the console, then hit Tab to bring up a
+list of options. RStudio will automatically add a closing parenthesis
+for you, but your cursor needs to be between the two parentheses for tab
+completion to work.</p>
+<p>Choose <code>mtcars</code> from the list and press Enter. What
+happens?</p>
 </div>
 <div id="environment-browser" class="section level2">
 <h2>Environment browser</h2>
-<p>The <code>mtcars</code> object should have appeared in your environment tab.</p>
-<p>The environment tab is in the top right window, which displays the R objects that exist in the global environment. These are the objects that were created by you in your current session.</p>
-<p>If you click the load symbol next to the <code>mtcars</code> object, you can see the structure of the object. You can also click the view icon load to have a table view of the dataset. This might come useful at times.</p>
+<p>The <code>mtcars</code> object should have appeared in your
+environment tab.</p>
+<p>The environment tab is in the top right window, which displays the R
+objects that exist in the global environment. These are the objects that
+were created by you in your current session.</p>
+<p>If you click the load symbol next to the <code>mtcars</code> object,
+you can see the structure of the object. You can also click the view
+icon load to have a table view of the dataset. This might come useful at
+times.</p>
 </div>
 <div id="run-some-code-in-your-script-file" class="section level2">
 <h2>Run some code in your script file</h2>
-<p>What we want to do most of time is to run our code from the script and not from the console. This will help us writing more complicated functions and keep track of exactly what we have been doing up to that point.</p>
-<p>You always have the choice to run part of it or the whole code. I suggest (particularly at the begginning) to always run from the start to the end of your code, and to make sure that your workspace is clean at the beginning.</p>
+<p>What we want to do most of time is to run our code from the script
+and not from the console. This will help us writing more complicated
+functions and keep track of exactly what we have been doing up to that
+point.</p>
+<p>You always have the choice to run part of it or the whole code. I
+suggest (particularly at the begginning) to always run from the start to
+the end of your code, and to make sure that your workspace is clean at
+the beginning.</p>
 <p>It’s very useful to use shortcuts for this, for example:</p>
 <table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Description</th>
@@ -449,7 +511,9 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
-<p>See <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">here</a> for more.</p>
+<p>See <a
+href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">here</a>
+for more.</p>
 <p>Practice with the following chunk of code:</p>
 <pre class="r"><code>data(mtcars)
 
@@ -476,13 +540,17 @@ head(mtcars)</code></pre>
 </div>
 <div id="retrieving-previous-commands" class="section level2">
 <h2>Retrieving previous commands</h2>
-<p>It’s often the case that you want to re-execute commands that you previously entered. The RStudio console supports the ability to recall previous commands using the arrow keys:</p>
+<p>It’s often the case that you want to re-execute commands that you
+previously entered. The RStudio console supports the ability to recall
+previous commands using the arrow keys:</p>
 <ul>
 <li>Up — Recall previous command(s)</li>
 <li>Down — Reverse of Up</li>
 </ul>
-<p>You can even view a list of your recent commands by pressing Ctrl+Up on Windows or Command+Up on a Mac.</p>
-<p>See <a href="https://twitter.com/rstudiotips">here</a> for more RStudio tips.</p>
+<p>You can even view a list of your recent commands by pressing Ctrl+Up
+on Windows or Command+Up on a Mac.</p>
+<p>See <a href="https://twitter.com/rstudiotips">here</a> for more
+RStudio tips.</p>
 </div>
 </div>
 <div id="install-and-load-packages" class="section level1">
@@ -506,17 +574,18 @@ ls()</code></pre>
 movies %&gt;%
   slice(1:5)</code></pre>
 <pre><code>## # A tibble: 5 x 32
-##   title  title_type genre runtime mpaa_rating studio thtr_rel_year thtr_rel_month thtr_rel_day dvd_rel_year dvd_rel_month
-##   &lt;chr&gt;  &lt;fct&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Filly… Feature F… Drama      80 R           Indom…          2013              4           19         2013             7
-## 2 The D… Feature F… Drama     101 PG-13       Warne…          2001              3           14         2001             8
-## 3 Waiti… Feature F… Come…      84 R           Sony …          1996              8           21         2001             8
-## 4 The A… Feature F… Drama     139 PG          Colum…          1993             10            1         2001            11
-## 5 Malev… Feature F… Horr…      90 R           Ancho…          2004              9           10         2005             4
-## # … with 21 more variables: dvd_rel_day &lt;dbl&gt;, imdb_rating &lt;dbl&gt;, imdb_num_votes &lt;int&gt;, critics_rating &lt;fct&gt;,
-## #   critics_score &lt;dbl&gt;, audience_rating &lt;fct&gt;, audience_score &lt;dbl&gt;, best_pic_nom &lt;fct&gt;, best_pic_win &lt;fct&gt;,
-## #   best_actor_win &lt;fct&gt;, best_actress_win &lt;fct&gt;, best_dir_win &lt;fct&gt;, top200_box &lt;fct&gt;, director &lt;chr&gt;, actor1 &lt;chr&gt;,
-## #   actor2 &lt;chr&gt;, actor3 &lt;chr&gt;, actor4 &lt;chr&gt;, actor5 &lt;chr&gt;, imdb_url &lt;chr&gt;, rt_url &lt;chr&gt;</code></pre>
+##   title                title_type   genre  runtime mpaa_rating studio thtr_rel_year thtr_rel_month thtr_rel_day dvd_rel_year
+##   &lt;chr&gt;                &lt;fct&gt;        &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;          &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Filly Brown          Feature Film Drama       80 R           Indom…          2013              4           19         2013
+## 2 The Dish             Feature Film Drama      101 PG-13       Warne…          2001              3           14         2001
+## 3 Waiting for Guffman  Feature Film Comedy      84 R           Sony …          1996              8           21         2001
+## 4 The Age of Innocence Feature Film Drama      139 PG          Colum…          1993             10            1         2001
+## 5 Malevolence          Feature Film Horror      90 R           Ancho…          2004              9           10         2005
+## # … with 22 more variables: dvd_rel_month &lt;dbl&gt;, dvd_rel_day &lt;dbl&gt;, imdb_rating &lt;dbl&gt;, imdb_num_votes &lt;int&gt;,
+## #   critics_rating &lt;fct&gt;, critics_score &lt;dbl&gt;, audience_rating &lt;fct&gt;, audience_score &lt;dbl&gt;, best_pic_nom &lt;fct&gt;,
+## #   best_pic_win &lt;fct&gt;, best_actor_win &lt;fct&gt;, best_actress_win &lt;fct&gt;, best_dir_win &lt;fct&gt;, top200_box &lt;fct&gt;,
+## #   director &lt;chr&gt;, actor1 &lt;chr&gt;, actor2 &lt;chr&gt;, actor3 &lt;chr&gt;, actor4 &lt;chr&gt;, actor5 &lt;chr&gt;, imdb_url &lt;chr&gt;,
+## #   rt_url &lt;chr&gt;</code></pre>
 <pre class="r"><code>summary(movies)</code></pre>
 <pre><code>##     title                  title_type                 genre        runtime       mpaa_rating 
 ##  Length:651         Documentary : 55   Drama             :305   Min.   : 39.0   G      : 19  
@@ -526,31 +595,31 @@ movies %&gt;%
 ##                                        Documentary       : 52   3rd Qu.:115.8   R      :329  
 ##                                        Horror            : 23   Max.   :267.0   Unrated: 50  
 ##                                        (Other)           : 60   NA&#39;s   :1                    
-##                               studio    thtr_rel_year  thtr_rel_month   thtr_rel_day    dvd_rel_year  dvd_rel_month   
-##  Paramount Pictures              : 37   Min.   :1970   Min.   : 1.00   Min.   : 1.00   Min.   :1991   Min.   : 1.000  
-##  Warner Bros. Pictures           : 30   1st Qu.:1990   1st Qu.: 4.00   1st Qu.: 7.00   1st Qu.:2001   1st Qu.: 3.000  
-##  Sony Pictures Home Entertainment: 27   Median :2000   Median : 7.00   Median :15.00   Median :2004   Median : 6.000  
-##  Universal Pictures              : 23   Mean   :1998   Mean   : 6.74   Mean   :14.42   Mean   :2004   Mean   : 6.333  
-##  Warner Home Video               : 19   3rd Qu.:2007   3rd Qu.:10.00   3rd Qu.:21.00   3rd Qu.:2008   3rd Qu.: 9.000  
-##  (Other)                         :507   Max.   :2014   Max.   :12.00   Max.   :31.00   Max.   :2015   Max.   :12.000  
-##  NA&#39;s                            :  8                                                  NA&#39;s   :8      NA&#39;s   :8       
-##   dvd_rel_day     imdb_rating    imdb_num_votes           critics_rating critics_score    audience_rating
-##  Min.   : 1.00   Min.   :1.900   Min.   :   180   Certified Fresh:135    Min.   :  1.00   Spilled:275    
-##  1st Qu.: 7.00   1st Qu.:5.900   1st Qu.:  4546   Fresh          :209    1st Qu.: 33.00   Upright:376    
-##  Median :15.00   Median :6.600   Median : 15116   Rotten         :307    Median : 61.00                  
-##  Mean   :15.01   Mean   :6.493   Mean   : 57533                          Mean   : 57.69                  
-##  3rd Qu.:23.00   3rd Qu.:7.300   3rd Qu.: 58300                          3rd Qu.: 83.00                  
-##  Max.   :31.00   Max.   :9.000   Max.   :893008                          Max.   :100.00                  
-##  NA&#39;s   :8                                                                                               
-##  audience_score  best_pic_nom best_pic_win best_actor_win best_actress_win best_dir_win top200_box   director        
-##  Min.   :11.00   no :629      no :644      no :558        no :579          no :608      no :636    Length:651        
-##  1st Qu.:46.00   yes: 22      yes:  7      yes: 93        yes: 72          yes: 43      yes: 15    Class :character  
-##  Median :65.00                                                                                     Mode  :character  
-##  Mean   :62.36                                                                                                       
-##  3rd Qu.:80.00                                                                                                       
-##  Max.   :97.00                                                                                                       
-##                                                                                                                      
-##     actor1             actor2             actor3             actor4             actor5            imdb_url        
+##                               studio    thtr_rel_year  thtr_rel_month   thtr_rel_day    dvd_rel_year 
+##  Paramount Pictures              : 37   Min.   :1970   Min.   : 1.00   Min.   : 1.00   Min.   :1991  
+##  Warner Bros. Pictures           : 30   1st Qu.:1990   1st Qu.: 4.00   1st Qu.: 7.00   1st Qu.:2001  
+##  Sony Pictures Home Entertainment: 27   Median :2000   Median : 7.00   Median :15.00   Median :2004  
+##  Universal Pictures              : 23   Mean   :1998   Mean   : 6.74   Mean   :14.42   Mean   :2004  
+##  Warner Home Video               : 19   3rd Qu.:2007   3rd Qu.:10.00   3rd Qu.:21.00   3rd Qu.:2008  
+##  (Other)                         :507   Max.   :2014   Max.   :12.00   Max.   :31.00   Max.   :2015  
+##  NA&#39;s                            :  8                                                  NA&#39;s   :8     
+##  dvd_rel_month     dvd_rel_day     imdb_rating    imdb_num_votes           critics_rating critics_score   
+##  Min.   : 1.000   Min.   : 1.00   Min.   :1.900   Min.   :   180   Certified Fresh:135    Min.   :  1.00  
+##  1st Qu.: 3.000   1st Qu.: 7.00   1st Qu.:5.900   1st Qu.:  4546   Fresh          :209    1st Qu.: 33.00  
+##  Median : 6.000   Median :15.00   Median :6.600   Median : 15116   Rotten         :307    Median : 61.00  
+##  Mean   : 6.333   Mean   :15.01   Mean   :6.493   Mean   : 57533                          Mean   : 57.69  
+##  3rd Qu.: 9.000   3rd Qu.:23.00   3rd Qu.:7.300   3rd Qu.: 58300                          3rd Qu.: 83.00  
+##  Max.   :12.000   Max.   :31.00   Max.   :9.000   Max.   :893008                          Max.   :100.00  
+##  NA&#39;s   :8        NA&#39;s   :8                                                                               
+##  audience_rating audience_score  best_pic_nom best_pic_win best_actor_win best_actress_win best_dir_win top200_box
+##  Spilled:275     Min.   :11.00   no :629      no :644      no :558        no :579          no :608      no :636   
+##  Upright:376     1st Qu.:46.00   yes: 22      yes:  7      yes: 93        yes: 72          yes: 43      yes: 15   
+##                  Median :65.00                                                                                    
+##                  Mean   :62.36                                                                                    
+##                  3rd Qu.:80.00                                                                                    
+##                  Max.   :97.00                                                                                    
+##                                                                                                                   
+##    director            actor1             actor2             actor3             actor4             actor5         
 ##  Length:651         Length:651         Length:651         Length:651         Length:651         Length:651        
 ##  Class :character   Class :character   Class :character   Class :character   Class :character   Class :character  
 ##  Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
@@ -558,13 +627,13 @@ movies %&gt;%
 ##                                                                                                                   
 ##                                                                                                                   
 ##                                                                                                                   
-##     rt_url         
-##  Length:651        
-##  Class :character  
-##  Mode  :character  
-##                    
-##                    
-##                    
+##    imdb_url            rt_url         
+##  Length:651         Length:651        
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
 ## </code></pre>
 <div id="continuous-variables" class="section level2">
 <h2>Continuous variables</h2>
@@ -653,23 +722,33 @@ summary(anova_fit)</code></pre>
 <h1>4. Now it’s your turn</h1>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li>Plot the relationship between: <code>imdb_rating</code>, <code>imdb_num_votes</code> and <code>audience_score</code>.</li>
-<li>Change the coloring of the scatterplot. You can either have a look <a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">here</a> or simply change the two colors in the gradients, and have a look for example <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">here</a>.</li>
+<li>Plot the relationship between: <code>imdb_rating</code>,
+<code>imdb_num_votes</code> and <code>audience_score</code>.</li>
+<li>Change the coloring of the scatterplot. You can either have a look
+<a
+href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">here</a>
+or simply change the two colors in the gradients, and have a look for
+example <a
+href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">here</a>.</li>
 <li>Compute the regression for such relationship.</li>
 </ol>
 <p><strong>Task B</strong></p>
 <ol style="list-style-type: decimal">
-<li>Plot the relationship between <code>best_actor_win</code>, <code>best_actress_win</code> and <code>audience_score</code>.</li>
+<li>Plot the relationship between <code>best_actor_win</code>,
+<code>best_actress_win</code> and <code>audience_score</code>.</li>
 <li>Compute the ANOVA for such relationship.</li>
 </ol>
 <p><strong>Task C</strong></p>
 <ol style="list-style-type: decimal">
-<li>Plot the number of movies in each <code>mpaa_rating</code> category.</li>
+<li>Plot the number of movies in each <code>mpaa_rating</code>
+category.</li>
 </ol>
 </div>
 <div id="submit-your-assignment" class="section level1">
 <h1>Submit your assignment</h1>
-<p>Save and email your <code>wpa_1_LastFirst.R</code> script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of the day.</p>
+<p>Save and email your <code>wpa_1_LastFirst.R</code> script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of the day.</p>
 </div>
 
 

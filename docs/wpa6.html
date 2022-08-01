@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,55 +352,122 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#basic-ggplot2-elements">1. Basic ggplot2 elements</a>
+<li><a href="#basic-ggplot2-elements" id="toc-basic-ggplot2-elements">1.
+Basic ggplot2 elements</a>
 <ul>
-<li><a href="#aesthetic-attributes">1.1 Aesthetic attributes</a></li>
-<li><a href="#geometric-objects">1.2 Geometric objects</a></li>
-<li><a href="#additional-functions">1.3 Additional functions</a></li>
-<li><a href="#additional-arguments-to-functions">1.4 Additional arguments to functions</a></li>
+<li><a href="#aesthetic-attributes" id="toc-aesthetic-attributes">1.1
+Aesthetic attributes</a></li>
+<li><a href="#geometric-objects" id="toc-geometric-objects">1.2
+Geometric objects</a></li>
+<li><a href="#additional-functions" id="toc-additional-functions">1.3
+Additional functions</a></li>
+<li><a href="#additional-arguments-to-functions"
+id="toc-additional-arguments-to-functions">1.4 Additional arguments to
+functions</a></li>
 </ul></li>
-<li><a href="#plots-with-categorical-variables">2. Plots with categorical variables</a>
+<li><a href="#plots-with-categorical-variables"
+id="toc-plots-with-categorical-variables">2. Plots with categorical
+variables</a>
 <ul>
-<li><a href="#bar-plot-showing-frequencies-of-a-categorical-variable-split-by-a-second-categorical-variable">2.1 Bar plot showing frequencies of a categorical variable, split by a second categorical variable</a></li>
+<li><a
+href="#bar-plot-showing-frequencies-of-a-categorical-variable-split-by-a-second-categorical-variable"
+id="toc-bar-plot-showing-frequencies-of-a-categorical-variable-split-by-a-second-categorical-variable">2.1
+Bar plot showing frequencies of a categorical variable, split by a
+second categorical variable</a></li>
 </ul></li>
-<li><a href="#plots-with-categorical-and-continuous-variables">3. Plots with categorical and continuous variables</a>
+<li><a href="#plots-with-categorical-and-continuous-variables"
+id="toc-plots-with-categorical-and-continuous-variables">3. Plots with
+categorical and continuous variables</a>
 <ul>
-<li><a href="#box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable">3.1 Box plot showing the distribution of a continuous variable, for each level of a second categorical variable</a></li>
-<li><a href="#box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-facet_grid">3.1 Box plot showing the distribution of a continuous variable, for each level of a second categorical variable, split by a third categorical variable using facet_grid</a></li>
-<li><a href="#box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-fill">3.3 Box plot showing the distribution of a continuous variable, for each level of a second categorical variable, split by a third categorical variable using fill</a></li>
-<li><a href="#violin-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-the-fill">3.4 Violin plot showing the distribution of a continuous variable, for each level of a second categorical variable, split by a third categorical variable using the fill</a></li>
-<li><a href="#scatter-plot-showing-the-relationship-between-two-continuous-variables-split-by-a-third-categorical-variable-with-colour-and-with-regression-lines-and-verticalhorizontal-lines-showing-the-means">3.5 Scatter plot showing the relationship between two continuous variables, split by a third categorical variable with colour, and with regression lines and vertical/horizontal lines showing the means</a></li>
-<li><a href="#histogram-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color">3.6 Histogram showing the distribution of a continuous variable, split by a second categorical variable based on color</a></li>
-<li><a href="#density-plot-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color">3.7 Density plot showing the distribution of a continuous variable, split by a second categorical variable based on color</a></li>
+<li><a
+href="#box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable"
+id="toc-box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable">3.1
+Box plot showing the distribution of a continuous variable, for each
+level of a second categorical variable</a></li>
+<li><a
+href="#box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-facet_grid"
+id="toc-box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-facet_grid">3.1
+Box plot showing the distribution of a continuous variable, for each
+level of a second categorical variable, split by a third categorical
+variable using facet_grid</a></li>
+<li><a
+href="#box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-fill"
+id="toc-box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-fill">3.3
+Box plot showing the distribution of a continuous variable, for each
+level of a second categorical variable, split by a third categorical
+variable using fill</a></li>
+<li><a
+href="#violin-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-the-fill"
+id="toc-violin-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-the-fill">3.4
+Violin plot showing the distribution of a continuous variable, for each
+level of a second categorical variable, split by a third categorical
+variable using the fill</a></li>
+<li><a
+href="#scatter-plot-showing-the-relationship-between-two-continuous-variables-split-by-a-third-categorical-variable-with-colour-and-with-regression-lines-and-verticalhorizontal-lines-showing-the-means"
+id="toc-scatter-plot-showing-the-relationship-between-two-continuous-variables-split-by-a-third-categorical-variable-with-colour-and-with-regression-lines-and-verticalhorizontal-lines-showing-the-means">3.5
+Scatter plot showing the relationship between two continuous variables,
+split by a third categorical variable with colour, and with regression
+lines and vertical/horizontal lines showing the means</a></li>
+<li><a
+href="#histogram-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color"
+id="toc-histogram-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color">3.6
+Histogram showing the distribution of a continuous variable, split by a
+second categorical variable based on color</a></li>
+<li><a
+href="#density-plot-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color"
+id="toc-density-plot-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color">3.7
+Density plot showing the distribution of a continuous variable, split by
+a second categorical variable based on color</a></li>
 </ul></li>
-<li><a href="#adding-error-bars">4. Adding error bars</a>
+<li><a href="#adding-error-bars" id="toc-adding-error-bars">4. Adding
+error bars</a>
 <ul>
-<li><a href="#dot-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-standard-error-of-the-mean">4.1 Dot plot showing the mean of a continuous variable across different levels of a categorical variable, with error bars (representing standard error of the mean)</a></li>
-<li><a href="#bar-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-confidence-intervals">4.2 Bar plot showing the mean of a continuous variable across different levels of a categorical variable, with error bars (representing confidence intervals)</a></li>
+<li><a
+href="#dot-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-standard-error-of-the-mean"
+id="toc-dot-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-standard-error-of-the-mean">4.1
+Dot plot showing the mean of a continuous variable across different
+levels of a categorical variable, with error bars (representing standard
+error of the mean)</a></li>
+<li><a
+href="#bar-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-confidence-intervals"
+id="toc-bar-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-confidence-intervals">4.2
+Bar plot showing the mean of a continuous variable across different
+levels of a categorical variable, with error bars (representing
+confidence intervals)</a></li>
 </ul></li>
-<li><a href="#now-its-your-turn">5. Now it’s your turn</a>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">5. Now it’s
+your turn</a>
 <ul>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul></li>
 </ul>
 </div>
 
 <p>Open RStudio.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_6_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_6_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using
+<code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 3
 # Name: Laura Fontanesi
 # Date: 19 April 2022</code></pre>
-<p>This week, we are going to work with the US survey dataset on public ppinion about climate change (2008-2017).</p>
-<p>You can find the original dataset <a href="https://osf.io/w36gn/">here</a>, and more explanations about the content/coding of the variables.</p>
-<p>I selected a few variables and prepared the dataset already, so that you can simply load it in R using the following command:</p>
+<p>This week, we are going to work with the US survey dataset on public
+ppinion about climate change (2008-2017).</p>
+<p>You can find the original dataset <a
+href="https://osf.io/w36gn/">here</a>, and more explanations about the
+content/coding of the variables.</p>
+<p>I selected a few variables and prepared the dataset already, so that
+you can simply load it in R using the following command:</p>
 <pre class="r"><code>library(tidyverse)
 
 # Load data in R
 survey_data = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/ccam_modified.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   cause_recoded = col_character(),
@@ -416,44 +486,53 @@ survey_data = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-
 <pre class="r"><code>glimpse(survey_data)</code></pre>
 <pre><code>## Rows: 18,514
 ## Columns: 30
-## $ wave                   &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ year                   &lt;dbl&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008…
-## $ happening              &lt;dbl&gt; 3, 2, 2, 3, 3, 2, 3, 1, 1, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 2, 3, 3, 3…
-## $ cause_recoded          &lt;chr&gt; &quot;natural and human&quot;, &quot;natural and human&quot;, &quot;natural&quot;, &quot;natural&quot;, &quot;natural and human&quot;, &quot;na…
-## $ sci_consensus          &lt;chr&gt; &quot;happening&quot;, &quot;dont know&quot;, &quot;disagreement&quot;, &quot;happening&quot;, &quot;disagreement&quot;, &quot;disagreement&quot;, &quot;…
-## $ worry                  &lt;dbl&gt; 3, 2, 1, 3, 3, 2, 3, 2, 1, 3, 2, 3, 3, 3, 4, 2, 4, 2, 4, 1, 3, 1, 2, 2, 2, 2, 3, 2, 2, 3…
-## $ harm_personally        &lt;dbl&gt; 2, 2, 1, 2, 0, 0, 2, 3, 1, 0, 0, 1, 3, 2, 4, 2, 3, 3, 3, 1, 3, 1, 2, 2, 1, 3, 3, 2, 1, 3…
-## $ harm_US                &lt;dbl&gt; 3, -1, 1, 2, 0, 0, 3, 3, 1, 0, 0, 0, 3, 2, 4, 2, 3, 3, 3, 1, -1, 1, 2, 2, 2, 4, 4, 3, 1,…
-## $ harm_dev_countries     &lt;dbl&gt; 4, 2, 1, 3, 0, 0, 4, 3, 1, 0, 0, 0, 4, 2, 4, 2, 4, 0, 3, 1, 4, 1, 2, 2, 3, 4, 4, 3, 1, 3…
-## $ harm_future_gen        &lt;dbl&gt; 4, 3, 1, 3, 0, 0, 4, 3, 1, 4, 0, 0, 4, 3, 4, 3, 4, 0, 4, 1, 4, 1, 2, 2, 3, 4, 4, 3, 3, 4…
-## $ harm_plants_animals    &lt;dbl&gt; 4, 3, 1, 3, 3, 0, 4, 3, 1, 4, 0, 3, 4, 2, 4, 3, 4, 3, 4, 1, 4, 1, 2, 3, 3, 4, 4, 3, 3, 4…
-## $ when_harm_US           &lt;dbl&gt; 5, 3, 1, 4, 2, 2, 5, 4, 1, 3, 3, 3, 5, 4, 5, 2, 5, 6, 6, 1, 6, 1, 2, 2, 4, 6, 6, 2, 2, 6…
-## $ reg_CO2_pollutant      &lt;dbl&gt; 4, 3, 2, 3, 3, 1, 3, 2, 2, 3, 3, 4, 4, 3, 3, 2, 3, 4, 4, 4, 4, 1, 2, 3, 4, 4, 4, 1, 1, 3…
-## $ reg_utilities          &lt;dbl&gt; 4, 3, 1, 4, 1, 1, 2, 2, 2, 4, 3, 1, 4, 3, 2, 2, 3, 1, 4, 4, 3, 1, 4, 3, 4, 4, 1, 3, 2, 4…
-## $ fund_research          &lt;dbl&gt; 4, 3, 1, 4, 4, 3, 4, 2, 3, 4, 3, 1, 3, 3, 4, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4…
-## $ discuss_GW             &lt;dbl&gt; 3, 2, 1, 2, 1, 2, 3, 2, 3, 3, 2, 2, 2, 1, 3, 2, 2, 1, 3, 1, 4, 1, 2, 2, 2, 2, 1, 3, 1, 3…
-## $ gender                 &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;…
-## $ age_category           &lt;dbl&gt; 3, 2, 2, 3, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 3, 1, 2, 3, 2, 2, 2, 3, 2, 1, 3, 1, 3, 3, 1, 2…
-## $ educ_category          &lt;dbl&gt; 2, 1, 4, 4, 3, 4, 4, 4, 4, 4, 2, 4, 2, 3, 2, 4, 4, 2, 4, 3, 4, 2, 4, 2, 4, 4, 3, 3, 4, 4…
-## $ income_category        &lt;dbl&gt; 2, 1, 1, 3, 2, 2, 1, 2, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 1, 2, 3, 1, 2, 2, 1, 2, 1, 3, 1, 2…
-## $ race                   &lt;chr&gt; &quot;white non hisp&quot;, &quot;white non hisp&quot;, &quot;hisp&quot;, &quot;white non hisp&quot;, &quot;white non hisp&quot;, &quot;white n…
-## $ party_x_ideo           &lt;chr&gt; &quot;conservative republican&quot;, &quot;no interest&quot;, &quot;conservative republican&quot;, &quot;conservative repub…
-## $ region4                &lt;chr&gt; &quot;south&quot;, &quot;midwest&quot;, &quot;west&quot;, &quot;south&quot;, &quot;south&quot;, &quot;west&quot;, &quot;west&quot;, &quot;west&quot;, &quot;northeast&quot;, &quot;sout…
-## $ employment             &lt;chr&gt; &quot;Not working –retired&quot;, &quot;Not working –disabled&quot;, &quot;Not working –looking&quot;, &quot;Not working –r…
-## $ happening_cont         &lt;dbl&gt; 3.1770484, 2.3892098, 1.7235311, 4.6690941, 3.3530206, 2.3946275, 2.4170193, 0.5560683, …
-## $ worry_cont             &lt;dbl&gt; 2.4890167, 2.5616335, 1.3625589, 2.6617477, 4.2543260, 2.3861420, 2.7739328, 1.4889807, …
-## $ happening_labels       &lt;chr&gt; &quot;yes&quot;, &quot;dont know&quot;, &quot;dont know&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;dont know&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;y…
-## $ age_category_labels    &lt;chr&gt; &quot;55+&quot;, &quot;35-54&quot;, &quot;35-54&quot;, &quot;55+&quot;, &quot;18-34&quot;, &quot;18-34&quot;, &quot;18-34&quot;, &quot;18-34&quot;, &quot;35-54&quot;, &quot;55+&quot;, &quot;55+…
-## $ educ_category_labels   &lt;chr&gt; &quot;highschool&quot;, &quot;no highschool&quot;, &quot;bachelor or higher&quot;, &quot;bachelor or higher&quot;, &quot;college&quot;, &quot;b…
-## $ income_category_labels &lt;chr&gt; &quot;50000-99999&quot;, &quot;less 50000&quot;, &quot;less 50000&quot;, &quot;more 100000&quot;, &quot;50000-99999&quot;, &quot;50000-99999&quot;, …</code></pre>
+## $ wave                   &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ year                   &lt;dbl&gt; 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, 2008, …
+## $ happening              &lt;dbl&gt; 3, 2, 2, 3, 3, 2, 3, 1, 1, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 2, 3, …
+## $ cause_recoded          &lt;chr&gt; &quot;natural and human&quot;, &quot;natural and human&quot;, &quot;natural&quot;, &quot;natural&quot;, &quot;natural and human&quot;,…
+## $ sci_consensus          &lt;chr&gt; &quot;happening&quot;, &quot;dont know&quot;, &quot;disagreement&quot;, &quot;happening&quot;, &quot;disagreement&quot;, &quot;disagreement…
+## $ worry                  &lt;dbl&gt; 3, 2, 1, 3, 3, 2, 3, 2, 1, 3, 2, 3, 3, 3, 4, 2, 4, 2, 4, 1, 3, 1, 2, 2, 2, 2, 3, 2, …
+## $ harm_personally        &lt;dbl&gt; 2, 2, 1, 2, 0, 0, 2, 3, 1, 0, 0, 1, 3, 2, 4, 2, 3, 3, 3, 1, 3, 1, 2, 2, 1, 3, 3, 2, …
+## $ harm_US                &lt;dbl&gt; 3, -1, 1, 2, 0, 0, 3, 3, 1, 0, 0, 0, 3, 2, 4, 2, 3, 3, 3, 1, -1, 1, 2, 2, 2, 4, 4, 3…
+## $ harm_dev_countries     &lt;dbl&gt; 4, 2, 1, 3, 0, 0, 4, 3, 1, 0, 0, 0, 4, 2, 4, 2, 4, 0, 3, 1, 4, 1, 2, 2, 3, 4, 4, 3, …
+## $ harm_future_gen        &lt;dbl&gt; 4, 3, 1, 3, 0, 0, 4, 3, 1, 4, 0, 0, 4, 3, 4, 3, 4, 0, 4, 1, 4, 1, 2, 2, 3, 4, 4, 3, …
+## $ harm_plants_animals    &lt;dbl&gt; 4, 3, 1, 3, 3, 0, 4, 3, 1, 4, 0, 3, 4, 2, 4, 3, 4, 3, 4, 1, 4, 1, 2, 3, 3, 4, 4, 3, …
+## $ when_harm_US           &lt;dbl&gt; 5, 3, 1, 4, 2, 2, 5, 4, 1, 3, 3, 3, 5, 4, 5, 2, 5, 6, 6, 1, 6, 1, 2, 2, 4, 6, 6, 2, …
+## $ reg_CO2_pollutant      &lt;dbl&gt; 4, 3, 2, 3, 3, 1, 3, 2, 2, 3, 3, 4, 4, 3, 3, 2, 3, 4, 4, 4, 4, 1, 2, 3, 4, 4, 4, 1, …
+## $ reg_utilities          &lt;dbl&gt; 4, 3, 1, 4, 1, 1, 2, 2, 2, 4, 3, 1, 4, 3, 2, 2, 3, 1, 4, 4, 3, 1, 4, 3, 4, 4, 1, 3, …
+## $ fund_research          &lt;dbl&gt; 4, 3, 1, 4, 4, 3, 4, 2, 3, 4, 3, 1, 3, 3, 4, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, …
+## $ discuss_GW             &lt;dbl&gt; 3, 2, 1, 2, 1, 2, 3, 2, 3, 3, 2, 2, 2, 1, 3, 2, 2, 1, 3, 1, 4, 1, 2, 2, 2, 2, 1, 3, …
+## $ gender                 &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;fem…
+## $ age_category           &lt;dbl&gt; 3, 2, 2, 3, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 3, 1, 2, 3, 2, 2, 2, 3, 2, 1, 3, 1, 3, 3, …
+## $ educ_category          &lt;dbl&gt; 2, 1, 4, 4, 3, 4, 4, 4, 4, 4, 2, 4, 2, 3, 2, 4, 4, 2, 4, 3, 4, 2, 4, 2, 4, 4, 3, 3, …
+## $ income_category        &lt;dbl&gt; 2, 1, 1, 3, 2, 2, 1, 2, 3, 3, 1, 1, 3, 1, 1, 3, 3, 1, 1, 2, 3, 1, 2, 2, 1, 2, 1, 3, …
+## $ race                   &lt;chr&gt; &quot;white non hisp&quot;, &quot;white non hisp&quot;, &quot;hisp&quot;, &quot;white non hisp&quot;, &quot;white non hisp&quot;, &quot;whi…
+## $ party_x_ideo           &lt;chr&gt; &quot;conservative republican&quot;, &quot;no interest&quot;, &quot;conservative republican&quot;, &quot;conservative r…
+## $ region4                &lt;chr&gt; &quot;south&quot;, &quot;midwest&quot;, &quot;west&quot;, &quot;south&quot;, &quot;south&quot;, &quot;west&quot;, &quot;west&quot;, &quot;west&quot;, &quot;northeast&quot;, &quot;…
+## $ employment             &lt;chr&gt; &quot;Not working –retired&quot;, &quot;Not working –disabled&quot;, &quot;Not working –looking&quot;, &quot;Not workin…
+## $ happening_cont         &lt;dbl&gt; 3.1770484, 2.3892098, 1.7235311, 4.6690941, 3.3530206, 2.3946275, 2.4170193, 0.55606…
+## $ worry_cont             &lt;dbl&gt; 2.4890167, 2.5616335, 1.3625589, 2.6617477, 4.2543260, 2.3861420, 2.7739328, 1.48898…
+## $ happening_labels       &lt;chr&gt; &quot;yes&quot;, &quot;dont know&quot;, &quot;dont know&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;dont know&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;…
+## $ age_category_labels    &lt;chr&gt; &quot;55+&quot;, &quot;35-54&quot;, &quot;35-54&quot;, &quot;55+&quot;, &quot;18-34&quot;, &quot;18-34&quot;, &quot;18-34&quot;, &quot;18-34&quot;, &quot;35-54&quot;, &quot;55+&quot;, …
+## $ educ_category_labels   &lt;chr&gt; &quot;highschool&quot;, &quot;no highschool&quot;, &quot;bachelor or higher&quot;, &quot;bachelor or higher&quot;, &quot;college&quot;…
+## $ income_category_labels &lt;chr&gt; &quot;50000-99999&quot;, &quot;less 50000&quot;, &quot;less 50000&quot;, &quot;more 100000&quot;, &quot;50000-99999&quot;, &quot;50000-9999…</code></pre>
 <div id="basic-ggplot2-elements" class="section level1">
 <h1>1. Basic ggplot2 elements</h1>
-<p>In this course, we are going to use <code>ggplot2</code> for plotting. You find the full <code>ggplot2</code> refererence <a href="https://ggplot2.tidyverse.org/reference/index.html">here</a>.</p>
-<p>Every <code>ggplot2</code> graphic has three essential components:</p>
+<p>In this course, we are going to use <code>ggplot2</code> for
+plotting. You find the full <code>ggplot2</code> refererence <a
+href="https://ggplot2.tidyverse.org/reference/index.html">here</a>.</p>
+<p>Every <code>ggplot2</code> graphic has three essential
+components:</p>
 <ul>
-<li><code>data</code>: the dataset containing the variables of interest.</li>
-<li><code>geom</code>: the geometric object in question. This refers to the type of object we can observe in a plot. For example: points, lines, and bars.</li>
-<li><code>mapping</code>: aesthetic attributes of the geometric object. They decide which variables of the dataset are shown and in which position. For example, the variables on the x- and y-axes, the variables that give the color or the size to specific elements.</li>
+<li><code>data</code>: the dataset containing the variables of
+interest.</li>
+<li><code>geom</code>: the geometric object in question. This refers to
+the type of object we can observe in a plot. For example: points, lines,
+and bars.</li>
+<li><code>mapping</code>: aesthetic attributes of the geometric object.
+They decide which variables of the dataset are shown and in which
+position. For example, the variables on the x- and y-axes, the variables
+that give the color or the size to specific elements.</li>
 </ul>
 <p>The basic template for a plot is:</p>
 <pre><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) + 
@@ -461,66 +540,127 @@ survey_data = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-
 <p>Where you would:</p>
 <ul>
 <li>call your dataframe instead of <code>&lt;DATA&gt;</code></li>
-<li>specify the main variables and their position instead of <code>&lt;MAPPINGS&gt;</code></li>
-<li>specify the type of plot insead of <code>&lt;GEOM_FUNCTION&gt;</code></li>
+<li>specify the main variables and their position instead of
+<code>&lt;MAPPINGS&gt;</code></li>
+<li>specify the type of plot insead of
+<code>&lt;GEOM_FUNCTION&gt;</code></li>
 </ul>
-<p>Note the <code>+</code> notation at the end of the first line. That is to tell <code>ggplot2</code> that you are still adding/changing components to/of the same plot. So, if you want to add/change other components, you would also put a <code>+</code> at the end of the second line and add a new function in the third line.</p>
-<p>In the <a href="https://laurafontanesi.github.io/r-seminar22/wpa1.html">course introduction</a> we had for example:</p>
+<p>Note the <code>+</code> notation at the end of the first line. That
+is to tell <code>ggplot2</code> that you are still adding/changing
+components to/of the same plot. So, if you want to add/change other
+components, you would also put a <code>+</code> at the end of the second
+line and add a new function in the third line.</p>
+<p>In the <a
+href="https://laurafontanesi.github.io/r-seminar22/wpa1.html">course
+introduction</a> we had for example:</p>
 <pre><code>ggplot(data = movies, mapping = aes(x = best_pic_nom, y = audience_score, fill = best_dir_win)) +
   geom_boxplot() +
   labs(x = &quot;Movie Was Nominated For A Best Picture Oscar&quot;, y = &quot;Audience Score&quot;, fill = &quot;Director won oscar&quot;) +
   ggtitle(&quot;Relationship Between Audience Score, Movie Picture Oscar and Director Achievement&quot;)</code></pre>
 <ul>
 <li><code>movies</code> was the name of our dataframe</li>
-<li><code>best_pic_nom</code> was the variable to show on the x-axis, <code>audience_score</code> on the y-axis, and <code>best_dir_win</code> as a color</li>
-<li><code>geom_boxplot()</code> was the kind of plot (as boxplot in that case)</li>
-<li><code>labs()</code> was to change the lables of the x- and y-axes, and of the color-legend</li>
+<li><code>best_pic_nom</code> was the variable to show on the x-axis,
+<code>audience_score</code> on the y-axis, and <code>best_dir_win</code>
+as a color</li>
+<li><code>geom_boxplot()</code> was the kind of plot (as boxplot in that
+case)</li>
+<li><code>labs()</code> was to change the lables of the x- and y-axes,
+and of the color-legend</li>
 <li><code>ggtitle()</code> was to change the title of the plot</li>
 </ul>
-<p>So in this case <code>labs()</code> and <code>ggtitle()</code> were additional functions to add/change components to our plot.</p>
+<p>So in this case <code>labs()</code> and <code>ggtitle()</code> were
+additional functions to add/change components to our plot.</p>
 <div id="aesthetic-attributes" class="section level2">
 <h2>1.1 Aesthetic attributes</h2>
-<p>Their function depends on the specific plot (see below). But the main arguments are:</p>
+<p>Their function depends on the specific plot (see below). But the main
+arguments are:</p>
 <ul>
 <li><p><code>x</code>: the variable on the x-axis</p></li>
 <li><p><code>y</code>: the variable on the y-axis</p></li>
-<li><p><code>color</code>/<code>fill</code>: the variable that determines the color to the plots’ elements</p></li>
-<li><p><code>size</code>: the variable that determines the size to the plots’ elements</p></li>
-<li><p><code>shape</code>: the variable that determines the shape of the plots’ elements</p></li>
+<li><p><code>color</code>/<code>fill</code>: the variable that
+determines the color to the plots’ elements</p></li>
+<li><p><code>size</code>: the variable that determines the size to the
+plots’ elements</p></li>
+<li><p><code>shape</code>: the variable that determines the shape of the
+plots’ elements</p></li>
 </ul>
 </div>
 <div id="geometric-objects" class="section level2">
 <h2>1.2 Geometric objects</h2>
 <p>We use:</p>
 <ul>
-<li><p><strong>Bar plots</strong>: <code>geom_bar()</code> to plot one value for each level of a categorical variable <code>x</code> (you can also split each level according to the levels of a second categorical variable using the <code>fill</code> aesthetic argument). Typically, these values are frequencies (how many observations are there per level?) or means (in this case you should compute the mean of a second variable <code>y</code> for each level of the categorical variable <code>x</code> before plotting).</p></li>
-<li><p><strong>Box and violin plots</strong>: <code>geom_boxplot()</code> or <code>geom_violin()</code> to plot the the distribution of a continuous variable <code>y</code> for different levels of a categorical variable <code>x</code> (you can also add a third categorical variable using the <code>fill</code> aesthetic argument).</p></li>
-<li><p><strong>Histograms and density plots</strong>: <code>geom_histogram()</code> or <code>geom_density()</code> to plot the the distribution of a continuous variable <code>x</code> (you can also plot separate distributions based on a second categorical variable using the <code>fill</code> aesthetic argument).</p></li>
-<li><p><strong>Scatter plots</strong>: <code>geom_point()</code> to plot the relationship between 2 continuous variables. You can add a third variable (either continuous or categorical) using the <code>color</code> aesthetic argument. In case the third variable is continuous, we can also add the <code>scale_colour_gradient</code> function, to change the colour gradient. You can also choose to show the third variable as the size of the points instead of the colour using the <code>size</code> aesthetic argument. You could then show a maximum of 4 variables: 1 on the x-axis, one on the y-axis, one as colour, and one as size of the dots.</p></li>
-<li><p><strong>Lines</strong>: <code>geom_abline()</code>, <code>geom_hline()</code>, <code>geom_vline()</code>, <code>geom_line()</code> and <code>geom_smooth()</code> to plot lines (typically to show the mean of a distribution, or a regression line in a scatter plot).</p></li>
-<li><p><strong>Error bars</strong>: <code>geom_errorbar()</code> to add error bars (typically to bar plots or to line plots).</p></li>
+<li><p><strong>Bar plots</strong>: <code>geom_bar()</code> to plot one
+value for each level of a categorical variable <code>x</code> (you can
+also split each level according to the levels of a second categorical
+variable using the <code>fill</code> aesthetic argument). Typically,
+these values are frequencies (how many observations are there per
+level?) or means (in this case you should compute the mean of a second
+variable <code>y</code> for each level of the categorical variable
+<code>x</code> before plotting).</p></li>
+<li><p><strong>Box and violin plots</strong>:
+<code>geom_boxplot()</code> or <code>geom_violin()</code> to plot the
+the distribution of a continuous variable <code>y</code> for different
+levels of a categorical variable <code>x</code> (you can also add a
+third categorical variable using the <code>fill</code> aesthetic
+argument).</p></li>
+<li><p><strong>Histograms and density plots</strong>:
+<code>geom_histogram()</code> or <code>geom_density()</code> to plot the
+the distribution of a continuous variable <code>x</code> (you can also
+plot separate distributions based on a second categorical variable using
+the <code>fill</code> aesthetic argument).</p></li>
+<li><p><strong>Scatter plots</strong>: <code>geom_point()</code> to plot
+the relationship between 2 continuous variables. You can add a third
+variable (either continuous or categorical) using the <code>color</code>
+aesthetic argument. In case the third variable is continuous, we can
+also add the <code>scale_colour_gradient</code> function, to change the
+colour gradient. You can also choose to show the third variable as the
+size of the points instead of the colour using the <code>size</code>
+aesthetic argument. You could then show a maximum of 4 variables: 1 on
+the x-axis, one on the y-axis, one as colour, and one as size of the
+dots.</p></li>
+<li><p><strong>Lines</strong>: <code>geom_abline()</code>,
+<code>geom_hline()</code>, <code>geom_vline()</code>,
+<code>geom_line()</code> and <code>geom_smooth()</code> to plot lines
+(typically to show the mean of a distribution, or a regression line in a
+scatter plot).</p></li>
+<li><p><strong>Error bars</strong>: <code>geom_errorbar()</code> to add
+error bars (typically to bar plots or to line plots).</p></li>
 </ul>
 </div>
 <div id="additional-functions" class="section level2">
 <h2>1.3 Additional functions</h2>
 <ul>
-<li><code>facet_grid()</code> and <code>facet_wrap()</code>: to split a plot into several plots by the values of another variable.</li>
-<li><code>scale_colour_gradient()</code>: to adjust the color gradient, when the color variable is continuous.</li>
+<li><code>facet_grid()</code> and <code>facet_wrap()</code>: to split a
+plot into several plots by the values of another variable.</li>
+<li><code>scale_colour_gradient()</code>: to adjust the color gradient,
+when the color variable is continuous.</li>
 <li><code>ggsave()</code>: to save the plot to file.</li>
-<li><code>labs()</code>: to change the lables of the x- and y-axes, and of the color-legend.</li>
+<li><code>labs()</code>: to change the lables of the x- and y-axes, and
+of the color-legend.</li>
 <li><code>ggtitle()</code>: to change the title of the plot.</li>
 </ul>
 </div>
 <div id="additional-arguments-to-functions" class="section level2">
 <h2>1.4 Additional arguments to functions</h2>
-<p>Note that each function can take additional arguments. In the example above, the <code>labs()</code> function took the additional <code>x</code>, <code>y</code> and <code>fill</code> arguments to specify which label corresponded to which variable.</p>
+<p>Note that each function can take additional arguments. In the example
+above, the <code>labs()</code> function took the additional
+<code>x</code>, <code>y</code> and <code>fill</code> arguments to
+specify which label corresponded to which variable.</p>
 </div>
 </div>
 <div id="plots-with-categorical-variables" class="section level1">
 <h1>2. Plots with categorical variables</h1>
-<div id="bar-plot-showing-frequencies-of-a-categorical-variable-split-by-a-second-categorical-variable" class="section level2">
-<h2>2.1 Bar plot showing frequencies of a categorical variable, split by a second categorical variable</h2>
-<p>Note here what happens when you write <code>x = year</code> instead of <code>x = factor(year)</code>. The point is that <code>ggplot</code> might not understand that <code>year</code> is a categorical variable (see in the dataframe summery above). So, to make sure <code>ggplot</code> treats certain variables as categorical, you can sue the <code>factor()</code> function.</p>
+<div
+id="bar-plot-showing-frequencies-of-a-categorical-variable-split-by-a-second-categorical-variable"
+class="section level2">
+<h2>2.1 Bar plot showing frequencies of a categorical variable, split by
+a second categorical variable</h2>
+<p>Note here what happens when you write <code>x = year</code> instead
+of <code>x = factor(year)</code>. The point is that <code>ggplot</code>
+might not understand that <code>year</code> is a categorical variable
+(see in the dataframe summery above). So, to make sure
+<code>ggplot</code> treats certain variables as categorical, you can sue
+the <code>factor()</code> function.</p>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = factor(year), fill = age_category_labels)) + 
     geom_bar() +
     labs(x=&quot;Year&quot;, fill=&quot;Age&quot;)</code></pre>
@@ -531,37 +671,57 @@ survey_data = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-
 <p><img src="wpa6_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 </div>
-<div id="plots-with-categorical-and-continuous-variables" class="section level1">
+<div id="plots-with-categorical-and-continuous-variables"
+class="section level1">
 <h1>3. Plots with categorical and continuous variables</h1>
-<div id="box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable" class="section level2">
-<h2>3.1 Box plot showing the distribution of a continuous variable, for each level of a second categorical variable</h2>
+<div
+id="box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable"
+class="section level2">
+<h2>3.1 Box plot showing the distribution of a continuous variable, for
+each level of a second categorical variable</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = factor(harm_future_gen), y = happening_cont)) + 
     geom_boxplot() + 
     labs(x = &quot;Will GW harm future generations?&quot;, y=&#39;Is GW happening?&#39;)</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
-<div id="box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-facet_grid" class="section level2">
-<h2>3.1 Box plot showing the distribution of a continuous variable, for each level of a second categorical variable, split by a third categorical variable using facet_grid</h2>
+<div
+id="box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-facet_grid"
+class="section level2">
+<h2>3.1 Box plot showing the distribution of a continuous variable, for
+each level of a second categorical variable, split by a third
+categorical variable using facet_grid</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = happening_labels, y = worry_cont)) + 
     geom_boxplot() + 
     facet_grid(~ gender)</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-fill" class="section level2">
-<h2>3.3 Box plot showing the distribution of a continuous variable, for each level of a second categorical variable, split by a third categorical variable using fill</h2>
+<div
+id="box-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-fill"
+class="section level2">
+<h2>3.3 Box plot showing the distribution of a continuous variable, for
+each level of a second categorical variable, split by a third
+categorical variable using fill</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = happening_labels, y = worry_cont, fill = gender)) + 
     geom_boxplot()</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="violin-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-the-fill" class="section level2">
-<h2>3.4 Violin plot showing the distribution of a continuous variable, for each level of a second categorical variable, split by a third categorical variable using the fill</h2>
+<div
+id="violin-plot-showing-the-distribution-of-a-continuous-variable-for-each-level-of-a-second-categorical-variable-split-by-a-third-categorical-variable-using-the-fill"
+class="section level2">
+<h2>3.4 Violin plot showing the distribution of a continuous variable,
+for each level of a second categorical variable, split by a third
+categorical variable using the fill</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = party_x_ideo, y = worry_cont)) + 
     geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
     labs(x = &quot;Party/ideology&quot;, y=&#39;How worried of GW are you?&#39;)</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div id="scatter-plot-showing-the-relationship-between-two-continuous-variables-split-by-a-third-categorical-variable-with-colour-and-with-regression-lines-and-verticalhorizontal-lines-showing-the-means" class="section level2">
-<h2>3.5 Scatter plot showing the relationship between two continuous variables, split by a third categorical variable with colour, and with regression lines and vertical/horizontal lines showing the means</h2>
+<div
+id="scatter-plot-showing-the-relationship-between-two-continuous-variables-split-by-a-third-categorical-variable-with-colour-and-with-regression-lines-and-verticalhorizontal-lines-showing-the-means"
+class="section level2">
+<h2>3.5 Scatter plot showing the relationship between two continuous
+variables, split by a third categorical variable with colour, and with
+regression lines and vertical/horizontal lines showing the means</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = happening_cont, y = worry_cont, shape=gender, color=gender)) + 
     geom_point(alpha = .3, size= 1) +
     geom_vline(xintercept = mean(survey_data$happening_cont), linetype=&quot;dotted&quot;) +
@@ -572,20 +732,27 @@ survey_data = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="histogram-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color" class="section level2">
-<h2>3.6 Histogram showing the distribution of a continuous variable, split by a second categorical variable based on color</h2>
+<div
+id="histogram-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color"
+class="section level2">
+<h2>3.6 Histogram showing the distribution of a continuous variable,
+split by a second categorical variable based on color</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = happening_cont, fill = sci_consensus)) + 
     geom_histogram(binwidth=.1, alpha = .4, position=&quot;identity&quot;) +
     labs(x = &#39;Is GW happening?&#39;, fill = &#39;What is the scientific consensus on GW?&#39;)</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="density-plot-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color" class="section level2">
-<h2>3.7 Density plot showing the distribution of a continuous variable, split by a second categorical variable based on color</h2>
+<div
+id="density-plot-showing-the-distribution-of-a-continuous-variable-split-by-a-second-categorical-variable-based-on-color"
+class="section level2">
+<h2>3.7 Density plot showing the distribution of a continuous variable,
+split by a second categorical variable based on color</h2>
 <pre class="r"><code>ggplot(data = survey_data, mapping = aes(x = worry_cont, fill = cause_recoded)) + 
     geom_density(alpha = .2) +
     labs(x = &#39;How worried of GW are you?&#39;, fill = &#39;What is causing GW?&#39;)</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>It’s a bit crowded… so I will filter the dataset to exclude a few levels of the <code>cause_recoded</code> variable:</p>
+<p>It’s a bit crowded… so I will filter the dataset to exclude a few
+levels of the <code>cause_recoded</code> variable:</p>
 <pre class="r"><code>filtered_survey_data = filter(survey_data, 
                               cause_recoded != &quot;dont know&quot;,
                               cause_recoded != &quot;other&quot;)
@@ -598,8 +765,12 @@ ggplot(data = filtered_survey_data, mapping = aes(x = worry_cont, fill = cause_r
 </div>
 <div id="adding-error-bars" class="section level1">
 <h1>4. Adding error bars</h1>
-<div id="dot-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-standard-error-of-the-mean" class="section level2">
-<h2>4.1 Dot plot showing the mean of a continuous variable across different levels of a categorical variable, with error bars (representing standard error of the mean)</h2>
+<div
+id="dot-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-standard-error-of-the-mean"
+class="section level2">
+<h2>4.1 Dot plot showing the mean of a continuous variable across
+different levels of a categorical variable, with error bars
+(representing standard error of the mean)</h2>
 <pre class="r"><code>ggplot(data = filtered_survey_data, mapping = aes(x = educ_category_labels, y = worry_cont)) +
     # stat_summary with arg &quot;fun&quot;:
     # A function that returns a single number, in this case the mean worry_cont for each level of educ_category_labels:
@@ -612,8 +783,12 @@ ggplot(data = filtered_survey_data, mapping = aes(x = worry_cont, fill = cause_r
     labs(x = &#39;Education level&#39;, y = &#39;How worried of GW are you?&#39;)</code></pre>
 <p><img src="wpa6_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
-<div id="bar-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-confidence-intervals" class="section level2">
-<h2>4.2 Bar plot showing the mean of a continuous variable across different levels of a categorical variable, with error bars (representing confidence intervals)</h2>
+<div
+id="bar-plot-showing-the-mean-of-a-continuous-variable-across-different-levels-of-a-categorical-variable-with-error-bars-representing-confidence-intervals"
+class="section level2">
+<h2>4.2 Bar plot showing the mean of a continuous variable across
+different levels of a categorical variable, with error bars
+(representing confidence intervals)</h2>
 <pre class="r"><code>ggplot(data = filtered_survey_data, mapping = aes(x = race, y = worry_cont)) +
     # stat_summary with arg &quot;fun.y&quot;:
     # A function that returns a single number, in this case the mean worry_cont for each level of cause_recoded:
@@ -630,15 +805,35 @@ ggplot(data = filtered_survey_data, mapping = aes(x = worry_cont, fill = cause_r
 </div>
 <div id="now-its-your-turn" class="section level1">
 <h1>5. Now it’s your turn</h1>
-<p>First, download the <code>tdcs.csv</code> datasets from the <a href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data folder on Github</a> and load them in R.</p>
+<p>First, download the <code>tdcs.csv</code> datasets from the <a
+href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data
+folder on Github</a> and load them in R.</p>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Show the distribution of response times (<code>RT</code>) with a <strong>density plot</strong>, separately by the accuracy vs. speed conditions (<code>acc_spd</code>) using different colors of the density plots per condition. Be sure to adjust the transparency so that they are both clearly visible and put appropriate axes labels and legend title.</p></li>
-<li><p>Show the distribution of response times (<code>RT</code>) with a <strong>histogram</strong>, separately by the accuracy vs. speed conditions (<code>acc_spd</code>) using different colors of the density plots per condition. Be sure to adjust the transparency and binwidth, so that they are clearly visible and put appropriate axes labels and legend title. This time, split it furtherly by TDCS manipulation (<code>tdcs</code>) using <code>facet_grid()</code>.</p></li>
-<li><p>Show the response times (<code>RT</code>) with a <strong>violinplot</strong>, separately by the place the data were collected (<code>dataset</code>). Split further by accuracy vs. speed conditions using colors. Add the 10%, 30%, 50%, 70%, and 90% quantiles, that are the most common in response times data analyses. Change labels appropriately.</p></li>
+<li><p>Show the distribution of response times (<code>RT</code>) with a
+<strong>density plot</strong>, separately by the accuracy vs. speed
+conditions (<code>acc_spd</code>) using different colors of the density
+plots per condition. Be sure to adjust the transparency so that they are
+both clearly visible and put appropriate axes labels and legend
+title.</p></li>
+<li><p>Show the distribution of response times (<code>RT</code>) with a
+<strong>histogram</strong>, separately by the accuracy vs. speed
+conditions (<code>acc_spd</code>) using different colors of the density
+plots per condition. Be sure to adjust the transparency and binwidth, so
+that they are clearly visible and put appropriate axes labels and legend
+title. This time, split it furtherly by TDCS manipulation
+(<code>tdcs</code>) using <code>facet_grid()</code>.</p></li>
+<li><p>Show the response times (<code>RT</code>) with a
+<strong>violinplot</strong>, separately by the place the data were
+collected (<code>dataset</code>). Split further by accuracy vs. speed
+conditions using colors. Add the 10%, 30%, 50%, 70%, and 90% quantiles,
+that are the most common in response times data analyses. Change labels
+appropriately.</p></li>
 </ol>
 <p><strong>Task B</strong></p>
-<p>Now, I am creating a summary of the data, where we look at mean response times and accuracy per subject, separately by coherence (how difficult the task was) and the speed vs. accuracy manipulation:</p>
+<p>Now, I am creating a summary of the data, where we look at mean
+response times and accuracy per subject, separately by coherence (how
+difficult the task was) and the speed vs. accuracy manipulation:</p>
 <pre><code>summary_tdcs_data = summarise(group_by(tdcs_data, id, coherence, acc_spd),
                               mean_RT=mean(RT), 
                               mean_accuracy=mean(accuracy))
@@ -646,18 +841,31 @@ ggplot(data = filtered_survey_data, mapping = aes(x = worry_cont, fill = cause_r
 glimpse(summary_tdcs_data)</code></pre>
 <p>Using the summarized data:</p>
 <ol style="list-style-type: decimal">
-<li><p>Plot the relationship between mean response times (<code>mean_RT</code>) and mean accuracy (<code>mean_accuracy</code>) using a <strong>scatterplot</strong>.</p></li>
-<li><p>Use <code>facet_grid</code> to split the plot based on the speed vs. accuracy manipulation (<code>acc_spd</code>).</p></li>
+<li><p>Plot the relationship between mean response times
+(<code>mean_RT</code>) and mean accuracy (<code>mean_accuracy</code>)
+using a <strong>scatterplot</strong>.</p></li>
+<li><p>Use <code>facet_grid</code> to split the plot based on the speed
+vs. accuracy manipulation (<code>acc_spd</code>).</p></li>
 <li><p>Add the regression lines.</p></li>
-<li><p>Change with appropriate plot titles and x- and y-axes labels.</p></li>
-<li><p>Add the coherence levels as color of the dots. Because coherence is a continuous variable and not categorical, you can use <code>scale_colour_gradient</code> to adjust the gradient.</p></li>
+<li><p>Change with appropriate plot titles and x- and y-axes
+labels.</p></li>
+<li><p>Add the coherence levels as color of the dots. Because coherence
+is a continuous variable and not categorical, you can use
+<code>scale_colour_gradient</code> to adjust the gradient.</p></li>
 <li><p>Change the color of the regression lines to grey.</p></li>
 </ol>
 <p><strong>Task C</strong></p>
 <p>Using the summarized data:</p>
 <ol style="list-style-type: decimal">
-<li><p>Plot the mean <code>mean_accuracy</code>, separately by <code>factor(coherence)</code> using <code>stat_summary</code> with arguments <code>geom="bar"</code> and <code>position = 'dodge'</code>. Split further based on the accuracy vs. speed manipulation (<code>acc_spd</code>) with different colors.</p></li>
-<li><p>Now add error bars representing confidence intervals and using <code>stat_summary</code> again with arguments <code>width=.9</code>, <code>position = 'dodge'</code>. Adjust the <code>width</code> argument if the error bars are not centered in each of the bars.</p></li>
+<li><p>Plot the mean <code>mean_accuracy</code>, separately by
+<code>factor(coherence)</code> using <code>stat_summary</code> with
+arguments <code>geom="bar"</code> and <code>position = 'dodge'</code>.
+Split further based on the accuracy vs. speed manipulation
+(<code>acc_spd</code>) with different colors.</p></li>
+<li><p>Now add error bars representing confidence intervals and using
+<code>stat_summary</code> again with arguments <code>width=.9</code>,
+<code>position = 'dodge'</code>. Adjust the <code>width</code> argument
+if the error bars are not centered in each of the bars.</p></li>
 <li><p>Do the same again, but:</p>
 <ul>
 <li>using points instead of bars</li>
@@ -665,10 +873,14 @@ glimpse(summary_tdcs_data)</code></pre>
 <li>mean RTs instead of accuracy</li>
 </ul></li>
 </ol>
-<p><em>Note</em> that you do not need the <code>position = 'dodge'</code> here anymore, and that you might have to adjust <code>size</code> and <code>width</code> of the error bars.</p>
+<p><em>Note</em> that you do not need the
+<code>position = 'dodge'</code> here anymore, and that you might have to
+adjust <code>size</code> and <code>width</code> of the error bars.</p>
 <div id="submit-your-assignment" class="section level2">
 <h2>Submit your assignment</h2>
-<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of Friday.</p>
+<p>Save and email your script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of Friday.</p>
 </div>
 </div>
 

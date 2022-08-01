@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,63 +352,105 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#importing-data">1. Importing data</a>
+<li><a href="#importing-data" id="toc-importing-data">1. Importing
+data</a>
 <ul>
-<li><a href="#different-functions-to-read-tabular-data-from-file">Different functions to read tabular data from file:</a></li>
-<li><a href="#different-functions-to-read-other-data-formats">Different functions to read other data formats:</a></li>
+<li><a href="#different-functions-to-read-tabular-data-from-file"
+id="toc-different-functions-to-read-tabular-data-from-file">Different
+functions to read tabular data from file:</a></li>
+<li><a href="#different-functions-to-read-other-data-formats"
+id="toc-different-functions-to-read-other-data-formats">Different
+functions to read other data formats:</a></li>
 </ul></li>
-<li><a href="#file-paths-for-local-files">2. File paths for local files</a></li>
-<li><a href="#file-on-a-website-load-and-save">3. File on a website: load and save</a></li>
-<li><a href="#get-raw-files-from-github">4. Get raw files from GitHub</a></li>
-<li><a href="#now-its-your-turn">5. Now it’s your turn</a></li>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#file-paths-for-local-files"
+id="toc-file-paths-for-local-files">2. File paths for local
+files</a></li>
+<li><a href="#file-on-a-website-load-and-save"
+id="toc-file-on-a-website-load-and-save">3. File on a website: load and
+save</a></li>
+<li><a href="#get-raw-files-from-github"
+id="toc-get-raw-files-from-github">4. Get raw files from GitHub</a></li>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">5. Now it’s
+your turn</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul>
 </div>
 
 <p>Open RStudio.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_3_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_3_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using
+<code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 3
 # Name: Laura Fontanesi
 # Date: 29 March 2022</code></pre>
 <div id="importing-data" class="section level1">
 <h1>1. Importing data</h1>
 <p>Up to this point, I gave you the code to load datasets in R.</p>
-<p>Say instead you have your own data saved on your computer or somewhere online. How can you analyze this data in R?</p>
-<p>You have two main ways to do it: - using the “Import Dataset” button in the “Environment” tab in R Studio - using code</p>
-<p>Today, we will learn how to import data using code within the the tidyverse package. This allow us to import data directly into tidyverse objects (i.e., tibbles, as we will see in the next 2 lessons).</p>
-<p>The specific sub-package for importing data is called <a href="https://readr.tidyverse.org/reference/index.html">readr</a>.</p>
-<p>Data can come from different sources, e.g.: - text files stored locally - text files from a website</p>
-<p>The functions you will use, depend on the specific format the data were written in:</p>
-<div id="different-functions-to-read-tabular-data-from-file" class="section level2">
+<p>Say instead you have your own data saved on your computer or
+somewhere online. How can you analyze this data in R?</p>
+<p>You have two main ways to do it: - using the “Import Dataset” button
+in the “Environment” tab in R Studio - using code</p>
+<p>Today, we will learn how to import data using code within the the
+tidyverse package. This allow us to import data directly into tidyverse
+objects (i.e., tibbles, as we will see in the next 2 lessons).</p>
+<p>The specific sub-package for importing data is called <a
+href="https://readr.tidyverse.org/reference/index.html">readr</a>.</p>
+<p>Data can come from different sources, e.g.: - text files stored
+locally - text files from a website</p>
+<p>The functions you will use, depend on the specific format the data
+were written in:</p>
+<div id="different-functions-to-read-tabular-data-from-file"
+class="section level2">
 <h2>Different functions to read tabular data from file:</h2>
 <ul>
-<li><p><code>read_delim()</code> is the principal and more general means of reading tabular data into R</p></li>
-<li><p><code>read_csv()</code> sets the default separator to a comma</p></li>
-<li><p><code>read_csv2()</code> is its European cousin, using a comma for decimal places and a semicolon as a separator</p></li>
+<li><p><code>read_delim()</code> is the principal and more general means
+of reading tabular data into R</p></li>
+<li><p><code>read_csv()</code> sets the default separator to a
+comma</p></li>
+<li><p><code>read_csv2()</code> is its European cousin, using a comma
+for decimal places and a semicolon as a separator</p></li>
 <li><p><code>read_tsv()</code> import tab-delimited files</p></li>
 </ul>
 </div>
-<div id="different-functions-to-read-other-data-formats" class="section level2">
+<div id="different-functions-to-read-other-data-formats"
+class="section level2">
 <h2>Different functions to read other data formats:</h2>
 <ul>
-<li><p>Excel files: <a href="https://readxl.tidyverse.org/reference/read_excel.html" class="uri">https://readxl.tidyverse.org/reference/read_excel.html</a></p></li>
-<li><p>STATA, SPSS, SAS files: <a href="https://haven.tidyverse.org/" class="uri">https://haven.tidyverse.org/</a></p></li>
+<li><p>Excel files: <a
+href="https://readxl.tidyverse.org/reference/read_excel.html"
+class="uri">https://readxl.tidyverse.org/reference/read_excel.html</a></p></li>
+<li><p>STATA, SPSS, SAS files: <a href="https://haven.tidyverse.org/"
+class="uri">https://haven.tidyverse.org/</a></p></li>
 </ul>
 </div>
 </div>
 <div id="file-paths-for-local-files" class="section level1">
 <h1>2. File paths for local files</h1>
-<p>At this point, you should have a folder on your laptop for our R course, where you stored all your scripts. Create a subfolder called <code>data</code>.</p>
-<p>When you are done, download the content of this folder ‘<a href="https://www.dropbox.com/sh/kw6o7ztouwpiawk/AACG5YtjeF58YaKjkK9h428Ka?dl=0" class="uri">https://www.dropbox.com/sh/kw6o7ztouwpiawk/AACG5YtjeF58YaKjkK9h428Ka?dl=0</a>’ in your <code>data</code> folder, so that the 5 data files are in your <code>data</code> folder.</p>
-<p>To load these files in R, we need to write the path to your data folder. We can do this using code completion (Tab key): - On Mac, you can start from <code>read_delim('~/')</code> (or similar functions for loading data) and press Tab, to start navigating from your home folder - On Windows, you can do the same, but starting from <code>read_delim('C:\Users\')</code></p>
+<p>At this point, you should have a folder on your laptop for our R
+course, where you stored all your scripts. Create a subfolder called
+<code>data</code>.</p>
+<p>When you are done, download the content of this folder ‘<a
+href="https://www.dropbox.com/sh/kw6o7ztouwpiawk/AACG5YtjeF58YaKjkK9h428Ka?dl=0"
+class="uri">https://www.dropbox.com/sh/kw6o7ztouwpiawk/AACG5YtjeF58YaKjkK9h428Ka?dl=0</a>’
+in your <code>data</code> folder, so that the 5 data files are in your
+<code>data</code> folder.</p>
+<p>To load these files in R, we need to write the path to your data
+folder. We can do this using code completion (Tab key): - On Mac, you
+can start from <code>read_delim('~/')</code> (or similar functions for
+loading data) and press Tab, to start navigating from your home folder -
+On Windows, you can do the same, but starting from
+<code>read_delim('C:\Users\')</code></p>
 <p>In my case, this folder was on Dropbox:</p>
 <pre class="r"><code>library(tidyverse)
 
 data_a = read_delim(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_a.txt&#39;, delim=&#39;\t&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   index = col_double(),
 ##   participant = col_double(),
@@ -427,7 +472,7 @@ data_a = read_delim(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_a.txt
 ## 6     6           8 male      18 AC             0     854</code></pre>
 <pre class="r"><code>data_b = read_csv(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_b.csv&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   id = col_character(),
 ##   gender = col_double(),
@@ -452,18 +497,19 @@ data_a = read_delim(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_a.txt
 
 head(data_b)</code></pre>
 <pre><code>## # A tibble: 6 x 18
-##   id       gender   age income    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10  task havemore haveless pcmore
-##   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-## 1 R_3PtNn…      2    26      7     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
-## 2 R_2AXrr…      2    32      4     1     1     1     1     1     1     1     1     1     1     0       NA       25     75
-## 3 R_cwEOX…      1    25      2     0     1     1     1     1     1     1     1     0     0     0       NA       10     90
-## 4 R_d59iP…      1    33      5     1     1     1     1     1     1     1     1     1     1     0       NA       50     50
-## 5 R_1f3K2…      1    24      1     1     1     0     1     1     1     1     1     1     1     1       99       NA     99
-## 6 R_3oN5i…      1    22      2     1     1     0     0     1     1     1     1     0     1     0       NA       20     80</code></pre>
+##   id          gender   age income    p1    p2    p3    p4    p5    p6    p7    p8    p9   p10  task havemore haveless
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 R_3PtNn51L…      2    26      7     1     1     1     1     1     1     1     1     1     1     0       NA       50
+## 2 R_2AXrrg62…      2    32      4     1     1     1     1     1     1     1     1     1     1     0       NA       25
+## 3 R_cwEOX3Hg…      1    25      2     0     1     1     1     1     1     1     1     0     0     0       NA       10
+## 4 R_d59iPwL4…      1    33      5     1     1     1     1     1     1     1     1     1     1     0       NA       50
+## 5 R_1f3K2HrG…      1    24      1     1     1     0     1     1     1     1     1     1     1     1       99       NA
+## 6 R_3oN5ijzT…      1    22      2     1     1     0     0     1     1     1     1     0     1     0       NA       20
+## # … with 1 more variable: pcmore &lt;dbl&gt;</code></pre>
 <pre class="r"><code>data_c = read_csv2(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_c.csv&#39;)</code></pre>
 <pre><code>## ℹ Using &quot;&#39;,&#39;&quot; as decimal and &quot;&#39;.&#39;&quot; as grouping mark. Use `read_delim()` for more control.</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_character(),
 ##   age = col_double(),
@@ -486,17 +532,17 @@ head(data_b)</code></pre>
 ## ℹ Use `spec()` for the full column specifications.</code></pre>
 <pre class="r"><code>head(data_c)</code></pre>
 <pre><code>## # A tibble: 6 x 33
-##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob     reason  guardian traveltime studytime failures
-##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 GP     F        18 U       GT3     A           4     4 at_home  teacher  course  mother            2         2        0
-## 2 GP     F        17 U       GT3     T           1     1 at_home  other    course  father            1         2        0
-## 3 GP     F        15 U       LE3     T           1     1 at_home  other    other   mother            1         2        0
-## 4 GP     F        15 U       GT3     T           4     2 health   services home    mother            1         3        0
-## 5 GP     F        16 U       GT3     T           3     3 other    other    home    father            1         2        0
-## 6 GP     M        16 U       LE3     T           4     3 services other    reputa… mother            1         2        0
-## # … with 18 more variables: schoolsup &lt;chr&gt;, famsup &lt;chr&gt;, paid &lt;chr&gt;, activities &lt;chr&gt;, nursery &lt;chr&gt;, higher &lt;chr&gt;,
-## #   internet &lt;chr&gt;, romantic &lt;chr&gt;, famrel &lt;dbl&gt;, freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;, Walc &lt;dbl&gt;, health &lt;dbl&gt;,
-## #   absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
+##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob     reason guardian traveltime studytime failures
+##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 GP     F        18 U       GT3     A           4     4 at_home  teacher  course mother            2         2        0
+## 2 GP     F        17 U       GT3     T           1     1 at_home  other    course father            1         2        0
+## 3 GP     F        15 U       LE3     T           1     1 at_home  other    other  mother            1         2        0
+## 4 GP     F        15 U       GT3     T           4     2 health   services home   mother            1         3        0
+## 5 GP     F        16 U       GT3     T           3     3 other    other    home   father            1         2        0
+## 6 GP     M        16 U       LE3     T           4     3 services other    reput… mother            1         2        0
+## # … with 18 more variables: schoolsup &lt;chr&gt;, famsup &lt;chr&gt;, paid &lt;chr&gt;, activities &lt;chr&gt;, nursery &lt;chr&gt;,
+## #   higher &lt;chr&gt;, internet &lt;chr&gt;, romantic &lt;chr&gt;, famrel &lt;dbl&gt;, freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;, Walc &lt;dbl&gt;,
+## #   health &lt;dbl&gt;, absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
 <pre class="r"><code>library(readxl)
 
 # maybe try first: install.packages(&quot;readxl&quot;)
@@ -505,14 +551,14 @@ data_d = read_excel(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_d.xls
 
 head(data_d)</code></pre>
 <pre><code>## # A tibble: 6 x 9
-##    Year `Average population` `Live births` Deaths `Natural change` `Crude birth rate… `Crude death rat… `Natural change …
-##   &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                         &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;
-## 1  1900 3,300,000            94,316        63,606 30,710                         28.6              19.3               9.3
-## 2  1901 3,341,000            97,028        60,018 37,010                         29                18                11.1
-## 3  1902 3,384,000            96,480        57,702 38,778                         28.5              17.1              11.5
-## 4  1903 3,428,000            93,824        59,626 34,198                         27.4              17.4              10  
-## 5  1904 3,472,000            94,867        60,857 34,010                         27.3              17.5               9.8
-## 6  1905 3,516,000            94,653        61,800 32,853                         26.9              17.6               9.3
+##    Year `Average population` `Live births` Deaths `Natural change` `Crude birth ra… `Crude death ra… `Natural change…
+##   &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1  1900 3,300,000            94,316        63,606 30,710                       28.6             19.3              9.3
+## 2  1901 3,341,000            97,028        60,018 37,010                       29               18               11.1
+## 3  1902 3,384,000            96,480        57,702 38,778                       28.5             17.1             11.5
+## 4  1903 3,428,000            93,824        59,626 34,198                       27.4             17.4             10  
+## 5  1904 3,472,000            94,867        60,857 34,010                       27.3             17.5              9.8
+## 6  1905 3,516,000            94,653        61,800 32,853                       26.9             17.6              9.3
 ## # … with 1 more variable: Total fertility rates &lt;dbl&gt;</code></pre>
 <pre class="r"><code>library(haven)
 # maybe first: install.packages(&quot;haven&quot;)
@@ -521,14 +567,14 @@ data_e = read_sav(&#39;~/Dropbox/teaching/r-course22/data/data_to_import_e.sav&#
 
 head(data_e)</code></pre>
 <pre><code>## # A tibble: 6 x 54
-##   case_ID         wave      year weight_wave weight_aggregate      happening cause_original cause_other_text cause_recoded
-##     &lt;dbl&gt;    &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt; &lt;chr&gt;                &lt;dbl+lbl&gt;
-## 1       2 1 [Nov 2008]  1 [2008]        0.54            0.294 3 [Yes]        1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 2       3 1 [Nov 2008]  1 [2008]        0.85            0.463 2 [Don&#39;t know] 1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 3       5 1 [Nov 2008]  1 [2008]        0.49            0.267 2 [Don&#39;t know] 2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 4       6 1 [Nov 2008]  1 [2008]        0.29            0.158 3 [Yes]        2 [Caused mos… &quot;&quot;               4 [Caused mo…
-## 5       7 1 [Nov 2008]  1 [2008]        1.29            0.702 3 [Yes]        1 [Caused mos… &quot;&quot;               6 [Caused mo…
-## 6       8 1 [Nov 2008]  1 [2008]        2.56            1.39  2 [Don&#39;t know] 2 [Caused mos… &quot;&quot;               4 [Caused mo…
+##   case_ID         wave      year weight_wave weight_aggregate happening cause_original cause_other_text cause_recoded
+##     &lt;dbl&gt;    &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt; &lt;chr&gt;                &lt;dbl+lbl&gt;
+## 1       2 1 [Nov 2008]  1 [2008]        0.54            0.294 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
+## 2       3 1 [Nov 2008]  1 [2008]        0.85            0.463 2 [Don&#39;t… 1 [Caused mos… &quot;&quot;               6 [Caused mo…
+## 3       5 1 [Nov 2008]  1 [2008]        0.49            0.267 2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo…
+## 4       6 1 [Nov 2008]  1 [2008]        0.29            0.158 3 [Yes]   2 [Caused mos… &quot;&quot;               4 [Caused mo…
+## 5       7 1 [Nov 2008]  1 [2008]        1.29            0.702 3 [Yes]   1 [Caused mos… &quot;&quot;               6 [Caused mo…
+## 6       8 1 [Nov 2008]  1 [2008]        2.56            1.39  2 [Don&#39;t… 2 [Caused mos… &quot;&quot;               4 [Caused mo…
 ## # … with 45 more variables: sci_consensus &lt;dbl+lbl&gt;, worry &lt;dbl+lbl&gt;, harm_personally &lt;dbl+lbl&gt;, harm_US &lt;dbl+lbl&gt;,
 ## #   harm_dev_countries &lt;dbl+lbl&gt;, harm_future_gen &lt;dbl+lbl&gt;, harm_plants_animals &lt;dbl+lbl&gt;, when_harm_US &lt;dbl+lbl&gt;,
 ## #   reg_CO2_pollutant &lt;dbl+lbl&gt;, reg_utilities &lt;dbl+lbl&gt;, fund_research &lt;dbl+lbl&gt;, reg_coal_emissions &lt;dbl+lbl&gt;,
@@ -539,10 +585,16 @@ head(data_e)</code></pre>
 </div>
 <div id="file-on-a-website-load-and-save" class="section level1">
 <h1>3. File on a website: load and save</h1>
-<p>Let’s say we want to load in R some data, directly from a website (without saving it to a file). In this case, we get some data from the website “<a href="https://support.spatialkey.com/spatialkey-sample-csv-data/" class="uri">https://support.spatialkey.com/spatialkey-sample-csv-data/</a>”. Instead of writing a local address, we can simply use the same functions with the web address.</p>
+<p>Let’s say we want to load in R some data, directly from a website
+(without saving it to a file). In this case, we get some data from the
+website “<a
+href="https://support.spatialkey.com/spatialkey-sample-csv-data/"
+class="uri">https://support.spatialkey.com/spatialkey-sample-csv-data/</a>”.
+Instead of writing a local address, we can simply use the same functions
+with the web address.</p>
 <pre class="r"><code>data_transactions = read_csv(&quot;https://support.spatialkey.com/wp-content/uploads/2021/02/Sacramentorealestatetransactions.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   street = col_character(),
 ##   city = col_character(),
@@ -559,21 +611,24 @@ head(data_e)</code></pre>
 ## )</code></pre>
 <pre class="r"><code>head(data_transactions)</code></pre>
 <pre><code>## # A tibble: 6 x 12
-##   street             city         zip state  beds baths sq__ft type        sale_date             price latitude longitude
-##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00:00 … 59222     38.6     -121.
-## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00:00 … 68212     38.5     -121.
-## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00:00 … 68880     38.6     -121.
-## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00:00 … 69307     38.6     -121.
-## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00:00 … 81900     38.5     -121.
-## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00:00 … 89921     38.7     -121.</code></pre>
-<p>If we want, we can then save it to file from R, using similar set of functions that start with <code>write_</code> instead of <code>read_</code>. You can use such functions also to save your data in a different format from the original for later use.</p>
+##   street             city         zip state  beds baths sq__ft type        sale_date         price latitude longitude
+##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00… 59222     38.6     -121.
+## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00… 68212     38.5     -121.
+## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00… 68880     38.6     -121.
+## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00… 69307     38.6     -121.
+## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00… 81900     38.5     -121.
+## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00… 89921     38.7     -121.</code></pre>
+<p>If we want, we can then save it to file from R, using similar set of
+functions that start with <code>write_</code> instead of
+<code>read_</code>. You can use such functions also to save your data in
+a different format from the original for later use.</p>
 <pre class="r"><code># save it to file
 write_csv(data_transactions, file = &quot;~/Dropbox/teaching/r-course22/data/Sacramentorealestatetransactions.csv&quot;)</code></pre>
 <pre class="r"><code># load it again
 data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramentorealestatetransactions.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   street = col_character(),
 ##   city = col_character(),
@@ -590,26 +645,37 @@ data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramento
 ## )</code></pre>
 <pre class="r"><code>head(data_transactions)</code></pre>
 <pre><code>## # A tibble: 6 x 12
-##   street             city         zip state  beds baths sq__ft type        sale_date             price latitude longitude
-##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00:00 … 59222     38.6     -121.
-## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00:00 … 68212     38.5     -121.
-## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00:00 … 68880     38.6     -121.
-## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00:00 … 69307     38.6     -121.
-## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00:00 … 81900     38.5     -121.
-## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00:00 … 89921     38.7     -121.</code></pre>
+##   street             city         zip state  beds baths sq__ft type        sale_date         price latitude longitude
+##   &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 3526 HIGH ST       SACRAMENTO 95838 CA        2     1    836 Residential Wed May 21 00:00… 59222     38.6     -121.
+## 2 51 OMAHA CT        SACRAMENTO 95823 CA        3     1   1167 Residential Wed May 21 00:00… 68212     38.5     -121.
+## 3 2796 BRANCH ST     SACRAMENTO 95815 CA        2     1    796 Residential Wed May 21 00:00… 68880     38.6     -121.
+## 4 2805 JANETTE WAY   SACRAMENTO 95815 CA        2     1    852 Residential Wed May 21 00:00… 69307     38.6     -121.
+## 5 6001 MCMAHON DR    SACRAMENTO 95824 CA        2     1    797 Residential Wed May 21 00:00… 81900     38.5     -121.
+## 6 5828 PEPPERMILL CT SACRAMENTO 95841 CA        3     1   1122 Condo       Wed May 21 00:00… 89921     38.7     -121.</code></pre>
 </div>
 <div id="get-raw-files-from-github" class="section level1">
 <h1>4. Get raw files from GitHub</h1>
-<p>Go on the <code>data</code> folder where I load the datasets for the seminar: ‘<a href="https://github.com/laurafontanesi/r-seminar22/tree/main/data" class="uri">https://github.com/laurafontanesi/r-seminar22/tree/main/data</a>’.</p>
+<p>Go on the <code>data</code> folder where I load the datasets for the
+seminar: ‘<a
+href="https://github.com/laurafontanesi/r-seminar22/tree/main/data"
+class="uri">https://github.com/laurafontanesi/r-seminar22/tree/main/data</a>’.</p>
 <p>Click on <code>tdcs.csv</code>.</p>
-<p>To be able to load these data in R, we first need to get to the raw data.</p>
-<p>You can get them by clickin on <code>View raw</code>. <strong>Note</strong> that for some files, instead of getting to the raw data page, you can directly dowload them to a local directory. From there, you can simply load them in R using the appropriate <code>read_</code> function.</p>
-<p>Copy the adress of the page containing the raw data. It should be <a href="https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv" class="uri">https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv</a></p>
-<p>You can use now this url with one of our <code>read_</code> functions:</p>
+<p>To be able to load these data in R, we first need to get to the raw
+data.</p>
+<p>You can get them by clickin on <code>View raw</code>.
+<strong>Note</strong> that for some files, instead of getting to the raw
+data page, you can directly dowload them to a local directory. From
+there, you can simply load them in R using the appropriate
+<code>read_</code> function.</p>
+<p>Copy the adress of the page containing the raw data. It should be <a
+href="https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv"
+class="uri">https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/tdcs.csv</a></p>
+<p>You can use now this url with one of our <code>read_</code>
+functions:</p>
 <pre class="r"><code>data_tdcs = read_csv(&quot;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/tdcs.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   RT = col_double(),
 ##   acc_spd = col_character(),
@@ -638,7 +704,15 @@ data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramento
 <div id="now-its-your-turn" class="section level1">
 <h1>5. Now it’s your turn</h1>
 <p><strong>Task A</strong></p>
-<p>From the <a href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data folder on Github</a>, get the data sets in the list below. Load them in R giving the respective names: <code>qualtrics_data</code>, <code>data_f</code>, <code>data_g</code>, <code>data_h</code>. Inspect them using <code>head()</code> or <code>glimpse()</code>. Finally, save them to your local <code>data</code> directory (that you should have as a sub-directory in your R course directory) as <code>csv</code> files.</p>
+<p>From the <a
+href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data
+folder on Github</a>, get the data sets in the list below. Load them in
+R giving the respective names: <code>qualtrics_data</code>,
+<code>data_f</code>, <code>data_g</code>, <code>data_h</code>. Inspect
+them using <code>head()</code> or <code>glimpse()</code>. Finally, save
+them to your local <code>data</code> directory (that you should have as
+a sub-directory in your R course directory) as <code>csv</code>
+files.</p>
 <ol style="list-style-type: decimal">
 <li>20180321_qualtrics_managers_historical_social_comparisons.dta</li>
 <li>data_to_import_f.csv</li>
@@ -646,12 +720,22 @@ data_transactions = read_csv(&quot;~/Dropbox/teaching/r-course22/data/Sacramento
 <li>data_to_import_h.csv</li>
 </ol>
 <p><strong>Task B</strong></p>
-<p>Go to this website: <a href="https://www.britishelectionstudy.com/data-objects/cross-sectional-data/" class="uri">https://www.britishelectionstudy.com/data-objects/cross-sectional-data/</a> (you can register for free).</p>
-<p>Download the 2017 Face-to-face Post-election Survey Version 1.5 <strong>SPSS file</strong> in your local <code>data</code> directory (see above). Then, load it in R assigning it to the name <code>british_cross_sectional_data</code> using the appropriate function for SPSS files and inspect it using <code>head()</code> or <code>glimpse()</code>.</p>
+<p>Go to this website: <a
+href="https://www.britishelectionstudy.com/data-objects/cross-sectional-data/"
+class="uri">https://www.britishelectionstudy.com/data-objects/cross-sectional-data/</a>
+(you can register for free).</p>
+<p>Download the 2017 Face-to-face Post-election Survey Version 1.5
+<strong>SPSS file</strong> in your local <code>data</code> directory
+(see above). Then, load it in R assigning it to the name
+<code>british_cross_sectional_data</code> using the appropriate function
+for SPSS files and inspect it using <code>head()</code> or
+<code>glimpse()</code>.</p>
 </div>
 <div id="submit-your-assignment" class="section level1">
 <h1>Submit your assignment</h1>
-<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of <strong>Friday</strong>.</p>
+<p>Save and email your script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of <strong>Friday</strong>.</p>
 </div>
 
 

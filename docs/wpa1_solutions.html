@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -355,8 +358,14 @@ load(con)
 close(con)</code></pre>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li>Plot the relationship between: <code>imdb_rating</code>, <code>imdb_num_votes</code> and <code>audience_score</code>.</li>
-<li>Change the coloring of the scatterplot. You can either have a look <a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">here</a> or simply change the two colors in the gradients, and have a look for example <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">here</a>.</li>
+<li>Plot the relationship between: <code>imdb_rating</code>,
+<code>imdb_num_votes</code> and <code>audience_score</code>.</li>
+<li>Change the coloring of the scatterplot. You can either have a look
+<a
+href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">here</a>
+or simply change the two colors in the gradients, and have a look for
+example <a
+href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour">here</a>.</li>
 <li>Compute the regression for such relationship.</li>
 </ol>
 <pre class="r"><code>ggplot(data = movies, aes(x = imdb_rating, y = audience_score, color=imdb_num_votes)) +
@@ -392,7 +401,8 @@ summary(regression_fit)</code></pre>
 ## F-statistic: 961.7 on 2 and 648 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong>Task B</strong></p>
 <ol style="list-style-type: decimal">
-<li>Plot the relationship between <code>best_actor_win</code>, <code>best_actress_win</code> and <code>audience_score</code>.</li>
+<li>Plot the relationship between <code>best_actor_win</code>,
+<code>best_actress_win</code> and <code>audience_score</code>.</li>
 <li>Compute the ANOVA for such relationship.</li>
 </ol>
 <pre class="r"><code>ggplot(data = movies, aes(x = best_actor_win, y = audience_score, fill = best_actress_win)) +
@@ -413,7 +423,8 @@ summary(anova_fit)</code></pre>
 ## Residuals                       647 265261   410.0</code></pre>
 <p><strong>Task C</strong></p>
 <ol style="list-style-type: decimal">
-<li>Plot the number of movies in each <code>mpaa_rating</code> category.</li>
+<li>Plot the number of movies in each <code>mpaa_rating</code>
+category.</li>
 </ol>
 <pre class="r"><code>ggplot(data = movies, aes(x = mpaa_rating)) +
   geom_bar() +

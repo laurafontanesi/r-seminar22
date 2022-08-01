@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>final_project_solutions</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R seminar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Syllabus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display"></span>
+     
+    WPAs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6.html">WPA 6</a>
+    </li>
+    <li>
+      <a href="wpa7.html">WPA 7</a>
+    </li>
+    <li>
+      <a href="wpa8.html">WPA 8</a>
+    </li>
+    <li>
+      <a href="wpa9.html">WPA 9</a>
+    </li>
+    <li>
+      <a href="wpa10.html">WPA 10</a>
+    </li>
+    <li>
+      <a href="final_project.html">Final Project</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fas fa-display-arrow-down"></span>
+     
+    Solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="wpa1_solutions.html">WPA 1</a>
+    </li>
+    <li>
+      <a href="wpa2_solutions.html">WPA 2</a>
+    </li>
+    <li>
+      <a href="wpa3_solutions.html">WPA 3</a>
+    </li>
+    <li>
+      <a href="wpa4_solutions.html">WPA 4</a>
+    </li>
+    <li>
+      <a href="wpa5_solutions.html">WPA 5</a>
+    </li>
+    <li>
+      <a href="wpa6_solutions.html">WPA 6</a>
+    </li>
+    <li>
+      <a href="wpa7_solutions.html">WPA 7</a>
+    </li>
+    <li>
+      <a href="wpa8_solutions.html">WPA 8</a>
+    </li>
+    <li>
+      <a href="wpa9_solutions.html">WPA 9</a>
+    </li>
+    <li>
+      <a href="wpa10_solutions.html">WPA 10</a>
+    </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">final_project_solutions</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#part-1" id="toc-part-1">Part 1</a>
+<ul>
+<li><a href="#part-1.1-loading-the-data"
+id="toc-part-1.1-loading-the-data">Part 1.1: Loading the data</a></li>
+<li><a href="#part-1.2-describing-the-data"
+id="toc-part-1.2-describing-the-data">Part 1.2: Describing the
+data</a></li>
+<li><a href="#part-1.3-exclude-participants"
+id="toc-part-1.3-exclude-participants">Part 1.3: Exclude
+participants</a></li>
+<li><a href="#part-1.4-data-visualization"
+id="toc-part-1.4-data-visualization">Part 1.4: Data
+visualization</a></li>
+<li><a
+href="#part-1.5-calculate-the-reward-rate-option-to-do-this-for-next-week-together-with-part-2"
+id="toc-part-1.5-calculate-the-reward-rate-option-to-do-this-for-next-week-together-with-part-2">Part
+1.5 Calculate the reward rate (option to do this for next week together
+with part 2)</a></li>
+</ul></li>
+<li><a href="#part-2-multi-level-regression-and-anova"
+id="toc-part-2-multi-level-regression-and-anova">Part 2: Multi-level
+regression and ANOVA</a></li>
+</ul>
+</div>
+
+<div id="part-1" class="section level1">
+<h1>Part 1</h1>
+<div id="part-1.1-loading-the-data" class="section level2">
+<h2>Part 1.1: Loading the data</h2>
+<pre class="r"><code>library(tidyverse)
+
+# define the data folder
+data_folder = &#39;~/Dropbox/teaching/r-course22/data/final_project/&#39;
+
+# define lists of files
+list_files = paste(data_folder, list.files(path=data_folder), sep=&quot;&quot;)
+
+# apply the read_delim function to each element in the list
+data_list = lapply(list_files, function(x) read_delim(x, delim=&#39;\t&#39;)) 
+
+# loop through all the participants to add the participant number as a column as well as the name of the file, since we have no other way to know in which conditions the participants were in
+data = NULL
+participant = 0
+
+for (n in 1:(length(data_list))){
+    participant = participant + 1
+    cond_list = strsplit(list_files[n], &quot;_&quot;)
+    condition = paste(cond_list[[1]][3], &quot;_&quot;, cond_list[[1]][4], sep=&quot;&quot;)
+    data=rbind(data,cbind(participant=participant, condition=condition, data_list[[n]]))
+}</code></pre>
+<pre class="r"><code>head(data)</code></pre>
+<pre><code>##   participant condition blkNum trlNum coherentDots numberofDots percentCoherence winningDirection response correct
+## 1           1 Norm_Time      1      1            4           40               10             left     left       1
+## 2           1 Norm_Time      1      2            4           40               10             left    right       0
+## 3           1 Norm_Time      1      3            4           40               10            right     left       0
+## 4           1 Norm_Time      1      4            4           40               10            right     left       0
+## 5           1 Norm_Time      1      5            4           40               10             left     left       1
+## 6           1 Norm_Time      1      6            4           40               10             left     left       1
+##   eventCount averageFrameRate   RT
+## 1         51           15.389 3314
+## 2         40           15.250 2623
+## 3         11           16.492  667
+## 4         19           15.690 1211
+## 5         99           15.175 6524
+## 6         15           16.060  934</code></pre>
+<p>As you can see, there are a few things to fix to make the dataset
+look a bit cleaner. It’s on you now to do the rest. The final data
+should consist of the following columns:</p>
+<ul>
+<li>participant</li>
+<li>block_number</li>
+<li>trial_number</li>
+<li>condition (use the labels in the description above)</li>
+<li>percent_coherence</li>
+<li>dots_direction</li>
+<li>response</li>
+<li>accuracy</li>
+<li>rt (change them to seconds, which means dividing them by 1000)</li>
+</ul>
+<p>The columns in the dataset that are not in this list you should
+remove. The labels of the column that are different you should change to
+the ones below.</p>
+<pre class="r"><code>data = rename(data,
+              block_number = blkNum,
+              trial_number = trlNum,
+              percent_coherence = percentCoherence,
+              dots_direction = winningDirection,
+              accuracy = correct,
+              rt = RT)
+
+data = mutate(data,
+              condition = recode(condition,
+                                 Norm_Trial = &quot;FixedTrial_LowInformation&quot;,
+                                 Info_Trial = &quot;FixedTrial_MediumInformation&quot;,
+                                 Optim_Trial = &quot;FixedTrial_HighInformation&quot;,
+                                 Norm_Time = &quot;FixedTime_LowInformation&quot;,
+                                 Info_Time = &quot;FixedTime_MediumInformation&quot;,
+                                 Optim_Time = &quot;FixedTime_HighInformation&quot;),
+              rt = rt/1000)
+
+data = select(data, -c(&quot;coherentDots&quot;, &quot;numberofDots&quot;, &quot;eventCount&quot;, &quot;averageFrameRate&quot;))
+
+head(data)</code></pre>
+<pre><code>##   participant                condition block_number trial_number percent_coherence dots_direction response accuracy
+## 1           1 FixedTime_LowInformation            1            1                10           left     left        1
+## 2           1 FixedTime_LowInformation            1            2                10           left    right        0
+## 3           1 FixedTime_LowInformation            1            3                10          right     left        0
+## 4           1 FixedTime_LowInformation            1            4                10          right     left        0
+## 5           1 FixedTime_LowInformation            1            5                10           left     left        1
+## 6           1 FixedTime_LowInformation            1            6                10           left     left        1
+##      rt
+## 1 3.314
+## 2 2.623
+## 3 0.667
+## 4 1.211
+## 5 6.524
+## 6 0.934</code></pre>
+</div>
+<div id="part-1.2-describing-the-data" class="section level2">
+<h2>Part 1.2: Describing the data</h2>
+<ul>
+<li>How many participants are in the dataset?</li>
+</ul>
+<pre class="r"><code>summarize(data, n_distinct(participant))</code></pre>
+<pre><code>##   n_distinct(participant)
+## 1                      85</code></pre>
+<ul>
+<li>How many participants were there in each condition?</li>
+</ul>
+<pre class="r"><code>summarize(group_by(data, condition), n_distinct(participant))</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   condition                    `n_distinct(participant)`
+##   &lt;chr&gt;                                            &lt;int&gt;
+## 1 FixedTime_HighInformation                           14
+## 2 FixedTime_LowInformation                            16
+## 3 FixedTime_MediumInformation                         16
+## 4 FixedTrial_HighInformation                          13
+## 5 FixedTrial_LowInformation                           13
+## 6 FixedTrial_MediumInformation                        13</code></pre>
+<ul>
+<li>Did the participants in the fixed time conditions perform more or
+less trials than the participants in the fixed trials conditions?</li>
+</ul>
+<pre class="r"><code>data = mutate(data,
+              blocktype = recode(condition,
+                                 FixedTrial_LowInformation = &quot;FixedTrial&quot;,
+                                 FixedTrial_MediumInformation = &quot;FixedTrial&quot;,
+                                 FixedTrial_HighInformation = &quot;FixedTrial&quot;,
+                                 FixedTime_LowInformation = &quot;FixedTime&quot;,
+                                 FixedTime_MediumInformation = &quot;FixedTime&quot;,
+                                 FixedTime_HighInformation = &quot;FixedTime&quot;))
+
+trials_blocktype = left_join(summarize(group_by(data, participant), n_trials=n()), 
+                             distinct(data, participant, blocktype),
+                             by=&quot;participant&quot;)
+
+summarize(group_by(trials_blocktype, blocktype), mean=mean(n_trials))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   blocktype   mean
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 FixedTime   775.
+## 2 FixedTrial  960</code></pre>
+<ul>
+<li>Calculate a summary, which includes the average and SD of accuracy
+and response time per condition (which are 6 in total) and use this to
+describe the overall performance across participants in these conditions
+(i.e., which conditions produced hiigher accuracy, which produced faster
+responses? Do accuracy and speed always trade off?).</li>
+</ul>
+<pre class="r"><code>summarize(group_by(data, condition), meanRT=mean(rt), meanACC=mean(accuracy))</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   condition                    meanRT meanACC
+##   &lt;chr&gt;                         &lt;dbl&gt;   &lt;dbl&gt;
+## 1 FixedTime_HighInformation      1.21   0.768
+## 2 FixedTime_LowInformation       1.59   0.738
+## 3 FixedTime_MediumInformation    1.33   0.801
+## 4 FixedTrial_HighInformation     1.31   0.789
+## 5 FixedTrial_LowInformation      1.16   0.794
+## 6 FixedTrial_MediumInformation   1.12   0.785</code></pre>
+<ul>
+<li>Calculate a summary, which includes the average accuracy and average
+response time per participant, as well as the percentage of trials below
+150 ms (too fast trials) and above 5000 ms (too slow trials). Are there
+any participants with more then 10% fast or slow trials?</li>
+</ul>
+<pre class="r"><code>data = mutate(data,
+              slow_trials = case_when(
+                rt &gt;= 5 ~ 1,
+                rt &lt; 5 ~ 0),
+              fast_trials = case_when(
+                rt &lt;= .15 ~ 1,
+                rt &gt; .15 ~ 0))
+
+participant_performance = summarize(group_by(data, participant),
+                                    meanRT=mean(rt),
+                                    meanACC=mean(accuracy),
+                                    perc_slow_trials = mean(slow_trials)*100,
+                                    perc_fast_trials = mean(fast_trials)*100)
+filter(participant_performance, perc_slow_trials &gt;= 10)</code></pre>
+<pre><code>## # A tibble: 7 x 5
+##   participant meanRT meanACC perc_slow_trials perc_fast_trials
+##         &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1          28   2.67   0.805             10.1            0    
+## 2          47   4.79   0.729             36.3            0    
+## 3          58   2.56   0.644             11.1            0.208
+## 4          70   2.81   0.673             10.6            0    
+## 5          82   3.25   0.556             17.9            0    
+## 6          83   2.75   0.906             15.2            0    
+## 7          85   2.18   0.709             11.8            0</code></pre>
+<pre class="r"><code>filter(participant_performance, perc_fast_trials &gt;= 10)</code></pre>
+<pre><code>## # A tibble: 0 x 5
+## # … with 5 variables: participant &lt;dbl&gt;, meanRT &lt;dbl&gt;, meanACC &lt;dbl&gt;, perc_slow_trials &lt;dbl&gt;, perc_fast_trials &lt;dbl&gt;</code></pre>
+</div>
+<div id="part-1.3-exclude-participants" class="section level2">
+<h2>Part 1.3: Exclude participants</h2>
+<p>Exclude from the dataset the participants that have less than 60%
+accuracy. The trials with a response time less than 150 ms or greater
+than 5000 ms should be also excluded. Check that the accuracy variable
+only contains 0 and 1.</p>
+<pre class="r"><code>participants_to_exclude = filter(participant_performance, meanACC &lt; .6)$participant
+
+for (n in 1:length(participants_to_exclude)) {
+  data = data %&gt;% 
+    filter(participant != participants_to_exclude[n])
+}</code></pre>
+</div>
+<div id="part-1.4-data-visualization" class="section level2">
+<h2>Part 1.4: Data visualization</h2>
+<p>Now it’s time to visualize the data set.</p>
+<ul>
+<li>First, we want to have a look at how the accuracy and response time
+evolve across the blocks. For this purpose, you should make a 2-by-1
+grid plot that depicts the response time (top panel) and accuracy (lower
+panel) across the blocks for each condition. This should recreate Figure
+2 fromt he paper: <a
+href="https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2"
+class="uri">https://link.springer.com/article/10.3758/s13423-016-1135-1/figures/2</a>
+(excluding the top panel). What trends do you observe?</li>
+</ul>
+<pre class="r"><code>grouped_data = group_by(data, condition, block_number)
+data_summary = summarise(grouped_data, meanRT = mean(rt), meanACC = mean(accuracy))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;condition&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>ggplot(data = data_summary, mapping = aes(x = block_number, y = meanACC, color=condition)) + 
+    geom_line()</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = data_summary, mapping = aes(x = block_number, y = meanRT, color=condition)) + 
+    geom_line()</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<ul>
+<li>Second, we want to make two separate plots, one for accuracy and one
+for response times, which show the average performance iin the 6
+conditions. The condition should be plotted in the x-axis and the
+performance (either accuracy or rt) in the y-axis. You can choose
+whether you would like to have bar plots or point plots. Add error bars
+representing confidence intervals.</li>
+</ul>
+<pre class="r"><code>ggplot(data = data, mapping = aes(x = condition, y = accuracy)) +
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;point&quot;, size=3) +
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;, size=1, width=.2) +
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = data, mapping = aes(x = condition, y = rt)) +
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;point&quot;, size=3) +
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;, size=1, width=.2) +
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<p>Alternatively:</p>
+<pre class="r"><code>data = mutate(data,
+              trialtype = recode(condition,
+                                 FixedTrial_LowInformation = &quot;LowInformation&quot;,
+                                 FixedTrial_MediumInformation = &quot;MediumInformation&quot;,
+                                 FixedTrial_HighInformation = &quot;HighInformation&quot;,
+                                 FixedTime_LowInformation = &quot;LowInformation&quot;,
+                                 FixedTime_MediumInformation = &quot;MediumInformation&quot;,
+                                 FixedTime_HighInformation = &quot;HighInformation&quot;))
+
+ggplot(data = data, mapping = aes(x = trialtype, y = accuracy, color=blocktype)) +
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;point&quot;, size=3) +
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;, size=1, width=.2) +
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = data, mapping = aes(x = trialtype, y = rt, color=blocktype)) +
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;point&quot;, size=3) +
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;, size=1, width=.2) +
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+</div>
+<div
+id="part-1.5-calculate-the-reward-rate-option-to-do-this-for-next-week-together-with-part-2"
+class="section level2">
+<h2>Part 1.5 Calculate the reward rate (option to do this for next week
+together with part 2)</h2>
+<p>In the paper, they define the reward rate as:</p>
+<p><span class="math inline">\(\frac {PC}{MRT + ITI + FDT +
+(1-PC)*ET}\)</span></p>
+<p>where MRT and PC refer to the mean correct response time and
+probability of a correct response, ITI is the inter-trial interval
+(i.e., 100 ms), FDT is the feedback display time (i.e., 300 ms), and ET
+is the error timeout (i.e., 500 ms).</p>
+<p>By calculating the MRT and PC per block per participant (i.e., create
+a summary using <code>participant</code> and <code>block_number</code>
+as grouping variables), you can calculate the <code>reward_rate</code>
+by filling in the rest of the equation above.</p>
+<p>When you are done, you can add the reward rate to the plot in Part
+1.4 (so recreate the full Figure 2 from the paper), and also plot the
+mean reward rate per condition, as you did in Part 1.4 for accuracy and
+RT.</p>
+<pre class="r"><code>grouped_data_pos = group_by(filter(data, accuracy &gt; 0), participant, block_number)
+grouped_data = group_by(data, participant, block_number)
+
+data_summary = full_join(summarise(grouped_data_pos, MRT = mean(rt)),
+                         summarise(grouped_data, PC = mean(accuracy)))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;participant&#39;. You can override using the `.groups` argument.
+## `summarise()` has grouped output by &#39;participant&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## Joining, by = c(&quot;participant&quot;, &quot;block_number&quot;)</code></pre>
+<pre class="r"><code>data_summary = full_join(data_summary,
+                         distinct(data, participant, block_number, condition, blocktype, trialtype))</code></pre>
+<pre><code>## Joining, by = c(&quot;participant&quot;, &quot;block_number&quot;)</code></pre>
+<pre class="r"><code>data_summary = mutate(data_summary,
+                      reward_rate = PC/(MRT + .1 + .3 + (1 - PC)*.5))</code></pre>
+<pre class="r"><code>grouped_data_summary = group_by(data_summary, condition, block_number)
+data_summary_summary = summarise(grouped_data_summary, meanRR = mean(reward_rate))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;condition&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>ggplot(data = data_summary_summary, mapping = aes(x = block_number, y = meanRR, color=condition)) + 
+    geom_line()</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = data_summary, mapping = aes(x = trialtype, y = reward_rate, color=blocktype)) +
+    stat_summary(fun = &quot;mean&quot;, geom=&quot;point&quot;, size=3) +
+    stat_summary(fun.data = mean_cl_normal, geom = &quot;errorbar&quot;, size=1, width=.2) +
+    theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="final_project_solutions_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+<div id="part-2-multi-level-regression-and-anova"
+class="section level1">
+<h1>Part 2: Multi-level regression and ANOVA</h1>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

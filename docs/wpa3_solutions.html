@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,7 +352,15 @@ $(document).ready(function () {
 
 
 <p><strong>Task A</strong></p>
-<p>From the <a href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data folder on Github</a>, get the data sets in the list below. Load them in R giving the respective names: <code>qualtrics_data</code>, <code>data_f</code>, <code>data_g</code>, <code>data_h</code>. Inspect them using <code>head()</code> or <code>glimpse()</code>. Finally, save them to your local <code>data</code> directory (that you should have as a sub-directory in your R course directory) as <code>csv</code> files.</p>
+<p>From the <a
+href="https://github.com/laurafontanesi/r-seminar22/tree/main/data">data
+folder on Github</a>, get the data sets in the list below. Load them in
+R giving the respective names: <code>qualtrics_data</code>,
+<code>data_f</code>, <code>data_g</code>, <code>data_h</code>. Inspect
+them using <code>head()</code> or <code>glimpse()</code>. Finally, save
+them to your local <code>data</code> directory (that you should have as
+a sub-directory in your R course directory) as <code>csv</code>
+files.</p>
 <ol style="list-style-type: decimal">
 <li>20180321_qualtrics_managers_historical_social_comparisons.dta</li>
 <li>data_to_import_f.csv</li>
@@ -357,30 +368,38 @@ $(document).ready(function () {
 <li>data_to_import_h.csv</li>
 </ol>
 <p><strong>Task B</strong></p>
-<p>Go to this website: <a href="https://www.britishelectionstudy.com/data-objects/cross-sectional-data/" class="uri">https://www.britishelectionstudy.com/data-objects/cross-sectional-data/</a> (you can register for free).</p>
-<p>Download the 2017 Face-to-face Post-election Survey Version 1.5 <strong>SPSS file</strong> in your local <code>data</code> directory (see above). Then, load it in R assigning it to the name <code>british_cross_sectional_data</code> using the appropriate function for SPSS files and inspect it using <code>head()</code> or <code>glimpse()</code>.</p>
+<p>Go to this website: <a
+href="https://www.britishelectionstudy.com/data-objects/cross-sectional-data/"
+class="uri">https://www.britishelectionstudy.com/data-objects/cross-sectional-data/</a>
+(you can register for free).</p>
+<p>Download the 2017 Face-to-face Post-election Survey Version 1.5
+<strong>SPSS file</strong> in your local <code>data</code> directory
+(see above). Then, load it in R assigning it to the name
+<code>british_cross_sectional_data</code> using the appropriate function
+for SPSS files and inspect it using <code>head()</code> or
+<code>glimpse()</code>.</p>
 <pre class="r"><code>library(&#39;tidyverse&#39;)
 library(&#39;haven&#39;)</code></pre>
 <pre class="r"><code>qualtrics_data = read_dta(&quot;https://github.com/laurafontanesi/r-seminar22/blob/main/data/20180321_qualtrics_managers_historical_social_comparisons.dta?raw=true&quot;)
 
 head(qualtrics_data, 2)</code></pre>
 <pre><code>## # A tibble: 2 x 58
-##   cur_emp    yrs_workforce yrs_curjob num_emp_work num_emp_man for_profit yrs_for_profit non_profit yrs_non_profit public
-##   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; 
-## 1 I work in…          17         15   500-999      50-99       Yes                     6 No                     NA Yes   
-## 2 I work in…          21.2       21.2 50-99        9-May       Yes                     4 No                     NA Yes   
-## # … with 48 more variables: yrs_public &lt;dbl&gt;, eng &lt;dbl&gt;, eng_i_u &lt;dbl&gt;, eng_i_l &lt;dbl&gt;, eng_d_u &lt;dbl&gt;, eng_d_l &lt;dbl&gt;,
-## #   eng_pct_pass &lt;dbl&gt;, eng_more_useful_comp &lt;chr&gt;, eng_why_select_comp &lt;chr&gt;, eng_hist &lt;chr&gt;, eng_soc &lt;chr&gt;, age &lt;dbl&gt;,
-## #   educ &lt;chr&gt;, prof_degree &lt;chr&gt;, prof_degree_other &lt;chr&gt;, gender &lt;chr&gt;, gender_other &lt;dbl&gt;, race &lt;chr&gt;,
-## #   race_other &lt;chr&gt;, hispanic &lt;chr&gt;, math &lt;dbl&gt;, math_i &lt;dbl&gt;, math_d &lt;dbl&gt;, math_u &lt;dbl&gt;, math_l &lt;dbl&gt;,
-## #   math_pct_pass &lt;dbl&gt;, math_more_useful_comp &lt;chr&gt;, math_why_select_comp &lt;chr&gt;, math_hist &lt;chr&gt;, math_soc &lt;chr&gt;,
-## #   gc &lt;dbl&gt;, sector &lt;chr&gt;, employment &lt;dbl+lbl&gt;, pub_sec &lt;dbl+lbl&gt;, female &lt;dbl+lbl&gt;, education &lt;dbl+lbl&gt;,
-## #   eng_outcome_group &lt;dbl+lbl&gt;, eng_outcome &lt;dbl&gt;, math_outcome_group &lt;dbl+lbl&gt;, math_outcome &lt;dbl&gt;, …</code></pre>
+##   cur_emp       yrs_workforce yrs_curjob num_emp_work num_emp_man for_profit yrs_for_profit non_profit yrs_non_profit
+##   &lt;chr&gt;                 &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;
+## 1 I work in th…          17         15   500-999      50-99       Yes                     6 No                     NA
+## 2 I work in th…          21.2       21.2 50-99        9-May       Yes                     4 No                     NA
+## # … with 49 more variables: public &lt;chr&gt;, yrs_public &lt;dbl&gt;, eng &lt;dbl&gt;, eng_i_u &lt;dbl&gt;, eng_i_l &lt;dbl&gt;, eng_d_u &lt;dbl&gt;,
+## #   eng_d_l &lt;dbl&gt;, eng_pct_pass &lt;dbl&gt;, eng_more_useful_comp &lt;chr&gt;, eng_why_select_comp &lt;chr&gt;, eng_hist &lt;chr&gt;,
+## #   eng_soc &lt;chr&gt;, age &lt;dbl&gt;, educ &lt;chr&gt;, prof_degree &lt;chr&gt;, prof_degree_other &lt;chr&gt;, gender &lt;chr&gt;,
+## #   gender_other &lt;dbl&gt;, race &lt;chr&gt;, race_other &lt;chr&gt;, hispanic &lt;chr&gt;, math &lt;dbl&gt;, math_i &lt;dbl&gt;, math_d &lt;dbl&gt;,
+## #   math_u &lt;dbl&gt;, math_l &lt;dbl&gt;, math_pct_pass &lt;dbl&gt;, math_more_useful_comp &lt;chr&gt;, math_why_select_comp &lt;chr&gt;,
+## #   math_hist &lt;chr&gt;, math_soc &lt;chr&gt;, gc &lt;dbl&gt;, sector &lt;chr&gt;, employment &lt;dbl+lbl&gt;, pub_sec &lt;dbl+lbl&gt;,
+## #   female &lt;dbl+lbl&gt;, education &lt;dbl+lbl&gt;, eng_outcome_group &lt;dbl+lbl&gt;, eng_outcome &lt;dbl&gt;, …</code></pre>
 <pre class="r"><code>data_f = read_csv2(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_f.csv&#39;)</code></pre>
 <pre><code>## ℹ Using &quot;&#39;,&#39;&quot; as decimal and &quot;&#39;.&#39;&quot; as grouping mark. Use `read_delim()` for more control.</code></pre>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_logical(),
 ##   Locations = col_character(),
@@ -401,7 +420,7 @@ head(qualtrics_data, 2)</code></pre>
 ## 6 NA    Iran[g]             23049   1812 8376      [39][40]</code></pre>
 <pre class="r"><code>data_g = read_delim(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_g.txt&#39;, delim=&#39;\t&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   Symptom = col_character(),
 ##   `%` = col_character()
@@ -418,7 +437,7 @@ head(qualtrics_data, 2)</code></pre>
 ## 6 Shortness of breath          18.6%</code></pre>
 <pre class="r"><code>data_h = read_csv(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/main/data/data_to_import_h.csv&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   Name = col_character(),
 ##   Canton = col_character(),
@@ -451,21 +470,21 @@ head(qualtrics_data, 2)</code></pre>
 
 head(british_cross_sectional_data)</code></pre>
 <pre><code>## # A tibble: 6 x 363
-##   finalserialno serial    a01        a02     a03   m02_1   m02_2   m02_3   m02_4   m02_5   m02_6     b01      b02      b04
-##           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt;
-## 1         10115 000000399 nhs    1 [Lab… 2 [Fai… 4 [Agr… 4 [Agr… 3 [Nei… 2 [Dis… 4 [Agr… 4 [Agr… 1 [Yes…  1 [Lab… NA      
-## 2         10119 000000398 brex…  0 [Non… 2 [Fai… 3 [Nei… 1 [Str… 4 [Agr… 4 [Agr… 3 [Nei… 4 [Agr… 1 [Yes…  1 [Lab… NA      
-## 3         10125 000000400 soci… -1 [Don… 2 [Fai… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 2 [Dis… 2 [No,… NA        2 [Con…
-## 4         10215 000000347 immi… -1 [Don… 2 [Fai… 4 [Agr… 5 [Str… 5 [Str… 5 [Str… 5 [Str… 4 [Agr… 1 [Yes…  1 [Lab… NA      
-## 5         10216 000000349 brex…  1 [Lab… 2 [Fai… 3 [Nei… 2 [Dis… 2 [Dis… 2 [Dis… 2 [Dis… 3 [Nei… 1 [Yes…  1 [Lab… NA      
-## 6         10217 000000374 gett… -1 [Don… 2 [Fai… 2 [Dis… 4 [Agr… 2 [Dis… 2 [Dis… 3 [Nei… 2 [Dis… 1 [Yes…  1 [Lab… NA      
-## # … with 349 more variables: b05 &lt;dbl+lbl&gt;, b0601 &lt;dbl+lbl&gt;, b0602 &lt;dbl+lbl&gt;, b0603 &lt;dbl+lbl&gt;, b0604 &lt;dbl+lbl&gt;,
-## #   b0605 &lt;dbl+lbl&gt;, b0606 &lt;dbl+lbl&gt;, b0607 &lt;dbl+lbl&gt;, b0608 &lt;dbl+lbl&gt;, b0609 &lt;dbl+lbl&gt;, b0610 &lt;dbl+lbl&gt;,
-## #   b0611 &lt;dbl+lbl&gt;, b0612 &lt;dbl+lbl&gt;, b0613 &lt;dbl+lbl&gt;, b0614 &lt;dbl+lbl&gt;, b0615 &lt;dbl+lbl&gt;, b0616 &lt;dbl+lbl&gt;,
-## #   b0617 &lt;dbl+lbl&gt;, b0618 &lt;dbl+lbl&gt;, b0619 &lt;dbl+lbl&gt;, b06a &lt;dbl+lbl&gt;, b07 &lt;dbl+lbl&gt;, b09 &lt;dbl+lbl&gt;, b12_1 &lt;dbl+lbl&gt;,
-## #   b12_2 &lt;dbl+lbl&gt;, b12_3 &lt;dbl+lbl&gt;, b12_4 &lt;dbl+lbl&gt;, b12_5 &lt;dbl+lbl&gt;, b12_6 &lt;dbl+lbl&gt;, b13_1 &lt;dbl+lbl&gt;,
-## #   b13_2 &lt;dbl+lbl&gt;, b13_3 &lt;dbl+lbl&gt;, b13_4 &lt;dbl+lbl&gt;, b13_5 &lt;dbl+lbl&gt;, b13_6 &lt;dbl+lbl&gt;, c01 &lt;dbl+lbl&gt;, c02_1 &lt;dbl+lbl&gt;,
-## #   c02_2 &lt;dbl+lbl&gt;, c02_3 &lt;dbl+lbl&gt;, c02_4 &lt;dbl+lbl&gt;, d01 &lt;dbl+lbl&gt;, d02 &lt;dbl+lbl&gt;, d03 &lt;dbl+lbl&gt;, d04 &lt;dbl+lbl&gt;, …</code></pre>
+##   finalserialno serial    a01          a02      a03    m02_1   m02_2   m02_3   m02_4   m02_5   m02_6     b01      b02
+##           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl+lbl&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt;
+## 1         10115 000000399 nhs     1 [Labo… 2 [Fair… 4 [Agre… 4 [Agr… 3 [Nei… 2 [Dis… 4 [Agr… 4 [Agr… 1 [Yes…  1 [Lab…
+## 2         10119 000000398 brexit  0 [None… 2 [Fair… 3 [Neit… 1 [Str… 4 [Agr… 4 [Agr… 3 [Nei… 4 [Agr… 1 [Yes…  1 [Lab…
+## 3         10125 000000400 socie… -1 [Don`… 2 [Fair… 4 [Agre… 4 [Agr… 4 [Agr… 4 [Agr… 4 [Agr… 2 [Dis… 2 [No,… NA      
+## 4         10215 000000347 immig… -1 [Don`… 2 [Fair… 4 [Agre… 5 [Str… 5 [Str… 5 [Str… 5 [Str… 4 [Agr… 1 [Yes…  1 [Lab…
+## 5         10216 000000349 brexit  1 [Labo… 2 [Fair… 3 [Neit… 2 [Dis… 2 [Dis… 2 [Dis… 2 [Dis… 3 [Nei… 1 [Yes…  1 [Lab…
+## 6         10217 000000374 getti… -1 [Don`… 2 [Fair… 2 [Disa… 4 [Agr… 2 [Dis… 2 [Dis… 3 [Nei… 2 [Dis… 1 [Yes…  1 [Lab…
+## # … with 350 more variables: b04 &lt;dbl+lbl&gt;, b05 &lt;dbl+lbl&gt;, b0601 &lt;dbl+lbl&gt;, b0602 &lt;dbl+lbl&gt;, b0603 &lt;dbl+lbl&gt;,
+## #   b0604 &lt;dbl+lbl&gt;, b0605 &lt;dbl+lbl&gt;, b0606 &lt;dbl+lbl&gt;, b0607 &lt;dbl+lbl&gt;, b0608 &lt;dbl+lbl&gt;, b0609 &lt;dbl+lbl&gt;,
+## #   b0610 &lt;dbl+lbl&gt;, b0611 &lt;dbl+lbl&gt;, b0612 &lt;dbl+lbl&gt;, b0613 &lt;dbl+lbl&gt;, b0614 &lt;dbl+lbl&gt;, b0615 &lt;dbl+lbl&gt;,
+## #   b0616 &lt;dbl+lbl&gt;, b0617 &lt;dbl+lbl&gt;, b0618 &lt;dbl+lbl&gt;, b0619 &lt;dbl+lbl&gt;, b06a &lt;dbl+lbl&gt;, b07 &lt;dbl+lbl&gt;,
+## #   b09 &lt;dbl+lbl&gt;, b12_1 &lt;dbl+lbl&gt;, b12_2 &lt;dbl+lbl&gt;, b12_3 &lt;dbl+lbl&gt;, b12_4 &lt;dbl+lbl&gt;, b12_5 &lt;dbl+lbl&gt;,
+## #   b12_6 &lt;dbl+lbl&gt;, b13_1 &lt;dbl+lbl&gt;, b13_2 &lt;dbl+lbl&gt;, b13_3 &lt;dbl+lbl&gt;, b13_4 &lt;dbl+lbl&gt;, b13_5 &lt;dbl+lbl&gt;,
+## #   b13_6 &lt;dbl+lbl&gt;, c01 &lt;dbl+lbl&gt;, c02_1 &lt;dbl+lbl&gt;, c02_2 &lt;dbl+lbl&gt;, c02_3 &lt;dbl+lbl&gt;, c02_4 &lt;dbl+lbl&gt;, …</code></pre>
 
 
 

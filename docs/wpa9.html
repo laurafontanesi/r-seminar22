@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,64 +352,104 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#multiple-linear-regression-model">1. Multiple linear regression model</a>
+<li><a href="#multiple-linear-regression-model"
+id="toc-multiple-linear-regression-model">1. Multiple linear regression
+model</a>
 <ul>
-<li><a href="#model-fitting">Model fitting</a>
+<li><a href="#model-fitting" id="toc-model-fitting">Model fitting</a>
 <ul>
-<li><a href="#main-effects-model">Main effects model:</a></li>
-<li><a href="#full-model-including-also-interactions-effects">Full model (including also interactions effects):</a></li>
+<li><a href="#main-effects-model" id="toc-main-effects-model">Main
+effects model:</a></li>
+<li><a href="#full-model-including-also-interactions-effects"
+id="toc-full-model-including-also-interactions-effects">Full model
+(including also interactions effects):</a></li>
 </ul></li>
-<li><a href="#how-to-visualize-it">How to visualize it?</a></li>
-<li><a href="#multicollinearity-checks">Multicollinearity checks</a>
+<li><a href="#how-to-visualize-it" id="toc-how-to-visualize-it">How to
+visualize it?</a></li>
+<li><a href="#multicollinearity-checks"
+id="toc-multicollinearity-checks">Multicollinearity checks</a>
 <ul>
-<li><a href="#hypothesis-tests-for-all-pairwise-correlations">Hypothesis tests for all pairwise correlations:</a></li>
+<li><a href="#hypothesis-tests-for-all-pairwise-correlations"
+id="toc-hypothesis-tests-for-all-pairwise-correlations">Hypothesis tests
+for all pairwise correlations:</a></li>
 </ul></li>
-<li><a href="#calculating-standardised-regression-coefficients">Calculating standardised regression coefficients</a></li>
+<li><a href="#calculating-standardised-regression-coefficients"
+id="toc-calculating-standardised-regression-coefficients">Calculating
+standardised regression coefficients</a></li>
 </ul></li>
-<li><a href="#anova">2. ANOVA</a>
+<li><a href="#anova" id="toc-anova">2. ANOVA</a>
 <ul>
-<li><a href="#general-linear-models">General linear models</a></li>
-<li><a href="#when-to-use-anovalinear-regression">When to use ANOVA/linear regression?</a></li>
-<li><a href="#different-types-of-anovas">Different types of ANOVAS</a></li>
-<li><a href="#anovas-assumptions">ANOVA’s assumptions</a></li>
-<li><a href="#model-checking-and-fitting">Model checking and fitting</a></li>
-<li><a href="#tukeys-honest-significant-difference-test">Tukey’s honest significant difference test</a></li>
+<li><a href="#general-linear-models"
+id="toc-general-linear-models">General linear models</a></li>
+<li><a href="#when-to-use-anovalinear-regression"
+id="toc-when-to-use-anovalinear-regression">When to use ANOVA/linear
+regression?</a></li>
+<li><a href="#different-types-of-anovas"
+id="toc-different-types-of-anovas">Different types of ANOVAS</a></li>
+<li><a href="#anovas-assumptions" id="toc-anovas-assumptions">ANOVA’s
+assumptions</a></li>
+<li><a href="#model-checking-and-fitting"
+id="toc-model-checking-and-fitting">Model checking and fitting</a></li>
+<li><a href="#tukeys-honest-significant-difference-test"
+id="toc-tukeys-honest-significant-difference-test">Tukey’s honest
+significant difference test</a></li>
 </ul></li>
-<li><a href="#now-its-your-turn">3. Now it’s your turn</a>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">3. Now it’s
+your turn</a>
 <ul>
-<li><a href="#student-performance">Student Performance</a></li>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#student-performance" id="toc-student-performance">Student
+Performance</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul></li>
 </ul>
 </div>
 
 <div id="multiple-linear-regression-model" class="section level1">
 <h1>1. Multiple linear regression model</h1>
-<p>Last week we looked at linear models with 1 predictor (either continuous or categorical with 2 levels). Now we are going to extend this to linear models with more than 1 predictor.</p>
-<p>We have already seen the assumptions of multiple linear regression last week. They are essentially the same as for simple linear regression but now we should also check that the predictors are not correlated.</p>
+<p>Last week we looked at linear models with 1 predictor (either
+continuous or categorical with 2 levels). Now we are going to extend
+this to linear models with more than 1 predictor.</p>
+<p>We have already seen the assumptions of multiple linear regression
+last week. They are essentially the same as for simple linear regression
+but now we should also check that the predictors are not correlated.</p>
 <p>Open RStudio.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_9_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_9_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using
+<code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 9
 # Name: Laura Fontanesi
 # Date: 9 May 2022</code></pre>
 <div id="model-fitting" class="section level2">
 <h2>Model fitting</h2>
-<p>Model fit can be achieved as in simple linear regression using <code>lm()</code>.</p>
-<p>the only thing to take into account is how to change the formula argument:</p>
+<p>Model fit can be achieved as in simple linear regression using
+<code>lm()</code>.</p>
+<p>the only thing to take into account is how to change the formula
+argument:</p>
 <ul>
-<li><code>outcome ~ predictor1 + predictor2</code>: tests main effects only of these two predictors</li>
-<li><code>outcome ~ predictor1 * predictor2</code>: tests all main effects and the interaction effect of these two predictors</li>
-<li><code>outcome ~ predictor1 * predictor2 * predictor3</code>: tests all main effects and all interaction effect of these three predictors</li>
-<li><code>outcome ~ predictor1 + predictor2 + predictor3 + predictor1*predictor2</code>: tests main all three main effects and only the interaction effect of the first and second predictor</li>
+<li><code>outcome ~ predictor1 + predictor2</code>: tests main effects
+only of these two predictors</li>
+<li><code>outcome ~ predictor1 * predictor2</code>: tests all main
+effects and the interaction effect of these two predictors</li>
+<li><code>outcome ~ predictor1 * predictor2 * predictor3</code>: tests
+all main effects and all interaction effect of these three
+predictors</li>
+<li><code>outcome ~ predictor1 + predictor2 + predictor3 + predictor1*predictor2</code>:
+tests main all three main effects and only the interaction effect of the
+first and second predictor</li>
 </ul>
-<p>Download the <code>house_prices.csv</code> dataset from the <a href="%22https://github.com/laurafontanesi/r-seminar22/tree/main/data%22">Github folder</a> and load it in R:</p>
+<p>Download the <code>house_prices.csv</code> dataset from the <a
+href="%22https://github.com/laurafontanesi/r-seminar22/tree/main/data%22">Github
+folder</a> and load it in R:</p>
 <pre class="r"><code>library(tidyverse)
 
 house_prices = read_csv(&#39;data/house_prices.csv&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_character(),
 ##   Id = col_double(),
@@ -435,87 +478,87 @@ house_prices = read_csv(&#39;data/house_prices.csv&#39;)</code></pre>
 <pre class="r"><code>glimpse(house_prices)</code></pre>
 <pre><code>## Rows: 1,460
 ## Columns: 81
-## $ Id            &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27…
-## $ MSSubClass    &lt;dbl&gt; 60, 20, 60, 70, 60, 50, 20, 60, 50, 190, 20, 60, 20, 20, 20, 45, 20, 90, 20, 20, 60, 45, 20, 120,…
-## $ MSZoning      &lt;chr&gt; &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RM&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RM&quot;, &quot;…
-## $ LotFrontage   &lt;dbl&gt; 65, 80, 68, 60, 84, 85, 75, NA, 51, 50, 70, 85, NA, 91, NA, 51, NA, 72, 66, 70, 101, 57, 75, 44, …
-## $ LotArea       &lt;dbl&gt; 8450, 9600, 11250, 9550, 14260, 14115, 10084, 10382, 6120, 7420, 11200, 11924, 12968, 10652, 1092…
-## $ Street        &lt;chr&gt; &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;…
-## $ Alley         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Grvl&quot;, NA, N…
-## $ LotShape      &lt;chr&gt; &quot;Reg&quot;, &quot;Reg&quot;, &quot;IR1&quot;, &quot;IR1&quot;, &quot;IR1&quot;, &quot;IR1&quot;, &quot;Reg&quot;, &quot;IR1&quot;, &quot;Reg&quot;, &quot;Reg&quot;, &quot;Reg&quot;, &quot;IR1&quot;, &quot;IR2&quot;, &quot;IR1&quot;,…
-## $ LandContour   &lt;chr&gt; &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;,…
-## $ Utilities     &lt;chr&gt; &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub…
-## $ LotConfig     &lt;chr&gt; &quot;Inside&quot;, &quot;FR2&quot;, &quot;Inside&quot;, &quot;Corner&quot;, &quot;FR2&quot;, &quot;Inside&quot;, &quot;Inside&quot;, &quot;Corner&quot;, &quot;Inside&quot;, &quot;Corner&quot;, &quot;In…
-## $ LandSlope     &lt;chr&gt; &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;,…
-## $ Neighborhood  &lt;chr&gt; &quot;CollgCr&quot;, &quot;Veenker&quot;, &quot;CollgCr&quot;, &quot;Crawfor&quot;, &quot;NoRidge&quot;, &quot;Mitchel&quot;, &quot;Somerst&quot;, &quot;NWAmes&quot;, &quot;OldTown&quot;,…
-## $ Condition1    &lt;chr&gt; &quot;Norm&quot;, &quot;Feedr&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;PosN&quot;, &quot;Artery&quot;, &quot;Artery&quot;, &quot;Norm&quot;, &quot;Nor…
-## $ Condition2    &lt;chr&gt; &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Artery&quot;, &quot;Norm&quot;, &quot;Norm&quot;,…
-## $ BldgType      &lt;chr&gt; &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;2fmCon&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;,…
-## $ HouseStyle    &lt;chr&gt; &quot;2Story&quot;, &quot;1Story&quot;, &quot;2Story&quot;, &quot;2Story&quot;, &quot;2Story&quot;, &quot;1.5Fin&quot;, &quot;1Story&quot;, &quot;2Story&quot;, &quot;1.5Fin&quot;, &quot;1.5Unf…
-## $ OverallQual   &lt;dbl&gt; 7, 6, 7, 7, 8, 5, 8, 7, 7, 5, 5, 9, 5, 7, 6, 7, 6, 4, 5, 5, 8, 7, 8, 5, 5, 8, 5, 8, 5, 4, 4, 5, 8…
-## $ OverallCond   &lt;dbl&gt; 5, 8, 5, 5, 5, 5, 5, 6, 5, 6, 5, 5, 6, 5, 5, 8, 7, 5, 5, 6, 5, 7, 5, 7, 8, 5, 7, 5, 6, 6, 4, 6, 5…
-## $ YearBuilt     &lt;dbl&gt; 2003, 1976, 2001, 1915, 2000, 1993, 2004, 1973, 1931, 1939, 1965, 2005, 1962, 2006, 1960, 1929, 1…
-## $ YearRemodAdd  &lt;dbl&gt; 2003, 1976, 2002, 1970, 2000, 1995, 2005, 1973, 1950, 1950, 1965, 2006, 1962, 2007, 1960, 2001, 1…
-## $ RoofStyle     &lt;chr&gt; &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Hip&quot;, …
-## $ RoofMatl      &lt;chr&gt; &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;…
-## $ Exterior1st   &lt;chr&gt; &quot;VinylSd&quot;, &quot;MetalSd&quot;, &quot;VinylSd&quot;, &quot;Wd Sdng&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;HdBoard&quot;, &quot;BrkFace&quot;…
-## $ Exterior2nd   &lt;chr&gt; &quot;VinylSd&quot;, &quot;MetalSd&quot;, &quot;VinylSd&quot;, &quot;Wd Shng&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;HdBoard&quot;, &quot;Wd Shng&quot;…
-## $ MasVnrType    &lt;chr&gt; &quot;BrkFace&quot;, &quot;None&quot;, &quot;BrkFace&quot;, &quot;None&quot;, &quot;BrkFace&quot;, &quot;None&quot;, &quot;Stone&quot;, &quot;Stone&quot;, &quot;None&quot;, &quot;None&quot;, &quot;None&quot;…
-## $ MasVnrArea    &lt;dbl&gt; 196, 0, 162, 0, 350, 0, 186, 240, 0, 0, 0, 286, 0, 306, 212, 0, 180, 0, 0, 0, 380, 0, 281, 0, 0, …
-## $ ExterQual     &lt;chr&gt; &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ ExterCond     &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ Foundation    &lt;chr&gt; &quot;PConc&quot;, &quot;CBlock&quot;, &quot;PConc&quot;, &quot;BrkTil&quot;, &quot;PConc&quot;, &quot;Wood&quot;, &quot;PConc&quot;, &quot;CBlock&quot;, &quot;BrkTil&quot;, &quot;BrkTil&quot;, &quot;CB…
-## $ BsmtQual      &lt;chr&gt; &quot;Gd&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;Ex&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ BsmtCond      &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ BsmtExposure  &lt;chr&gt; &quot;No&quot;, &quot;Gd&quot;, &quot;Mn&quot;, &quot;No&quot;, &quot;Av&quot;, &quot;No&quot;, &quot;Av&quot;, &quot;Mn&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;Av&quot;, &quot;No&quot;, &quot;No&quot;, &quot;…
-## $ BsmtFinType1  &lt;chr&gt; &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;GLQ&quot;, &quot;GLQ&quot;, &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;Unf&quot;, &quot;GLQ&quot;, &quot;Rec&quot;, &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;Unf&quot;,…
-## $ BsmtFinSF1    &lt;dbl&gt; 706, 978, 486, 216, 655, 732, 1369, 859, 0, 851, 906, 998, 737, 0, 733, 0, 578, 0, 646, 504, 0, 0…
-## $ BsmtFinType2  &lt;chr&gt; &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;BLQ&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;,…
-## $ BsmtFinSF2    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 668, 0, 486, 0, 0, 0, 0,…
-## $ BsmtUnfSF     &lt;dbl&gt; 150, 284, 434, 540, 490, 64, 317, 216, 952, 140, 134, 177, 175, 1494, 520, 832, 426, 0, 468, 525,…
-## $ TotalBsmtSF   &lt;dbl&gt; 856, 1262, 920, 756, 1145, 796, 1686, 1107, 952, 991, 1040, 1175, 912, 1494, 1253, 832, 1004, 0, …
-## $ Heating       &lt;chr&gt; &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;…
-## $ HeatingQC     &lt;chr&gt; &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Gd&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Gd&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;…
-## $ CentralAir    &lt;chr&gt; &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y…
-## $ Electrical    &lt;chr&gt; &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;FuseF&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;…
-## $ `1stFlrSF`    &lt;dbl&gt; 856, 1262, 920, 961, 1145, 796, 1694, 1107, 1022, 1077, 1040, 1182, 912, 1494, 1253, 854, 1004, 1…
-## $ `2ndFlrSF`    &lt;dbl&gt; 854, 0, 866, 756, 1053, 566, 0, 983, 752, 0, 0, 1142, 0, 0, 0, 0, 0, 0, 0, 0, 1218, 0, 0, 0, 0, 0…
-## $ LowQualFinSF  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ GrLivArea     &lt;dbl&gt; 1710, 1262, 1786, 1717, 2198, 1362, 1694, 2090, 1774, 1077, 1040, 2324, 912, 1494, 1253, 854, 100…
-## $ BsmtFullBath  &lt;dbl&gt; 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0…
-## $ BsmtHalfBath  &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0…
-## $ FullBath      &lt;dbl&gt; 2, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 1, 2, 1, 1, 3, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2…
-## $ HalfBath      &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0…
-## $ BedroomAbvGr  &lt;dbl&gt; 3, 3, 3, 3, 4, 1, 3, 3, 2, 2, 3, 4, 2, 3, 2, 2, 2, 2, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1, 3, 3, 3…
-## $ KitchenAbvGr  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-## $ KitchenQual   &lt;chr&gt; &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ TotRmsAbvGrd  &lt;dbl&gt; 8, 6, 6, 7, 9, 5, 7, 7, 8, 5, 5, 11, 4, 7, 5, 5, 5, 6, 6, 6, 9, 6, 7, 6, 6, 7, 5, 7, 6, 4, 6, 6, …
-## $ Functional    &lt;chr&gt; &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Min1&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;…
-## $ Fireplaces    &lt;dbl&gt; 0, 1, 1, 1, 1, 0, 1, 2, 2, 2, 0, 2, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 0, 0, 0…
-## $ FireplaceQu   &lt;chr&gt; NA, &quot;TA&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, NA, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, NA, &quot;Gd&quot;, NA, &quot;Gd&quot;, &quot;Fa&quot;, NA, &quot;TA&quot;, NA, N…
-## $ GarageType    &lt;chr&gt; &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Detchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Detchd&quot;, &quot;Attchd…
-## $ GarageYrBlt   &lt;dbl&gt; 2003, 1976, 2001, 1998, 2000, 1993, 2004, 1973, 1931, 1939, 1965, 2005, 1962, 2006, 1960, 1991, 1…
-## $ GarageFinish  &lt;chr&gt; &quot;RFn&quot;, &quot;RFn&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;RFn&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;Fin&quot;, &quot;Unf&quot;, &quot;RFn&quot;,…
-## $ GarageCars    &lt;dbl&gt; 2, 2, 2, 3, 3, 2, 2, 2, 2, 1, 1, 3, 1, 3, 1, 2, 2, 2, 2, 1, 3, 1, 2, 2, 1, 3, 2, 3, 1, 1, 1, 1, 2…
-## $ GarageArea    &lt;dbl&gt; 548, 460, 608, 642, 836, 480, 636, 484, 468, 205, 384, 736, 352, 840, 352, 576, 480, 516, 576, 29…
-## $ GarageQual    &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Fa&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ GarageCond    &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;…
-## $ PavedDrive    &lt;chr&gt; &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y…
-## $ WoodDeckSF    &lt;dbl&gt; 0, 298, 0, 0, 192, 40, 255, 235, 90, 0, 0, 147, 140, 160, 0, 48, 0, 0, 0, 0, 240, 0, 171, 100, 40…
-## $ OpenPorchSF   &lt;dbl&gt; 61, 0, 42, 35, 84, 30, 57, 204, 0, 4, 0, 21, 0, 33, 213, 112, 0, 0, 102, 0, 154, 0, 159, 110, 90,…
-## $ EnclosedPorch &lt;dbl&gt; 0, 0, 0, 272, 0, 0, 0, 228, 205, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 0, 205, 0, 0, 0, 0, 0, 0, 0, …
-## $ `3SsnPorch`   &lt;dbl&gt; 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ ScreenPorch   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ PoolArea      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ PoolQC        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ Fence         &lt;chr&gt; NA, NA, NA, NA, NA, &quot;MnPrv&quot;, NA, NA, NA, NA, NA, NA, NA, NA, &quot;GdWo&quot;, &quot;GdPrv&quot;, NA, NA, NA, &quot;MnPrv&quot;…
-## $ MiscFeature   &lt;chr&gt; NA, NA, NA, NA, NA, &quot;Shed&quot;, NA, &quot;Shed&quot;, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Shed&quot;, &quot;Shed&quot;, NA, NA, N…
-## $ MiscVal       &lt;dbl&gt; 0, 0, 0, 0, 0, 700, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0, 700, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ MoSold        &lt;dbl&gt; 2, 5, 9, 2, 12, 10, 8, 11, 4, 1, 2, 7, 9, 8, 5, 7, 3, 10, 6, 5, 11, 6, 9, 6, 5, 7, 5, 5, 12, 5, 7…
-## $ YrSold        &lt;dbl&gt; 2008, 2007, 2008, 2006, 2008, 2009, 2007, 2009, 2008, 2008, 2008, 2006, 2008, 2007, 2008, 2007, 2…
-## $ SaleType      &lt;chr&gt; &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;New&quot;, &quot;WD&quot;, &quot;New&quot;, &quot;WD&quot;, &quot;WD&quot;,…
-## $ SaleCondition &lt;chr&gt; &quot;Normal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Abnorml&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Abnorml&quot;, &quot;Norm…
-## $ SalePrice     &lt;dbl&gt; 208500, 181500, 223500, 140000, 250000, 143000, 307000, 200000, 129900, 118000, 129500, 345000, 1…</code></pre>
+## $ Id            &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26…
+## $ MSSubClass    &lt;dbl&gt; 60, 20, 60, 70, 60, 50, 20, 60, 50, 190, 20, 60, 20, 20, 20, 45, 20, 90, 20, 20, 60, 45, 20, …
+## $ MSZoning      &lt;chr&gt; &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RM&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RL&quot;, &quot;RM…
+## $ LotFrontage   &lt;dbl&gt; 65, 80, 68, 60, 84, 85, 75, NA, 51, 50, 70, 85, NA, 91, NA, 51, NA, 72, 66, 70, 101, 57, 75, …
+## $ LotArea       &lt;dbl&gt; 8450, 9600, 11250, 9550, 14260, 14115, 10084, 10382, 6120, 7420, 11200, 11924, 12968, 10652, …
+## $ Street        &lt;chr&gt; &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave&quot;, &quot;Pave…
+## $ Alley         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Grvl&quot;, N…
+## $ LotShape      &lt;chr&gt; &quot;Reg&quot;, &quot;Reg&quot;, &quot;IR1&quot;, &quot;IR1&quot;, &quot;IR1&quot;, &quot;IR1&quot;, &quot;Reg&quot;, &quot;IR1&quot;, &quot;Reg&quot;, &quot;Reg&quot;, &quot;Reg&quot;, &quot;IR1&quot;, &quot;IR2&quot;, &quot;I…
+## $ LandContour   &lt;chr&gt; &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;Lvl&quot;, &quot;L…
+## $ Utilities     &lt;chr&gt; &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;AllPub&quot;, &quot;Al…
+## $ LotConfig     &lt;chr&gt; &quot;Inside&quot;, &quot;FR2&quot;, &quot;Inside&quot;, &quot;Corner&quot;, &quot;FR2&quot;, &quot;Inside&quot;, &quot;Inside&quot;, &quot;Corner&quot;, &quot;Inside&quot;, &quot;Corner&quot;,…
+## $ LandSlope     &lt;chr&gt; &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;Gtl&quot;, &quot;G…
+## $ Neighborhood  &lt;chr&gt; &quot;CollgCr&quot;, &quot;Veenker&quot;, &quot;CollgCr&quot;, &quot;Crawfor&quot;, &quot;NoRidge&quot;, &quot;Mitchel&quot;, &quot;Somerst&quot;, &quot;NWAmes&quot;, &quot;OldTo…
+## $ Condition1    &lt;chr&gt; &quot;Norm&quot;, &quot;Feedr&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;PosN&quot;, &quot;Artery&quot;, &quot;Artery&quot;, &quot;Norm&quot;, …
+## $ Condition2    &lt;chr&gt; &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Norm&quot;, &quot;Artery&quot;, &quot;Norm&quot;, &quot;No…
+## $ BldgType      &lt;chr&gt; &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;1Fam&quot;, &quot;2fmCon&quot;, &quot;1Fam&quot;, &quot;1F…
+## $ HouseStyle    &lt;chr&gt; &quot;2Story&quot;, &quot;1Story&quot;, &quot;2Story&quot;, &quot;2Story&quot;, &quot;2Story&quot;, &quot;1.5Fin&quot;, &quot;1Story&quot;, &quot;2Story&quot;, &quot;1.5Fin&quot;, &quot;1.…
+## $ OverallQual   &lt;dbl&gt; 7, 6, 7, 7, 8, 5, 8, 7, 7, 5, 5, 9, 5, 7, 6, 7, 6, 4, 5, 5, 8, 7, 8, 5, 5, 8, 5, 8, 5, 4, 4, …
+## $ OverallCond   &lt;dbl&gt; 5, 8, 5, 5, 5, 5, 5, 6, 5, 6, 5, 5, 6, 5, 5, 8, 7, 5, 5, 6, 5, 7, 5, 7, 8, 5, 7, 5, 6, 6, 4, …
+## $ YearBuilt     &lt;dbl&gt; 2003, 1976, 2001, 1915, 2000, 1993, 2004, 1973, 1931, 1939, 1965, 2005, 1962, 2006, 1960, 192…
+## $ YearRemodAdd  &lt;dbl&gt; 2003, 1976, 2002, 1970, 2000, 1995, 2005, 1973, 1950, 1950, 1965, 2006, 1962, 2007, 1960, 200…
+## $ RoofStyle     &lt;chr&gt; &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Gable&quot;, &quot;Hi…
+## $ RoofMatl      &lt;chr&gt; &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;CompShg&quot;, &quot;Comp…
+## $ Exterior1st   &lt;chr&gt; &quot;VinylSd&quot;, &quot;MetalSd&quot;, &quot;VinylSd&quot;, &quot;Wd Sdng&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;HdBoard&quot;, &quot;BrkF…
+## $ Exterior2nd   &lt;chr&gt; &quot;VinylSd&quot;, &quot;MetalSd&quot;, &quot;VinylSd&quot;, &quot;Wd Shng&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;VinylSd&quot;, &quot;HdBoard&quot;, &quot;Wd S…
+## $ MasVnrType    &lt;chr&gt; &quot;BrkFace&quot;, &quot;None&quot;, &quot;BrkFace&quot;, &quot;None&quot;, &quot;BrkFace&quot;, &quot;None&quot;, &quot;Stone&quot;, &quot;Stone&quot;, &quot;None&quot;, &quot;None&quot;, &quot;N…
+## $ MasVnrArea    &lt;dbl&gt; 196, 0, 162, 0, 350, 0, 186, 240, 0, 0, 0, 286, 0, 306, 212, 0, 180, 0, 0, 0, 380, 0, 281, 0,…
+## $ ExterQual     &lt;chr&gt; &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA…
+## $ ExterCond     &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA…
+## $ Foundation    &lt;chr&gt; &quot;PConc&quot;, &quot;CBlock&quot;, &quot;PConc&quot;, &quot;BrkTil&quot;, &quot;PConc&quot;, &quot;Wood&quot;, &quot;PConc&quot;, &quot;CBlock&quot;, &quot;BrkTil&quot;, &quot;BrkTil&quot;,…
+## $ BsmtQual      &lt;chr&gt; &quot;Gd&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;Ex&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA…
+## $ BsmtCond      &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA…
+## $ BsmtExposure  &lt;chr&gt; &quot;No&quot;, &quot;Gd&quot;, &quot;Mn&quot;, &quot;No&quot;, &quot;Av&quot;, &quot;No&quot;, &quot;Av&quot;, &quot;Mn&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;Av&quot;, &quot;No&quot;, &quot;No…
+## $ BsmtFinType1  &lt;chr&gt; &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;GLQ&quot;, &quot;GLQ&quot;, &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;Unf&quot;, &quot;GLQ&quot;, &quot;Rec&quot;, &quot;GLQ&quot;, &quot;ALQ&quot;, &quot;U…
+## $ BsmtFinSF1    &lt;dbl&gt; 706, 978, 486, 216, 655, 732, 1369, 859, 0, 851, 906, 998, 737, 0, 733, 0, 578, 0, 646, 504, …
+## $ BsmtFinType2  &lt;chr&gt; &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;BLQ&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;Unf&quot;, &quot;U…
+## $ BsmtFinSF2    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 668, 0, 486, 0, 0, 0…
+## $ BsmtUnfSF     &lt;dbl&gt; 150, 284, 434, 540, 490, 64, 317, 216, 952, 140, 134, 177, 175, 1494, 520, 832, 426, 0, 468, …
+## $ TotalBsmtSF   &lt;dbl&gt; 856, 1262, 920, 756, 1145, 796, 1686, 1107, 952, 991, 1040, 1175, 912, 1494, 1253, 832, 1004,…
+## $ Heating       &lt;chr&gt; &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA&quot;, &quot;GasA…
+## $ HeatingQC     &lt;chr&gt; &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Gd&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Gd&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Ex…
+## $ CentralAir    &lt;chr&gt; &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;…
+## $ Electrical    &lt;chr&gt; &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;SBrkr&quot;, &quot;FuseF&quot;, &quot;SBrkr&quot;, &quot;SB…
+## $ `1stFlrSF`    &lt;dbl&gt; 856, 1262, 920, 961, 1145, 796, 1694, 1107, 1022, 1077, 1040, 1182, 912, 1494, 1253, 854, 100…
+## $ `2ndFlrSF`    &lt;dbl&gt; 854, 0, 866, 756, 1053, 566, 0, 983, 752, 0, 0, 1142, 0, 0, 0, 0, 0, 0, 0, 0, 1218, 0, 0, 0, …
+## $ LowQualFinSF  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ GrLivArea     &lt;dbl&gt; 1710, 1262, 1786, 1717, 2198, 1362, 1694, 2090, 1774, 1077, 1040, 2324, 912, 1494, 1253, 854,…
+## $ BsmtFullBath  &lt;dbl&gt; 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, …
+## $ BsmtHalfBath  &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, …
+## $ FullBath      &lt;dbl&gt; 2, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 1, 2, 1, 1, 3, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, …
+## $ HalfBath      &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ BedroomAbvGr  &lt;dbl&gt; 3, 3, 3, 3, 4, 1, 3, 3, 2, 2, 3, 4, 2, 3, 2, 2, 2, 2, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1, 3, …
+## $ KitchenAbvGr  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ KitchenQual   &lt;chr&gt; &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Ex&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA…
+## $ TotRmsAbvGrd  &lt;dbl&gt; 8, 6, 6, 7, 9, 5, 7, 7, 8, 5, 5, 11, 4, 7, 5, 5, 5, 6, 6, 6, 9, 6, 7, 6, 6, 7, 5, 7, 6, 4, 6,…
+## $ Functional    &lt;chr&gt; &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Min1&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;Typ&quot;, &quot;…
+## $ Fireplaces    &lt;dbl&gt; 0, 1, 1, 1, 1, 0, 1, 2, 2, 2, 0, 2, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 0, …
+## $ FireplaceQu   &lt;chr&gt; NA, &quot;TA&quot;, &quot;TA&quot;, &quot;Gd&quot;, &quot;TA&quot;, NA, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, NA, &quot;Gd&quot;, NA, &quot;Gd&quot;, &quot;Fa&quot;, NA, &quot;TA&quot;, N…
+## $ GarageType    &lt;chr&gt; &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Detchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Attchd&quot;, &quot;Detchd&quot;, &quot;At…
+## $ GarageYrBlt   &lt;dbl&gt; 2003, 1976, 2001, 1998, 2000, 1993, 2004, 1973, 1931, 1939, 1965, 2005, 1962, 2006, 1960, 199…
+## $ GarageFinish  &lt;chr&gt; &quot;RFn&quot;, &quot;RFn&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;RFn&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;RFn&quot;, &quot;Unf&quot;, &quot;Fin&quot;, &quot;Unf&quot;, &quot;R…
+## $ GarageCars    &lt;dbl&gt; 2, 2, 2, 3, 3, 2, 2, 2, 2, 1, 1, 3, 1, 3, 1, 2, 2, 2, 2, 1, 3, 1, 2, 2, 1, 3, 2, 3, 1, 1, 1, …
+## $ GarageArea    &lt;dbl&gt; 548, 460, 608, 642, 836, 480, 636, 484, 468, 205, 384, 736, 352, 840, 352, 576, 480, 516, 576…
+## $ GarageQual    &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;Fa&quot;, &quot;Gd&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA…
+## $ GarageCond    &lt;chr&gt; &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA&quot;, &quot;TA…
+## $ PavedDrive    &lt;chr&gt; &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;, &quot;Y&quot;…
+## $ WoodDeckSF    &lt;dbl&gt; 0, 298, 0, 0, 192, 40, 255, 235, 90, 0, 0, 147, 140, 160, 0, 48, 0, 0, 0, 0, 240, 0, 171, 100…
+## $ OpenPorchSF   &lt;dbl&gt; 61, 0, 42, 35, 84, 30, 57, 204, 0, 4, 0, 21, 0, 33, 213, 112, 0, 0, 102, 0, 154, 0, 159, 110,…
+## $ EnclosedPorch &lt;dbl&gt; 0, 0, 0, 272, 0, 0, 0, 228, 205, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 0, 205, 0, 0, 0, 0, 0, 0,…
+## $ `3SsnPorch`   &lt;dbl&gt; 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ ScreenPorch   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ PoolArea      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ PoolQC        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ Fence         &lt;chr&gt; NA, NA, NA, NA, NA, &quot;MnPrv&quot;, NA, NA, NA, NA, NA, NA, NA, NA, &quot;GdWo&quot;, &quot;GdPrv&quot;, NA, NA, NA, &quot;Mn…
+## $ MiscFeature   &lt;chr&gt; NA, NA, NA, NA, NA, &quot;Shed&quot;, NA, &quot;Shed&quot;, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Shed&quot;, &quot;Shed&quot;, NA, N…
+## $ MiscVal       &lt;dbl&gt; 0, 0, 0, 0, 0, 700, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0, 700, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ MoSold        &lt;dbl&gt; 2, 5, 9, 2, 12, 10, 8, 11, 4, 1, 2, 7, 9, 8, 5, 7, 3, 10, 6, 5, 11, 6, 9, 6, 5, 7, 5, 5, 12, …
+## $ YrSold        &lt;dbl&gt; 2008, 2007, 2008, 2006, 2008, 2009, 2007, 2009, 2008, 2008, 2008, 2006, 2008, 2007, 2008, 200…
+## $ SaleType      &lt;chr&gt; &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;WD&quot;, &quot;New&quot;, &quot;WD&quot;, &quot;New&quot;, &quot;WD&quot;, &quot;…
+## $ SaleCondition &lt;chr&gt; &quot;Normal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Abnorml&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Abnorml&quot;, &quot;…
+## $ SalePrice     &lt;dbl&gt; 208500, 181500, 223500, 140000, 250000, 143000, 307000, 200000, 129900, 118000, 129500, 34500…</code></pre>
 <p>GrLivArea: Above grade (ground) living area square feet</p>
 <p>LotArea: Lot size in square feet</p>
 <p>GarageArea: Size of garage in square feet</p>
@@ -545,7 +588,8 @@ summary(model_fit)</code></pre>
 ## Multiple R-squared:  0.6142, Adjusted R-squared:  0.6134 
 ## F-statistic: 772.6 on 3 and 1456 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div id="full-model-including-also-interactions-effects" class="section level3">
+<div id="full-model-including-also-interactions-effects"
+class="section level3">
 <h3>Full model (including also interactions effects):</h3>
 <pre class="r"><code>model_fit = lm(SalePrice ~ LotArea*GarageArea*GrLivArea, 
                data = house_prices)
@@ -590,7 +634,8 @@ summary(model_fit)</code></pre>
 </div>
 <div id="multicollinearity-checks" class="section level2">
 <h2>Multicollinearity checks</h2>
-<p>From the plots above we can see that the predictors are somewhat correlated. But how can we check this best?</p>
+<p>From the plots above we can see that the predictors are somewhat
+correlated. But how can we check this best?</p>
 <pre class="r"><code>M = cor(select(house_prices, LotArea, GarageArea, GrLivArea))
 M</code></pre>
 <pre><code>##              LotArea GarageArea GrLivArea
@@ -610,8 +655,10 @@ M</code></pre>
 ## sample estimates:
 ##       cor 
 ## 0.4689975</code></pre>
-<p>This means that the assumptions were violated and the coefficients should be interpreted with caution.</p>
-<div id="hypothesis-tests-for-all-pairwise-correlations" class="section level3">
+<p>This means that the assumptions were violated and the coefficients
+should be interpreted with caution.</p>
+<div id="hypothesis-tests-for-all-pairwise-correlations"
+class="section level3">
 <h3>Hypothesis tests for all pairwise correlations:</h3>
 <pre class="r"><code>#install.packages(&quot;lsr&quot;)
 
@@ -660,11 +707,18 @@ library(&#39;corrplot&#39;)</code></pre>
 <p><img src="wpa9_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 </div>
-<div id="calculating-standardised-regression-coefficients" class="section level2">
+<div id="calculating-standardised-regression-coefficients"
+class="section level2">
 <h2>Calculating standardised regression coefficients</h2>
-<p>One more thing that you might want to do is to calculate “standardised” regression coefficients: your predictors are often on different scales and this makes it very difficult to compare the coefficients of different predictors.</p>
-<p>The standardised coefficients are the coefficients that you would have obtained if you’d converted all the variables to z-scores before running the regression.</p>
-<p>You can then either standardize them first, or use the <code>standardCoefs</code> function in R.</p>
+<p>One more thing that you might want to do is to calculate
+“standardised” regression coefficients: your predictors are often on
+different scales and this makes it very difficult to compare the
+coefficients of different predictors.</p>
+<p>The standardised coefficients are the coefficients that you would
+have obtained if you’d converted all the variables to z-scores before
+running the regression.</p>
+<p>You can then either standardize them first, or use the
+<code>standardCoefs</code> function in R.</p>
 <pre class="r"><code>model_fit = lm(SalePrice ~ LotArea+GarageArea+GrLivArea, 
                data = house_prices)
 summary(model_fit)</code></pre>
@@ -730,42 +784,94 @@ summary(st_model_fit)</code></pre>
 <h1>2. ANOVA</h1>
 <div id="general-linear-models" class="section level2">
 <h2>General linear models</h2>
-<p>We use linear regression models when we want to predict a continuous variable based on one or more continuous variables, assuming a linear relationship.</p>
-<p>But we can also predict a continuous variable based on one or more categorical variables using the ANOVA.</p>
-<p>Both linear regression and ANOVA, however, are part of the same category of models: <a href="https://en.wikipedia.org/wiki/General_linear_model">general linear models</a>.</p>
-<p>The general linear model or <strong>multivariate regression model</strong> is a statistical linear model. It may be written as:</p>
+<p>We use linear regression models when we want to predict a continuous
+variable based on one or more continuous variables, assuming a linear
+relationship.</p>
+<p>But we can also predict a continuous variable based on one or more
+categorical variables using the ANOVA.</p>
+<p>Both linear regression and ANOVA, however, are part of the same
+category of models: <a
+href="https://en.wikipedia.org/wiki/General_linear_model">general linear
+models</a>.</p>
+<p>The general linear model or <strong>multivariate regression
+model</strong> is a statistical linear model. It may be written as:</p>
 <p><strong>Y = XB + U</strong>,</p>
-<p>where: - <strong>Y</strong> is a matrix with series of multivariate measurements (each column being a set of measurements on one of the dependent variables), - <strong>X</strong> is a matrix of observations on independent variables that might be a design matrix (each column being a set of observations on one of the independent variables), - <strong>B</strong> is a matrix containing parameters that are usually to be estimated - and <strong>U</strong> is a matrix containing errors (noise). The errors are usually assumed to be uncorrelated across measurements, and follow a multivariate normal distribution.</p>
-<p>The general linear model incorporates a number of different statistical models: ANOVA, ANCOVA, MANOVA, MANCOVA, ordinary linear regression, t-test and F-test.</p>
+<p>where: - <strong>Y</strong> is a matrix with series of multivariate
+measurements (each column being a set of measurements on one of the
+dependent variables), - <strong>X</strong> is a matrix of observations
+on independent variables that might be a design matrix (each column
+being a set of observations on one of the independent variables), -
+<strong>B</strong> is a matrix containing parameters that are usually to
+be estimated - and <strong>U</strong> is a matrix containing errors
+(noise). The errors are usually assumed to be uncorrelated across
+measurements, and follow a multivariate normal distribution.</p>
+<p>The general linear model incorporates a number of different
+statistical models: ANOVA, ANCOVA, MANOVA, MANCOVA, ordinary linear
+regression, t-test and F-test.</p>
 </div>
 <div id="when-to-use-anovalinear-regression" class="section level2">
 <h2>When to use ANOVA/linear regression?</h2>
-<p>In practice, we use Analysis of variance (ANOVA) when we have categorical-only predictors. As soon as we have at least one continuous predictor we would switch to linear regression.</p>
-<p>The conversion between ANOVA and regression depends on how we code the categorical predictors (see <a href="https://www.theanalysisfactor.com/why-anova-and-linear-regression-are-the-same-analysis/">here</a> for a clear example).</p>
+<p>In practice, we use Analysis of variance (ANOVA) when we have
+categorical-only predictors. As soon as we have at least one continuous
+predictor we would switch to linear regression.</p>
+<p>The conversion between ANOVA and regression depends on how we code
+the categorical predictors (see <a
+href="https://www.theanalysisfactor.com/why-anova-and-linear-regression-are-the-same-analysis/">here</a>
+for a clear example).</p>
 </div>
 <div id="different-types-of-anovas" class="section level2">
 <h2>Different types of ANOVAS</h2>
 <ul>
-<li><p><strong>One-way ANOVA</strong> is used to test for differences among two or more independent groups (means), e.g., different levels of urea application in a crop, or different levels of antibiotic action on several different bacterial species, or different levels of effect of some medicine on groups of patients.</p></li>
-<li><p>However, should these groups not be independent, and there is an order in the groups (such as mild, moderate and severe disease), or in the dose of a drug (such as 5 mg/mL, 10 mg/mL, 20 mg/mL) given to the same group of patients, then a linear trend estimation should be used. Typically, however, the one-way ANOVA is used to test for differences among at least three groups, since the two-group case can be covered by a t-test. <strong>When there are only two means to compare, the t-test and the ANOVA F-test are equivalent</strong>; the relation between ANOVA and t is given by F = t2.</p></li>
-<li><p><strong>Two-way ANOVA</strong> is an extension of the one-way ANOVA that examines the influence of two different categorical independent variables on one continuous dependent variable. The two-way ANOVA not only aims at assessing the main effect of each independent variable but also if there is any interaction between them.</p></li>
-<li><p><strong>Repeated measures ANOVA</strong> is used when the same subjects are used for each treatment (e.g., in a longitudinal study).</p></li>
-<li><p><strong>Multivariate analysis of variance (MANOVA)</strong> is used when there is more than one response variable.</p></li>
+<li><p><strong>One-way ANOVA</strong> is used to test for differences
+among two or more independent groups (means), e.g., different levels of
+urea application in a crop, or different levels of antibiotic action on
+several different bacterial species, or different levels of effect of
+some medicine on groups of patients.</p></li>
+<li><p>However, should these groups not be independent, and there is an
+order in the groups (such as mild, moderate and severe disease), or in
+the dose of a drug (such as 5 mg/mL, 10 mg/mL, 20 mg/mL) given to the
+same group of patients, then a linear trend estimation should be used.
+Typically, however, the one-way ANOVA is used to test for differences
+among at least three groups, since the two-group case can be covered by
+a t-test. <strong>When there are only two means to compare, the t-test
+and the ANOVA F-test are equivalent</strong>; the relation between ANOVA
+and t is given by F = t2.</p></li>
+<li><p><strong>Two-way ANOVA</strong> is an extension of the one-way
+ANOVA that examines the influence of two different categorical
+independent variables on one continuous dependent variable. The two-way
+ANOVA not only aims at assessing the main effect of each independent
+variable but also if there is any interaction between them.</p></li>
+<li><p><strong>Repeated measures ANOVA</strong> is used when the same
+subjects are used for each treatment (e.g., in a longitudinal
+study).</p></li>
+<li><p><strong>Multivariate analysis of variance (MANOVA)</strong> is
+used when there is more than one response variable.</p></li>
 </ul>
 </div>
 <div id="anovas-assumptions" class="section level2">
 <h2>ANOVA’s assumptions</h2>
-<p>Because ANOVA and linear regression are <em>essentially</em> the same (see better explanations above), the model’s assumptions are also very similar:</p>
+<p>Because ANOVA and linear regression are <em>essentially</em> the same
+(see better explanations above), the model’s assumptions are also very
+similar:</p>
 <ul>
-<li><strong>Normality</strong>: The residuals are assumed to be normally distributed. As we saw for linear regression, we can assess this by looking at QQ plots or running a Shapiro-Wilk test.</li>
-<li><strong>Homogeneity of variance (homoscedasticity)</strong>: ANOVA assumes that the population standard deviation is the same for all groups. We can assess this using the Levene’s test (see below) and visually using a violin or similar plots.</li>
-<li><strong>Independence</strong>: the observations should be independent. In case of repeated measures study, you should then use the repeated measure ANOVA (that we don’t cover in this course).</li>
+<li><strong>Normality</strong>: The residuals are assumed to be normally
+distributed. As we saw for linear regression, we can assess this by
+looking at QQ plots or running a Shapiro-Wilk test.</li>
+<li><strong>Homogeneity of variance (homoscedasticity)</strong>: ANOVA
+assumes that the population standard deviation is the same for all
+groups. We can assess this using the Levene’s test (see below) and
+visually using a violin or similar plots.</li>
+<li><strong>Independence</strong>: the observations should be
+independent. In case of repeated measures study, you should then use the
+repeated measure ANOVA (that we don’t cover in this course).</li>
 </ul>
 </div>
 <div id="model-checking-and-fitting" class="section level2">
 <h2>Model checking and fitting</h2>
 <p>To fit ANOVAs, we use the <code>aov()</code> function.</p>
-<p>This function works very similarly to the <code>lm()</code> function: you need a <code>formula</code> argument and a <code>data</code> argument to make it work.</p>
+<p>This function works very similarly to the <code>lm()</code> function:
+you need a <code>formula</code> argument and a <code>data</code>
+argument to make it work.</p>
 <pre class="r"><code>sub_house_prices = filter(house_prices, Foundation == &quot;Slab&quot; | Foundation == &quot;Stone&quot; | Foundation == &quot;Wood&quot;)
 
 arrange(summarize(group_by(sub_house_prices, Foundation),
@@ -781,7 +887,9 @@ arrange(summarize(group_by(sub_house_prices, Foundation),
 <pre class="r"><code>ggplot(data = sub_house_prices, mapping = aes(y = SalePrice, x = Foundation)) +
   geom_violin()</code></pre>
 <p><img src="wpa9_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>Note that you can also here check whether the normality assumption is violated or not. You can do so by also plotting separate histograms per level of your categorical variable.</p>
+<p>Note that you can also here check whether the normality assumption is
+violated or not. You can do so by also plotting separate histograms per
+level of your categorical variable.</p>
 <p>More formally:</p>
 <pre class="r"><code>shapiro.test(filter(sub_house_prices, Foundation == &quot;Slab&quot;)$SalePrice)</code></pre>
 <pre><code>## 
@@ -801,9 +909,13 @@ arrange(summarize(group_by(sub_house_prices, Foundation),
 ## 
 ## data:  filter(sub_house_prices, Foundation == &quot;Wood&quot;)$SalePrice
 ## W = 0.89046, p-value = 0.3558</code></pre>
-<p>Levene’s test of equal variance: Low p-value means the variances are not equal.</p>
-<p>For the test of equal variances, we need a package called <code>car</code>.</p>
-<p>The first argument in the function is thr continuous dependent variable, the second argument is the categorical independent variable.</p>
+<p>Levene’s test of equal variance: Low p-value means the variances are
+not equal.</p>
+<p>For the test of equal variances, we need a package called
+<code>car</code>.</p>
+<p>The first argument in the function is thr continuous dependent
+variable, the second argument is the categorical independent
+variable.</p>
 <pre class="r"><code>#install.packages(&quot;car&quot;)
 
 library(car)</code></pre>
@@ -850,11 +962,19 @@ summary(model_fit)</code></pre>
 ## Residual standard error: 46263.36
 ## Estimated effects may be unbalanced</code></pre>
 </div>
-<div id="tukeys-honest-significant-difference-test" class="section level2">
+<div id="tukeys-honest-significant-difference-test"
+class="section level2">
 <h2>Tukey’s honest significant difference test</h2>
-<p>Note that ANOVA tests the null hypothesis that the means in all our groups are equal. A rejection of this null hypothesis means that there is a significant difference in at least one of the possible pairs of means.</p>
-<p>To get an idea of which pair of means contains a significant difference, we can follow up with Tukey’s test that will give us all pairwise comparisons.</p>
-<p>Tukey’s test corrects the p-values upwards — so it is more conservative in deciding something is significant — because the comparisons are post-hoc or exploratory:</p>
+<p>Note that ANOVA tests the null hypothesis that the means in all our
+groups are equal. A rejection of this null hypothesis means that there
+is a significant difference in at least one of the possible pairs of
+means.</p>
+<p>To get an idea of which pair of means contains a significant
+difference, we can follow up with Tukey’s test that will give us all
+pairwise comparisons.</p>
+<p>Tukey’s test corrects the p-values upwards — so it is more
+conservative in deciding something is significant — because the
+comparisons are post-hoc or exploratory:</p>
 <pre class="r"><code>TukeyHSD(model_fit, &quot;Foundation&quot;)</code></pre>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -872,35 +992,83 @@ summary(model_fit)</code></pre>
 <h1>3. Now it’s your turn</h1>
 <div id="student-performance" class="section level2">
 <h2>Student Performance</h2>
-<p>From github, get the <code>student-mat.csv</code> and <code>student-por.csv</code> datasets.</p>
+<p>From github, get the <code>student-mat.csv</code> and
+<code>student-por.csv</code> datasets.</p>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Using the <code>student_math</code> dataset, create a regression object called <code>model_fit_1</code> predicting third period grade (G3) based on sex, age, internet, and failures. How do you interpret the regression output? Which variables are significantly related to third period grade?</p></li>
+<li><p>Using the <code>student_math</code> dataset, create a regression
+object called <code>model_fit_1</code> predicting third period grade
+(G3) based on sex, age, internet, and failures. How do you interpret the
+regression output? Which variables are significantly related to third
+period grade?</p></li>
 <li><p>Check the model’s assumptions. Which are violated?</p></li>
-<li><p>Load the <code>student-por.csv</code> in R as <code>student_port</code>. Inspect the dataset first.</p></li>
-<li><p>Create a new regression object called <code>model_fit_2</code> using the same variables as question 1: however, this time use the portugese dataset.</p></li>
-<li><p>What are the key differences between the beta values for the portugese dataset (<code>model_fit_2</code>) and the math dataset (<code>model_fit_1</code>)?</p></li>
+<li><p>Load the <code>student-por.csv</code> in R as
+<code>student_port</code>. Inspect the dataset first.</p></li>
+<li><p>Create a new regression object called <code>model_fit_2</code>
+using the same variables as question 1: however, this time use the
+portugese dataset.</p></li>
+<li><p>What are the key differences between the beta values for the
+portugese dataset (<code>model_fit_2</code>) and the math dataset
+(<code>model_fit_1</code>)?</p></li>
 </ol>
 <p><strong>Task B</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Using the <code>student_math</code> dataset, create a regression object called <code>model_fit_3</code> predicting first period grade (G1) based on guardian. Guardian is a nominal variable with 3 levels.</p></li>
-<li><p>Use <code>summary</code> to look at the output. You should see 2 predictors listed (“guardianmother” and “guardiananother”), rather than the expected 1 (“guardian”). <code>lm</code> has dummy coded your variables with “father” set as the reference group. Look at the levels of the guardian factor to see why “father” is the reference group. How would you interpret the results?</p></li>
-<li><p>What is the predicted grade for those with a father as their guardian? Those with a mother? Those with other? Compare these to the means of each group again.</p></li>
+<li><p>Using the <code>student_math</code> dataset, create a regression
+object called <code>model_fit_3</code> predicting first period grade
+(G1) based on guardian. Guardian is a nominal variable with 3
+levels.</p></li>
+<li><p>Use <code>summary</code> to look at the output. You should see 2
+predictors listed (“guardianmother” and “guardiananother”), rather than
+the expected 1 (“guardian”). <code>lm</code> has dummy coded your
+variables with “father” set as the reference group. Look at the levels
+of the guardian factor to see why “father” is the reference group. How
+would you interpret the results?</p></li>
+<li><p>What is the predicted grade for those with a father as their
+guardian? Those with a mother? Those with other? Compare these to the
+means of each group again.</p></li>
 </ol>
 <p><strong>Task C</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Using the <code>student_math</code> dataset, create a regression object called <code>model_fit_4</code> predicting a student’s first period grade (G1) based on all variables in the dataset (<em>Hint</em>: use the notation <code>formula = y ~ .</code> to include all variables)</p></li>
-<li><p>Save the fitted values from the <code>model_fit_4</code> object as a vector called <code>model_4_fitted</code>.</p></li>
-<li><p>Using the <code>student_math</code> dataset, create a scatterplot showing the relationship between a student’s first period grade (G1) and the fitted values from the model. Does the model appear to correctly fit a student’s first period grade? Use <code>geom_abline()</code> with <code>slope=1</code> and <code>intercept=0</code> to plot the identity line and better answer to this question.</p></li>
-<li><p>Create a new regression object, called <code>model_fit_5</code> which doesn’t include G2 or G3 as predictors, but still includes all other variables. Save the fitted values from the <code>model_fit_5</code> object as a vector called <code>model_5_fitted</code>.</p></li>
-<li><p>Plot the predicted grades against the actual ones, as predicted by model <code>model_fit_5</code>, as in question 3. How well does the new model perform now?</p></li>
+<li><p>Using the <code>student_math</code> dataset, create a regression
+object called <code>model_fit_4</code> predicting a student’s first
+period grade (G1) based on all variables in the dataset (<em>Hint</em>:
+use the notation <code>formula = y ~ .</code> to include all
+variables)</p></li>
+<li><p>Save the fitted values from the <code>model_fit_4</code> object
+as a vector called <code>model_4_fitted</code>.</p></li>
+<li><p>Using the <code>student_math</code> dataset, create a scatterplot
+showing the relationship between a student’s first period grade (G1) and
+the fitted values from the model. Does the model appear to correctly fit
+a student’s first period grade? Use <code>geom_abline()</code> with
+<code>slope=1</code> and <code>intercept=0</code> to plot the identity
+line and better answer to this question.</p></li>
+<li><p>Create a new regression object, called <code>model_fit_5</code>
+which doesn’t include G2 or G3 as predictors, but still includes all
+other variables. Save the fitted values from the
+<code>model_fit_5</code> object as a vector called
+<code>model_5_fitted</code>.</p></li>
+<li><p>Plot the predicted grades against the actual ones, as predicted
+by model <code>model_fit_5</code>, as in question 3. How well does the
+new model perform now?</p></li>
 </ol>
 <p><strong>Task D</strong></p>
 <ul>
-<li><p>For each question, conduct the appropriate ANOVA. Write the conclusion in APA style. To summarize an effect in an ANOVA, use the format F(XXX, YYY) = FFF, p = PPP, where XXX is the degrees of freedom of the variable you are testing, YYY is the degrees of freedom of the residuals, FFF is the F value for the variable you are testing, and PPP is the p-value. If the p-value is less than .01, just write p &lt; .01.</p></li>
-<li><p>For the purposes of this class, if the p-value of the ANOVA is less than .05, conduct post-hoc tests. If you are only testing one independent variable, write APA conclusions for the post-hoc test. <strong>If you are testing more than one independent variable in your ANOVA, you do not need to write APA style conclusions for post-hoc tests – just comment the result.</strong></p></li>
+<li><p>For each question, conduct the appropriate ANOVA. Write the
+conclusion in APA style. To summarize an effect in an ANOVA, use the
+format F(XXX, YYY) = FFF, p = PPP, where XXX is the degrees of freedom
+of the variable you are testing, YYY is the degrees of freedom of the
+residuals, FFF is the F value for the variable you are testing, and PPP
+is the p-value. If the p-value is less than .01, just write p &lt;
+.01.</p></li>
+<li><p>For the purposes of this class, if the p-value of the ANOVA is
+less than .05, conduct post-hoc tests. If you are only testing one
+independent variable, write APA conclusions for the post-hoc test.
+<strong>If you are testing more than one independent variable in your
+ANOVA, you do not need to write APA style conclusions for post-hoc tests
+– just comment the result.</strong></p></li>
 </ul>
-<p>For example, here is how you would analyze and answer the question: “Was there an effect of diets on Chicken Weights?”"</p>
+<p>For example, here is how you would analyze and answer the question:
+“Was there an effect of diets on Chicken Weights?””</p>
 <pre><code># ANOVA on Chicken Weights
 #   IV = Diet, DV = weight
 
@@ -919,14 +1087,24 @@ TukeyHSD(model_fit)
 # and diets 1 and 4 (diff = 32.62, p &lt; .01). 
 # All other pairwise differences were not significant at the 0.05 significance threshold.</code></pre>
 <ol style="list-style-type: decimal">
-<li><p>Using the <code>student_math</code> dataset, was there a main effect of the school support on G1? Conduct a one-way ANOVA. If the result is significant (p &lt; .05), conduct post-hoc tests.</p></li>
-<li><p>Using the <code>student_math</code> dataset, was there a main effect of the family support on G1? Conduct a one-way ANOVA. If the result is significant (p &lt; .05), conduct post-hoc tests.</p></li>
-<li><p>Conduct a two-way ANOVA on G1 with both school support and family support as IVs. Do your results for each variable change compared to your previous one-way ANOVAs on these variables? (You do not need to give APA results or conduct post-hoc tests, just answer the question verbally).</p></li>
+<li><p>Using the <code>student_math</code> dataset, was there a main
+effect of the school support on G1? Conduct a one-way ANOVA. If the
+result is significant (p &lt; .05), conduct post-hoc tests.</p></li>
+<li><p>Using the <code>student_math</code> dataset, was there a main
+effect of the family support on G1? Conduct a one-way ANOVA. If the
+result is significant (p &lt; .05), conduct post-hoc tests.</p></li>
+<li><p>Conduct a two-way ANOVA on G1 with both school support and family
+support as IVs. Do your results for each variable change compared to
+your previous one-way ANOVAs on these variables? (You do not need to
+give APA results or conduct post-hoc tests, just answer the question
+verbally).</p></li>
 </ol>
 </div>
 <div id="submit-your-assignment" class="section level2">
 <h2>Submit your assignment</h2>
-<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of <strong>Friday</strong>.</p>
+<p>Save and email your script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of <strong>Friday</strong>.</p>
 </div>
 </div>
 

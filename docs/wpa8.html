@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,60 +352,138 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#statistical-models">Statistical models</a></li>
-<li><a href="#linear-regression-model">Linear regression model</a>
+<li><a href="#statistical-models"
+id="toc-statistical-models">Statistical models</a></li>
+<li><a href="#linear-regression-model"
+id="toc-linear-regression-model">Linear regression model</a>
 <ul>
-<li><a href="#assumptions-of-regression">Assumptions of regression</a></li>
+<li><a href="#assumptions-of-regression"
+id="toc-assumptions-of-regression">Assumptions of regression</a></li>
 </ul></li>
-<li><a href="#model-fitting">1. Model fitting</a></li>
-<li><a href="#model-checking">2. Model checking</a>
+<li><a href="#model-fitting" id="toc-model-fitting">1. Model
+fitting</a></li>
+<li><a href="#model-checking" id="toc-model-checking">2. Model
+checking</a>
 <ul>
-<li><a href="#residuals">Residuals</a></li>
-<li><a href="#anomalous-data">Anomalous data</a></li>
+<li><a href="#residuals" id="toc-residuals">Residuals</a></li>
+<li><a href="#anomalous-data" id="toc-anomalous-data">Anomalous
+data</a></li>
 </ul></li>
-<li><a href="#logistic-regression">3. Logistic regression</a></li>
-<li><a href="#now-its-your-turn">3. Now it’s your turn</a>
+<li><a href="#logistic-regression" id="toc-logistic-regression">3.
+Logistic regression</a></li>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">3. Now it’s
+your turn</a>
 <ul>
-<li><a href="#student-performance">Student Performance</a></li>
-<li><a href="#datafile-description">Datafile description</a></li>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#student-performance" id="toc-student-performance">Student
+Performance</a></li>
+<li><a href="#datafile-description"
+id="toc-datafile-description">Datafile description</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul></li>
 </ul>
 </div>
 
 <div id="statistical-models" class="section level1">
 <h1>Statistical models</h1>
-<p>In the first part of this course, we focused on what I called <strong>exploratory data analyses</strong>. In particular, we looked at tools that allow us to load data in R, clean them, summarize them using some basic statistics (such as mean and variance), transform them (such as by using the logaritmic function) and plot them. I also mentioned how these tools are crucial because they allow us to prepare the data for “further analyses”.</p>
-<p>But what are these “further analyses”? Further analyses typically include some form of <strong>statistical hypothesis testing</strong> (or confirmatory data analysis).</p>
+<p>In the first part of this course, we focused on what I called
+<strong>exploratory data analyses</strong>. In particular, we looked at
+tools that allow us to load data in R, clean them, summarize them using
+some basic statistics (such as mean and variance), transform them (such
+as by using the logaritmic function) and plot them. I also mentioned how
+these tools are crucial because they allow us to prepare the data for
+“further analyses”.</p>
+<p>But what are these “further analyses”? Further analyses typically
+include some form of <strong>statistical hypothesis testing</strong> (or
+confirmatory data analysis).</p>
 <p>For testing, we need:</p>
 <ul>
-<li><p>an <strong>hypothesis</strong> about the relationship between random variables at the population level.</p></li>
-<li><p>a <strong>statistical model</strong> that formalizes such hypothesis, given certain assumptions.</p></li>
+<li><p>an <strong>hypothesis</strong> about the relationship between
+random variables at the population level.</p></li>
+<li><p>a <strong>statistical model</strong> that formalizes such
+hypothesis, given certain assumptions.</p></li>
 </ul>
-<p>The data we collect will be a sample from the population we want to draw inferences on. With the statistical model we also formalize the sampling error, and the limits within which these models are valid (its assumptions).</p>
-<p>The hypothesis is what we come up with <em>before</em> collecting the data. Before collecting the data, we should also already know which statistical model to use and how many trials/participants we need to test such hypothesis in order to minimize <a href="https://en.wikipedia.org/wiki/Type_I_and_type_II_errors">type 1 and type 2 errors</a>.</p>
-<p><strong>Note on null hypothesis testing in frequentist statistics (unfortunately this course will be only limited to that ;) )</strong></p>
-<p>Null hypothesis testing is a formal approach to deciding between two interpretations of a statistical relationship in a sample. One interpretation is called the <strong>null hypothesis (H0)</strong>. This is the idea that there is no relationship in the population and that the relationship in the sample reflects only sampling error. Informally, the null hypothesis is that the sample relationship “occurred by chance.” The other interpretation is called the <strong>alternative hypothesis (H1)</strong>. This is the idea that there is a relationship in the population and that the relationship in the sample reflects this relationship in the population.</p>
-<p>Again, every statistical relationship in a sample can be interpreted in either of these two ways: It might have occurred by chance, or it might reflect a relationship in the population. So researchers need a way to decide between them. Although there are many specific null hypothesis testing techniques, they are all based on the same general logic. The steps are as follows:</p>
+<p>The data we collect will be a sample from the population we want to
+draw inferences on. With the statistical model we also formalize the
+sampling error, and the limits within which these models are valid (its
+assumptions).</p>
+<p>The hypothesis is what we come up with <em>before</em> collecting the
+data. Before collecting the data, we should also already know which
+statistical model to use and how many trials/participants we need to
+test such hypothesis in order to minimize <a
+href="https://en.wikipedia.org/wiki/Type_I_and_type_II_errors">type 1
+and type 2 errors</a>.</p>
+<p><strong>Note on null hypothesis testing in frequentist statistics
+(unfortunately this course will be only limited to that ;)
+)</strong></p>
+<p>Null hypothesis testing is a formal approach to deciding between two
+interpretations of a statistical relationship in a sample. One
+interpretation is called the <strong>null hypothesis (H0)</strong>. This
+is the idea that there is no relationship in the population and that the
+relationship in the sample reflects only sampling error. Informally, the
+null hypothesis is that the sample relationship “occurred by chance.”
+The other interpretation is called the <strong>alternative hypothesis
+(H1)</strong>. This is the idea that there is a relationship in the
+population and that the relationship in the sample reflects this
+relationship in the population.</p>
+<p>Again, every statistical relationship in a sample can be interpreted
+in either of these two ways: It might have occurred by chance, or it
+might reflect a relationship in the population. So researchers need a
+way to decide between them. Although there are many specific null
+hypothesis testing techniques, they are all based on the same general
+logic. The steps are as follows:</p>
 <ul>
-<li>Assume for the moment that the null hypothesis is true. There is no relationship between the variables in the population.</li>
-<li>Determine how likely the sample relationship would be if the null hypothesis were true.</li>
-<li>If the sample relationship would be extremely unlikely, then reject the null hypothesis in favour of the alternative hypothesis. If it would not be extremely unlikely, then retain the null hypothesis.</li>
+<li>Assume for the moment that the null hypothesis is true. There is no
+relationship between the variables in the population.</li>
+<li>Determine how likely the sample relationship would be if the null
+hypothesis were true.</li>
+<li>If the sample relationship would be extremely unlikely, then reject
+the null hypothesis in favour of the alternative hypothesis. If it would
+not be extremely unlikely, then retain the null hypothesis.</li>
 </ul>
 </div>
 <div id="linear-regression-model" class="section level1">
 <h1>Linear regression model</h1>
-<p>In statistics, linear regression is a linear approach to modeling the relationship between a scalar response (or dependent variable) and one or more explanatory variables (or independent variables). The case of one explanatory variable is called simple linear regression. For more than one explanatory variable, the process is called multiple linear regression. This term is distinct from multivariate linear regression, where multiple correlated dependent variables are predicted, rather than a single scalar variable (we will not cover this in our course).</p>
-<p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data. Such models are called linear models.</p>
-<p>We already saw how to plot the relationship between 2 continuous variables (scatterplot) and how to add a regression line. Now we are going to see how to test such relationship.</p>
+<p>In statistics, linear regression is a linear approach to modeling the
+relationship between a scalar response (or dependent variable) and one
+or more explanatory variables (or independent variables). The case of
+one explanatory variable is called simple linear regression. For more
+than one explanatory variable, the process is called multiple linear
+regression. This term is distinct from multivariate linear regression,
+where multiple correlated dependent variables are predicted, rather than
+a single scalar variable (we will not cover this in our course).</p>
+<p>In linear regression, the relationships are modeled using linear
+predictor functions whose unknown model parameters are estimated from
+the data. Such models are called linear models.</p>
+<p>We already saw how to plot the relationship between 2 continuous
+variables (scatterplot) and how to add a regression line. Now we are
+going to see how to test such relationship.</p>
 <div id="assumptions-of-regression" class="section level2">
 <h2>Assumptions of regression</h2>
-<p>Linear regression models rely on several assumptions: - Normality: they assume that the residuals are normally distributed. It’s actually okay if the predictors X and the outcome Y are non-normal, so long as the residuals are. - Linearity: they assume that the relationship between X and Y is linear. - Homogeneity of variance: they assume that the standard deviation is the same for every single residual.</p>
-<p>Other things to check: - Uncorrelated predictors (only relevant for multiple regression, which we’ll se next week): The idea here is that, is a multiple regression model, you don’t want your predictors to be too strongly correlated with each other, to be able to reliably interpret and estimate the parameters. - Residuals are independent of each other: This is more due to the specific design: is there something else that can explain the residuals? E.g., data collected across different days, groups of subjects, etc. - No “bad” outliers: In case of extreme outliers, the parameters estimates will be biased and not representative of the rest of the data.</p>
+<p>Linear regression models rely on several assumptions: - Normality:
+they assume that the residuals are normally distributed. It’s actually
+okay if the predictors X and the outcome Y are non-normal, so long as
+the residuals are. - Linearity: they assume that the relationship
+between X and Y is linear. - Homogeneity of variance: they assume that
+the standard deviation is the same for every single residual.</p>
+<p>Other things to check: - Uncorrelated predictors (only relevant for
+multiple regression, which we’ll se next week): The idea here is that,
+is a multiple regression model, you don’t want your predictors to be too
+strongly correlated with each other, to be able to reliably interpret
+and estimate the parameters. - Residuals are independent of each other:
+This is more due to the specific design: is there something else that
+can explain the residuals? E.g., data collected across different days,
+groups of subjects, etc. - No “bad” outliers: In case of extreme
+outliers, the parameters estimates will be biased and not representative
+of the rest of the data.</p>
 <p>Open RStudio.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_8_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_8_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using
+<code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 8
 # Name: Laura Fontanesi
 # Date: 3 May 2022</code></pre>
@@ -410,18 +491,23 @@ $(document).ready(function () {
 </div>
 <div id="model-fitting" class="section level1">
 <h1>1. Model fitting</h1>
-<p>Today, we will se how to fit a simple linear regression model using <code>lm()</code>.</p>
-<p>Main arguments: - <code>formula</code>. A formula that specifies the regression model. For simple linear regression models, in which you have a single predictor variable as well as an intercept term, this formula is of the form outcome ~ predictor. - <code>data</code>. The data frame containing the variables.</p>
+<p>Today, we will se how to fit a simple linear regression model using
+<code>lm()</code>.</p>
+<p>Main arguments: - <code>formula</code>. A formula that specifies the
+regression model. For simple linear regression models, in which you have
+a single predictor variable as well as an intercept term, this formula
+is of the form outcome ~ predictor. - <code>data</code>. The data frame
+containing the variables.</p>
 <p>y = a + bx -&gt; y ~ x</p>
 <pre class="r"><code>library(tidyverse)
 glimpse(quakes)</code></pre>
 <pre><code>## Rows: 1,000
 ## Columns: 5
-## $ lat      &lt;dbl&gt; -20.42, -20.62, -26.00, -17.97, -20.42, -19.68, -11.70, -28.11, -28.74, -17.47, -21.44, -12.26, -18.54…
-## $ long     &lt;dbl&gt; 181.62, 181.03, 184.10, 181.66, 181.96, 184.31, 166.10, 181.93, 181.74, 179.59, 180.69, 167.00, 182.11…
-## $ depth    &lt;int&gt; 562, 650, 42, 626, 649, 195, 82, 194, 211, 622, 583, 249, 554, 600, 139, 306, 50, 590, 570, 598, 576, …
-## $ mag      &lt;dbl&gt; 4.8, 4.2, 5.4, 4.1, 4.0, 4.0, 4.8, 4.4, 4.7, 4.3, 4.4, 4.6, 4.4, 4.4, 6.1, 4.3, 6.0, 4.5, 4.4, 4.4, 4.…
-## $ stations &lt;int&gt; 41, 15, 43, 19, 11, 12, 43, 15, 35, 19, 13, 16, 19, 10, 94, 11, 83, 21, 13, 18, 17, 12, 18, 22, 57, 15…</code></pre>
+## $ lat      &lt;dbl&gt; -20.42, -20.62, -26.00, -17.97, -20.42, -19.68, -11.70, -28.11, -28.74, -17.47, -21.44, -12.26, -1…
+## $ long     &lt;dbl&gt; 181.62, 181.03, 184.10, 181.66, 181.96, 184.31, 166.10, 181.93, 181.74, 179.59, 180.69, 167.00, 18…
+## $ depth    &lt;int&gt; 562, 650, 42, 626, 649, 195, 82, 194, 211, 622, 583, 249, 554, 600, 139, 306, 50, 590, 570, 598, 5…
+## $ mag      &lt;dbl&gt; 4.8, 4.2, 5.4, 4.1, 4.0, 4.0, 4.8, 4.4, 4.7, 4.3, 4.4, 4.6, 4.4, 4.4, 6.1, 4.3, 6.0, 4.5, 4.4, 4.4…
+## $ stations &lt;int&gt; 41, 15, 43, 19, 11, 12, 43, 15, 35, 19, 13, 16, 19, 10, 94, 11, 83, 21, 13, 18, 17, 12, 18, 22, 57…</code></pre>
 <pre class="r"><code>ggplot(data = quakes, mapping = aes(x = mag, y = depth)) + 
     geom_point(alpha = 0.8, size= 1) +
     geom_smooth(method = lm, color=&#39;red&#39;)</code></pre>
@@ -452,31 +538,77 @@ summary(model_fit)</code></pre>
 ## F-statistic: 56.07 on 1 and 998 DF,  p-value: 1.535e-13</code></pre>
 <p>In the summary above, we find a lot of information:</p>
 <ul>
-<li><p>descriptive statistics for the model residuals (distance of each dot from the estimated regression line): we assumed that these residuals were normally distributed, with mean 0. So it’s worth quickly checking to see if the median is close to zero, and to see if the first quartile is about the same size as the third quartile. If they look badly off, there’s a good chance that the assumptions of regression are violated.</p></li>
-<li><p>model parameters: the intercept and coefficient of the estimated regression line (compare with plot above: makes sense?)</p></li>
-<li><p>statistical test for the model parameters (both intercept and coefficient): how likely is it that they are equal to 0? In general, values of the regression coefficient represent the change in the outcome resulting from a unit change in the predictor and that if a predictor is having a significant impact on our ability to predict the outcome then this should be different from 0. The t-test tells us whether the b-value is different from O. R provides the exact probability that the observed value of t would occur if the value of b in the population were O. If this observed significance is less than .05, then scientists agree that the result reflects a genuine effect.</p></li>
-<li><p>statistical test for the model as a whole: the value of R2 and adjusted R2. When there is only one predictor, R2 represents the square of the simple correlation between predictor and predicted variable. You can get the Pearson correlation coefficient by calculating the sqrt(R2). The value of R2 also tells us the percentage of varioation in predicted variable that can be acocunted by the predictor. Note that the adjusted R2 is particularly important when there are several predictors.</p></li>
-<li><p>results of an analysis of variance: is the regression better than just the intercept model?</p></li>
+<li><p>descriptive statistics for the model residuals (distance of each
+dot from the estimated regression line): we assumed that these residuals
+were normally distributed, with mean 0. So it’s worth quickly checking
+to see if the median is close to zero, and to see if the first quartile
+is about the same size as the third quartile. If they look badly off,
+there’s a good chance that the assumptions of regression are
+violated.</p></li>
+<li><p>model parameters: the intercept and coefficient of the estimated
+regression line (compare with plot above: makes sense?)</p></li>
+<li><p>statistical test for the model parameters (both intercept and
+coefficient): how likely is it that they are equal to 0? In general,
+values of the regression coefficient represent the change in the outcome
+resulting from a unit change in the predictor and that if a predictor is
+having a significant impact on our ability to predict the outcome then
+this should be different from 0. The t-test tells us whether the b-value
+is different from O. R provides the exact probability that the observed
+value of t would occur if the value of b in the population were O. If
+this observed significance is less than .05, then scientists agree that
+the result reflects a genuine effect.</p></li>
+<li><p>statistical test for the model as a whole: the value of R2 and
+adjusted R2. When there is only one predictor, R2 represents the square
+of the simple correlation between predictor and predicted variable. You
+can get the Pearson correlation coefficient by calculating the sqrt(R2).
+The value of R2 also tells us the percentage of varioation in predicted
+variable that can be acocunted by the predictor. Note that the adjusted
+R2 is particularly important when there are several predictors.</p></li>
+<li><p>results of an analysis of variance: is the regression better than
+just the intercept model?</p></li>
 </ul>
 <pre class="r"><code># Get confidence intervals for the parameter coefficients:
 confint(object = model_fit, level = .95)</code></pre>
 <pre><code>##                 2.5 %     97.5 %
 ## (Intercept)  731.6149 1031.63519
 ## mag         -155.7653  -91.07654</code></pre>
-<p>What was missing above were the confidence intervals for the regression coefficients. These can be easily obtained with the <code>confint</code> function.</p>
-<p>Like any population parameter, the regression coefficients cannot be estimated with complete precision from a sample of data; that’s part of why we need hypothesis tests. Given this, it’s quite useful to be able to report confidence intervals that capture our uncertainty about the true values of the coefficients. This is especially useful when the research question focuses heavily on an attempt to find out how strongly variable X is related to variable Y , since in those situations the interest is primarily in the regression weight (in this case “mag”).</p>
+<p>What was missing above were the confidence intervals for the
+regression coefficients. These can be easily obtained with the
+<code>confint</code> function.</p>
+<p>Like any population parameter, the regression coefficients cannot be
+estimated with complete precision from a sample of data; that’s part of
+why we need hypothesis tests. Given this, it’s quite useful to be able
+to report confidence intervals that capture our uncertainty about the
+true values of the coefficients. This is especially useful when the
+research question focuses heavily on an attempt to find out how strongly
+variable X is related to variable Y , since in those situations the
+interest is primarily in the regression weight (in this case “mag”).</p>
 </div>
 <div id="model-checking" class="section level1">
 <h1>2. Model checking</h1>
 <div id="residuals" class="section level2">
 <h2>Residuals</h2>
-<p>The first and simplest kind of residuals that we care about are <strong>ordinary residuals</strong>. The ordinary residual is just the difference between the estimated (regression line) and the observed values.</p>
-<p>In a lot of contexts, especially where you’re only interested in the pattern of the residuals and not their actual values, it’s convenient to estimate the <strong>standardised residuals</strong>, which are normalised in such a way as to have standard deviation 1.</p>
-<p>Finally, the third kind of residuals are <strong>Studentised residuals</strong>.</p>
+<p>The first and simplest kind of residuals that we care about are
+<strong>ordinary residuals</strong>. The ordinary residual is just the
+difference between the estimated (regression line) and the observed
+values.</p>
+<p>In a lot of contexts, especially where you’re only interested in the
+pattern of the residuals and not their actual values, it’s convenient to
+estimate the <strong>standardised residuals</strong>, which are
+normalised in such a way as to have standard deviation 1.</p>
+<p>Finally, the third kind of residuals are <strong>Studentised
+residuals</strong>.</p>
 </div>
 <div id="anomalous-data" class="section level2">
 <h2>Anomalous data</h2>
-<p>The first kind of unusual observation is an <strong>outlier</strong>. The definition of an outlier is an observation that is very different from what the regression model predicts. Outliers are interesting: a big outlier might correspond to junk data – e.g., the variables might have been entered incorrectly, or some other defect may be detectable. Note that you shouldn’t throw an observation away just because it’s an outlier. But the fact that it’s an outlier is often a cue to look more closely at that case, and try to find out why it’s so different.</p>
+<p>The first kind of unusual observation is an <strong>outlier</strong>.
+The definition of an outlier is an observation that is very different
+from what the regression model predicts. Outliers are interesting: a big
+outlier might correspond to junk data – e.g., the variables might have
+been entered incorrectly, or some other defect may be detectable. Note
+that you shouldn’t throw an observation away just because it’s an
+outlier. But the fact that it’s an outlier is often a cue to look more
+closely at that case, and try to find out why it’s so different.</p>
 <pre class="r"><code># Obtain ordinary residuals:
 res = residuals(object = model_fit)
 
@@ -526,16 +658,18 @@ library(ISLR)
 glimpse(Smarket)</code></pre>
 <pre><code>## Rows: 1,250
 ## Columns: 9
-## $ Year      &lt;dbl&gt; 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001,…
-## $ Lag1      &lt;dbl&gt; 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498, -0.189, 0.680,…
-## $ Lag2      &lt;dbl&gt; -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498, -0.189…
-## $ Lag3      &lt;dbl&gt; -2.624, -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498…
-## $ Lag4      &lt;dbl&gt; -1.055, -2.624, -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287…
-## $ Lag5      &lt;dbl&gt; 5.010, -1.055, -2.624, -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303…
-## $ Volume    &lt;dbl&gt; 1.1913, 1.2965, 1.4112, 1.2760, 1.2057, 1.3491, 1.4450, 1.4078, 1.1640, 1.2326, 1.3090, 1.2580, 1.098…
-## $ Today     &lt;dbl&gt; 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498, -0.189, 0.680, 0.701,…
-## $ Direction &lt;fct&gt; Up, Up, Down, Up, Up, Up, Down, Up, Up, Up, Down, Down, Up, Up, Down, Up, Down, Up, Down, Down, Down,…</code></pre>
-<p>There’s a number of lags, volume, today’s price, and direction. We will use Direction as a response vairable, as that shows whether the market went up or down since the previous day.</p>
+## $ Year      &lt;dbl&gt; 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2…
+## $ Lag1      &lt;dbl&gt; 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498, -0.189, 0.…
+## $ Lag2      &lt;dbl&gt; -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498, -0…
+## $ Lag3      &lt;dbl&gt; -2.624, -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0…
+## $ Lag4      &lt;dbl&gt; -1.055, -2.624, -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0…
+## $ Lag5      &lt;dbl&gt; 5.010, -1.055, -2.624, -0.192, 0.381, 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1…
+## $ Volume    &lt;dbl&gt; 1.1913, 1.2965, 1.4112, 1.2760, 1.2057, 1.3491, 1.4450, 1.4078, 1.1640, 1.2326, 1.3090, 1.2580, 1…
+## $ Today     &lt;dbl&gt; 0.959, 1.032, -0.623, 0.614, 0.213, 1.392, -0.403, 0.027, 1.303, 0.287, -0.498, -0.189, 0.680, 0.…
+## $ Direction &lt;fct&gt; Up, Up, Down, Up, Up, Up, Down, Up, Up, Up, Down, Down, Up, Up, Down, Up, Down, Up, Down, Down, D…</code></pre>
+<p>There’s a number of lags, volume, today’s price, and direction. We
+will use Direction as a response vairable, as that shows whether the
+market went up or down since the previous day.</p>
 <pre class="r"><code># Fit logistic regression model:
 model_fit = glm(Direction ~ Volume, data = Smarket, family = binomial)
 
@@ -566,60 +700,134 @@ summary(model_fit)</code></pre>
 <h1>3. Now it’s your turn</h1>
 <div id="student-performance" class="section level2">
 <h2>Student Performance</h2>
-<p>In this WPA, you will analyze data from a study on student performance in two classes: math and Portugese. These data come from the UCI Machine Learning database at <a href="http://archive.ics.uci.edu/ml/datasets/Student+Performance#" class="uri">http://archive.ics.uci.edu/ml/datasets/Student+Performance#</a></p>
+<p>In this WPA, you will analyze data from a study on student
+performance in two classes: math and Portugese. These data come from the
+UCI Machine Learning database at <a
+href="http://archive.ics.uci.edu/ml/datasets/Student+Performance#"
+class="uri">http://archive.ics.uci.edu/ml/datasets/Student+Performance#</a></p>
 <p>The data were collected for this paper:<br />
-P. Cortez and A. Silva. Using Data Mining to Predict Secondary School Student Performance. In A. Brito and J. Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7.</p>
-<p>Here is the data description (taken directly from the original website):</p>
-<p><em>This data approach student achievement in secondary education of two Portuguese schools. The data attributes include student grades, demographic, social and school related features) and it was collected by using school reports and questionnaires. Two datasets are provided regarding the performance in two distinct subjects: Mathematics (mat) and Portuguese language (por). In [Cortez and Silva, 2008], the two datasets were modeled under binary/five-level classification and regression tasks. Important note: the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd period), while G1 and G2 correspond to the 1st and 2nd period grades. It is more difficult to predict G3 without G2 and G1, but such prediction is much more useful (see paper source for more details).</em></p>
+P. Cortez and A. Silva. Using Data Mining to Predict Secondary School
+Student Performance. In A. Brito and J. Teixeira Eds., Proceedings of
+5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12,
+Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7.</p>
+<p>Here is the data description (taken directly from the original
+website):</p>
+<p><em>This data approach student achievement in secondary education of
+two Portuguese schools. The data attributes include student grades,
+demographic, social and school related features) and it was collected by
+using school reports and questionnaires. Two datasets are provided
+regarding the performance in two distinct subjects: Mathematics (mat)
+and Portuguese language (por). In [Cortez and Silva, 2008], the two
+datasets were modeled under binary/five-level classification and
+regression tasks. Important note: the target attribute G3 has a strong
+correlation with attributes G2 and G1. This occurs because G3 is the
+final year grade (issued at the 3rd period), while G1 and G2 correspond
+to the 1st and 2nd period grades. It is more difficult to predict G3
+without G2 and G1, but such prediction is much more useful (see paper
+source for more details).</em></p>
 </div>
 <div id="datafile-description" class="section level2">
 <h2>Datafile description</h2>
-<p>1 school - student’s school (binary: ‘GP’ - Gabriel Pereira or ‘MS’ - Mousinho da Silveira)</p>
+<p>1 school - student’s school (binary: ‘GP’ - Gabriel Pereira or ‘MS’ -
+Mousinho da Silveira)</p>
 <p>2 sex - student’s sex (binary: ‘F’ - female or ‘M’ - male)</p>
 <p>3 age - student’s age (numeric: from 15 to 22)</p>
-<p>4 address - student’s home address type (binary: ‘U’ - urban or ‘R’ - rural)</p>
-<p>5 famsize - family size (binary: ‘LE3’ - less or equal to 3 or ‘GT3’ - greater than 3)</p>
-<p>6 Pstatus - parent’s cohabitation status (binary: ‘T’ - living together or ‘A’ - apart)</p>
-<p>7 Medu - mother’s education (numeric: 0 - none, 1 - primary education (4th grade), 2 ???????? 5th to 9th grade, 3 ???????? secondary education or 4 ???????? higher education)</p>
-<p>8 Fedu - father’s education (numeric: 0 - none, 1 - primary education (4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher education)</p>
-<p>9 Mjob - mother’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g. administrative or police), ‘at_home’ or ‘other’)</p>
-<p>10 Fjob - father’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g. administrative or police), ‘at_home’ or ‘other’)</p>
-<p>11 reason - reason to choose this school (nominal: close to ‘home’, school ‘reputation’, ‘course’ preference or ‘other’)</p>
-<p>12 guardian - student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</p>
-<p>13 traveltime - home to school travel time (numeric: 1 - &lt;15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - &gt;1 hour)</p>
-<p>14 studytime - weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p>
-<p>15 failures - number of past class failures (numeric: n if 1&lt;=n&lt;3, else 4)</p>
+<p>4 address - student’s home address type (binary: ‘U’ - urban or ‘R’ -
+rural)</p>
+<p>5 famsize - family size (binary: ‘LE3’ - less or equal to 3 or ‘GT3’
+- greater than 3)</p>
+<p>6 Pstatus - parent’s cohabitation status (binary: ‘T’ - living
+together or ‘A’ - apart)</p>
+<p>7 Medu - mother’s education (numeric: 0 - none, 1 - primary education
+(4th grade), 2 ???????? 5th to 9th grade, 3 ???????? secondary education
+or 4 ???????? higher education)</p>
+<p>8 Fedu - father’s education (numeric: 0 - none, 1 - primary education
+(4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher
+education)</p>
+<p>9 Mjob - mother’s job (nominal: ‘teacher’, ‘health’ care related,
+civil ‘services’ (e.g. administrative or police), ‘at_home’ or
+‘other’)</p>
+<p>10 Fjob - father’s job (nominal: ‘teacher’, ‘health’ care related,
+civil ‘services’ (e.g. administrative or police), ‘at_home’ or
+‘other’)</p>
+<p>11 reason - reason to choose this school (nominal: close to ‘home’,
+school ‘reputation’, ‘course’ preference or ‘other’)</p>
+<p>12 guardian - student’s guardian (nominal: ‘mother’, ‘father’ or
+‘other’)</p>
+<p>13 traveltime - home to school travel time (numeric: 1 - &lt;15 min.,
+2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - &gt;1 hour)</p>
+<p>14 studytime - weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to
+5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p>
+<p>15 failures - number of past class failures (numeric: n if
+1&lt;=n&lt;3, else 4)</p>
 <p>16 schoolsup - extra educational support (binary: yes or no)</p>
 <p>17 famsup - family educational support (binary: yes or no)</p>
-<p>18 paid - extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)</p>
+<p>18 paid - extra paid classes within the course subject (Math or
+Portuguese) (binary: yes or no)</p>
 <p>19 activities - extra-curricular activities (binary: yes or no)</p>
 <p>20 nursery - attended nursery school (binary: yes or no)</p>
 <p>21 higher - wants to take higher education (binary: yes or no)</p>
 <p>22 internet - Internet access at home (binary: yes or no)</p>
 <p>23 romantic - with a romantic relationship (binary: yes or no)</p>
-<p>24 famrel - quality of family relationships (numeric: from 1 - very bad to 5 - excellent)</p>
-<p>25 freetime - free time after school (numeric: from 1 - very low to 5 - very high)</p>
-<p>26 goout - going out with friends (numeric: from 1 - very low to 5 - very high)</p>
-<p>27 Dalc - workday alcohol consumption (numeric: from 1 - very low to 5 - very high)</p>
-<p>28 Walc - weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)</p>
-<p>29 health - current health status (numeric: from 1 - very bad to 5 - very good)</p>
+<p>24 famrel - quality of family relationships (numeric: from 1 - very
+bad to 5 - excellent)</p>
+<p>25 freetime - free time after school (numeric: from 1 - very low to 5
+- very high)</p>
+<p>26 goout - going out with friends (numeric: from 1 - very low to 5 -
+very high)</p>
+<p>27 Dalc - workday alcohol consumption (numeric: from 1 - very low to
+5 - very high)</p>
+<p>28 Walc - weekend alcohol consumption (numeric: from 1 - very low to
+5 - very high)</p>
+<p>29 health - current health status (numeric: from 1 - very bad to 5 -
+very good)</p>
 <p>30 absences - number of school absences (numeric: from 0 to 93)</p>
 <p>31 G1 - first period grade (numeric: from 0 to 20)</p>
 <p>31 G2 - second period grade (numeric: from 0 to 20)</p>
 <p>32 G3 - final grade (numeric: from 0 to 20, output target)</p>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Download the data from the website (by clicking on <code>Data Folder</code>, and unzipping the downloaded <code>student</code> folder on your computer). We are going to use one of the files contained in the <code>student</code> folder: <code>student-mat.csv</code>. Load it in R as <code>student_math</code>. Inspect the dataset first.</p></li>
-<li><p>Create a regression object called <code>model_fit_math_1</code> predicting first period grade (G1) based on age. How do you interpret the relationship between age and first period grade? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</p></li>
-<li><p>Create a regression object called <code>model_fit_math_2</code> predicting first period grade (G1) based on absences. How do you interpret the relationship between absences and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</p></li>
-<li><p>Create a regression object called <code>model_fit_math_3</code> predicting first period grade (G1) based on school support. How do you interpret the relationship between school support and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</p></li>
-<li><p>Given that school support is a nominal variable with 2 levels, how can you tell from the output which direction the effect is? How does this relate to the way the dataset has stored the levels of the school support factor?</p></li>
-<li><p>From the regression, what would be your best guess for the first period grade for a student with no school support? What about for a student with school support?</p></li>
+<li><p>Download the data from the website (by clicking on
+<code>Data Folder</code>, and unzipping the downloaded
+<code>student</code> folder on your computer). We are going to use one
+of the files contained in the <code>student</code> folder:
+<code>student-mat.csv</code>. Load it in R as <code>student_math</code>.
+Inspect the dataset first.</p></li>
+<li><p>Create a regression object called <code>model_fit_math_1</code>
+predicting first period grade (G1) based on age. How do you interpret
+the relationship between age and first period grade? Respond in terms of
+both model parameters fit and overall model fit. Were the model
+assumption violated? Respond using the plots we have seen in class.
+Finally, make a scatterplot with the regression line to illustrate such
+relationship as we have seen in previous assignments.</p></li>
+<li><p>Create a regression object called <code>model_fit_math_2</code>
+predicting first period grade (G1) based on absences. How do you
+interpret the relationship between absences and G1? Respond in terms of
+both model parameters fit and overall model fit. Were the model
+assumption violated? Respond using the plots we have seen in class.
+Finally, make a scatterplot with the regression line to illustrate such
+relationship as we have seen in previous assignments.</p></li>
+<li><p>Create a regression object called <code>model_fit_math_3</code>
+predicting first period grade (G1) based on school support. How do you
+interpret the relationship between school support and G1? Respond in
+terms of both model parameters fit and overall model fit. Were the model
+assumption violated? Respond using the plots we have seen in class.
+Finally, make a scatterplot with the regression line to illustrate such
+relationship as we have seen in previous assignments.</p></li>
+<li><p>Given that school support is a nominal variable with 2 levels,
+how can you tell from the output which direction the effect is? How does
+this relate to the way the dataset has stored the levels of the school
+support factor?</p></li>
+<li><p>From the regression, what would be your best guess for the first
+period grade for a student with no school support? What about for a
+student with school support?</p></li>
 </ol>
 </div>
 <div id="submit-your-assignment" class="section level2">
 <h2>Submit your assignment</h2>
-<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of <strong>Friday</strong>.</p>
+<p>Save and email your script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of <strong>Friday</strong>.</p>
 </div>
 </div>
 

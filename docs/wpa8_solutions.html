@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,8 +352,10 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#now-its-your-turn">3. Now it’s your turn</a></li>
-<li><a href="#student-performance">Student Performance</a></li>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">3. Now it’s
+your turn</a></li>
+<li><a href="#student-performance" id="toc-student-performance">Student
+Performance</a></li>
 </ul>
 </div>
 
@@ -359,14 +364,22 @@ $(document).ready(function () {
 </div>
 <div id="student-performance" class="section level2">
 <h2>Student Performance</h2>
-<p>In this WPA, you will analyze data from a study on student performance in two classes: math and Portugese. These data come from the UCI Machine Learning database at <a href="http://archive.ics.uci.edu/ml/datasets/Student+Performance#" class="uri">http://archive.ics.uci.edu/ml/datasets/Student+Performance#</a></p>
-<p><strong>A1. Download the data from the website (by clicking on Data Folder, and unzipping the downloaded student folder on your computer). We are going to use one of the files contained in the student folder: student-mat.csv. Load it in R as student_math. Inspect the dataset first.</strong></p>
+<p>In this WPA, you will analyze data from a study on student
+performance in two classes: math and Portugese. These data come from the
+UCI Machine Learning database at <a
+href="http://archive.ics.uci.edu/ml/datasets/Student+Performance#"
+class="uri">http://archive.ics.uci.edu/ml/datasets/Student+Performance#</a></p>
+<p><strong>A1. Download the data from the website (by clicking on Data
+Folder, and unzipping the downloaded student folder on your computer).
+We are going to use one of the files contained in the student folder:
+student-mat.csv. Load it in R as student_math. Inspect the dataset
+first.</strong></p>
 <pre class="r"><code>library(tidyverse)
 
 student_math = read_csv2(&#39;data/student-mat.csv&#39;)</code></pre>
 <pre><code>## ℹ Using &quot;&#39;,&#39;&quot; as decimal and &quot;&#39;.&#39;&quot; as grouping mark. Use `read_delim()` for more control.</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_character(),
 ##   age = col_double(),
@@ -390,53 +403,59 @@ student_math = read_csv2(&#39;data/student-mat.csv&#39;)</code></pre>
 <pre class="r"><code>glimpse(student_math)</code></pre>
 <pre><code>## Rows: 395
 ## Columns: 33
-## $ school     &lt;chr&gt; &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;…
-## $ sex        &lt;chr&gt; &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, …
-## $ age        &lt;dbl&gt; 18, 17, 15, 15, 16, 16, 16, 17, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 17, 16, 15, 15, 16, 16, 15, …
-## $ address    &lt;chr&gt; &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, …
-## $ famsize    &lt;chr&gt; &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;G…
-## $ Pstatus    &lt;chr&gt; &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, …
-## $ Medu       &lt;dbl&gt; 4, 1, 1, 4, 3, 4, 2, 4, 3, 3, 4, 2, 4, 4, 2, 4, 4, 3, 3, 4, 4, 4, 4, 2, 2, 2, 2, 4, 3, 4, 4, 4, 4, 3…
-## $ Fedu       &lt;dbl&gt; 4, 1, 1, 2, 3, 3, 2, 4, 2, 4, 4, 1, 4, 3, 2, 4, 4, 3, 2, 3, 3, 4, 2, 2, 4, 2, 2, 2, 4, 4, 4, 4, 3, 3…
-## $ Mjob       &lt;chr&gt; &quot;at_home&quot;, &quot;at_home&quot;, &quot;at_home&quot;, &quot;health&quot;, &quot;other&quot;, &quot;services&quot;, &quot;other&quot;, &quot;other&quot;, &quot;services&quot;, &quot;other…
-## $ Fjob       &lt;chr&gt; &quot;teacher&quot;, &quot;other&quot;, &quot;other&quot;, &quot;services&quot;, &quot;other&quot;, &quot;other&quot;, &quot;other&quot;, &quot;teacher&quot;, &quot;other&quot;, &quot;other&quot;, &quot;he…
-## $ reason     &lt;chr&gt; &quot;course&quot;, &quot;course&quot;, &quot;other&quot;, &quot;home&quot;, &quot;home&quot;, &quot;reputation&quot;, &quot;home&quot;, &quot;home&quot;, &quot;home&quot;, &quot;home&quot;, &quot;reputati…
-## $ guardian   &lt;chr&gt; &quot;mother&quot;, &quot;father&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;father&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;mother&quot;, …
-## $ traveltime &lt;dbl&gt; 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 1, 2, 1, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1…
-## $ studytime  &lt;dbl&gt; 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 3, 2, 1, 1, 2, 1, 2, 2, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2…
-## $ failures   &lt;dbl&gt; 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ schoolsup  &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;…
-## $ famsup     &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
-## $ paid       &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;…
-## $ activities &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;,…
-## $ nursery    &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;ye…
-## $ higher     &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;y…
-## $ internet   &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
-## $ romantic   &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;n…
-## $ famrel     &lt;dbl&gt; 4, 5, 4, 3, 4, 5, 4, 4, 4, 5, 3, 5, 4, 5, 4, 4, 3, 5, 5, 3, 4, 5, 4, 5, 4, 1, 4, 2, 5, 4, 5, 4, 4, 5…
-## $ freetime   &lt;dbl&gt; 3, 3, 3, 2, 3, 4, 4, 1, 2, 5, 3, 2, 3, 4, 5, 4, 2, 3, 5, 1, 4, 4, 5, 4, 3, 2, 2, 2, 3, 4, 4, 3, 5, 3…
-## $ goout      &lt;dbl&gt; 4, 3, 2, 2, 2, 2, 4, 4, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3, 1, 2, 1, 4, 2, 2, 2, 4, 3, 5, 2, 1, 2, 2…
-## $ Dalc       &lt;dbl&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 5, 3, 1, 1, 1…
-## $ Walc       &lt;dbl&gt; 1, 1, 3, 1, 2, 2, 1, 1, 1, 1, 2, 1, 3, 2, 1, 2, 2, 1, 4, 3, 1, 1, 3, 4, 1, 3, 2, 4, 1, 5, 4, 1, 1, 1…
-## $ health     &lt;dbl&gt; 3, 3, 3, 5, 5, 5, 3, 1, 1, 5, 2, 4, 5, 3, 3, 2, 2, 4, 5, 5, 1, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5, 5, 5, 2…
-## $ absences   &lt;dbl&gt; 6, 4, 10, 2, 4, 10, 0, 6, 0, 0, 0, 4, 2, 2, 0, 4, 6, 4, 16, 4, 0, 0, 2, 0, 2, 14, 2, 4, 4, 16, 0, 0,…
-## $ G1         &lt;dbl&gt; 5, 5, 7, 15, 6, 15, 12, 6, 16, 14, 10, 10, 14, 10, 14, 14, 13, 8, 6, 8, 13, 12, 15, 13, 10, 6, 12, 1…
-## $ G2         &lt;dbl&gt; 6, 5, 8, 14, 10, 15, 12, 5, 18, 15, 8, 12, 14, 10, 16, 14, 14, 10, 5, 10, 14, 15, 15, 13, 9, 9, 12, …
-## $ G3         &lt;dbl&gt; 6, 6, 10, 15, 10, 15, 11, 6, 19, 15, 9, 12, 14, 11, 16, 14, 14, 10, 5, 10, 15, 15, 16, 12, 8, 8, 11,…</code></pre>
+## $ school     &lt;chr&gt; &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, &quot;GP&quot;, …
+## $ sex        &lt;chr&gt; &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;…
+## $ age        &lt;dbl&gt; 18, 17, 15, 15, 16, 16, 16, 17, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 17, 16, 15, 15, 16, 16, …
+## $ address    &lt;chr&gt; &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;U&quot;, &quot;…
+## $ famsize    &lt;chr&gt; &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;GT3&quot;, &quot;LE3&quot;, &quot;GT3&quot;…
+## $ Pstatus    &lt;chr&gt; &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;A&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;T&quot;, &quot;…
+## $ Medu       &lt;dbl&gt; 4, 1, 1, 4, 3, 4, 2, 4, 3, 3, 4, 2, 4, 4, 2, 4, 4, 3, 3, 4, 4, 4, 4, 2, 2, 2, 2, 4, 3, 4, 4, 4, …
+## $ Fedu       &lt;dbl&gt; 4, 1, 1, 2, 3, 3, 2, 4, 2, 4, 4, 1, 4, 3, 2, 4, 4, 3, 2, 3, 3, 4, 2, 2, 4, 2, 2, 2, 4, 4, 4, 4, …
+## $ Mjob       &lt;chr&gt; &quot;at_home&quot;, &quot;at_home&quot;, &quot;at_home&quot;, &quot;health&quot;, &quot;other&quot;, &quot;services&quot;, &quot;other&quot;, &quot;other&quot;, &quot;services&quot;, &quot;o…
+## $ Fjob       &lt;chr&gt; &quot;teacher&quot;, &quot;other&quot;, &quot;other&quot;, &quot;services&quot;, &quot;other&quot;, &quot;other&quot;, &quot;other&quot;, &quot;teacher&quot;, &quot;other&quot;, &quot;other&quot;,…
+## $ reason     &lt;chr&gt; &quot;course&quot;, &quot;course&quot;, &quot;other&quot;, &quot;home&quot;, &quot;home&quot;, &quot;reputation&quot;, &quot;home&quot;, &quot;home&quot;, &quot;home&quot;, &quot;home&quot;, &quot;repu…
+## $ guardian   &lt;chr&gt; &quot;mother&quot;, &quot;father&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;father&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;mother&quot;, &quot;mothe…
+## $ traveltime &lt;dbl&gt; 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 1, 2, 1, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, …
+## $ studytime  &lt;dbl&gt; 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 3, 2, 1, 1, 2, 1, 2, 2, 3, 1, 1, 1, 2, 2, 2, 2, …
+## $ failures   &lt;dbl&gt; 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, …
+## $ schoolsup  &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no…
+## $ famsup     &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;…
+## $ paid       &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no…
+## $ activities &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;…
+## $ nursery    &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;,…
+## $ higher     &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
+## $ internet   &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;…
+## $ romantic   &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;…
+## $ famrel     &lt;dbl&gt; 4, 5, 4, 3, 4, 5, 4, 4, 4, 5, 3, 5, 4, 5, 4, 4, 3, 5, 5, 3, 4, 5, 4, 5, 4, 1, 4, 2, 5, 4, 5, 4, …
+## $ freetime   &lt;dbl&gt; 3, 3, 3, 2, 3, 4, 4, 1, 2, 5, 3, 2, 3, 4, 5, 4, 2, 3, 5, 1, 4, 4, 5, 4, 3, 2, 2, 2, 3, 4, 4, 3, …
+## $ goout      &lt;dbl&gt; 4, 3, 2, 2, 2, 2, 4, 4, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3, 1, 2, 1, 4, 2, 2, 2, 4, 3, 5, 2, 1, …
+## $ Dalc       &lt;dbl&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 5, 3, 1, …
+## $ Walc       &lt;dbl&gt; 1, 1, 3, 1, 2, 2, 1, 1, 1, 1, 2, 1, 3, 2, 1, 2, 2, 1, 4, 3, 1, 1, 3, 4, 1, 3, 2, 4, 1, 5, 4, 1, …
+## $ health     &lt;dbl&gt; 3, 3, 3, 5, 5, 5, 3, 1, 1, 5, 2, 4, 5, 3, 3, 2, 2, 4, 5, 5, 1, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5, 5, …
+## $ absences   &lt;dbl&gt; 6, 4, 10, 2, 4, 10, 0, 6, 0, 0, 0, 4, 2, 2, 0, 4, 6, 4, 16, 4, 0, 0, 2, 0, 2, 14, 2, 4, 4, 16, 0…
+## $ G1         &lt;dbl&gt; 5, 5, 7, 15, 6, 15, 12, 6, 16, 14, 10, 10, 14, 10, 14, 14, 13, 8, 6, 8, 13, 12, 15, 13, 10, 6, 1…
+## $ G2         &lt;dbl&gt; 6, 5, 8, 14, 10, 15, 12, 5, 18, 15, 8, 12, 14, 10, 16, 14, 14, 10, 5, 10, 14, 15, 15, 13, 9, 9, …
+## $ G3         &lt;dbl&gt; 6, 6, 10, 15, 10, 15, 11, 6, 19, 15, 9, 12, 14, 11, 16, 14, 14, 10, 5, 10, 15, 15, 16, 12, 8, 8,…</code></pre>
 <pre class="r"><code>head(student_math)</code></pre>
 <pre><code>## # A tibble: 6 x 33
-##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob     reason  guardian traveltime studytime failures
-##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 GP     F        18 U       GT3     A           4     4 at_home  teacher  course  mother            2         2        0
-## 2 GP     F        17 U       GT3     T           1     1 at_home  other    course  father            1         2        0
-## 3 GP     F        15 U       LE3     T           1     1 at_home  other    other   mother            1         2        3
-## 4 GP     F        15 U       GT3     T           4     2 health   services home    mother            1         3        0
-## 5 GP     F        16 U       GT3     T           3     3 other    other    home    father            1         2        0
-## 6 GP     M        16 U       LE3     T           4     3 services other    reputa… mother            1         2        0
-## # … with 18 more variables: schoolsup &lt;chr&gt;, famsup &lt;chr&gt;, paid &lt;chr&gt;, activities &lt;chr&gt;, nursery &lt;chr&gt;, higher &lt;chr&gt;,
-## #   internet &lt;chr&gt;, romantic &lt;chr&gt;, famrel &lt;dbl&gt;, freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;, Walc &lt;dbl&gt;, health &lt;dbl&gt;,
-## #   absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
-<p><strong>A2. Create a regression object called model_fit_math_1 predicting first period grade (G1) based on age. How do you interpret the relationship between age and first period grade? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</strong></p>
+##   school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob     reason guardian traveltime studytime failures
+##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 GP     F        18 U       GT3     A           4     4 at_home  teacher  course mother            2         2        0
+## 2 GP     F        17 U       GT3     T           1     1 at_home  other    course father            1         2        0
+## 3 GP     F        15 U       LE3     T           1     1 at_home  other    other  mother            1         2        3
+## 4 GP     F        15 U       GT3     T           4     2 health   services home   mother            1         3        0
+## 5 GP     F        16 U       GT3     T           3     3 other    other    home   father            1         2        0
+## 6 GP     M        16 U       LE3     T           4     3 services other    reput… mother            1         2        0
+## # … with 18 more variables: schoolsup &lt;chr&gt;, famsup &lt;chr&gt;, paid &lt;chr&gt;, activities &lt;chr&gt;, nursery &lt;chr&gt;,
+## #   higher &lt;chr&gt;, internet &lt;chr&gt;, romantic &lt;chr&gt;, famrel &lt;dbl&gt;, freetime &lt;dbl&gt;, goout &lt;dbl&gt;, Dalc &lt;dbl&gt;, Walc &lt;dbl&gt;,
+## #   health &lt;dbl&gt;, absences &lt;dbl&gt;, G1 &lt;dbl&gt;, G2 &lt;dbl&gt;, G3 &lt;dbl&gt;</code></pre>
+<p><strong>A2. Create a regression object called model_fit_math_1
+predicting first period grade (G1) based on age. How do you interpret
+the relationship between age and first period grade? Respond in terms of
+both model parameters fit and overall model fit. Were the model
+assumption violated? Respond using the plots we have seen in class.
+Finally, make a scatterplot with the regression line to illustrate such
+relationship as we have seen in previous assignments.</strong></p>
 <pre class="r"><code>model_fit_math_1 = lm(G1 ~ age, data = student_math)
 summary(model_fit_math_1)</code></pre>
 <pre><code>## 
@@ -492,8 +511,11 @@ model_checks = as_tibble(model_checks)</code></pre>
 ## 
 ## data:  model_checks$res_stu
 ## W = 0.98114, p-value = 4.999e-05</code></pre>
-<p>This test shows that we can reject the null hypothesis that the residuals came from a normal distribution.</p>
-<p>See <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">here</a> for more info.</p>
+<p>This test shows that we can reject the null hypothesis that the
+residuals came from a normal distribution.</p>
+<p>See <a
+href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">here</a>
+for more info.</p>
 <p>And you can also use a more formal test for heteroskedacity:</p>
 <pre class="r"><code>#install.packages(&#39;lmtest&#39;)
 #install.packages(&#39;zoo&#39;)
@@ -512,9 +534,18 @@ library(lmtest)</code></pre>
 ## 
 ## data:  model_fit_math_1
 ## BP = 0.37268, df = 1, p-value = 0.5415</code></pre>
-<p>This test shows that we cannot reject the null that the variance of the residuals is constant, thus heteroskedacity is not present.</p>
-<p>See <a href="https://en.wikipedia.org/wiki/Breusch%E2%80%93Pagan_test">here</a> for more info.</p>
-<p><strong>A3. Create a regression object called model_fit_math_2 predicting first period grade (G1) based on absences. How do you interpret the relationship between absences and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</strong></p>
+<p>This test shows that we cannot reject the null that the variance of
+the residuals is constant, thus heteroskedacity is not present.</p>
+<p>See <a
+href="https://en.wikipedia.org/wiki/Breusch%E2%80%93Pagan_test">here</a>
+for more info.</p>
+<p><strong>A3. Create a regression object called model_fit_math_2
+predicting first period grade (G1) based on absences. How do you
+interpret the relationship between absences and G1? Respond in terms of
+both model parameters fit and overall model fit. Were the model
+assumption violated? Respond using the plots we have seen in class.
+Finally, make a scatterplot with the regression line to illustrate such
+relationship as we have seen in previous assignments.</strong></p>
 <pre class="r"><code>model_fit_math_2 = lm(G1 ~ absences, data = student_math)
 summary(model_fit_math_2)</code></pre>
 <pre><code>## 
@@ -575,7 +606,13 @@ model_checks = as_tibble(model_checks)</code></pre>
 ## 
 ## data:  model_fit_math_2
 ## BP = 1.4807, df = 1, p-value = 0.2237</code></pre>
-<p><strong>A4. Create a regression object called model_fit_math_3 predicting first period grade (G1) based on school support. How do you interpret the relationship between school support and G1? Respond in terms of both model parameters fit and overall model fit. Were the model assumption violated? Respond using the plots we have seen in class. Finally, make a scatterplot with the regression line to illustrate such relationship as we have seen in previous assignments.</strong></p>
+<p><strong>A4. Create a regression object called model_fit_math_3
+predicting first period grade (G1) based on school support. How do you
+interpret the relationship between school support and G1? Respond in
+terms of both model parameters fit and overall model fit. Were the model
+assumption violated? Respond using the plots we have seen in class.
+Finally, make a scatterplot with the regression line to illustrate such
+relationship as we have seen in previous assignments.</strong></p>
 <pre class="r"><code>model_fit_math_3 = lm(G1 ~ schoolsup, data = student_math)
 summary(model_fit_math_3)</code></pre>
 <pre><code>## 
@@ -669,18 +706,41 @@ model_checks = as_tibble(model_checks)</code></pre>
 ## data:  model_fit_math_3
 ## BP = 10.851, df = 1, p-value = 0.0009873</code></pre>
 <p>They are both significant: both assumptions have been violated.</p>
-<p><strong>A5. Given that school support is a nominal variable with 2 levels, how can you tell from the output which direction the effect is? How does this relate to the way the dataset has stored the levels of the school support factor?</strong></p>
-<p>There is a negative relationship between school support and first period grade (b = -2.1): Students with extra support from the school have worse Period 1 grades on average.</p>
-<p>In the regression, rather than a predictor labelled schoolsup because it is a nominal variable we are given the variable schoolsupyes. This tells us that the regression coefficient is the change in grade caused by going from no school support to yes school support. In essence, R has dummy coded the variable so that students with no school support are given a value of 0 and those with yes school support a value of 1.</p>
-<p>If we look at the factor levels for the school support column we see that no is level 1 and yes level two. ‘lm()’ will always code predictors as the change from level 1 to level 2 (i.e. level 1 is coded as 0, and level 2 as 1).")</p>
+<p><strong>A5. Given that school support is a nominal variable with 2
+levels, how can you tell from the output which direction the effect is?
+How does this relate to the way the dataset has stored the levels of the
+school support factor?</strong></p>
+<p>There is a negative relationship between school support and first
+period grade (b = -2.1): Students with extra support from the school
+have worse Period 1 grades on average.</p>
+<p>In the regression, rather than a predictor labelled schoolsup because
+it is a nominal variable we are given the variable schoolsupyes. This
+tells us that the regression coefficient is the change in grade caused
+by going from no school support to yes school support. In essence, R has
+dummy coded the variable so that students with no school support are
+given a value of 0 and those with yes school support a value of 1.</p>
+<p>If we look at the factor levels for the school support column we see
+that no is level 1 and yes level two. ‘lm()’ will always code predictors
+as the change from level 1 to level 2 (i.e. level 1 is coded as 0, and
+level 2 as 1).”)</p>
 <pre class="r"><code>levels(factor(student_math$schoolsup))</code></pre>
 <pre><code>## [1] &quot;no&quot;  &quot;yes&quot;</code></pre>
-<p><strong>A6. From the regression, what would be your best guess for the first period grade for a student with no school support? What about for a student with school support?</strong></p>
-<p>The intercept estimate tells us the best estimate for first period grade when all predictor vairables have a value of 0.</p>
-<p>In this case, we only have 1 predictor (school support) and it is dummy coded so that those without school support have a value of 0.</p>
-<p>Therefore, the predicted first period grade for those without school support is 11.18 (the intercept estimate).</p>
-<p>We can also use our schoolsupportyes estimate to calculate our prediction for those with school support: Our estimate tells us that those on school support are predicted to have a first period grade that is 2.1 lower than those without school support, therefore they have a predicted grade of 9.08.</p>
-<p>Because we have a single categorical predictor, these predicted scores should also be the mean of each of the groups:</p>
+<p><strong>A6. From the regression, what would be your best guess for
+the first period grade for a student with no school support? What about
+for a student with school support?</strong></p>
+<p>The intercept estimate tells us the best estimate for first period
+grade when all predictor vairables have a value of 0.</p>
+<p>In this case, we only have 1 predictor (school support) and it is
+dummy coded so that those without school support have a value of 0.</p>
+<p>Therefore, the predicted first period grade for those without school
+support is 11.18 (the intercept estimate).</p>
+<p>We can also use our schoolsupportyes estimate to calculate our
+prediction for those with school support: Our estimate tells us that
+those on school support are predicted to have a first period grade that
+is 2.1 lower than those without school support, therefore they have a
+predicted grade of 9.08.</p>
+<p>Because we have a single categorical predictor, these predicted
+scores should also be the mean of each of the groups:</p>
 <pre class="r"><code>summarize(group_by(student_math, schoolsup),
           mean_G1 = mean(G1))</code></pre>
 <pre><code>## # A tibble: 2 x 2

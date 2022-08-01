@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,34 +352,52 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#creating-r-functions">1. Creating R Functions</a></li>
-<li><a href="#conditional-satements">2. Conditional satements</a></li>
-<li><a href="#loops">3. Loops</a>
+<li><a href="#creating-r-functions" id="toc-creating-r-functions">1.
+Creating R Functions</a></li>
+<li><a href="#conditional-satements" id="toc-conditional-satements">2.
+Conditional satements</a></li>
+<li><a href="#loops" id="toc-loops">3. Loops</a>
 <ul>
-<li><a href="#the-for-loop">The for loop</a></li>
-<li><a href="#the-while-loop">The while loop</a></li>
-<li><a href="#example-with-dataframes">Example with dataframes</a></li>
+<li><a href="#the-for-loop" id="toc-the-for-loop">The for loop</a></li>
+<li><a href="#the-while-loop" id="toc-the-while-loop">The while
+loop</a></li>
+<li><a href="#example-with-dataframes"
+id="toc-example-with-dataframes">Example with dataframes</a></li>
 </ul></li>
-<li><a href="#now-its-your-turn">4. Now it’s your turn</a>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">4. Now it’s
+your turn</a>
 <ul>
-<li><a href="#datafile-description">Datafile description</a></li>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#datafile-description"
+id="toc-datafile-description">Datafile description</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul></li>
 </ul>
 </div>
 
 <p>Open RStudio.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_7_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_7_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using
+<code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 7
 # Name: Laura Fontanesi
 # Date: 26 April 2022</code></pre>
 <div id="creating-r-functions" class="section level1">
 <h1>1. Creating R Functions</h1>
-<p>R scripts are a way to organize and save data, complicated expressions, or sequences of operations for re-use.</p>
-<p>Whenever we re-use a code snippet, instead of copy-pasting and thus increasing the chances of typos and other mistakes, we should rather think about how to <strong>generalize our code</strong>, so that it can be re-used later in the script or other scripts on slightly different data.</p>
-<p>Functions are perfect for this purpose. We already used many functions, that other people have defined for us and saved in packages that we could load in R.</p>
+<p>R scripts are a way to organize and save data, complicated
+expressions, or sequences of operations for re-use.</p>
+<p>Whenever we re-use a code snippet, instead of copy-pasting and thus
+increasing the chances of typos and other mistakes, we should rather
+think about how to <strong>generalize our code</strong>, so that it can
+be re-used later in the script or other scripts on slightly different
+data.</p>
+<p>Functions are perfect for this purpose. We already used many
+functions, that other people have defined for us and saved in packages
+that we could load in R.</p>
 <p>Now we see how to create our own functions:</p>
 <pre><code>NAME = function(ARGUMENTS) {
 
@@ -385,7 +406,9 @@ $(document).ready(function () {
   return(OUTPUT) # optional.. you can also just create a function that prints something, without returning anything
 
 }</code></pre>
-<p>For example, let’s create a function called <code>percentage</code> that calculates the percentage of <code>x</code> of a <code>total</code>:</p>
+<p>For example, let’s create a function called <code>percentage</code>
+that calculates the percentage of <code>x</code> of a
+<code>total</code>:</p>
 <pre class="r"><code>percentage = function(x, total) {
     ratio = x/total
     perc = ratio*100
@@ -400,21 +423,26 @@ $(document).ready(function () {
 
 print(a)</code></pre>
 <pre><code>## [1] 56.25</code></pre>
-<p>Let’s now create a function called <code>print_percentage</code> that calculates a percentage but returns the result in a more readable way (addding the <code>%</code>):</p>
+<p>Let’s now create a function called <code>print_percentage</code> that
+calculates a percentage but returns the result in a more readable way
+(addding the <code>%</code>):</p>
 <pre class="r"><code>print_percentage = function(x, total) {
     ratio = x/total
     perc = ratio*100
     
     print(paste(perc, &#39;%&#39;))
 }</code></pre>
-<p><strong>Note</strong> that we didn’t use the <code>return</code> now. The output of the function is given by <code>print</code> instead.</p>
+<p><strong>Note</strong> that we didn’t use the <code>return</code> now.
+The output of the function is given by <code>print</code> instead.</p>
 <pre class="r"><code>print_percentage(6, 20)</code></pre>
 <pre><code>## [1] &quot;30 %&quot;</code></pre>
 <pre class="r"><code>a = print_percentage(45, 80)</code></pre>
 <pre><code>## [1] &quot;56.25 %&quot;</code></pre>
 <pre class="r"><code>print(a)</code></pre>
 <pre><code>## [1] &quot;56.25 %&quot;</code></pre>
-<p>You can create functions with any number of arguments, for example we could decide to round the result to <code>n</code> decimals before printing:</p>
+<p>You can create functions with any number of arguments, for example we
+could decide to round the result to <code>n</code> decimals before
+printing:</p>
 <pre class="r"><code>print_percentage_decimals = function(x, total, n_decimals) {
     ratio = x/total
     perc = ratio*100
@@ -429,7 +457,8 @@ print(a)</code></pre>
 <pre><code>## [1] &quot;56 %&quot;</code></pre>
 <pre class="r"><code>print_percentage_decimals(79, 81, 4)</code></pre>
 <pre><code>## [1] &quot;97.5309 %&quot;</code></pre>
-<p>And we can assign a default value to one of the arguments, so that it doesn’t have to be specified every time the function is called:</p>
+<p>And we can assign a default value to one of the arguments, so that it
+doesn’t have to be specified every time the function is called:</p>
 <pre class="r"><code>print_percentage_decimals = function(x, total, n_decimals=2) {
     ratio = x/total
     perc = ratio*100
@@ -445,13 +474,17 @@ print(a)</code></pre>
 </div>
 <div id="conditional-satements" class="section level1">
 <h1>2. Conditional satements</h1>
-<p>Conditional statements can help us improve our functions, so that different operations can be done depending on the input to the function:</p>
+<p>Conditional statements can help us improve our functions, so that
+different operations can be done depending on the input to the
+function:</p>
 <pre><code>if (statement_is_true) {
     do_this
 } else {
     do_this_instead
 }</code></pre>
-<p>For example, let’s write a conditional statement that prints <code>x is positive</code> if a variable x is higher than 0, and prints <code>x is not positive</code> otherwise:</p>
+<p>For example, let’s write a conditional statement that prints
+<code>x is positive</code> if a variable x is higher than 0, and prints
+<code>x is not positive</code> otherwise:</p>
 <pre class="r"><code>x = 2
 
 if (x &gt; 0) {
@@ -460,7 +493,10 @@ if (x &gt; 0) {
     print(&quot;x is not positive&quot;)
 }</code></pre>
 <pre><code>## [1] &quot;x is positive&quot;</code></pre>
-<p>Conditional statements can be very useful inside functions, to specify different outputs depending on which inputs are given. For example, we might want to limit the percentage calculation to positive numbers:</p>
+<p>Conditional statements can be very useful inside functions, to
+specify different outputs depending on which inputs are given. For
+example, we might want to limit the percentage calculation to positive
+numbers:</p>
 <pre class="r"><code>print_percentage_positive = function(x, total, n_decimals=2) {
     if (x &gt;=0 &amp; total &gt; 0) {
         ratio = x/total
@@ -503,13 +539,20 @@ if (x &gt; 0) {
 </div>
 <div id="loops" class="section level1">
 <h1>3. Loops</h1>
-<p>Another construct that can help you repeat the same code on different inputs is a loop. We now look at 2 types of loops: <code>for</code> and <code>while</code> loops.</p>
+<p>Another construct that can help you repeat the same code on different
+inputs is a loop. We now look at 2 types of loops: <code>for</code> and
+<code>while</code> loops.</p>
 <div id="the-for-loop" class="section level2">
 <h2>The for loop</h2>
 <pre><code>for (val in sequence) {
     calculation
 }</code></pre>
-<p>We can use a for loop for printing the elements of a vector, iteratevely (one by one). In the loop, at each iteration, each element of the vector <code>a</code> gets assigned to the variable <code>i</code>. Therefore, any calculation that we want to happen iteratively, we should do on <code>i</code> (in the example below, only printing):</p>
+<p>We can use a for loop for printing the elements of a vector,
+iteratevely (one by one). In the loop, at each iteration, each element
+of the vector <code>a</code> gets assigned to the variable
+<code>i</code>. Therefore, any calculation that we want to happen
+iteratively, we should do on <code>i</code> (in the example below, only
+printing):</p>
 <pre class="r"><code>a = seq(10, 20)
 
 for (i in a) {
@@ -526,7 +569,10 @@ for (i in a) {
 ## [1] 18
 ## [1] 19
 ## [1] 20</code></pre>
-<p>Here, we create a second vector <code>b</code> that is initially empty. At each iteration in the for loop, we add a new element to <code>b</code>, specifically, each element of <code>a</code> increased by 2:</p>
+<p>Here, we create a second vector <code>b</code> that is initially
+empty. At each iteration in the for loop, we add a new element to
+<code>b</code>, specifically, each element of <code>a</code> increased
+by 2:</p>
 <pre class="r"><code>b = c()
 
 for (i in a) {
@@ -535,7 +581,8 @@ for (i in a) {
 
 print(b)</code></pre>
 <pre><code>##  [1] 12 13 14 15 16 17 18 19 20 21 22</code></pre>
-<p>Note what happens when we define the vector <code>b</code> inside the loop, instead of before it:</p>
+<p>Note what happens when we define the vector <code>b</code> inside the
+loop, instead of before it:</p>
 <pre class="r"><code>for (i in a) {
   b = c()
   b = c(b, i+2)
@@ -543,7 +590,8 @@ print(b)</code></pre>
 
 print(b)</code></pre>
 <pre><code>## [1] 22</code></pre>
-<p>Also, note that it does not matter how you name this variable inside the loop:</p>
+<p>Also, note that it does not matter how you name this variable inside
+the loop:</p>
 <pre class="r"><code>some_vector = c(3, 4, 5)
 
 for (x in some_vector) {
@@ -558,8 +606,15 @@ for (x in some_vector) {
 <pre><code>while (test_expression) {
     statement
 }</code></pre>
-<p>Here, we still have iterations of the calculations defined within the loop (in the <code>statement</code> above). However, the loop stops when the <code>test_expression</code> is evaluated as False.</p>
-<p>For example, here we start with defining a variable <code>a</code> equal to 1. At each iteration, we print <code>a</code> and multiply it by 10. The loop will stop when <code>a</code> is less than 1001, which is after 4 iterations. Note that, unlike in the for loop, we do not have to tell R that there will be 4 iterations, but only the condition to continue (<code>a &lt; 1001</code>):</p>
+<p>Here, we still have iterations of the calculations defined within the
+loop (in the <code>statement</code> above). However, the loop stops when
+the <code>test_expression</code> is evaluated as False.</p>
+<p>For example, here we start with defining a variable <code>a</code>
+equal to 1. At each iteration, we print <code>a</code> and multiply it
+by 10. The loop will stop when <code>a</code> is less than 1001, which
+is after 4 iterations. Note that, unlike in the for loop, we do not have
+to tell R that there will be 4 iterations, but only the condition to
+continue (<code>a &lt; 1001</code>):</p>
 <pre class="r"><code>a = 1
 
 while (a &lt; 1001) {
@@ -570,7 +625,11 @@ while (a &lt; 1001) {
 ## [1] 10
 ## [1] 100
 ## [1] 1000</code></pre>
-<p>We can also create a variable called <code>count</code>, that simply increases of 1 at each iteration, and make the while loop stop when count is equal to (in this example) 12. In this case while is more similar to the for loop, because we know in advance how many iterations we want:</p>
+<p>We can also create a variable called <code>count</code>, that simply
+increases of 1 at each iteration, and make the while loop stop when
+count is equal to (in this example) 12. In this case while is more
+similar to the for loop, because we know in advance how many iterations
+we want:</p>
 <pre class="r"><code>count = 1
 c = c()
 
@@ -584,28 +643,34 @@ print(c)</code></pre>
 </div>
 <div id="example-with-dataframes" class="section level2">
 <h2>Example with dataframes</h2>
-<p>Now we have a look at a more specific example with dataframes. Let’s say we have data from a class of 100 students containing the points in a test:</p>
+<p>Now we have a look at a more specific example with dataframes. Let’s
+say we have data from a class of 100 students containing the points in a
+test:</p>
 <pre class="r"><code>n = 100
 student_data = data.frame(student_id=as.integer(runif(n=n, min=1000, max=9000)),
                           total_points=round(runif(n=n, min=0, max=30), 1))
 head(student_data)</code></pre>
 <pre><code>##   student_id total_points
-## 1       7878         16.9
-## 2       6129         10.7
-## 3       8263         10.8
-## 4       1561         25.2
-## 5       8951         26.5
-## 6       8978         15.0</code></pre>
-<p>Now, we define a subset of tests that we need to revise, and we want to see to which student they belong to and what was the test result. We can index these student one by one, but that takes a while and it’s also an inefficient repetition of code:</p>
+## 1       7040         15.1
+## 2       4143         18.6
+## 3       4811          4.1
+## 4       1072          6.7
+## 5       5146          8.6
+## 6       6663         26.8</code></pre>
+<p>Now, we define a subset of tests that we need to revise, and we want
+to see to which student they belong to and what was the test result. We
+can index these student one by one, but that takes a while and it’s also
+an inefficient repetition of code:</p>
 <pre class="r"><code>subset_students = c(5, 16, 3, 9, 37, 30, 25, 28, 59, 61, 88, 94, 99)
 
 print(student_data[5,])</code></pre>
 <pre><code>##   student_id total_points
-## 5       8951         26.5</code></pre>
+## 5       5146          8.6</code></pre>
 <pre class="r"><code>print(student_data[16,])</code></pre>
 <pre><code>##    student_id total_points
-## 16       4470         15.4</code></pre>
-<p>Or, we can use a for loop and extract this information iteratively, without code repetition:</p>
+## 16       5414         24.2</code></pre>
+<p>Or, we can use a for loop and extract this information iteratively,
+without code repetition:</p>
 <pre class="r"><code>for (i in subset_students) {
   student_id = student_data[i, &quot;student_id&quot;]  
   points_student = student_data[i, &quot;total_points&quot;]
@@ -614,20 +679,21 @@ print(student_data[5,])</code></pre>
     
   print(paste(&quot;Student:&quot;, student_id, &quot;-&quot;, &quot;Grade:&quot;, rounded_grade, &#39;%&#39;))
 }</code></pre>
-<pre><code>## [1] &quot;Student: 8951 - Grade: 88 %&quot;
-## [1] &quot;Student: 4470 - Grade: 51 %&quot;
-## [1] &quot;Student: 8263 - Grade: 36 %&quot;
-## [1] &quot;Student: 4416 - Grade: 53 %&quot;
-## [1] &quot;Student: 5253 - Grade: 16 %&quot;
-## [1] &quot;Student: 6706 - Grade: 28 %&quot;
-## [1] &quot;Student: 6590 - Grade: 51 %&quot;
-## [1] &quot;Student: 6700 - Grade: 41 %&quot;
-## [1] &quot;Student: 1776 - Grade: 100 %&quot;
-## [1] &quot;Student: 8438 - Grade: 83 %&quot;
-## [1] &quot;Student: 5274 - Grade: 25 %&quot;
-## [1] &quot;Student: 6533 - Grade: 52 %&quot;
-## [1] &quot;Student: 1611 - Grade: 35 %&quot;</code></pre>
-<p>The equivalent way to write this loop with a <code>while</code> loop:</p>
+<pre><code>## [1] &quot;Student: 5146 - Grade: 29 %&quot;
+## [1] &quot;Student: 5414 - Grade: 81 %&quot;
+## [1] &quot;Student: 4811 - Grade: 14 %&quot;
+## [1] &quot;Student: 8502 - Grade: 64 %&quot;
+## [1] &quot;Student: 7807 - Grade: 70 %&quot;
+## [1] &quot;Student: 8125 - Grade: 85 %&quot;
+## [1] &quot;Student: 4424 - Grade: 54 %&quot;
+## [1] &quot;Student: 1630 - Grade: 16 %&quot;
+## [1] &quot;Student: 6223 - Grade: 40 %&quot;
+## [1] &quot;Student: 6865 - Grade: 50 %&quot;
+## [1] &quot;Student: 7499 - Grade: 42 %&quot;
+## [1] &quot;Student: 5481 - Grade: 22 %&quot;
+## [1] &quot;Student: 4896 - Grade: 50 %&quot;</code></pre>
+<p>The equivalent way to write this loop with a <code>while</code>
+loop:</p>
 <pre class="r"><code>n_subset = length(subset_students)
 n = 1
 
@@ -642,24 +708,33 @@ while (n &lt;= n_subset) {
     
   n = n + 1 # crucial!
 }</code></pre>
-<pre><code>## [1] &quot;Student: 8951 - Grade: 88 %&quot;
-## [1] &quot;Student: 4470 - Grade: 51 %&quot;
-## [1] &quot;Student: 8263 - Grade: 36 %&quot;
-## [1] &quot;Student: 4416 - Grade: 53 %&quot;
-## [1] &quot;Student: 5253 - Grade: 16 %&quot;
-## [1] &quot;Student: 6706 - Grade: 28 %&quot;
-## [1] &quot;Student: 6590 - Grade: 51 %&quot;
-## [1] &quot;Student: 6700 - Grade: 41 %&quot;
-## [1] &quot;Student: 1776 - Grade: 100 %&quot;
-## [1] &quot;Student: 8438 - Grade: 83 %&quot;
-## [1] &quot;Student: 5274 - Grade: 25 %&quot;
-## [1] &quot;Student: 6533 - Grade: 52 %&quot;
-## [1] &quot;Student: 1611 - Grade: 35 %&quot;</code></pre>
+<pre><code>## [1] &quot;Student: 5146 - Grade: 29 %&quot;
+## [1] &quot;Student: 5414 - Grade: 81 %&quot;
+## [1] &quot;Student: 4811 - Grade: 14 %&quot;
+## [1] &quot;Student: 8502 - Grade: 64 %&quot;
+## [1] &quot;Student: 7807 - Grade: 70 %&quot;
+## [1] &quot;Student: 8125 - Grade: 85 %&quot;
+## [1] &quot;Student: 4424 - Grade: 54 %&quot;
+## [1] &quot;Student: 1630 - Grade: 16 %&quot;
+## [1] &quot;Student: 6223 - Grade: 40 %&quot;
+## [1] &quot;Student: 6865 - Grade: 50 %&quot;
+## [1] &quot;Student: 7499 - Grade: 42 %&quot;
+## [1] &quot;Student: 5481 - Grade: 22 %&quot;
+## [1] &quot;Student: 4896 - Grade: 50 %&quot;</code></pre>
 </div>
 </div>
 <div id="now-its-your-turn" class="section level1">
 <h1>4. Now it’s your turn</h1>
-<p>In this WPA, you will analyze data from another fake study. In this fake study the researchers were interested in whether playing video games had cognitive benefits compared to other leisure activities. In the study, 90 University students were asked to do one of 3 leisure activities for 1 hour a day for the next month. 30 participants were asked to play visio games, 30 to read and 30 to juggle. At the end of the month each participant did 3 cognitive tests, a problem solving test (<strong>logic</strong>) and a reflex/response test (<strong>reflex</strong>) and a written comprehension test (<strong>comprehension</strong>).</p>
+<p>In this WPA, you will analyze data from another fake study. In this
+fake study the researchers were interested in whether playing video
+games had cognitive benefits compared to other leisure activities. In
+the study, 90 University students were asked to do one of 3 leisure
+activities for 1 hour a day for the next month. 30 participants were
+asked to play visio games, 30 to read and 30 to juggle. At the end of
+the month each participant did 3 cognitive tests, a problem solving test
+(<strong>logic</strong>) and a reflex/response test
+(<strong>reflex</strong>) and a written comprehension test
+(<strong>comprehension</strong>).</p>
 <div id="datafile-description" class="section level2">
 <h2>Datafile description</h2>
 <p>The data file has 90 rows and 7 columns. Here are the columns</p>
@@ -667,58 +742,122 @@ while (n &lt;= n_subset) {
 <li><p><code>id</code>: The participant ID</p></li>
 <li><p><code>age</code>: The age of the participant</p></li>
 <li><p><code>gender</code>: The gender of the particiant</p></li>
-<li><p><code>activity</code>: Which leisure activity the participant was assigned for the last month (“reading”, “juggling”, “gaming”)</p></li>
-<li><p><code>logic</code>: Score out of 120 on a problem solving task. Higher is better.</p></li>
-<li><p><code>reflex</code>: Score out of 25 on a reflex test. Higher indicates faster reflexes.</p></li>
-<li><p><code>comprehension</code>: Score out of 100 on a reading comprehension test. Higher is better.</p></li>
+<li><p><code>activity</code>: Which leisure activity the participant was
+assigned for the last month (“reading”, “juggling”, “gaming”)</p></li>
+<li><p><code>logic</code>: Score out of 120 on a problem solving task.
+Higher is better.</p></li>
+<li><p><code>reflex</code>: Score out of 25 on a reflex test. Higher
+indicates faster reflexes.</p></li>
+<li><p><code>comprehension</code>: Score out of 100 on a reading
+comprehension test. Higher is better.</p></li>
 </ul>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Load the <code>data_wpa7.txt</code> dataset in R (find it on Github) and save it as a new object called <code>leisure</code>. Inspect the dataset first.</p></li>
-<li><p>Write a function called <code>feed_me()</code> that takes a string <code>food</code> as an argument, and returns (in case <code>food = 'pizza'</code>) the sentence “I love to eat pizza”. Try your function by running <code>feed_me("apples")</code> (it should then return “I love to eat apples”).</p></li>
-<li><p>Without using the <code>mean()</code> function, calculate the mean of the vector <code>vec_1 = seq(1, 100, 5)</code>.</p></li>
-<li><p>Write a function called <code>my_mean()</code> that takes a vector <code>x</code> as an argument, and returns the mean of the vector <code>x</code>. Use your code for task A3 as your starting point. Test it on the vector from task A3.</p></li>
-<li><p>Try your <code>my_mean()</code> function to calculate the mean ‘logic’ rating of participants in the <code>leisure</code> dataset and compare the result to the built-in <code>mean()</code> function (using <code>==</code>) to make sure you get the same result.</p></li>
-<li><p>Create a loop that prints the squares of integers from 1 to 10.</p></li>
-<li><p>Modify the previous code so that it saves the squared integers as a vector called <code>squares</code>. You’ll need to pre-create a vector, and use indexing to update it.</p></li>
+<li><p>Load the <code>data_wpa7.txt</code> dataset in R (find it on
+Github) and save it as a new object called <code>leisure</code>. Inspect
+the dataset first.</p></li>
+<li><p>Write a function called <code>feed_me()</code> that takes a
+string <code>food</code> as an argument, and returns (in case
+<code>food = 'pizza'</code>) the sentence “I love to eat pizza”. Try
+your function by running <code>feed_me("apples")</code> (it should then
+return “I love to eat apples”).</p></li>
+<li><p>Without using the <code>mean()</code> function, calculate the
+mean of the vector <code>vec_1 = seq(1, 100, 5)</code>.</p></li>
+<li><p>Write a function called <code>my_mean()</code> that takes a
+vector <code>x</code> as an argument, and returns the mean of the vector
+<code>x</code>. Use your code for task A3 as your starting point. Test
+it on the vector from task A3.</p></li>
+<li><p>Try your <code>my_mean()</code> function to calculate the mean
+‘logic’ rating of participants in the <code>leisure</code> dataset and
+compare the result to the built-in <code>mean()</code> function (using
+<code>==</code>) to make sure you get the same result.</p></li>
+<li><p>Create a loop that prints the squares of integers from 1 to
+10.</p></li>
+<li><p>Modify the previous code so that it saves the squared integers as
+a vector called <code>squares</code>. You’ll need to pre-create a
+vector, and use indexing to update it.</p></li>
 </ol>
 <p><strong>Task B</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Create a function called <code>standardize</code>, that, given an input vector, returns its standardized version. Remember that to normalize a score, also called z-transforming it, you first subtract the mean score from the individual scores and then divide by the standard deviation.</p></li>
-<li><p>Create a copy of the <code>leisure</code> dataset. Call this copy <code>z_leisure</code>. Normalise the <code>logic</code>, <code>reflex</code>, <code>age</code> and <code>comprehension</code> columns using the <code>standardize</code> function using a <code>for</code> loop. In each iteration of the loop, you should standardize one of these 4 columns. You can create a vector first, called <code>columns_to_standardize</code> where you store these columns and use them later in the loop. You should not add them as additional columns, but overwrite the original columns.</p></li>
+<li><p>Create a function called <code>standardize</code>, that, given an
+input vector, returns its standardized version. Remember that to
+normalize a score, also called z-transforming it, you first subtract the
+mean score from the individual scores and then divide by the standard
+deviation.</p></li>
+<li><p>Create a copy of the <code>leisure</code> dataset. Call this copy
+<code>z_leisure</code>. Normalise the <code>logic</code>,
+<code>reflex</code>, <code>age</code> and <code>comprehension</code>
+columns using the <code>standardize</code> function using a
+<code>for</code> loop. In each iteration of the loop, you should
+standardize one of these 4 columns. You can create a vector first,
+called <code>columns_to_standardize</code> where you store these columns
+and use them later in the loop. You should not add them as additional
+columns, but overwrite the original columns.</p></li>
 </ol>
 <p><strong>Task C</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Create a scatterplot of <code>age</code> and <code>reflex</code> of participants in the <code>leisure</code> datset. Cutomise it and add a regression line.</p></li>
-<li><p>Create a function called <code>my_plot()</code> that takes arguments <code>x</code> and <code>y</code> and returns a customised scatterplot with your customizations and the regression line.</p></li>
-<li><p>Now test your <code>my_plot()</code> function on the <code>age</code> and <code>reflec</code> of participants in the <code>leisure</code> dataset.</p></li>
+<li><p>Create a scatterplot of <code>age</code> and <code>reflex</code>
+of participants in the <code>leisure</code> datset. Cutomise it and add
+a regression line.</p></li>
+<li><p>Create a function called <code>my_plot()</code> that takes
+arguments <code>x</code> and <code>y</code> and returns a customised
+scatterplot with your customizations and the regression line.</p></li>
+<li><p>Now test your <code>my_plot()</code> function on the
+<code>age</code> and <code>reflec</code> of participants in the
+<code>leisure</code> dataset.</p></li>
 </ol>
 <p><strong>Task D</strong></p>
 <ol style="list-style-type: decimal">
-<li>Create a loop that returns the sum of the vector <code>1:10</code>. (i.e. Don’t use the existing <code>sum</code> function).</li>
-<li>Use this loop to create a function, called <code>my_sum</code> that returns the sum of any vector x. Test it on the <code>logic</code> ratings.</li>
-<li>Modify the function you created in task D2, to instead calculate the mean of a vector. Call this new function <code>my_mean2</code> and compare it to both the <code>my_mean</code> function you created, and the in-built <code>mean</code> function. (Bonus: Can you also think of a way to do this without using the the length function)</li>
+<li>Create a loop that returns the sum of the vector <code>1:10</code>.
+(i.e. Don’t use the existing <code>sum</code> function).</li>
+<li>Use this loop to create a function, called <code>my_sum</code> that
+returns the sum of any vector x. Test it on the <code>logic</code>
+ratings.</li>
+<li>Modify the function you created in task D2, to instead calculate the
+mean of a vector. Call this new function <code>my_mean2</code> and
+compare it to both the <code>my_mean</code> function you created, and
+the in-built <code>mean</code> function. (Bonus: Can you also think of a
+way to do this without using the the length function)</li>
 </ol>
 <p><strong>Task E (extra, but doable)</strong></p>
 <ol style="list-style-type: decimal">
-<li>What is the probability of getting a significant p-value if the null hypothesis is true? Test this by conducting the following simulation:</li>
+<li>What is the probability of getting a significant p-value if the null
+hypothesis is true? Test this by conducting the following
+simulation:</li>
 </ol>
 <ul>
-<li>Create a vector called <code>p_values</code> with 100 NA values.</li>
-<li>Draw a sample of size 10 from a normal distribution with mean = 0 and standard deviation = 1.</li>
-<li>Do a one-sample t-test testing if the mean of the distribution is different from 0. Save the p-value from this test in the 1st position of <code>p_values</code>.</li>
-<li>Repeat these steps with a loop to fill <code>p_values</code> with 100 p-values.</li>
-<li>Create a histogram of <code>p_values</code> and calculate the proportion of p-values that are significant at the .05 level.</li>
+<li>Create a vector called <code>p_values</code> with 100 NA
+values.</li>
+<li>Draw a sample of size 10 from a normal distribution with mean = 0
+and standard deviation = 1.</li>
+<li>Do a one-sample t-test testing if the mean of the distribution is
+different from 0. Save the p-value from this test in the 1st position of
+<code>p_values</code>.</li>
+<li>Repeat these steps with a loop to fill <code>p_values</code> with
+100 p-values.</li>
+<li>Create a histogram of <code>p_values</code> and calculate the
+proportion of p-values that are significant at the .05 level.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
-<li>Create a function called <code>p_simulation</code> with 4 arguments: <code>sim</code>: the number of simulations, <code>samplesize</code>: the sample size, <code>mu_true</code>: the true mean, and <code>sd_true</code>: the true standard deviation. Your function should repeat the simulation from the previous question with the given arguments. That is, it should calculate <code>sim</code> p-values testing whether <code>samplesize</code> samples from a normal distribution with mean = <code>mu_true</code> and standard deviation = <code>sd_true</code> is significantly different from 0. The function should return a vector of p-values.</li>
+<li>Create a function called <code>p_simulation</code> with 4 arguments:
+<code>sim</code>: the number of simulations, <code>samplesize</code>:
+the sample size, <code>mu_true</code>: the true mean, and
+<code>sd_true</code>: the true standard deviation. Your function should
+repeat the simulation from the previous question with the given
+arguments. That is, it should calculate <code>sim</code> p-values
+testing whether <code>samplesize</code> samples from a normal
+distribution with mean = <code>mu_true</code> and standard deviation =
+<code>sd_true</code> is significantly different from 0. The function
+should return a vector of p-values.</li>
 </ol>
 <p><em>Note</em>: to get the p-value of a t-test:</p>
 <pre><code>p_value = t.test(x)$p.value     # Calculate the p.vale for the sample x</code></pre>
 </div>
 <div id="submit-your-assignment" class="section level2">
 <h2>Submit your assignment</h2>
-<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of <strong>Friday</strong>.</p>
+<p>Save and email your script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of <strong>Friday</strong>.</p>
 </div>
 </div>
 

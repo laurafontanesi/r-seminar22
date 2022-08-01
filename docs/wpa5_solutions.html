@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,11 +352,12 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#now-its-your-turn">3. Now it’s your turn</a>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">3. Now it’s
+your turn</a>
 <ul>
-<li><a href="#task-a">Task A</a></li>
-<li><a href="#task-b">Task B</a></li>
-<li><a href="#task-c">Task C</a></li>
+<li><a href="#task-a" id="toc-task-a">Task A</a></li>
+<li><a href="#task-b" id="toc-task-b">Task B</a></li>
+<li><a href="#task-c" id="toc-task-c">Task C</a></li>
 </ul></li>
 </ul>
 </div>
@@ -361,30 +365,70 @@ $(document).ready(function () {
 <div id="now-its-your-turn" class="section level1">
 <h1>3. Now it’s your turn</h1>
 <p><strong>Task A</strong></p>
-<p>Inspect the <code>police_locals</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/" class="uri">https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/</a>.</p>
+<p>Inspect the <code>police_locals</code> dataset. Here is the article
+attached to it: <a
+href="https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/"
+class="uri">https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/</a>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new dataset, called <code>police_locals_new</code>, made of the following columns: <code>city</code>, <code>force_size</code>, <code>ethnic_group</code>, <code>perc_locals</code>. You should create the <code>ethnic_group</code> column using a pivot function, as shown in this wpa or in wpa_4. The values in this column should be <code>all</code>, <code>white</code>, <code>non_white</code>, <code>black</code>, <code>hispanic</code>, <code>asian</code>. The <code>perc_locals</code> column should contain the percentage of officers that live in the town where they work, corresponding to their ethnic group. Rearrange based on the <code>ethnic_group</code> and inspect it by printing the first 10 lines.</p></li>
-<li><p>Make a boxplot, with <code>ethnic_group</code> on the x-axis and <code>perc_locals</code> on the y-axis. <code>ethnic_group</code> should be ordered from the lowest <code>perc_locals</code> to the highest. Put appropriate labels.</p></li>
+<li><p>Create a new dataset, called <code>police_locals_new</code>, made
+of the following columns: <code>city</code>, <code>force_size</code>,
+<code>ethnic_group</code>, <code>perc_locals</code>. You should create
+the <code>ethnic_group</code> column using a pivot function, as shown in
+this wpa or in wpa_4. The values in this column should be
+<code>all</code>, <code>white</code>, <code>non_white</code>,
+<code>black</code>, <code>hispanic</code>, <code>asian</code>. The
+<code>perc_locals</code> column should contain the percentage of
+officers that live in the town where they work, corresponding to their
+ethnic group. Rearrange based on the <code>ethnic_group</code> and
+inspect it by printing the first 10 lines.</p></li>
+<li><p>Make a boxplot, with <code>ethnic_group</code> on the x-axis and
+<code>perc_locals</code> on the y-axis. <code>ethnic_group</code> should
+be ordered from the lowest <code>perc_locals</code> to the highest. Put
+appropriate labels.</p></li>
 </ol>
 <p><strong>Task B</strong></p>
-<p>Inspect the <code>unisex_names</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/" class="uri">https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/</a>.</p>
+<p>Inspect the <code>unisex_names</code> dataset. Here is the article
+attached to it: <a
+href="https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/"
+class="uri">https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/</a>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new dataset, called <code>unisex_names_new</code>, made of the following columns: <code>name</code>, <code>total</code>, <code>gap</code>, <code>gender</code>, <code>share</code>. The <code>gender</code> column should only contain the values “male” and “female”. The <code>share</code> column should contain the percentages.</p></li>
-<li><p>Multiply the <code>share</code> column by 100. Re-arrange so that the first rows contain the names with the highest <code>total</code>. Print the first 10 rows of the newly created dataset. Create now a new dataset, called <code>unisex_names_common</code>, with the names in <code>unisex_names_new</code> that have a total higher than 50000.</p></li>
-<li><p>Using <code>unisex_names_common</code>, make a barplot that has <code>share</code> on the y-axis, <code>name</code> on the x-axis, and with each bar split vertically by color based on the <code>gender</code>.</p></li>
+<li><p>Create a new dataset, called <code>unisex_names_new</code>, made
+of the following columns: <code>name</code>, <code>total</code>,
+<code>gap</code>, <code>gender</code>, <code>share</code>. The
+<code>gender</code> column should only contain the values “male” and
+“female”. The <code>share</code> column should contain the
+percentages.</p></li>
+<li><p>Multiply the <code>share</code> column by 100. Re-arrange so that
+the first rows contain the names with the highest <code>total</code>.
+Print the first 10 rows of the newly created dataset. Create now a new
+dataset, called <code>unisex_names_common</code>, with the names in
+<code>unisex_names_new</code> that have a total higher than
+50000.</p></li>
+<li><p>Using <code>unisex_names_common</code>, make a barplot that has
+<code>share</code> on the y-axis, <code>name</code> on the x-axis, and
+with each bar split vertically by color based on the
+<code>gender</code>.</p></li>
 </ol>
 <p><strong>Task C</strong></p>
-<p>Inspect the <code>tv_states</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/" class="uri">https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/</a>.</p>
+<p>Inspect the <code>tv_states</code> dataset. Here is the article
+attached to it: <a
+href="https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/"
+class="uri">https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/</a>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new dataset, with a different name, that is the long version of <code>tv_states</code>. You should decide how to call the new columns, as well as which columns should be used for the transformation.</p></li>
-<li><p>With the newly created dataset, make a plot of your choosing to illustrate the information contained in this dataset. As an inspiration, you can have a look at what plot was done in the article above.</p></li>
+<li><p>Create a new dataset, with a different name, that is the long
+version of <code>tv_states</code>. You should decide how to call the new
+columns, as well as which columns should be used for the
+transformation.</p></li>
+<li><p>With the newly created dataset, make a plot of your choosing to
+illustrate the information contained in this dataset. As an inspiration,
+you can have a look at what plot was done in the article above.</p></li>
 </ol>
 <div id="task-a" class="section level2">
 <h2>Task A</h2>
 <pre class="r"><code>library(tidyverse)
 library(fivethirtyeight)</code></pre>
-<pre><code>## Some larger datasets need to be installed separately, like senators and house_district_forecast. To install
-## these, we recommend you install the fivethirtyeightdata package by running:
+<pre><code>## Some larger datasets need to be installed separately, like senators and house_district_forecast. To
+## install these, we recommend you install the fivethirtyeightdata package by running:
 ## install.packages(&#39;fivethirtyeightdata&#39;, repos = &#39;https://fivethirtyeightdata.github.io/drat/&#39;, type =
 ## &#39;source&#39;)</code></pre>
 <pre class="r"><code>police_locals_new = police_locals %&gt;%

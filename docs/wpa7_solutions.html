@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,16 +352,27 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#now-its-your-turn">4. Now it’s your turn</a>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">4. Now it’s
+your turn</a>
 <ul>
-<li><a href="#datafile-description">Datafile description</a></li>
+<li><a href="#datafile-description"
+id="toc-datafile-description">Datafile description</a></li>
 </ul></li>
 </ul>
 </div>
 
 <div id="now-its-your-turn" class="section level1">
 <h1>4. Now it’s your turn</h1>
-<p>In this WPA, you will analyze data from another fake study. In this fake study the researchers were interested in whether playing video games had cognitive benefits compared to other leisure activities. In the study, 90 University students were asked to do one of 3 leisure activities for 1 hour a day for the next month. 30 participants were asked to play visio games, 30 to read and 30 to juggle. At the end of the month each participant did 3 cognitive tests, a problem solving test (<strong>logic</strong>) and a reflex/response test (<strong>reflex</strong>) and a written comprehension test (<strong>comprehension</strong>).</p>
+<p>In this WPA, you will analyze data from another fake study. In this
+fake study the researchers were interested in whether playing video
+games had cognitive benefits compared to other leisure activities. In
+the study, 90 University students were asked to do one of 3 leisure
+activities for 1 hour a day for the next month. 30 participants were
+asked to play visio games, 30 to read and 30 to juggle. At the end of
+the month each participant did 3 cognitive tests, a problem solving test
+(<strong>logic</strong>) and a reflex/response test
+(<strong>reflex</strong>) and a written comprehension test
+(<strong>comprehension</strong>).</p>
 <div id="datafile-description" class="section level2">
 <h2>Datafile description</h2>
 <p>The data file has 90 rows and 7 columns. Here are the columns</p>
@@ -366,20 +380,26 @@ $(document).ready(function () {
 <li><p><code>id</code>: The participant ID</p></li>
 <li><p><code>age</code>: The age of the participant</p></li>
 <li><p><code>gender</code>: The gender of the particiant</p></li>
-<li><p><code>activity</code>: Which leisure activity the participant was assigned for the last month (“reading”, “juggling”, “gaming”)</p></li>
-<li><p><code>logic</code>: Score out of 120 on a problem solving task. Higher is better.</p></li>
-<li><p><code>reflex</code>: Score out of 25 on a reflex test. Higher indicates faster reflexes.</p></li>
-<li><p><code>comprehension</code>: Score out of 100 on a reading comprehension test. Higher is better.</p></li>
+<li><p><code>activity</code>: Which leisure activity the participant was
+assigned for the last month (“reading”, “juggling”, “gaming”)</p></li>
+<li><p><code>logic</code>: Score out of 120 on a problem solving task.
+Higher is better.</p></li>
+<li><p><code>reflex</code>: Score out of 25 on a reflex test. Higher
+indicates faster reflexes.</p></li>
+<li><p><code>comprehension</code>: Score out of 100 on a reading
+comprehension test. Higher is better.</p></li>
 </ul>
 <p><strong>Task A</strong></p>
 <ol style="list-style-type: decimal">
-<li>Load the <code>data_wpa7.txt</code> dataset in R (find them on Github) and save it as a new object called <code>leisure</code>. Inspect the dataset first.</li>
+<li>Load the <code>data_wpa7.txt</code> dataset in R (find them on
+Github) and save it as a new object called <code>leisure</code>. Inspect
+the dataset first.</li>
 </ol>
 <pre class="r"><code>library(tidyverse)
 
 leisure = read_delim(&#39;https://raw.githubusercontent.com/laurafontanesi/r-seminar22/master/data/data_wpa7.txt&#39;, delim=&#39;\t&#39;)</code></pre>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   index = col_double(),
 ##   id = col_double(),
@@ -401,7 +421,11 @@ leisure = read_delim(&#39;https://raw.githubusercontent.com/laurafontanesi/r-sem
 ## 5     5     5    30 f      reading     48   14              62
 ## 6     6     6    31 m      reading     61   14.1            58</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Write a function called <code>feed_me()</code> that takes a string <code>food</code> as an argument, and returns (in case <code>food = 'pizza'</code>) the sentence “I love to eat pizza”. Try your function by running <code>feed_me("apples")</code> (it should then return “I love to eat apples”).</li>
+<li>Write a function called <code>feed_me()</code> that takes a string
+<code>food</code> as an argument, and returns (in case
+<code>food = 'pizza'</code>) the sentence “I love to eat pizza”. Try
+your function by running <code>feed_me("apples")</code> (it should then
+return “I love to eat apples”).</li>
 </ol>
 <pre class="r"><code>feed_me = function(food) {
     print(paste(&quot;I love to eat&quot;, food))
@@ -410,8 +434,12 @@ leisure = read_delim(&#39;https://raw.githubusercontent.com/laurafontanesi/r-sem
 feed_me(&quot;apples&quot;)</code></pre>
 <pre><code>## [1] &quot;I love to eat apples&quot;</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li><p>Without using the <code>mean()</code> function, calculate the mean of the vector <code>vec_1 = seq(1, 100, 5)</code>.</p></li>
-<li><p>Write a function called <code>my_mean()</code> that takes a vector <code>x</code> as an argument, and returns the mean of the vector <code>x</code>. Use your code for task A3 as your starting point. Test it on the vector from task A3.</p></li>
+<li><p>Without using the <code>mean()</code> function, calculate the
+mean of the vector <code>vec_1 = seq(1, 100, 5)</code>.</p></li>
+<li><p>Write a function called <code>my_mean()</code> that takes a
+vector <code>x</code> as an argument, and returns the mean of the vector
+<code>x</code>. Use your code for task A3 as your starting point. Test
+it on the vector from task A3.</p></li>
 </ol>
 <pre class="r"><code>vec_1 = seq(1, 100, 5)
 
@@ -422,7 +450,10 @@ my_mean = function(x) {
 my_mean(vec_1)</code></pre>
 <pre><code>## [1] 48.5</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Try your <code>my_mean()</code> function to calculate the mean ‘logic’ rating of participants in the <code>leisure</code> dataset and compare the result to the built-in <code>mean()</code> function (using <code>==</code>) to make sure you get the same result.</li>
+<li>Try your <code>my_mean()</code> function to calculate the mean
+‘logic’ rating of participants in the <code>leisure</code> dataset and
+compare the result to the built-in <code>mean()</code> function (using
+<code>==</code>) to make sure you get the same result.</li>
 </ol>
 <pre class="r"><code>my_mean(leisure$logic) == mean(leisure$logic)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -443,7 +474,9 @@ my_mean(vec_1)</code></pre>
 ## [1] 81
 ## [1] 100</code></pre>
 <ol start="7" style="list-style-type: decimal">
-<li>Modify the previous code so that it saves the squared integers as a vector called <code>squares</code>. You’ll need to pre-create a vector, and use indexing to update it.</li>
+<li>Modify the previous code so that it saves the squared integers as a
+vector called <code>squares</code>. You’ll need to pre-create a vector,
+and use indexing to update it.</li>
 </ol>
 <pre class="r"><code>squares = rep(NA, 10)
 
@@ -455,7 +488,11 @@ print(squares)</code></pre>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <p><strong>Task B</strong></p>
 <ol style="list-style-type: decimal">
-<li>Create a function called <code>standardize</code>, that, given an input vector, returns its standardized version. Remember that to normalize a score, also called z-transforming it, you first subtract the mean score from the individual scores and then divide by the standard deviation.</li>
+<li>Create a function called <code>standardize</code>, that, given an
+input vector, returns its standardized version. Remember that to
+normalize a score, also called z-transforming it, you first subtract the
+mean score from the individual scores and then divide by the standard
+deviation.</li>
 </ol>
 <pre class="r"><code>standardize = function(x) {
     demeaned = x - mean(x, na.rm = TRUE)
@@ -465,7 +502,15 @@ print(squares)</code></pre>
     return (z_score)
 }</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Create a copy of the <code>leisure</code> dataset. Call this copy <code>z_leisure</code>. Normalise the <code>logic</code>, <code>reflex</code>, <code>age</code> and <code>comprehension</code> columns using the <code>standardize</code> function using a <code>for</code> loop. In each iteration of the loop, you should standardize one of these 4 columns. You can create a vector first, called <code>columns_to_standardize</code> where you store these columns and use them later in the loop. You should not add them as additional columns, but overwrite the original columns.</li>
+<li>Create a copy of the <code>leisure</code> dataset. Call this copy
+<code>z_leisure</code>. Normalise the <code>logic</code>,
+<code>reflex</code>, <code>age</code> and <code>comprehension</code>
+columns using the <code>standardize</code> function using a
+<code>for</code> loop. In each iteration of the loop, you should
+standardize one of these 4 columns. You can create a vector first,
+called <code>columns_to_standardize</code> where you store these columns
+and use them later in the loop. You should not add them as additional
+columns, but overwrite the original columns.</li>
 </ol>
 <pre class="r"><code>z_leisure = leisure
 
@@ -487,7 +532,9 @@ head(z_leisure)</code></pre>
 ## 6     6     6  0.190  m      reading  -0.457 -0.299       -0.332</code></pre>
 <p><strong>Task C</strong></p>
 <ol style="list-style-type: decimal">
-<li>Create a scatterplot of <code>age</code> and <code>reflex</code> of participants in the <code>leisure</code> datset. Cutomise it and add a regression line.</li>
+<li>Create a scatterplot of <code>age</code> and <code>reflex</code> of
+participants in the <code>leisure</code> datset. Cutomise it and add a
+regression line.</li>
 </ol>
 <pre class="r"><code>ggplot(data = leisure, mapping = aes(x = age, y = reflex)) + 
     geom_point(alpha = 0.2, size= 3) +
@@ -496,7 +543,9 @@ head(z_leisure)</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="wpa7_solutions_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>Create a function called <code>my_plot()</code> that takes arguments <code>x</code> and <code>y</code> and returns a customised scatterplot with your customizations and the regression line.</li>
+<li>Create a function called <code>my_plot()</code> that takes arguments
+<code>x</code> and <code>y</code> and returns a customised scatterplot
+with your customizations and the regression line.</li>
 </ol>
 <pre class="r"><code>my_plot = function(x, y) {
     g = ggplot(mapping = aes(x = x, y = y)) + 
@@ -506,14 +555,17 @@ head(z_leisure)</code></pre>
     return(g)
 }</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Now test your <code>my_plot()</code> function on the <code>age</code> and <code>reflex</code> of participants in the <code>leisure</code> dataset.</li>
+<li>Now test your <code>my_plot()</code> function on the
+<code>age</code> and <code>reflex</code> of participants in the
+<code>leisure</code> dataset.</li>
 </ol>
 <pre class="r"><code>my_plot(leisure$age, leisure$reflex)</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="wpa7_solutions_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><strong>Task D</strong></p>
 <ol style="list-style-type: decimal">
-<li>Create a loop that returns the sum of the vector <code>1:10</code>. (i.e. Don’t use the existing <code>sum</code> function).</li>
+<li>Create a loop that returns the sum of the vector <code>1:10</code>.
+(i.e. Don’t use the existing <code>sum</code> function).</li>
 </ol>
 <pre class="r"><code>final_sum = 0
 
@@ -534,7 +586,9 @@ for (i in 1:10) {
 <pre class="r"><code>final_sum</code></pre>
 <pre><code>## [1] 55</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Use this loop to create a function, called <code>my_sum</code> that returns the sum of any vector x. Test it on the <code>logic</code> ratings.</li>
+<li>Use this loop to create a function, called <code>my_sum</code> that
+returns the sum of any vector x. Test it on the <code>logic</code>
+ratings.</li>
 </ol>
 <pre class="r"><code>my_sum = function(x) {
     final_sum = 0
@@ -551,7 +605,11 @@ my_sum(leisure$logic)</code></pre>
 <pre class="r"><code>sum(leisure$logic)</code></pre>
 <pre><code>## [1] 6186</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Modify the function you created in task D2, to instead calculate the mean of a vector. Call this new function <code>my_mean2</code> and compare it to both the <code>my_mean</code> function you created, and the in-built <code>mean</code> function. (Bonus: Can you also think of a way to do this without using the the length function)</li>
+<li>Modify the function you created in task D2, to instead calculate the
+mean of a vector. Call this new function <code>my_mean2</code> and
+compare it to both the <code>my_mean</code> function you created, and
+the in-built <code>mean</code> function. (Bonus: Can you also think of a
+way to do this without using the the length function)</li>
 </ol>
 <pre class="r"><code>my_mean2 = function(x) {
     final_sum = 0
@@ -573,14 +631,22 @@ my_mean(leisure$logic)</code></pre>
 <pre><code>## [1] 68.73333</code></pre>
 <p><strong>Task E</strong></p>
 <ol style="list-style-type: decimal">
-<li>What is the probability of getting a significant p-value if the null hypothesis is true? Test this by conducting the following simulation:</li>
+<li>What is the probability of getting a significant p-value if the null
+hypothesis is true? Test this by conducting the following
+simulation:</li>
 </ol>
 <ul>
-<li>Create a vector called <code>p_values</code> with 100 NA values.</li>
-<li>Draw a sample of size 10 from a normal distribution with mean = 0 and standard deviation = 1.</li>
-<li>Do a one-sample t-test testing if the mean of the distribution is different from 0. Save the p-value from this test in the 1st position of <code>p_values</code>.</li>
-<li>Repeat these steps with a loop to fill <code>p_values</code> with 100 p-values.</li>
-<li>Create a histogram of <code>p_values</code> and calculate the proportion of p-values that are significant at the .05 level.</li>
+<li>Create a vector called <code>p_values</code> with 100 NA
+values.</li>
+<li>Draw a sample of size 10 from a normal distribution with mean = 0
+and standard deviation = 1.</li>
+<li>Do a one-sample t-test testing if the mean of the distribution is
+different from 0. Save the p-value from this test in the 1st position of
+<code>p_values</code>.</li>
+<li>Repeat these steps with a loop to fill <code>p_values</code> with
+100 p-values.</li>
+<li>Create a histogram of <code>p_values</code> and calculate the
+proportion of p-values that are significant at the .05 level.</li>
 </ul>
 <pre class="r"><code>p_values = rep(NA, 100)
 
@@ -589,7 +655,7 @@ sample = rnorm(mean=0, sd=1, n=10)
 p_values[1] = t.test(sample)$p.value
 
 p_values[1]</code></pre>
-<pre><code>## [1] 0.6254588</code></pre>
+<pre><code>## [1] 0.7385729</code></pre>
 <pre class="r"><code>p_values = rep(NA, 100)
 
 for (i in 1:100) {
@@ -599,9 +665,19 @@ for (i in 1:100) {
     p_values[i] = t.test(sample)$p.value
 }</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Create a function called <code>p_simulation</code> with 4 arguments: <code>sim</code>: the number of simulations, <code>samplesize</code>: the sample size, <code>mu_true</code>: the true mean, and <code>sd_true</code>: the true standard deviation. Your function should repeat the simulation from the previous question with the given arguments. That is, it should calculate <code>sim</code> p-values testing whether <code>samplesize</code> samples from a normal distribution with mean = <code>mu_true</code> and standard deviation = <code>sd_true</code> is significantly different from 0. The function should return a vector of p-values.</li>
+<li>Create a function called <code>p_simulation</code> with 4 arguments:
+<code>sim</code>: the number of simulations, <code>samplesize</code>:
+the sample size, <code>mu_true</code>: the true mean, and
+<code>sd_true</code>: the true standard deviation. Your function should
+repeat the simulation from the previous question with the given
+arguments. That is, it should calculate <code>sim</code> p-values
+testing whether <code>samplesize</code> samples from a normal
+distribution with mean = <code>mu_true</code> and standard deviation =
+<code>sd_true</code> is significantly different from 0. The function
+should return a vector of p-values.</li>
 </ol>
-<p><em>Note</em>: to get the p-value of a t-test: p_value = t.test(x)$p.value # Calculate the p.vale for the sample x</p>
+<p><em>Note</em>: to get the p-value of a t-test: p_value =
+t.test(x)$p.value # Calculate the p.vale for the sample x</p>
 <pre class="r"><code>p_simulation = function(sim, samplesize, mu_true, sd_true) {
     
     p_values = rep(NA, sim)
@@ -616,7 +692,7 @@ for (i in 1:100) {
 p_values = p_simulation(sim=1000, samplesize=100, mu_true=0, sd_true=1)
 
 mean(p_values &lt; .05)*100</code></pre>
-<pre><code>## [1] 5.5</code></pre>
+<pre><code>## [1] 5.2</code></pre>
 </div>
 </div>
 

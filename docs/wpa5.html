@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,39 +352,57 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#definition-of-tidy-data">1. Definition of tidy data</a></li>
-<li><a href="#some-examples">2. Some examples</a>
+<li><a href="#definition-of-tidy-data"
+id="toc-definition-of-tidy-data">1. Definition of tidy data</a></li>
+<li><a href="#some-examples" id="toc-some-examples">2. Some examples</a>
 <ul>
-<li><a href="#pulitzer-dataset">Pulitzer dataset</a></li>
-<li><a href="#drug-use-dataset">Drug use dataset</a></li>
+<li><a href="#pulitzer-dataset" id="toc-pulitzer-dataset">Pulitzer
+dataset</a></li>
+<li><a href="#drug-use-dataset" id="toc-drug-use-dataset">Drug use
+dataset</a></li>
 </ul></li>
-<li><a href="#now-its-your-turn">3. Now it’s your turn</a>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">3. Now it’s
+your turn</a>
 <ul>
-<li><a href="#submit-your-assignment">Submit your assignment</a></li>
+<li><a href="#submit-your-assignment"
+id="toc-submit-your-assignment">Submit your assignment</a></li>
 </ul></li>
 </ul>
 </div>
 
 <p>Open RStudio.</p>
-<p>Open a new R script in R and <strong>save it as</strong> <code>wpa_5_LastFirst.R</code> (where Last and First is your last and first name).</p>
-<p>Careful about: capitalizing, last and first name order, and using <code>_</code> instead of <code>-</code>.</p>
-<p>At the top of your script, write the following (<strong>with appropriate changes</strong>):</p>
+<p>Open a new R script in R and <strong>save it as</strong>
+<code>wpa_5_LastFirst.R</code> (where Last and First is your last and
+first name).</p>
+<p>Careful about: capitalizing, last and first name order, and using
+<code>_</code> instead of <code>-</code>.</p>
+<p>At the top of your script, write the following (<strong>with
+appropriate changes</strong>):</p>
 <pre><code># Assignment: WPA 5
 # Name: Laura Fontanesi
 # Date: 12 April 2022</code></pre>
 <div id="definition-of-tidy-data" class="section level1">
 <h1>1. Definition of tidy data</h1>
-<p>In tidy data: - Each variable forms a <strong>column</strong>. - Each observation forms a <strong>row</strong>.</p>
-<p>This means that data in <a href="https://en.wikipedia.org/wiki/Wide_and_narrow_data">wide format</a> are <em>not</em> tidy.</p>
+<p>In tidy data: - Each variable forms a <strong>column</strong>. - Each
+observation forms a <strong>row</strong>.</p>
+<p>This means that data in <a
+href="https://en.wikipedia.org/wiki/Wide_and_narrow_data">wide
+format</a> are <em>not</em> tidy.</p>
 <p>Funtions to transform dataset:</p>
 <ul>
-<li><p><code>pivot_longer()</code>(<a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="uri">https://tidyr.tidyverse.org/reference/pivot_longer.html</a>)</p></li>
-<li><p><code>pivot_wider()</code>(<a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="uri">https://tidyr.tidyverse.org/reference/pivot_wider.html</a>)</p></li>
+<li><p><code>pivot_longer()</code>(<a
+href="https://tidyr.tidyverse.org/reference/pivot_longer.html"
+class="uri">https://tidyr.tidyverse.org/reference/pivot_longer.html</a>)</p></li>
+<li><p><code>pivot_wider()</code>(<a
+href="https://tidyr.tidyverse.org/reference/pivot_wider.html"
+class="uri">https://tidyr.tidyverse.org/reference/pivot_wider.html</a>)</p></li>
 </ul>
 </div>
 <div id="some-examples" class="section level1">
 <h1>2. Some examples</h1>
-<p>We can install the <a href="https://fivethirtyeight-r.netlify.com/articles/fivethirtyeight.html">fivethirtyeight</a> which contains many datasets to practice tidying data.</p>
+<p>We can install the <a
+href="https://fivethirtyeight-r.netlify.com/articles/fivethirtyeight.html">fivethirtyeight</a>
+which contains many datasets to practice tidying data.</p>
 <pre class="r"><code>library(tidyverse)
 
 #install.packages(&#39;fivethirtyeight&#39;)
@@ -398,10 +419,18 @@ library(fivethirtyeight)</code></pre>
 ## 4 Los Angeles Times     983727   653868         -34                  44                  41                  85
 ## 5 Washington Post       760034   474767         -38                  52                  48                 100
 ## 6 New York Daily News   712671   516165         -28                   4                   2                   6</code></pre>
-<p>Here is the article connected to this dataset: <a href="https://fivethirtyeight.com/features/do-pulitzers-help-newspapers-keep-readers/" class="uri">https://fivethirtyeight.com/features/do-pulitzers-help-newspapers-keep-readers/</a></p>
-<p>This format might be good if you are interested in analysing the <code>pctchg_circ</code> variable, which summarizes the percentage change in daily circulation numbers from the year 2004 to the year 2013.</p>
-<p>But what if you want to look at the daily circulations? These are two observations done in two different years. Therefore, the data in this format are not tidy.</p>
-<p>To make it more tidy, we should pivot the dataset to a longer format:</p>
+<p>Here is the article connected to this dataset: <a
+href="https://fivethirtyeight.com/features/do-pulitzers-help-newspapers-keep-readers/"
+class="uri">https://fivethirtyeight.com/features/do-pulitzers-help-newspapers-keep-readers/</a></p>
+<p>This format might be good if you are interested in analysing the
+<code>pctchg_circ</code> variable, which summarizes the percentage
+change in daily circulation numbers from the year 2004 to the year
+2013.</p>
+<p>But what if you want to look at the daily circulations? These are two
+observations done in two different years. Therefore, the data in this
+format are not tidy.</p>
+<p>To make it more tidy, we should pivot the dataset to a longer
+format:</p>
 <pre class="r"><code>pulitzer_new = pulitzer %&gt;%
     pivot_longer(cols = starts_with(&quot;circ&quot;), # circ2004:circ2013
                  names_to = &quot;year_circulation&quot;,
@@ -415,15 +444,16 @@ print(dim(pulitzer))</code></pre>
 <pre><code>## [1] 100   7</code></pre>
 <pre class="r"><code>head(pulitzer_new)</code></pre>
 <pre><code>## # A tibble: 6 x 7
-##   newspaper           pctchg_circ num_finals1990_2003 num_finals2004_… num_finals1990_… year_circulation daily_circulati…
-##   &lt;chr&gt;                     &lt;int&gt;               &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;chr&gt;                       &lt;dbl&gt;
-## 1 USA Today                   -24                   1                1                2 2004                      2192098
-## 2 Wall Street Journal          13                  30               20               50 2004                      2101017
-## 3 New York Times               67                  55               62              117 2004                      1119027
-## 4 Los Angeles Times           -34                  44               41               85 2004                       983727
-## 5 Washington Post             -38                  52               48              100 2004                       760034
-## 6 New York Daily News         -28                   4                2                6 2004                       712671</code></pre>
-<p>To visualize, we can plot the daily circulation numbers, divided by year and across the different newspapers:</p>
+##   newspaper           pctchg_circ num_finals1990_… num_finals2004_… num_finals1990_… year_circulation daily_circulati…
+##   &lt;chr&gt;                     &lt;int&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt; &lt;chr&gt;                       &lt;dbl&gt;
+## 1 USA Today                   -24                1                1                2 2004                      2192098
+## 2 Wall Street Journal          13               30               20               50 2004                      2101017
+## 3 New York Times               67               55               62              117 2004                      1119027
+## 4 Los Angeles Times           -34               44               41               85 2004                       983727
+## 5 Washington Post             -38               52               48              100 2004                       760034
+## 6 New York Daily News         -28                4                2                6 2004                       712671</code></pre>
+<p>To visualize, we can plot the daily circulation numbers, divided by
+year and across the different newspapers:</p>
 <pre class="r"><code>ggplot(data = pulitzer_new, mapping = aes(x = reorder(newspaper, daily_circulations), y = daily_circulations, fill = factor(year_circulation))) +
     geom_col(position=&#39;dodge&#39;) +
     labs(x = &#39;Newspaper&#39;, y = &#39;Daily circulations&#39;, fill=&#39;Year&#39;) + 
@@ -436,17 +466,17 @@ print(dim(pulitzer))</code></pre>
 <pre><code>## Rows: 17
 ## Columns: 28
 ## $ age                &lt;ord&gt; 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22-23, 24-25, 26-29, 30-34, 35-49, 50-64, 65+
-## $ n                  &lt;int&gt; 2798, 2757, 2792, 2956, 3058, 3038, 2469, 2223, 2271, 2354, 4707, 4591, 2628, 2864, 7391, 39…
-## $ alcohol_use        &lt;dbl&gt; 3.9, 8.5, 18.1, 29.2, 40.1, 49.3, 58.7, 64.6, 69.7, 83.2, 84.2, 83.1, 80.7, 77.5, 75.0, 67.2…
+## $ n                  &lt;int&gt; 2798, 2757, 2792, 2956, 3058, 3038, 2469, 2223, 2271, 2354, 4707, 4591, 2628, 2864, 7391…
+## $ alcohol_use        &lt;dbl&gt; 3.9, 8.5, 18.1, 29.2, 40.1, 49.3, 58.7, 64.6, 69.7, 83.2, 84.2, 83.1, 80.7, 77.5, 75.0, …
 ## $ alcohol_freq       &lt;dbl&gt; 3, 6, 5, 6, 10, 13, 24, 36, 48, 52, 52, 52, 52, 52, 52, 52, 52
-## $ marijuana_use      &lt;dbl&gt; 1.1, 3.4, 8.7, 14.5, 22.5, 28.0, 33.7, 33.4, 34.0, 33.0, 28.4, 24.9, 20.8, 16.4, 10.4, 7.3, …
+## $ marijuana_use      &lt;dbl&gt; 1.1, 3.4, 8.7, 14.5, 22.5, 28.0, 33.7, 33.4, 34.0, 33.0, 28.4, 24.9, 20.8, 16.4, 10.4, 7…
 ## $ marijuana_freq     &lt;dbl&gt; 4, 15, 24, 25, 30, 36, 52, 60, 60, 52, 52, 60, 52, 72, 48, 52, 36
 ## $ cocaine_use        &lt;dbl&gt; 0.1, 0.1, 0.1, 0.5, 1.0, 2.0, 3.2, 4.1, 4.9, 4.8, 4.5, 4.0, 3.2, 2.1, 1.5, 0.9, 0.0
 ## $ cocaine_freq       &lt;dbl&gt; 5.0, 1.0, 5.5, 4.0, 7.0, 5.0, 5.0, 5.5, 8.0, 5.0, 5.0, 6.0, 5.0, 8.0, 15.0, 36.0, NA
 ## $ crack_use          &lt;dbl&gt; 0.0, 0.0, 0.0, 0.1, 0.0, 0.1, 0.4, 0.5, 0.6, 0.5, 0.5, 0.5, 0.4, 0.5, 0.5, 0.4, 0.0
 ## $ crack_freq         &lt;dbl&gt; NA, 3.0, NA, 9.5, 1.0, 21.0, 10.0, 2.0, 5.0, 17.0, 5.0, 6.0, 6.0, 15.0, 48.0, 62.0, NA
 ## $ heroin_use         &lt;dbl&gt; 0.1, 0.0, 0.1, 0.2, 0.1, 0.1, 0.4, 0.5, 0.9, 0.6, 1.1, 0.7, 0.6, 0.4, 0.1, 0.1, 0.0
-## $ heroin_freq        &lt;dbl&gt; 35.5, NA, 2.0, 1.0, 66.5, 64.0, 46.0, 180.0, 45.0, 30.0, 57.5, 88.0, 50.0, 66.0, 280.0, 41.0…
+## $ heroin_freq        &lt;dbl&gt; 35.5, NA, 2.0, 1.0, 66.5, 64.0, 46.0, 180.0, 45.0, 30.0, 57.5, 88.0, 50.0, 66.0, 280.0, …
 ## $ hallucinogen_use   &lt;dbl&gt; 0.2, 0.6, 1.6, 2.1, 3.4, 4.8, 7.0, 8.6, 7.4, 6.3, 5.2, 4.5, 3.2, 1.8, 0.6, 0.3, 0.1
 ## $ hallucinogen_freq  &lt;dbl&gt; 52, 6, 3, 4, 3, 3, 4, 3, 2, 4, 3, 2, 3, 2, 3, 44, 2
 ## $ inhalant_use       &lt;dbl&gt; 1.6, 2.5, 2.6, 2.5, 3.0, 2.0, 1.8, 1.4, 1.5, 1.4, 1.0, 0.8, 0.6, 0.4, 0.3, 0.2, 0.0
@@ -454,17 +484,25 @@ print(dim(pulitzer))</code></pre>
 ## $ pain_releiver_use  &lt;dbl&gt; 2.0, 2.4, 3.9, 5.5, 6.2, 8.5, 9.2, 9.4, 10.0, 9.0, 10.0, 9.0, 8.3, 5.9, 4.2, 2.5, 0.6
 ## $ pain_releiver_freq &lt;dbl&gt; 36, 14, 12, 10, 7, 9, 12, 12, 10, 15, 15, 15, 13, 22, 12, 12, 24
 ## $ oxycontin_use      &lt;dbl&gt; 0.1, 0.1, 0.4, 0.8, 1.1, 1.4, 1.7, 1.5, 1.7, 1.3, 1.7, 1.3, 1.2, 0.9, 0.3, 0.4, 0.0
-## $ oxycontin_freq     &lt;dbl&gt; 24.5, 41.0, 4.5, 3.0, 4.0, 6.0, 7.0, 7.5, 12.0, 13.5, 17.5, 20.0, 13.5, 46.0, 12.0, 5.0, NA
+## $ oxycontin_freq     &lt;dbl&gt; 24.5, 41.0, 4.5, 3.0, 4.0, 6.0, 7.0, 7.5, 12.0, 13.5, 17.5, 20.0, 13.5, 46.0, 12.0, 5.0,…
 ## $ tranquilizer_use   &lt;dbl&gt; 0.2, 0.3, 0.9, 2.0, 2.4, 3.5, 4.9, 4.2, 5.4, 3.9, 4.4, 4.3, 4.2, 3.6, 1.9, 1.4, 0.2
-## $ tranquilizer_freq  &lt;dbl&gt; 52.0, 25.5, 5.0, 4.5, 11.0, 7.0, 12.0, 4.5, 10.0, 7.0, 12.0, 10.0, 10.0, 8.0, 6.0, 10.0, 5.0
+## $ tranquilizer_freq  &lt;dbl&gt; 52.0, 25.5, 5.0, 4.5, 11.0, 7.0, 12.0, 4.5, 10.0, 7.0, 12.0, 10.0, 10.0, 8.0, 6.0, 10.0,…
 ## $ stimulant_use      &lt;dbl&gt; 0.2, 0.3, 0.8, 1.5, 1.8, 2.8, 3.0, 3.3, 4.0, 4.1, 3.6, 2.6, 2.3, 1.4, 0.6, 0.3, 0.0
-## $ stimulant_freq     &lt;dbl&gt; 2.0, 4.0, 12.0, 6.0, 9.5, 9.0, 8.0, 6.0, 12.0, 10.0, 10.0, 10.0, 7.0, 12.0, 24.0, 24.0, 364.0
+## $ stimulant_freq     &lt;dbl&gt; 2.0, 4.0, 12.0, 6.0, 9.5, 9.0, 8.0, 6.0, 12.0, 10.0, 10.0, 10.0, 7.0, 12.0, 24.0, 24.0, …
 ## $ meth_use           &lt;dbl&gt; 0.0, 0.1, 0.1, 0.3, 0.3, 0.6, 0.5, 0.4, 0.9, 0.6, 0.6, 0.7, 0.6, 0.4, 0.2, 0.2, 0.0
-## $ meth_freq          &lt;dbl&gt; NA, 5.0, 24.0, 10.5, 36.0, 48.0, 12.0, 105.0, 12.0, 2.0, 46.0, 21.0, 30.0, 54.0, 104.0, 30.0…
+## $ meth_freq          &lt;dbl&gt; NA, 5.0, 24.0, 10.5, 36.0, 48.0, 12.0, 105.0, 12.0, 2.0, 46.0, 21.0, 30.0, 54.0, 104.0, …
 ## $ sedative_use       &lt;dbl&gt; 0.2, 0.1, 0.2, 0.4, 0.2, 0.5, 0.4, 0.3, 0.5, 0.3, 0.2, 0.2, 0.4, 0.4, 0.3, 0.2, 0.0
-## $ sedative_freq      &lt;dbl&gt; 13.0, 19.0, 16.5, 30.0, 3.0, 6.5, 10.0, 6.0, 4.0, 9.0, 52.0, 17.5, 4.0, 10.0, 10.0, 104.0, 1…</code></pre>
-<p>The data were given to us again in a <strong>wide format</strong>, as many observations are stored in separate columns: <code>alchohol_use</code> and <code>heroin_use</code>, for example, are two observations of “drug use” for each of the age categories, so it would make sense to have them in separate rows.</p>
-<p>Because in each column name two information are stored, namely the name of the drug and the type of measure (whether it is use of frequency), we need to specify which character divides this information, and give two separate names of columns where we want this information to end up in:</p>
+## $ sedative_freq      &lt;dbl&gt; 13.0, 19.0, 16.5, 30.0, 3.0, 6.5, 10.0, 6.0, 4.0, 9.0, 52.0, 17.5, 4.0, 10.0, 10.0, 104.…</code></pre>
+<p>The data were given to us again in a <strong>wide format</strong>, as
+many observations are stored in separate columns:
+<code>alchohol_use</code> and <code>heroin_use</code>, for example, are
+two observations of “drug use” for each of the age categories, so it
+would make sense to have them in separate rows.</p>
+<p>Because in each column name two information are stored, namely the
+name of the drug and the type of measure (whether it is use of
+frequency), we need to specify which character divides this information,
+and give two separate names of columns where we want this information to
+end up in:</p>
 <pre class="r"><code># First we need to fix the &quot;pain_releiver_use&quot; and &quot;_freq&quot; columns (because they are exceptions):
 drug_use_new = rename(drug_use,
                       painreleiver_use = pain_releiver_use,
@@ -490,7 +528,9 @@ print(dim(drug_use))</code></pre>
 ## 4 12     2798 marijuana freq      4  
 ## 5 12     2798 cocaine   use       0.1
 ## 6 12     2798 cocaine   freq      5</code></pre>
-<p>Now, want to have <code>use</code> and <code>freq</code> as separate columns, as they are two different measures, or variables for each of the observations.</p>
+<p>Now, want to have <code>use</code> and <code>freq</code> as separate
+columns, as they are two different measures, or variables for each of
+the observations.</p>
 <p>So we need to go 1 step back and make it “wider”:</p>
 <pre class="r"><code>drug_use_new = pivot_wider(drug_use_new,
                            names_from = measure, 
@@ -526,10 +566,26 @@ print(dim(drug_use_new))</code></pre>
 <div id="now-its-your-turn" class="section level1">
 <h1>3. Now it’s your turn</h1>
 <p><strong>Task A</strong></p>
-<p>Inspect the <code>police_locals</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/" class="uri">https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/</a>.</p>
+<p>Inspect the <code>police_locals</code> dataset. Here is the article
+attached to it: <a
+href="https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/"
+class="uri">https://fivethirtyeight.com/features/most-police-dont-live-in-the-cities-they-serve/</a>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new dataset, called <code>police_locals_new</code>, made of the following columns: <code>city</code>, <code>force_size</code>, <code>ethnic_group</code>, <code>perc_locals</code>. You should create the <code>ethnic_group</code> column using a pivot function, as shown in this wpa or in wpa_4. The values in this column should be <code>all</code>, <code>white</code>, <code>non_white</code>, <code>black</code>, <code>hispanic</code>, <code>asian</code>. The <code>perc_locals</code> column should contain the percentage of officers that live in the town where they work, corresponding to their ethnic group. Rearrange based on the <code>ethnic_group</code> and inspect it by printing the first 10 lines.</p></li>
-<li><p>Make a boxplot, with <code>ethnic_group</code> on the x-axis and <code>perc_locals</code> on the y-axis. <code>ethnic_group</code> should be ordered from the lowest <code>perc_locals</code> to the highest. Put appropriate labels.</p></li>
+<li><p>Create a new dataset, called <code>police_locals_new</code>, made
+of the following columns: <code>city</code>, <code>force_size</code>,
+<code>ethnic_group</code>, <code>perc_locals</code>. You should create
+the <code>ethnic_group</code> column using a pivot function, as shown in
+this wpa or in wpa_4. The values in this column should be
+<code>all</code>, <code>white</code>, <code>non_white</code>,
+<code>black</code>, <code>hispanic</code>, <code>asian</code>. The
+<code>perc_locals</code> column should contain the percentage of
+officers that live in the town where they work, corresponding to their
+ethnic group. Rearrange based on the <code>ethnic_group</code> and
+inspect it by printing the first 10 lines.</p></li>
+<li><p>Make a boxplot, with <code>ethnic_group</code> on the x-axis and
+<code>perc_locals</code> on the y-axis. <code>ethnic_group</code> should
+be ordered from the lowest <code>perc_locals</code> to the highest. Put
+appropriate labels.</p></li>
 </ol>
 <pre><code># these are the solutions for A2, as we will cover plotting later in the seminar
 ggplot(data = police_locals_new, mapping = aes(x = reorder(ethnic_group, perc_locals), y = perc_locals)) +
@@ -537,11 +593,27 @@ ggplot(data = police_locals_new, mapping = aes(x = reorder(ethnic_group, perc_lo
     labs(x = &#39;Ethnic group&#39;, y = &#39;Mean Percentage Locals&#39;) + 
     theme(axis.text.x = element_text(angle = 90))</code></pre>
 <p><strong>Task B</strong></p>
-<p>Inspect the <code>unisex_names</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/" class="uri">https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/</a>.</p>
+<p>Inspect the <code>unisex_names</code> dataset. Here is the article
+attached to it: <a
+href="https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/"
+class="uri">https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/</a>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new dataset, called <code>unisex_names_new</code>, made of the following columns: <code>name</code>, <code>total</code>, <code>gap</code>, <code>gender</code>, <code>share</code>. The <code>gender</code> column should only contain the values “male” and “female”. The <code>share</code> column should contain the percentages.</p></li>
-<li><p>Multiply the <code>share</code> column by 100. Re-arrange so that the first rows contain the names with the highest <code>total</code>. Print the first 10 rows of the newly created dataset. Create now a new dataset, called <code>unisex_names_common</code>, with the names in <code>unisex_names_new</code> that have a total higher than 50000.</p></li>
-<li><p>Using <code>unisex_names_common</code>, make a barplot that has <code>share</code> on the y-axis, <code>name</code> on the x-axis, and with each bar split vertically by color based on the <code>gender</code>.</p></li>
+<li><p>Create a new dataset, called <code>unisex_names_new</code>, made
+of the following columns: <code>name</code>, <code>total</code>,
+<code>gap</code>, <code>gender</code>, <code>share</code>. The
+<code>gender</code> column should only contain the values “male” and
+“female”. The <code>share</code> column should contain the
+percentages.</p></li>
+<li><p>Multiply the <code>share</code> column by 100. Re-arrange so that
+the first rows contain the names with the highest <code>total</code>.
+Print the first 10 rows of the newly created dataset. Create now a new
+dataset, called <code>unisex_names_common</code>, with the names in
+<code>unisex_names_new</code> that have a total higher than
+50000.</p></li>
+<li><p>Using <code>unisex_names_common</code>, make a barplot that has
+<code>share</code> on the y-axis, <code>name</code> on the x-axis, and
+with each bar split vertically by color based on the
+<code>gender</code>.</p></li>
 </ol>
 <pre><code># these are the solutions for B3, as we will cover plotting later in the seminar
 ggplot(data = unisex_names_common, mapping = aes(x = name, y = share, fill = gender)) +
@@ -549,10 +621,18 @@ ggplot(data = unisex_names_common, mapping = aes(x = name, y = share, fill = gen
     labs(x = &#39;Name&#39;, y = &#39;Share&#39;, fill=&#39;Gender&#39;) + 
     theme(axis.text.x = element_text(angle = 90))</code></pre>
 <p><strong>Task C</strong></p>
-<p>Inspect the <code>tv_states</code> dataset. Here is the article attached to it: <a href="https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/" class="uri">https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/</a>.</p>
+<p>Inspect the <code>tv_states</code> dataset. Here is the article
+attached to it: <a
+href="https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/"
+class="uri">https://fivethirtyeight.com/features/the-media-really-started-paying-attention-to-puerto-rico-when-trump-did/</a>.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new dataset, with a different name, that is the long version of <code>tv_states</code>. You should decide how to call the new columns, as well as which columns should be used for the transformation.</p></li>
-<li><p>With the newly created dataset, make a plot of your choosing to illustrate the information contained in this dataset. As an inspiration, you can have a look at what plot was done in the article above.</p></li>
+<li><p>Create a new dataset, with a different name, that is the long
+version of <code>tv_states</code>. You should decide how to call the new
+columns, as well as which columns should be used for the
+transformation.</p></li>
+<li><p>With the newly created dataset, make a plot of your choosing to
+illustrate the information contained in this dataset. As an inspiration,
+you can have a look at what plot was done in the article above.</p></li>
 </ol>
 <pre><code># these are the solutions for C2, as we will cover plotting later in the seminar
 ggplot(data = tv_states_new, mapping = aes(x = date, y= share_of_sentences, fill = state)) + 
@@ -566,7 +646,9 @@ ggplot(tv_states_new, aes(x=date, y=share_of_sentences, group=state, color=state
     theme(axis.text.x = element_text(angle = 90, size = 6))</code></pre>
 <div id="submit-your-assignment" class="section level2">
 <h2>Submit your assignment</h2>
-<p>Save and email your script to me at <a href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by the end of Friday.</p>
+<p>Save and email your script to me at <a
+href="mailto:laura.fontanesi@unibas.ch">laura.fontanesi@unibas.ch</a> by
+the end of Friday.</p>
 </div>
 </div>
 

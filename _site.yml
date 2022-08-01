@@ -54,6 +54,8 @@ navbar:
         href: wpa9_solutions.html
       - text: "WPA 10"
         href: wpa10_solutions.html
+      - text: "Final Project solutions"
+        href: final_project_solutions.html
 output:
   html_document:
     theme: paper

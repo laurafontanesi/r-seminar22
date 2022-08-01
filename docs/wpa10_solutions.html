@@ -329,6 +329,9 @@ $(document).ready(function () {
     <li>
       <a href="wpa10_solutions.html">WPA 10</a>
     </li>
+    <li>
+      <a href="final_project_solutions.html">Final Project solutions</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,73 +352,77 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#now-its-your-turn">Now it’s your turn</a></li>
+<li><a href="#now-its-your-turn" id="toc-now-its-your-turn">Now it’s
+your turn</a></li>
 </ul>
 </div>
 
 <pre class="r"><code>library(tidyverse)
 library(readxl)
-library(lme4)</code></pre>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Matrix&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
-## 
-##     expand, pack, unpack</code></pre>
-<pre class="r"><code>data = read_excel(&#39;~/git/r-seminar/data/Bressoux Data AnPsycho.xls&#39;)
+library(lme4)
+
+data = read_excel(&#39;~/git/r-seminar/data/Bressoux Data AnPsycho.xls&#39;)
 
 glimpse(data)</code></pre>
 <pre><code>## Rows: 609
 ## Columns: 38
-## $ NUMELEVE  &lt;dbl&gt; 701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 716, 717, 718, 719, 720, 721, 7…
-## $ FRAN4     &lt;dbl&gt; -1.03844718, 0.05081523, -1.32558075, 0.24899764, -1.32558075, 1.14062612, -0.91424034, -0.25480473, …
-## $ CPBIS     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ CE1BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ CE2BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ CM1BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ CM2BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ MATH4     &lt;dbl&gt; -0.84660133, -0.90465749, -0.90465749, 0.06410083, -0.62877082, 0.69927881, -1.20330629, -1.81509449,…
-## $ ECOLE2    &lt;dbl&gt; 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-## $ CLASSE2   &lt;dbl&gt; 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,…
-## $ COURS2    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ RDBLT2    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ FRAN3     &lt;dbl&gt; 1.13978958, -0.25171360, 0.97295339, 1.13978958, -2.00298384, 1.59399505, -1.01594421, 1.38446085, -0…
-## $ MATH3     &lt;dbl&gt; 0.36853256, -0.95115243, 0.67302730, 1.59547256, -1.10303698, 0.84497577, -1.10303698, -0.53838360, -…
-## $ MOIS      &lt;dbl&gt; 10, 11, 10, 4, 11, 5, 12, 2, 8, 12, 12, 4, 12, 11, 7, 2, 8, 5, 11, 3, 8, 9, 11, 10, 8, 2, 12, 9, 2, 1…
-## $ ANNEE     &lt;dbl&gt; 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 9…
-## $ FRAT      &lt;dbl&gt; 3, 2, 2, 1, 2, 2, 2, 2, 3, 1, 2, 3, 2, 2, 2, 3, 1, 1, 2, 3, 1, 1, 1, 4, 1, 1, 1, 2, 2, 3, 1, 1, 1, 1,…
-## $ PREEL     &lt;dbl&gt; 3, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
-## $ CSPP      &lt;dbl&gt; 6, 4, 1, 7, 4, 4, 6, 2, 2, 3, 5, 4, 3, 5, 6, 6, 3, 4, 2, 4, 2, 6, 3, 4, 5, 4, 3, 4, 3, 5, 4, 6, 5, 1,…
-## $ CSPM      &lt;dbl&gt; 4, 7, 7, 6, 7, 4, 7, 7, 4, 2, 5, 5, 4, 4, 6, 6, 4, 4, 4, 8, 5, 5, 8, 5, 8, 7, 3, 4, 8, 6, 4, 3, 8, 5,…
-## $ FILLE     &lt;dbl&gt; 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0,…
-## $ ANCENS2   &lt;dbl&gt; 21, 21, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 28, 28, 28, 28, 28, 28, 28, 28, 13, 1…
-## $ NBEL2     &lt;dbl&gt; 15, 15, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 22, 22, 22, 22, 22, 22, 22, 22, 23, 2…
-## $ NBCOURS2  &lt;dbl&gt; 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
-## $ arti      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ sup       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,…
-## $ inter     &lt;dbl&gt; 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0,…
-## $ empl      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,…
-## $ ouvr      &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…
-## $ autr      &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ cmult     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ cmultnomb &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ mfran3    &lt;dbl&gt; -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.…
-## $ mmath3    &lt;dbl&gt; 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.042…
-## $ msup      &lt;dbl&gt; 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.080…
-## $ mouvr     &lt;dbl&gt; 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.…
-## $ stdfran3  &lt;dbl&gt; 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.…
-## $ stdmath3  &lt;dbl&gt; 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1…</code></pre>
+## $ NUMELEVE  &lt;dbl&gt; 701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 716, 717, 718, 719, 720, 72…
+## $ FRAN4     &lt;dbl&gt; -1.03844718, 0.05081523, -1.32558075, 0.24899764, -1.32558075, 1.14062612, -0.91424034, -0.254804…
+## $ CPBIS     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ CE1BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ CE2BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ CM1BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ CM2BIS    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ MATH4     &lt;dbl&gt; -0.84660133, -0.90465749, -0.90465749, 0.06410083, -0.62877082, 0.69927881, -1.20330629, -1.81509…
+## $ ECOLE2    &lt;dbl&gt; 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5…
+## $ CLASSE2   &lt;dbl&gt; 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8…
+## $ COURS2    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ RDBLT2    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ FRAN3     &lt;dbl&gt; 1.13978958, -0.25171360, 0.97295339, 1.13978958, -2.00298384, 1.59399505, -1.01594421, 1.38446085…
+## $ MATH3     &lt;dbl&gt; 0.36853256, -0.95115243, 0.67302730, 1.59547256, -1.10303698, 0.84497577, -1.10303698, -0.5383836…
+## $ MOIS      &lt;dbl&gt; 10, 11, 10, 4, 11, 5, 12, 2, 8, 12, 12, 4, 12, 11, 7, 2, 8, 5, 11, 3, 8, 9, 11, 10, 8, 2, 12, 9, …
+## $ ANNEE     &lt;dbl&gt; 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 9…
+## $ FRAT      &lt;dbl&gt; 3, 2, 2, 1, 2, 2, 2, 2, 3, 1, 2, 3, 2, 2, 2, 3, 1, 1, 2, 3, 1, 1, 1, 4, 1, 1, 1, 2, 2, 3, 1, 1, 1…
+## $ PREEL     &lt;dbl&gt; 3, 3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,…
+## $ CSPP      &lt;dbl&gt; 6, 4, 1, 7, 4, 4, 6, 2, 2, 3, 5, 4, 3, 5, 6, 6, 3, 4, 2, 4, 2, 6, 3, 4, 5, 4, 3, 4, 3, 5, 4, 6, 5…
+## $ CSPM      &lt;dbl&gt; 4, 7, 7, 6, 7, 4, 7, 7, 4, 2, 5, 5, 4, 4, 6, 6, 4, 4, 4, 8, 5, 5, 8, 5, 8, 7, 3, 4, 8, 6, 4, 3, 8…
+## $ FILLE     &lt;dbl&gt; 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0…
+## $ ANCENS2   &lt;dbl&gt; 21, 21, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 28, 28, 28, 28, 28, 28, 28, 28, 1…
+## $ NBEL2     &lt;dbl&gt; 15, 15, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 22, 22, 22, 22, 22, 22, 22, 22, 2…
+## $ NBCOURS2  &lt;dbl&gt; 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2…
+## $ arti      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ sup       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0…
+## $ inter     &lt;dbl&gt; 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0…
+## $ empl      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1…
+## $ ouvr      &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0…
+## $ autr      &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ cmult     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ cmultnomb &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ mfran3    &lt;dbl&gt; -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.009005236, -0.009005236,…
+## $ mmath3    &lt;dbl&gt; 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0.04217022, 0…
+## $ msup      &lt;dbl&gt; 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0.08080808, 0…
+## $ mouvr     &lt;dbl&gt; 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273, 0.2727273…
+## $ stdfran3  &lt;dbl&gt; 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583, 0.9908583…
+## $ stdmath3  &lt;dbl&gt; 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.003498, 1.00349…</code></pre>
 <div id="now-its-your-turn" class="section level1">
 <h1>Now it’s your turn</h1>
 <ol style="list-style-type: decimal">
-<li>Create a new variable in the dataset, called <code>improvement_math</code>, which is the difference between <code>MATH4</code> and <code>MATH3</code>; and <code>improvement_french</code> which is the difference between <code>FRAN4</code> and <code>FRAN3</code>.</li>
+<li>Create a new variable in the dataset, called
+<code>improvement_math</code>, which is the difference between
+<code>MATH4</code> and <code>MATH3</code>; and
+<code>improvement_french</code> which is the difference between
+<code>FRAN4</code> and <code>FRAN3</code>.</li>
 </ol>
 <pre class="r"><code>data = mutate(data,
               improvement_math=(MATH4-MATH3),
               improvement_french=(FRAN4-FRAN3)
               )</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>Run a multilevel model (separately for math and french), in which the improvement in math and french is predicted by at least 2 variables of your choice in the dataset, and that takes into account the school level. Run a random slope model, a random intercept model, and a random slope and intercept model.</li>
+<li>Run a multilevel model (separately for math and french), in which
+the improvement in math and french is predicted by at least 2 variables
+of your choice in the dataset, and that takes into account the school
+level. Run a random slope model, a random intercept model, and a random
+slope and intercept model.</li>
 </ol>
 <pre class="r"><code># Run a random intercept model
 randintmodel = lmer(improvement_math ~ FRAT*FILLE + (1 | ECOLE2), data = data)
@@ -433,7 +440,7 @@ confint(randintmodel)</code></pre>
 randslopemodel = lmer(improvement_math ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2), data = data)</code></pre>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <pre class="r"><code>summary(randslopemodel)</code></pre>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: improvement_math ~ FRAT * FILLE + (0 + FRAT * FILLE | ECOLE2)
 ##    Data: data
 ## 
@@ -452,11 +459,11 @@ randslopemodel = lmer(improvement_math ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2),
 ## Number of obs: 609, groups:  ECOLE2, 16
 ## 
 ## Fixed effects:
-##              Estimate Std. Error t value
-## (Intercept) -0.048480   0.086606  -0.560
-## FRAT         0.027640   0.053458   0.517
-## FILLE       -0.050445   0.129298  -0.390
-## FRAT:FILLE  -0.001028   0.067833  -0.015
+##               Estimate Std. Error         df t value Pr(&gt;|t|)
+## (Intercept)  -0.048480   0.086606 581.204796  -0.560    0.576
+## FRAT          0.027640   0.053458  67.171533   0.517    0.607
+## FILLE        -0.050445   0.129298  44.764266  -0.390    0.698
+## FRAT:FILLE   -0.001028   0.067833 267.329947  -0.015    0.988
 ## 
 ## Correlation of Fixed Effects:
 ##            (Intr) FRAT   FILLE 
@@ -469,7 +476,7 @@ randslopemodel = lmer(improvement_math ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2),
 randintslopemodel = lmer(improvement_math ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2), data = data)</code></pre>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <pre class="r"><code>summary(randintslopemodel)</code></pre>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: improvement_math ~ FRAT * FILLE + (FRAT * FILLE | ECOLE2)
 ##    Data: data
 ## 
@@ -489,11 +496,11 @@ randintslopemodel = lmer(improvement_math ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2), 
 ## Number of obs: 609, groups:  ECOLE2, 16
 ## 
 ## Fixed effects:
-##              Estimate Std. Error t value
-## (Intercept) -0.040259   0.091026  -0.442
-## FRAT         0.021253   0.056561   0.376
-## FILLE       -0.063532   0.125206  -0.507
-## FRAT:FILLE   0.006797   0.068990   0.099
+##               Estimate Std. Error         df t value Pr(&gt;|t|)
+## (Intercept)  -0.040259   0.091026  39.806128  -0.442    0.661
+## FRAT          0.021253   0.056561  13.754566   0.376    0.713
+## FILLE        -0.063532   0.125206 155.115752  -0.507    0.613
+## FRAT:FILLE    0.006797   0.068990 107.748543   0.099    0.922
 ## 
 ## Correlation of Fixed Effects:
 ##            (Intr) FRAT   FILLE 
@@ -518,7 +525,7 @@ confint(randintmodel)</code></pre>
 randslopemodel = lmer(improvement_french ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2), data = data)</code></pre>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <pre class="r"><code>summary(randslopemodel)</code></pre>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: improvement_french ~ FRAT * FILLE + (0 + FRAT * FILLE | ECOLE2)
 ##    Data: data
 ## 
@@ -537,11 +544,11 @@ randslopemodel = lmer(improvement_french ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2
 ## Number of obs: 602, groups:  ECOLE2, 16
 ## 
 ## Fixed effects:
-##             Estimate Std. Error t value
-## (Intercept) -0.02134    0.08324  -0.256
-## FRAT        -0.03795    0.04718  -0.805
-## FILLE        0.02810    0.13201   0.213
-## FRAT:FILLE   0.03113    0.06430   0.484
+##              Estimate Std. Error        df t value Pr(&gt;|t|)
+## (Intercept)  -0.02134    0.08324 576.65377  -0.256    0.798
+## FRAT         -0.03795    0.04718 243.53189  -0.805    0.422
+## FILLE         0.02810    0.13201  43.89253   0.213    0.832
+## FRAT:FILLE    0.03113    0.06430 469.06788   0.484    0.628
 ## 
 ## Correlation of Fixed Effects:
 ##            (Intr) FRAT   FILLE 
@@ -553,8 +560,9 @@ randslopemodel = lmer(improvement_french ~ FRAT*FILLE + (0 + FRAT*FILLE | ECOLE2
 <pre class="r"><code># Run a random intercept &amp; slope model
 randintslopemodel = lmer(improvement_french ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2), data = data)</code></pre>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## Warning: Model failed to converge with 1 negative eigenvalue: -1.4e+00</code></pre>
 <pre class="r"><code>summary(randintslopemodel)</code></pre>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: improvement_french ~ FRAT * FILLE + (FRAT * FILLE | ECOLE2)
 ##    Data: data
 ## 
@@ -574,11 +582,11 @@ randintslopemodel = lmer(improvement_french ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2)
 ## Number of obs: 602, groups:  ECOLE2, 16
 ## 
 ## Fixed effects:
-##             Estimate Std. Error t value
-## (Intercept) -0.04296    0.09508  -0.452
-## FRAT        -0.03279    0.04800  -0.683
-## FILLE        0.04875    0.12133   0.402
-## FRAT:FILLE   0.02246    0.06842   0.328
+##             Estimate Std. Error       df t value Pr(&gt;|t|)
+## (Intercept) -0.04296    0.09508 12.10320  -0.452    0.659
+## FRAT        -0.03279    0.04800 45.77754  -0.683    0.498
+## FILLE        0.04875    0.12133 14.63906   0.402    0.694
+## FRAT:FILLE   0.02246    0.06842 24.04909   0.328    0.746
 ## 
 ## Correlation of Fixed Effects:
 ##            (Intr) FRAT   FILLE 
@@ -588,7 +596,9 @@ randintslopemodel = lmer(improvement_french ~ FRAT*FILLE + (FRAT*FILLE | ECOLE2)
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see ?isSingular</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>(extra) Collapse the data across classrooms. Can you look at the effect of the number of student per classrrom on the improvements of math and french, taking into account the school level as well?</li>
+<li>(extra) Collapse the data across classrooms. Can you look at the
+effect of the number of student per classrrom on the improvements of
+math and french, taking into account the school level as well?</li>
 </ol>
 <pre class="r"><code>grouped = group_by(data, 
                    CLASSE2, )
@@ -619,7 +629,8 @@ randintslopemodel = lmer(mean_improvement_math ~ NBEL2 + (1 | ECOLE2), data = co
 <pre><code>## Computing profile confidence intervals ...</code></pre>
 <pre><code>## Warning in nextpar(mat, cc, i, delta, lowcut, upcut): Last two rows have identical or NA .zeta values: using minstep</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): non-monotonic profile for .sig01</code></pre>
-<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for .sig01: falling back to linear interpolation</code></pre>
+<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for .sig01: falling back to linear
+## interpolation</code></pre>
 <pre><code>## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique &#39;x&#39; values</code></pre>
 <pre><code>##                   2.5 %     97.5 %
 ## .sig01       0.00000000 0.26159820
@@ -632,13 +643,15 @@ randintslopemodel = lmer(mean_improvement_french ~ NBEL2 + (1 | ECOLE2), data = 
 <pre class="r"><code>confint(randintslopemodel)</code></pre>
 <pre><code>## Computing profile confidence intervals ...</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): non-monotonic profile for .sig01</code></pre>
-<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for .sig01: falling back to linear interpolation</code></pre>
+<pre><code>## Warning in confint.thpr(pp, level = level, zeta = zeta): bad spline fit for .sig01: falling back to linear
+## interpolation</code></pre>
 <pre><code>##                   2.5 %     97.5 %
 ## .sig01       0.00000000 0.22222182
 ## .sigma       0.29533576 0.48365798
 ## (Intercept) -0.78892056 0.41789139
 ## NBEL2       -0.01919235 0.03410106</code></pre>
-<p>There seem to be no effect of the number of students on the mean improvement.</p>
+<p>There seem to be no effect of the number of students on the mean
+improvement.</p>
 </div>
 
 
